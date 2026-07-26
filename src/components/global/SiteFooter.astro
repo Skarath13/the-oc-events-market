@@ -1,0 +1,71 @@
+---
+import { footerNavigation, primaryNavigation } from '@/data/navigation';
+import { featureFlags, siteConfig } from '@/data/site';
+---
+
+<footer class="site-footer">
+  <div class="site-footer__top">
+    <div class="brand-lockup brand-lockup--footer">
+      <span class="brand-lockup__name">{siteConfig.businessName}</span>
+      <span class="brand-lockup__descriptor">{siteConfig.descriptor}</span>
+    </div>
+    <p class="site-footer__promise">{siteConfig.brandPromise}</p>
+  </div>
+  <div class="site-footer__grid">
+    <div>
+      <h2 class="site-footer__heading">Plan a celebration</h2>
+      <p>
+        One Orange County planning team for the vision, vendors, design, logistics, and approved
+        event-day details.
+      </p>
+      <a class="text-link text-link--light" href="/contact/">Check availability</a>
+    </div>
+    <nav aria-label="Footer client links">
+      <h2 class="site-footer__heading">Explore</h2>
+      <ul>
+        {
+          primaryNavigation.map((item) => (
+            <li>
+              <a href={item.href}>{item.label}</a>
+            </li>
+          ))
+        }
+        <li><a href="/process/">Our Process</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Footer business and legal links">
+      <h2 class="site-footer__heading">More</h2>
+      <ul>
+        {
+          footerNavigation.map((item) => (
+            <li>
+              <a href={item.href}>{item.label}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <div>
+      <h2 class="site-footer__heading">Service area</h2>
+      <p>{siteConfig.serviceArea}</p>
+      {
+        featureFlags.showPhone && siteConfig.publicPhone && (
+          <p>
+            <a href={`tel:${siteConfig.publicPhone}`}>{siteConfig.publicPhone}</a>
+          </p>
+        )
+      }
+      {
+        siteConfig.publicEmail && (
+          <p>
+            <a href={`mailto:${siteConfig.publicEmail}`}>{siteConfig.publicEmail}</a>
+          </p>
+        )
+      }
+    </div>
+  </div>
+  <div class="site-footer__bottom">
+    <p>© {new Date().getFullYear()} {siteConfig.businessName}</p>
+    <p>Event Planning & Design · Orange County, California</p>
+  </div>
+</footer>

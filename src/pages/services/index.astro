@@ -1,0 +1,89 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/global/PageHero.astro';
+import EventGateway from '@/components/global/EventGateway.astro';
+import FinalCta from '@/components/global/FinalCta.astro';
+import { capabilityRows } from '@/data/site';
+import { media } from '@/data/media';
+import { breadcrumbSchema, serviceSchema } from '@/lib/seo';
+
+const origin = Astro.site ?? new URL('https://the-oc-events-market.example');
+const breadcrumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Services', path: '/services/' },
+];
+---
+
+<BaseLayout
+  title="Event Planning Services in Orange County"
+  description="Explore planning, design, vendor coordination, logistics, and event-day support for Orange County celebrations. Scope is confirmed in your selected service."
+  jsonLd={[
+    breadcrumbSchema(origin, breadcrumbs),
+    serviceSchema({
+      origin,
+      pathname: '/services/',
+      name: 'Orange County event planning and design',
+      description:
+        'Planning, design, vendor coordination, logistics, and included event-day support for Orange County celebrations.',
+      serviceType: 'Event planning and design',
+    }),
+  ]}
+>
+  <PageHero
+    title="Orange County Event Planning Services"
+    summary="Event planning should make responsibility clearer, not hide it behind a package name. We shape the vision, organize the decisions, coordinate the approved vendor team, and manage the work stated in your selected service."
+    image={media.planningDetail}
+    imageAlt="Flowers, glassware, and candlelight arranged for a dinner"
+    breadcrumbs={breadcrumbs}
+    proof="One planning team · Exact scope confirmed in writing"
+  />
+
+  <section class="section-shell detail-intro">
+    <h2>Support built around the actual celebration.</h2>
+    <div class="detail-intro__body">
+      <p>
+        Some hosts need help from the earliest idea. Others have a venue, vendors, or design
+        direction and need an experienced team to organize what remains. The first conversation
+        should establish what is already decided, what still needs ownership, and what the event
+        requires.
+      </p>
+      <p>
+        Exact package names, inclusions, staffing, meetings, and event-day hours are not published
+        until the owner confirms them. That protects clients from relying on an unverified promise.
+      </p>
+    </div>
+  </section>
+
+  <section class="capabilities-section">
+    <div class="section-shell">
+      <div class="section-heading section-heading--split">
+        <h2>Planning responsibilities, in plain language.</h2>
+        <p>
+          These are possible workstreams, not a claim that every item is included in every
+          engagement.
+        </p>
+      </div>
+      <div class="capability-index">
+        {
+          capabilityRows.map((capability, index) => (
+            <article class="capability-index__item">
+              <span class="capability-index__number" aria-hidden="true">
+                0{index + 1}
+              </span>
+              <div>
+                <h3>{capability.title}</h3>
+                <p>{capability.body}</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <EventGateway
+    heading="The event type changes the plan."
+    intro="A wedding, children’s party, shower, milestone dinner, and corporate event do not share the same operational priorities."
+  />
+  <FinalCta />
+</BaseLayout>

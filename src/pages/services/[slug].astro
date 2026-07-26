@@ -1,0 +1,44 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import DetailPage from '@/components/global/DetailPage.astro';
+import { services, type ServicePage } from '@/data/services';
+import { breadcrumbSchema, serviceSchema } from '@/lib/seo';
+
+export function getStaticPaths() {
+  return services.map((service) => ({
+    params: { slug: service.slug },
+    props: { service },
+  }));
+}
+
+type Props = {
+  service: ServicePage;
+};
+
+const { service } = Astro.props;
+const origin = Astro.site ?? new URL('https://the-oc-events-market.example');
+const pathname = `/services/${service.slug}/`;
+const breadcrumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Services', path: '/services/' },
+  { name: service.shortTitle, path: pathname },
+];
+---
+
+<BaseLayout
+  title={service.metaTitle}
+  description={service.metaDescription}
+  noindex={!service.verified}
+  jsonLd={[
+    breadcrumbSchema(origin, breadcrumbs),
+    serviceSchema({
+      origin,
+      pathname,
+      name: service.title,
+      description: service.summary,
+      serviceType: service.title,
+    }),
+  ]}
+>
+  <DetailPage page={service} kind="service" breadcrumbs={breadcrumbs} />
+</BaseLayout>

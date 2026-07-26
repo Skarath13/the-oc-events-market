@@ -1,0 +1,64 @@
+---
+import { Image, getImage } from 'astro:assets';
+import { eventTypes } from '@/data/eventTypes';
+import { media } from '@/data/media';
+
+type Props = {
+  heading?: string;
+  intro?: string;
+};
+
+const {
+  heading = 'Every kind of moment deserves a clear plan.',
+  intro = 'Explore planning shaped around the event itself—not a generic package with a new title.',
+} = Astro.props;
+const items = await Promise.all(
+  eventTypes.map(async (eventType) => ({
+    eventType,
+    mobileImage: await getImage({
+      src: media[eventType.image],
+      width: 480,
+      format: 'avif',
+      quality: 68,
+    }),
+  })),
+);
+---
+
+<section class="section-shell gateway-section">
+  <div class="section-heading section-heading--split">
+    <h2>{heading}</h2>
+    <p>{intro}</p>
+  </div>
+  <div class="event-gateway">
+    {
+      items.map(({ eventType, mobileImage }, index) => (
+        <a
+          class:list={['event-gateway__item', `event-gateway__item--${index + 1}`]}
+          href={`/events/${eventType.slug}/`}
+        >
+          <div class="event-gateway__media">
+            <picture>
+              <source media="(max-width: 767px)" type="image/avif" srcset={mobileImage.src} />
+              <Image
+                src={media[eventType.image]}
+                alt={eventType.imageAlt}
+                widths={[480, 720, 960]}
+                sizes="(max-width: 1100px) 50vw, 33vw"
+                loading="lazy"
+                quality={76}
+              />
+            </picture>
+          </div>
+          <div class="event-gateway__copy">
+            <h3>{eventType.gatewayTitle}</h3>
+            <p>{eventType.gatewayBody}</p>
+            <span>
+              Explore planning <span aria-hidden="true">→</span>
+            </span>
+          </div>
+        </a>
+      ))
+    }
+  </div>
+</section>

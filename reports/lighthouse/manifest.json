@@ -1,0 +1,62 @@
+[
+  {
+    "url": "http://127.0.0.1:4388/",
+    "isRepresentativeRun": true,
+    "htmlPath": "/Users/dylan/Desktop/events/reports/lighthouse/127_0_0_1--2026_07_26_03_46_16.report.html",
+    "jsonPath": "/Users/dylan/Desktop/events/reports/lighthouse/127_0_0_1--2026_07_26_03_46_16.report.json",
+    "summary": {
+      "performance": 0.98,
+      "accessibility": 1,
+      "best-practices": 1,
+      "seo": 1
+    }
+  },
+  {
+    "url": "http://127.0.0.1:4388/services/",
+    "isRepresentativeRun": true,
+    "htmlPath": "/Users/dylan/Desktop/events/reports/lighthouse/127_0_0_1-services_-2026_07_26_03_46_27.report.html",
+    "jsonPath": "/Users/dylan/Desktop/events/reports/lighthouse/127_0_0_1-services_-2026_07_26_03_46_27.report.json",
+    "summary": {
+      "performance": 0.99,
+      "accessibility": 1,
+      "best-practices": 1,
+      "seo": 1
+    }
+  },
+  {
+    "url": "http://127.0.0.1:4388/events/weddings/",
+    "isRepresentativeRun": true,
+    "htmlPath": "/Users/dylan/Desktop/events/reports/lighthouse/127_0_0_1-events_weddings_-2026_07_26_03_46_37.report.html",
+    "jsonPath": "/Users/dylan/Desktop/events/reports/lighthouse/127_0_0_1-events_weddings_-2026_07_26_03_46_37.report.json",
+    "summary": {
+      "performance": 0.99,
+      "accessibility": 1,
+      "best-practices": 1,
+      "seo": 1
+    }
+  },
+  {
+    "url": "http://127.0.0.1:4388/contact/",
+    "isRepresentativeRun": true,
+    "htmlPath": "/Users/dylan/Desktop/events/reports/lighthouse/127_0_0_1-contact_-2026_07_26_03_46_47.report.html",
+    "jsonPath": "/Users/dylan/Desktop/events/reports/lighthouse/127_0_0_1-contact_-2026_07_26_03_46_47.report.json",
+    "summary": {
+      "performance": 1,
+      "accessibility": 1,
+      "best-practices": 1,
+      "seo": 1
+    }
+  },
+  {
+    "url": "http://127.0.0.1:4388/for-vendors/",
+    "isRepresentativeRun": true,
+    "htmlPath": "/Users/dylan/Desktop/events/reports/lighthouse/127_0_0_1-for_vendors_-2026_07_26_03_46_56.report.html",
+    "jsonPath": "/Users/dylan/Desktop/events/reports/lighthouse/127_0_0_1-for_vendors_-2026_07_26_03_46_56.report.json",
+    "summary": {
+      "performance": 0.99,
+      "accessibility": 1,
+      "best-practices": 1,
+      "seo": 1
+    }
+  }
+]

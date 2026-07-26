@@ -1,0 +1,249 @@
+---
+import { Image, getImage } from 'astro:assets';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import EventGateway from '@/components/global/EventGateway.astro';
+import FaqList from '@/components/global/FaqList.astro';
+import FinalCta from '@/components/global/FinalCta.astro';
+import { capabilityRows, coreFaqs, processSteps } from '@/data/site';
+import { media } from '@/data/media';
+import { organizationSchema, websiteSchema } from '@/lib/seo';
+
+const mobileWidths = [430, 640];
+const desktopWidths = [960, 1440, 1920];
+const imageSet = async (
+  src: typeof media.heroDesktop,
+  widths: number[],
+  format: 'avif' | 'webp' | 'jpeg',
+  quality: number,
+) =>
+  Promise.all(
+    widths.map(async (width) => {
+      const image = await getImage({ src, width, format, quality });
+      return { src: image.src, width };
+    }),
+  );
+
+const [mobileAvif, mobileWebp, desktopAvif, desktopWebp, desktopJpeg] = await Promise.all([
+  imageSet(media.heroMobile, mobileWidths, 'avif', 62),
+  imageSet(media.heroMobile, mobileWidths, 'webp', 68),
+  imageSet(media.heroDesktop, desktopWidths, 'avif', 72),
+  imageSet(media.heroDesktop, desktopWidths, 'webp', 72),
+  imageSet(media.heroDesktop, desktopWidths, 'jpeg', 78),
+]);
+const toSrcset = (images: Array<{ src: string; width: number }>) =>
+  images.map((image) => `${image.src} ${image.width}w`).join(', ');
+const origin = Astro.site ?? new URL('https://the-oc-events-market.example');
+---
+
+<BaseLayout
+  title="Orange County Event Planner & Designer"
+  description="Orange County event planning and design for weddings, showers, birthdays, kids’ parties, and corporate events. One planning team; trusted vendors or yours."
+  jsonLd={[organizationSchema(origin), websiteSchema(origin)]}
+  bodyClass="home-page"
+>
+  <Fragment slot="head">
+    <link
+      rel="preload"
+      as="image"
+      type="image/avif"
+      media="(max-width: 767px)"
+      imagesrcset={toSrcset(mobileAvif)}
+      imagesizes="100vw"
+      fetchpriority="high"
+    />
+    <link
+      rel="preload"
+      as="image"
+      type="image/avif"
+      media="(min-width: 768px)"
+      imagesrcset={toSrcset(desktopAvif)}
+      imagesizes="58vw"
+      fetchpriority="high"
+    />
+  </Fragment>
+
+  <section class="home-hero">
+    <div class="home-hero__copy">
+      <div class="home-hero__copy-inner">
+        <h1>Orange County Event Planning, Designed Around Your Moment.</h1>
+        <p class="home-hero__body">
+          From baby showers and birthdays to weddings and corporate celebrations, we shape the
+          vision, coordinate every vendor, and manage the details so you can be fully present.
+        </p>
+        <div class="home-hero__actions">
+          <a
+            class="button button--dark"
+            href="/contact/"
+            data-analytics-event="primary_cta_click"
+            data-analytics-context="home_hero">Plan My Event</a
+          >
+          <a class="text-link" href="/celebrations/">Explore Celebrations</a>
+        </div>
+        <p class="home-hero__proof">Orange County planning · Trusted vendors or yours</p>
+      </div>
+    </div>
+    <div class="home-hero__media">
+      <picture>
+        <source
+          media="(max-width: 767px)"
+          type="image/avif"
+          srcset={toSrcset(mobileAvif)}
+          sizes="100vw"
+        />
+        <source
+          media="(max-width: 767px)"
+          type="image/webp"
+          srcset={toSrcset(mobileWebp)}
+          sizes="100vw"
+        />
+        <source
+          media="(min-width: 768px)"
+          type="image/avif"
+          srcset={toSrcset(desktopAvif)}
+          sizes="58vw"
+        />
+        <source
+          media="(min-width: 768px)"
+          type="image/webp"
+          srcset={toSrcset(desktopWebp)}
+          sizes="58vw"
+        />
+        <img
+          src={desktopJpeg.at(-1)?.src}
+          srcset={toSrcset(desktopJpeg)}
+          sizes="58vw"
+          alt="Outdoor event table layered with yellow flowers, glassware, woven place settings, and soft blue linens"
+          width={1920}
+          height={1280}
+          loading="eager"
+          fetchpriority="high"
+          decoding="sync"
+        />
+      </picture>
+    </div>
+  </section>
+
+  <section class="clarification">
+    <div class="clarification__copy">
+      <h2>We do more than connect the pieces. We plan the whole celebration.</h2>
+      <p>
+        From the first mood board to the final vendor arrival, we create the plan, organize the
+        team, and keep every moving part aligned. You get one clear point of contact and the space
+        to actually enjoy the reason everyone is gathering.
+      </p>
+    </div>
+    <div class="clarification__media">
+      <picture>
+        <source
+          media="(max-width: 767px)"
+          type="image/avif"
+          srcset={(
+            await getImage({
+              src: media.planningDetail,
+              width: 480,
+              format: 'avif',
+              quality: 68,
+            })
+          ).src}
+        />
+        <Image
+          src={media.planningDetail}
+          alt="Warm floral arrangement, candles, and glassware prepared for a dinner"
+          widths={[560, 720, 960]}
+          sizes="40vw"
+          loading="lazy"
+          quality={76}
+        />
+      </picture>
+    </div>
+  </section>
+
+  <EventGateway />
+
+  <section class="capabilities-section">
+    <div class="section-shell">
+      <div class="section-heading section-heading--split">
+        <h2>One planning team for the moving pieces.</h2>
+        <p>
+          The exact work depends on the selected service. The role is always made clear before the
+          plan starts.
+        </p>
+      </div>
+      <div class="capability-index">
+        {
+          capabilityRows.map((capability, index) => (
+            <article class="capability-index__item">
+              <span class="capability-index__number" aria-hidden="true">
+                0{index + 1}
+              </span>
+              <div>
+                <h3>{capability.title}</h3>
+                <p>{capability.body}</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section-shell process-section">
+    <div class="section-heading section-heading--split">
+      <h2>From first idea to event day.</h2>
+      <p>
+        A calm process is not less detailed. It is a detailed plan presented in the order you need
+        it.
+      </p>
+    </div>
+    <ol class="process-rail">
+      {
+        processSteps.map((step, index) => (
+          <li class="process-rail__step">
+            <span class="process-rail__number" aria-hidden="true">
+              0{index + 1}
+            </span>
+            <h3>{step.title}</h3>
+            <p>{step.body}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section class="network-statement">
+    <div class="network-statement__media">
+      <Image
+        src={media.network}
+        alt="Intimate outdoor dining area set among deep green plants"
+        widths={[720, 1080, 1440]}
+        sizes="(max-width: 767px) 100vw, 50vw"
+        loading="lazy"
+        quality={76}
+      />
+    </div>
+    <div class="network-statement__copy">
+      <h2>A trusted network, without locking you into one.</h2>
+      <p>
+        We can introduce the right creative partners for your event or step in alongside vendors you
+        have already chosen. Either way, we coordinate the team around one plan, one timeline, and
+        one shared vision.
+      </p>
+      <a class="text-link text-link--light" href="/trusted-creative-network/"
+        >How the network works</a
+      >
+    </div>
+  </section>
+
+  <section class="section-shell">
+    <div class="section-heading section-heading--split">
+      <h2>Before you inquire</h2>
+      <p>
+        Clear answers now make for a better first conversation. Package-specific details are always
+        confirmed in writing.
+      </p>
+    </div>
+    <FaqList faqs={coreFaqs} />
+  </section>
+
+  <FinalCta />
+</BaseLayout>

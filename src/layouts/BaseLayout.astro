@@ -1,0 +1,90 @@
+---
+import '@/styles/global.css';
+import SiteHeader from '@/components/global/SiteHeader.astro';
+import SiteFooter from '@/components/global/SiteFooter.astro';
+import Analytics from '@/components/global/Analytics.astro';
+import { siteConfig } from '@/data/site';
+import type { JsonLd } from '@/lib/seo';
+
+type Props = {
+  title: string;
+  description: string;
+  noindex?: boolean;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  jsonLd?: JsonLd[];
+  bodyClass?: string;
+};
+
+const {
+  title,
+  description,
+  noindex = false,
+  ogImage = siteConfig.ogImage,
+  ogType = 'website',
+  jsonLd = [],
+  bodyClass = '',
+} = Astro.props;
+
+const origin = Astro.site ?? new URL('https://the-oc-events-market.example');
+const canonical = new URL(Astro.url.pathname, origin);
+const publicIndexingEnabled =
+  import.meta.env.PUBLIC_SITE_INDEXABLE === 'true' && !origin.hostname.endsWith('.example');
+const shouldNoindex = noindex || !publicIndexingEnabled;
+const fullTitle = title.includes(siteConfig.businessName)
+  ? title
+  : `${title} | ${siteConfig.businessName}`;
+const socialImage = new URL(ogImage, origin).href;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f6f2ea" />
+    <meta name="color-scheme" content="light" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content={shouldNoindex ? 'noindex, nofollow' : 'index, follow'} />
+
+    <meta property="og:type" content={ogType} />
+    <meta property="og:locale" content={siteConfig.locale} />
+    <meta property="og:site_name" content={siteConfig.businessName} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:alt" content="Editorial event tablescape for The OC Events Market" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="/favicon/icon-192.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+
+    <slot name="head" />
+
+    {
+      jsonLd.map((schema) => (
+        <script
+          is:inline
+          type="application/ld+json"
+          set:html={JSON.stringify(schema).replaceAll('<', '\\u003c')}
+        />
+      ))
+    }
+    <Analytics />
+  </head>
+  <body class={bodyClass}>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <SiteHeader currentPath={Astro.url.pathname} />
+    <main id="main-content" tabindex="-1">
+      <slot />
+    </main>
+    <SiteFooter />
+  </body>
+</html>

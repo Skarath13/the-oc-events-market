@@ -1,0 +1,71 @@
+---
+const provider = import.meta.env.PUBLIC_ANALYTICS_PROVIDER ?? 'none';
+const id = import.meta.env.PUBLIC_ANALYTICS_ID ?? '';
+const enabled = provider !== 'none' && Boolean(id);
+---
+
+{enabled && <meta name="oc-analytics-provider" content={provider} data-id={id} />}
+
+<script>
+  const analyticsConfig = document.querySelector<HTMLMetaElement>(
+    'meta[name="oc-analytics-provider"]',
+  );
+
+  if (analyticsConfig) {
+    const provider = analyticsConfig.content;
+    const id = analyticsConfig.dataset.id ?? '';
+
+    if (provider === 'ga4') {
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(id)}`;
+      document.head.append(script);
+      const dataLayer = (window.dataLayer ??= []);
+      window.gtag = (...args: unknown[]) => {
+        dataLayer.push(args);
+      };
+      window.gtag('js', new Date());
+      window.gtag('config', id, { anonymize_ip: true });
+    }
+
+    if (provider === 'plausible') {
+      const script = document.createElement('script');
+      script.defer = true;
+      script.dataset.domain = id;
+      script.src = 'https://plausible.io/js/script.js';
+      document.head.append(script);
+    }
+
+    if (provider === 'umami') {
+      const script = document.createElement('script');
+      script.defer = true;
+      script.dataset.websiteId = id;
+      script.src = 'https://cloud.umami.is/script.js';
+      document.head.append(script);
+    }
+  }
+
+  document.addEventListener('oc:analytics', (event) => {
+    if (!(event instanceof CustomEvent)) return;
+    const name = String(event.detail?.name ?? '');
+    const context = String(event.detail?.context ?? '');
+    if (!/^[a-z0-9_]{1,60}$/.test(name)) return;
+
+    if (typeof window.gtag === 'function') window.gtag('event', name, { page_context: context });
+    if (typeof window.plausible === 'function') window.plausible(name, { props: { context } });
+    if (typeof window.umami?.track === 'function') window.umami.track(name, { context });
+  });
+
+  document.addEventListener('click', (event) => {
+    const target = (event.target as HTMLElement).closest<HTMLElement>('[data-analytics-event]');
+    if (!target) return;
+    document.dispatchEvent(
+      new CustomEvent('oc:analytics', {
+        detail: {
+          name: target.dataset.analyticsEvent ?? '',
+          context: target.dataset.analyticsContext ?? window.location.pathname,
+        },
+      }),
+    );
+  });
+</script>

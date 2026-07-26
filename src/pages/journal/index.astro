@@ -1,0 +1,61 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { breadcrumbSchema } from '@/lib/seo';
+
+const publishedEntries = await getCollection('journal', ({ data }) => !data.draft);
+const origin = Astro.site ?? new URL('https://the-oc-events-market.example');
+const breadcrumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Journal', path: '/journal/' },
+];
+---
+
+<BaseLayout
+  title="Orange County Event Planning Journal"
+  description="Practical Orange County event-planning guidance about timelines, vendors, venues, design decisions, logistics, and levels of support."
+  noindex={publishedEntries.length === 0}
+  jsonLd={[breadcrumbSchema(origin, breadcrumbs)]}
+>
+  <section class="simple-hero">
+    <h1>Planning Notes for Thoughtful Hosts</h1>
+    <p>
+      The journal is structured for first-hand planning guidance—not generic inspiration filler.
+      Articles publish only when the planner contributes real process, examples, and owner-approved
+      facts.
+    </p>
+  </section>
+
+  {
+    publishedEntries.length > 0 ? (
+      <section class="section-shell section-shell--tight">
+        <div class="detail-list">
+          {publishedEntries.map((entry) => (
+            <a class="detail-list__item" href={`/journal/${entry.id}/`}>
+              <h2>{entry.data.title}</h2>
+              <p>{entry.data.description}</p>
+            </a>
+          ))}
+        </div>
+      </section>
+    ) : (
+      <section class="section-shell section-shell--tight surface-white">
+        <div class="detail-intro">
+          <h2>Editorial briefs are ready. Published filler is not.</h2>
+          <div class="detail-intro__body">
+            <p>
+              Eight owner-reviewable briefs live in the content collection: full-service planning,
+              vendor flexibility, celebration timelines, baby showers, venues, outdoor events,
+              planning versus coordination, and multi-vendor timelines.
+            </p>
+            <p>
+              This route remains noindex and out of primary navigation until a real article has
+              verified authorship, first-hand contribution, useful supporting material, and an
+              approved publication date.
+            </p>
+          </div>
+        </div>
+      </section>
+    )
+  }
+</BaseLayout>

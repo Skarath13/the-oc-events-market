@@ -1,0 +1,65 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/global/PageHero.astro';
+import FinalCta from '@/components/global/FinalCta.astro';
+import { media } from '@/data/media';
+import { breadcrumbSchema } from '@/lib/seo';
+
+const origin = Astro.site ?? new URL('https://the-oc-events-market.example');
+const breadcrumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'About', path: '/about/' },
+];
+---
+
+<BaseLayout
+  title="About The OC Events Market"
+  description="Meet the planner-first approach behind The OC Events Market: one Orange County planning and design team coordinating the celebration and its vendor network."
+  jsonLd={[breadcrumbSchema(origin, breadcrumbs)]}
+>
+  <PageHero
+    title="A Planning Studio Built Around the Whole Celebration"
+    summary="The OC Events Market is an Orange County event planning and design studio. The work is not a directory of separate vendors; it is one accountable planning relationship supported by the right creative partners."
+    image={media.heroDesktop}
+    imageAlt="Layered outdoor event table with florals, linens, and glassware"
+    breadcrumbs={breadcrumbs}
+  />
+
+  <section class="section-shell detail-intro">
+    <h2>Creative direction and operational clarity belong together.</h2>
+    <div class="detail-intro__body">
+      <p>
+        A celebration can look cohesive only when the choices behind it connect: the room, guest
+        flow, food, rentals, florals, entertainment, lighting, schedule, and vendor handoffs.
+      </p>
+      <p>
+        The studio’s role is to shape those connected decisions and coordinate the approved team
+        around one plan. Clients can use trusted recommendations or bring professionals they already
+        know.
+      </p>
+    </div>
+  </section>
+
+  <section class="clarification surface-white">
+    <div class="clarification__media">
+      <Image
+        src={media.planningDetail}
+        alt="Event table detail with flowers, candles, and glassware"
+        widths={[560, 840, 1120]}
+        sizes="(max-width: 767px) 92vw, 48vw"
+        loading="lazy"
+        quality={76}
+      />
+    </div>
+    <div class="clarification__copy">
+      <h2>What this page does not invent.</h2>
+      <p>
+        Owner biography, team names, headshots, credentials, years in business, awards, and event
+        counts are withheld until verified and approved. The site can explain the planning
+        philosophy honestly without manufacturing a founder story.
+      </p>
+    </div>
+  </section>
+  <FinalCta />
+</BaseLayout>

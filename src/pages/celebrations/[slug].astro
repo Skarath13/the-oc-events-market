@@ -1,0 +1,41 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import FinalCta from '@/components/global/FinalCta.astro';
+import { breadcrumbSchema } from '@/lib/seo';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('celebrations', ({ data }) => !data.draft);
+  return entries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+type Props = {
+  entry: Awaited<ReturnType<typeof getCollection<'celebrations'>>>[number];
+};
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const origin = Astro.site ?? new URL('https://the-oc-events-market.example');
+const path = `/celebrations/${entry.id}/`;
+const breadcrumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Celebrations', path: '/celebrations/' },
+  { name: entry.data.title, path },
+];
+---
+
+<BaseLayout
+  title={entry.data.title}
+  description={entry.data.summary}
+  jsonLd={[breadcrumbSchema(origin, breadcrumbs)]}
+>
+  <article class="prose-page">
+    <h1>{entry.data.title}</h1>
+    <p>{entry.data.summary}</p>
+    <Content />
+  </article>
+  <FinalCta />
+</BaseLayout>

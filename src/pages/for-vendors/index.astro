@@ -1,0 +1,33 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import VendorInquiryForm from '@/components/forms/VendorInquiryForm.astro';
+import { breadcrumbSchema } from '@/lib/seo';
+
+const origin = Astro.site ?? new URL('https://the-oc-events-market.example');
+const breadcrumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'For Vendors', path: '/for-vendors/' },
+];
+---
+
+<BaseLayout
+  title="Vendor Partner Inquiries"
+  description="Introduce your event business, service area, portfolio, and capabilities to The OC Events Market’s planning team."
+  jsonLd={[breadcrumbSchema(origin, breadcrumbs)]}
+>
+  <div class="form-layout">
+    <div class="form-layout__intro">
+      <h1>Introduce your work to the planning team.</h1>
+      <p>
+        The OC Events Market builds vendor relationships separately from the client inquiry journey.
+        Share a clear introduction, service area, and portfolio so the team can understand how you
+        work.
+      </p>
+      <p class="form-layout__note">
+        Submitting this form does not create a partnership, recommendation, preferred status, or
+        public directory listing. Do not enter sensitive license or insurance document numbers.
+      </p>
+    </div>
+    <VendorInquiryForm />
+  </div>
+</BaseLayout>

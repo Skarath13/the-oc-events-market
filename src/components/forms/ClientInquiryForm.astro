@@ -1,0 +1,283 @@
+---
+import FormEnhancer from './FormEnhancer.astro';
+import { eventTypeOptions, planningSupportOptions, preferredContactOptions } from '@/lib/forms';
+
+type Props = {
+  selectedEvent?: string;
+  selectedSupport?: string;
+};
+
+const { selectedEvent = '', selectedSupport = '' } = Astro.props;
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+const staticPreview = import.meta.env.PUBLIC_STATIC_PREVIEW === 'true';
+---
+
+<form
+  class="inquiry-form"
+  id="client-inquiry"
+  action="/api/inquiry/"
+  method="post"
+  data-enhanced-form
+  data-analytics-context="client_inquiry"
+  data-static-preview={staticPreview ? 'true' : 'false'}
+  novalidate
+>
+  <div class="form-summary" data-form-summary tabindex="-1" role="alert" hidden></div>
+  <input type="hidden" name="submissionId" value="" />
+
+  <div class="honeypot" aria-hidden="true">
+    <label for="client-website">Leave this field empty</label>
+    <input id="client-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+  </div>
+
+  <fieldset>
+    <legend>About your celebration</legend>
+    <div class="form-grid">
+      <div class="form-field form-field--full">
+        <label for="eventType">Event type <span aria-hidden="true">*</span></label>
+        <select id="eventType" name="eventType" required aria-describedby="error-eventType">
+          <option value="">Choose the closest fit</option>
+          {
+            eventTypeOptions.map(([value, label]) => (
+              <option value={value} selected={selectedEvent === value}>
+                {label}
+              </option>
+            ))
+          }
+        </select>
+        <span class="form-error" id="error-eventType" data-error-for="eventType"></span>
+      </div>
+
+      <div class="form-field">
+        <label for="eventDate">Event date</label>
+        <input
+          id="eventDate"
+          name="eventDate"
+          type="date"
+          aria-describedby="eventDate-hint error-eventDate"
+        />
+        <p class="form-hint" id="eventDate-hint">A working date is enough.</p>
+        <span class="form-error" id="error-eventDate" data-error-for="eventDate"></span>
+      </div>
+      <div class="form-field">
+        <span class="form-label">No date yet?</span>
+        <div class="form-option">
+          <input id="dateNotSelected" name="dateNotSelected" type="checkbox" />
+          <label for="dateNotSelected">We have not chosen a date yet.</label>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label for="cityVenue">City or venue</label>
+        <input
+          id="cityVenue"
+          name="cityVenue"
+          type="text"
+          autocomplete="address-level2"
+          placeholder="City, venue, or still deciding"
+          maxlength="160"
+        />
+      </div>
+      <div class="form-field">
+        <label for="guestCount">Estimated guest count</label>
+        <input
+          id="guestCount"
+          name="guestCount"
+          type="text"
+          inputmode="numeric"
+          placeholder="An estimate is fine"
+          maxlength="40"
+        />
+      </div>
+      <div class="form-field form-field--full">
+        <label for="budget">Working budget</label>
+        <input
+          id="budget"
+          name="budget"
+          type="text"
+          inputmode="decimal"
+          aria-describedby="budget-hint"
+          placeholder="Share a range or write “still deciding”"
+          maxlength="100"
+        />
+        <p class="form-hint" id="budget-hint">
+          No budget bands are published until the owner approves them.
+        </p>
+      </div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>How we can help</legend>
+    <div class="form-grid">
+      <div class="form-field form-field--full">
+        <span class="form-label" id="planningSupport-label"
+          >Planning support needed <span aria-hidden="true">*</span></span
+        >
+        <div
+          class="form-options"
+          role="radiogroup"
+          aria-labelledby="planningSupport-label"
+          aria-describedby="error-planningSupport"
+        >
+          {
+            planningSupportOptions.map(([value, label], index) => (
+              <div class="form-option">
+                <input
+                  id={`planningSupport-${value}`}
+                  name="planningSupport"
+                  value={value}
+                  type="radio"
+                  required={index === 0}
+                  checked={selectedSupport === value}
+                />
+                <label for={`planningSupport-${value}`}>{label}</label>
+              </div>
+            ))
+          }
+        </div>
+        <span class="form-error" id="error-planningSupport" data-error-for="planningSupport"></span>
+      </div>
+      <div class="form-field form-field--full">
+        <label for="description">Tell us about the event <span aria-hidden="true">*</span></label>
+        <textarea
+          id="description"
+          name="description"
+          required
+          minlength="20"
+          maxlength="3000"
+          aria-describedby="description-hint error-description"
+          placeholder="What are you celebrating, what matters most, and where do you want support?"
+        ></textarea>
+        <p class="form-hint" id="description-hint">20–3,000 characters.</p>
+        <span class="form-error" id="error-description" data-error-for="description"></span>
+      </div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>How to reach you</legend>
+    <div class="form-grid">
+      <div class="form-field">
+        <label for="name">Name <span aria-hidden="true">*</span></label>
+        <input
+          id="name"
+          name="name"
+          type="text"
+          autocomplete="name"
+          required
+          maxlength="100"
+          aria-describedby="error-name"
+        />
+        <span class="form-error" id="error-name" data-error-for="name"></span>
+      </div>
+      <div class="form-field">
+        <label for="email">Email <span aria-hidden="true">*</span></label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          autocomplete="email"
+          required
+          maxlength="254"
+          aria-describedby="error-email"
+        />
+        <span class="form-error" id="error-email" data-error-for="email"></span>
+      </div>
+      <div class="form-field">
+        <label for="phone">Phone number</label>
+        <input
+          id="phone"
+          name="phone"
+          type="tel"
+          autocomplete="tel"
+          maxlength="40"
+          aria-describedby="phone-hint error-phone"
+        />
+        <p class="form-hint" id="phone-hint">Required if you prefer a call or text.</p>
+        <span class="form-error" id="error-phone" data-error-for="phone"></span>
+      </div>
+      <div class="form-field">
+        <span class="form-label" id="preferredContact-label"
+          >Preferred contact <span aria-hidden="true">*</span></span
+        >
+        <div
+          class="form-options"
+          role="radiogroup"
+          aria-labelledby="preferredContact-label"
+          aria-describedby="error-preferredContact"
+        >
+          {
+            preferredContactOptions.map(([value, label], index) => (
+              <div class="form-option">
+                <input
+                  id={`preferredContact-${value}`}
+                  name="preferredContact"
+                  value={value}
+                  type="radio"
+                  required={index === 0}
+                />
+                <label for={`preferredContact-${value}`}>{label}</label>
+              </div>
+            ))
+          }
+        </div>
+        <span class="form-error" id="error-preferredContact" data-error-for="preferredContact"
+        ></span>
+      </div>
+      <div class="form-field form-field--full">
+        <div class="form-option">
+          <input
+            id="privacyConsent"
+            name="privacyConsent"
+            type="checkbox"
+            required
+            aria-describedby="error-privacyConsent"
+          />
+          <label for="privacyConsent"
+            >I agree that The OC Events Market may use these details to respond to this inquiry.
+            <a href="/privacy/">Read the privacy notice.</a>
+            <span aria-hidden="true">*</span></label
+          >
+        </div>
+        <span class="form-error" id="error-privacyConsent" data-error-for="privacyConsent"></span>
+      </div>
+    </div>
+  </fieldset>
+
+  {
+    turnstileSiteKey && (
+      <div
+        class="cf-turnstile"
+        data-sitekey={turnstileSiteKey}
+        data-action="client_inquiry"
+        data-theme="light"
+      />
+    )
+  }
+
+  {
+    staticPreview && (
+      <p class="static-preview-notice" role="status">
+        This staging preview does not send inquiries. Form delivery is enabled only on a configured
+        server host.
+      </p>
+    )
+  }
+  <button class="button button--dark" type="submit" disabled={staticPreview}>Send My Inquiry</button
+  >
+  <p class="form-status" data-form-status role="status" aria-live="polite" hidden></p>
+</form>
+
+<section class="form-success" data-form-success="client-inquiry" tabindex="-1" role="status" hidden>
+  <h2>Thank you.</h2>
+  <p data-success-message>Your inquiry was received.</p>
+  <p>No unverified response-time promise is made. The planning team will review what you shared.</p>
+</section>
+
+{
+  turnstileSiteKey && (
+    <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer />
+  )
+}
+<FormEnhancer />

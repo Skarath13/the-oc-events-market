@@ -1,0 +1,156 @@
+---
+import PageHero from './PageHero.astro';
+import FaqList from './FaqList.astro';
+import FinalCta from './FinalCta.astro';
+import { processSteps } from '@/data/site';
+import { eventTypes } from '@/data/eventTypes';
+import type { ServicePage } from '@/data/services';
+import type { EventTypePage } from '@/data/eventTypes';
+import { media } from '@/data/media';
+import type { Breadcrumb } from '@/lib/seo';
+
+type Props = {
+  page: ServicePage | EventTypePage;
+  kind: 'service' | 'event';
+  breadcrumbs: Breadcrumb[];
+};
+
+const { page, kind, breadcrumbs } = Astro.props;
+const forItems = 'forWhom' in page ? page.forWhom : [page.whoFor];
+const relatedEvents = eventTypes.filter((eventType) => eventType.slug !== page.slug).slice(0, 3);
+---
+
+<PageHero
+  title={page.h1}
+  summary={page.summary}
+  image={media[page.image]}
+  imageAlt={page.imageAlt}
+  breadcrumbs={breadcrumbs}
+  proof="Orange County planning · Trusted vendors or yours"
+/>
+
+<section class="section-shell detail-intro">
+  <div>
+    <h2>Who this planning is for</h2>
+  </div>
+  <div class="detail-intro__body">
+    {forItems.map((item) => <p>{item}</p>)}
+  </div>
+</section>
+
+<section class="section-shell section-shell--tight surface-white">
+  <div class="section-heading section-heading--split">
+    <h2>What the planning can handle</h2>
+    <p>
+      Responsibilities are confirmed in the selected service. The proposal—not a broad website
+      label—defines exactly what the planning team manages.
+    </p>
+  </div>
+  <div class="detail-list">
+    {
+      page.capabilities.map((capability) => (
+        <article class="detail-list__item">
+          <h3>{capability.title}</h3>
+          <p>{capability.body}</p>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<section class="section-shell process-section">
+  <div class="section-heading">
+    <h2>One clear planning rhythm</h2>
+    <p>
+      The work moves from priorities to decisions, then into a coordinated team and an approved
+      event-day plan.
+    </p>
+  </div>
+  <ol class="process-rail">
+    {
+      processSteps.map((step, index) => (
+        <li class="process-rail__step">
+          <span class="process-rail__number" aria-hidden="true">
+            0{index + 1}
+          </span>
+          <h3>{step.title}</h3>
+          <p>{step.body}</p>
+        </li>
+      ))
+    }
+  </ol>
+</section>
+
+<section class="section-shell vendor-flex">
+  <div>
+    <h2>A trusted network, without locking you into one.</h2>
+    <p>
+      We can introduce the right creative partners for your event when sourcing is included or step
+      in alongside vendors you have already chosen. Either way, we coordinate the approved team
+      around one plan, one timeline, and one shared direction.
+    </p>
+    <a class="text-link" href="/trusted-creative-network/">How vendor flexibility works</a>
+  </div>
+  <p class="vendor-flex__rule">Your vendors or ours. One coordinated plan.</p>
+</section>
+
+<section class="considerations">
+  <div class="section-shell">
+    <div class="section-heading">
+      <h2>Planning considerations that matter here</h2>
+    </div>
+    <div class="considerations-grid">
+      {
+        page.considerations.map((consideration) => (
+          <article>
+            <h3>{consideration.title}</h3>
+            <p>{consideration.body}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<section class="section-shell">
+  <div class="section-heading section-heading--split">
+    <h2>Questions, answered plainly</h2>
+    <p>
+      These answers avoid assumptions about packages. Your proposal should settle every
+      event-specific responsibility before work begins.
+    </p>
+  </div>
+  <FaqList faqs={page.faqs} />
+</section>
+
+<section class="section-shell section-shell--tight">
+  <div class="section-heading section-heading--split">
+    <h2>Keep exploring</h2>
+    <div>
+      <p>
+        {
+          kind === 'service'
+            ? 'See how planning changes across different celebrations.'
+            : 'Compare other event types or review the planning process.'
+        }
+      </p>
+      <p>
+        <a class="text-link" href="/services/">Planning services</a>
+        {' · '}
+        <a class="text-link" href="/process/">Our process</a>
+      </p>
+    </div>
+  </div>
+  <div class="detail-list">
+    {
+      relatedEvents.map((eventType) => (
+        <a class="detail-list__item" href={`/events/${eventType.slug}/`}>
+          <h3>{eventType.title}</h3>
+          <p>{eventType.gatewayBody}</p>
+        </a>
+      ))
+    }
+  </div>
+</section>
+
+<FinalCta />

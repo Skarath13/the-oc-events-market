@@ -1,0 +1,37 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import ClientInquiryForm from '@/components/forms/ClientInquiryForm.astro';
+import { eventTypeOptions, planningSupportOptions } from '@/lib/forms';
+import { breadcrumbSchema } from '@/lib/seo';
+
+const event = Astro.url.searchParams.get('event') ?? '';
+const support = Astro.url.searchParams.get('support') ?? '';
+const validEvent = eventTypeOptions.some(([value]) => value === event) ? event : '';
+const validSupport = planningSupportOptions.some(([value]) => value === support) ? support : '';
+const origin = Astro.site ?? new URL('https://the-oc-events-market.example');
+const breadcrumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Contact', path: '/contact/' },
+];
+---
+
+<BaseLayout
+  title="Plan Your Orange County Event"
+  description="Tell The OC Events Market what you are celebrating, when and where it may happen, and what planning support you need."
+  jsonLd={[breadcrumbSchema(origin, breadcrumbs)]}
+>
+  <div class="form-layout">
+    <div class="form-layout__intro">
+      <h1>Tell us what you’re celebrating.</h1>
+      <p>
+        Share what is known, what is still open, and where you want help. A working date or planning
+        window is enough to begin the conversation.
+      </p>
+      <p class="form-layout__note">
+        No response-time promise is published until the owner confirms it. Your information is sent
+        only when the server delivery provider is configured and reports success.
+      </p>
+    </div>
+    <ClientInquiryForm selectedEvent={validEvent} selectedSupport={validSupport} />
+  </div>
+</BaseLayout>

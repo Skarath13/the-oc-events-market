@@ -1,0 +1,43 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import DetailPage from '@/components/global/DetailPage.astro';
+import { eventTypes, type EventTypePage } from '@/data/eventTypes';
+import { breadcrumbSchema, serviceSchema } from '@/lib/seo';
+
+export function getStaticPaths() {
+  return eventTypes.map((eventType) => ({
+    params: { slug: eventType.slug },
+    props: { eventType },
+  }));
+}
+
+type Props = {
+  eventType: EventTypePage;
+};
+
+const { eventType } = Astro.props;
+const origin = Astro.site ?? new URL('https://the-oc-events-market.example');
+const pathname = `/events/${eventType.slug}/`;
+const breadcrumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Celebrations', path: '/celebrations/' },
+  { name: eventType.title, path: pathname },
+];
+---
+
+<BaseLayout
+  title={eventType.metaTitle}
+  description={eventType.metaDescription}
+  jsonLd={[
+    breadcrumbSchema(origin, breadcrumbs),
+    serviceSchema({
+      origin,
+      pathname,
+      name: eventType.title,
+      description: eventType.summary,
+      serviceType: `${eventType.title} planning and design`,
+    }),
+  ]}
+>
+  <DetailPage page={eventType} kind="event" breadcrumbs={breadcrumbs} />
+</BaseLayout>

@@ -1,0 +1,50 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/global/PageHero.astro';
+import EventGateway from '@/components/global/EventGateway.astro';
+import FinalCta from '@/components/global/FinalCta.astro';
+import { media } from '@/data/media';
+import { breadcrumbSchema } from '@/lib/seo';
+
+const origin = Astro.site ?? new URL('https://the-oc-events-market.example');
+const breadcrumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Celebrations', path: '/celebrations/' },
+];
+---
+
+<BaseLayout
+  title="Orange County Celebrations & Event Design"
+  description="Explore the kinds of Orange County celebrations The OC Events Market plans. Verified client case studies will publish only with approved facts and photography."
+  jsonLd={[breadcrumbSchema(origin, breadcrumbs)]}
+>
+  <PageHero
+    title="Celebrations Planned Around the People in the Room"
+    summary="The occasion matters, but so do the setting, guests, vendors, timing, and details behind it. Explore how the planning priorities change across weddings, showers, birthdays, kids’ parties, and corporate events."
+    image={media.venue}
+    imageAlt="Sunlit outdoor tables arranged for a gathering"
+    breadcrumbs={breadcrumbs}
+  />
+
+  <section class="section-shell detail-intro">
+    <h2>Pretty pictures are not the whole proof.</h2>
+    <div class="detail-intro__body">
+      <p>
+        A useful celebration story should explain what the client wanted, what the planner handled,
+        how the vendor team worked together, and which logistical decision made the event more
+        coherent.
+      </p>
+      <p>
+        Real portfolio stories are intentionally withheld until the owner supplies approved project
+        facts, galleries, permissions, and vendor credits. Temporary editorial photography is used
+        only to illustrate event categories—not to impersonate client work.
+      </p>
+    </div>
+  </section>
+
+  <EventGateway
+    heading="Start with what you’re celebrating."
+    intro="Each page answers the planning questions that are specific to that kind of event."
+  />
+  <FinalCta />
+</BaseLayout>

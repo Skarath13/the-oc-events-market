@@ -1,0 +1,101 @@
+---
+import { primaryNavigation } from '@/data/navigation';
+import { siteConfig } from '@/data/site';
+
+type Props = {
+  currentPath: string;
+};
+
+const { currentPath } = Astro.props;
+const isCurrent = (href: string) =>
+  href === '/' ? currentPath === '/' : currentPath.startsWith(href);
+---
+
+<header class="site-header" data-site-header>
+  <div class="site-header__inner">
+    <a class="brand-lockup" href="/" aria-label={`${siteConfig.businessName}, home`}>
+      {
+        siteConfig.logo.src ? (
+          <img src={siteConfig.logo.src} alt={siteConfig.logo.alt} class="brand-lockup__logo" />
+        ) : (
+          <span class="brand-lockup__name">{siteConfig.businessName}</span>
+        )
+      }
+      <span class="brand-lockup__descriptor">{siteConfig.descriptor}</span>
+    </a>
+
+    <nav class="desktop-navigation" aria-label="Primary navigation">
+      <ul>
+        {
+          primaryNavigation.map((item) => (
+            <li>
+              <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <a class="button button--small button--dark" href="/contact/">Plan My Event</a>
+    </nav>
+
+    <button
+      class="menu-trigger"
+      type="button"
+      aria-haspopup="dialog"
+      aria-controls="mobile-menu"
+      data-menu-open
+    >
+      <span>Menu</span>
+      <span class="menu-trigger__lines" aria-hidden="true"></span>
+    </button>
+  </div>
+</header>
+
+<dialog class="mobile-menu" id="mobile-menu" aria-labelledby="mobile-menu-title">
+  <div class="mobile-menu__header">
+    <p id="mobile-menu-title">Navigation</p>
+    <button class="menu-close" type="button" data-menu-close>
+      <span>Close</span>
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <nav aria-label="Mobile navigation">
+    <a class="button button--dark mobile-menu__cta" href="/contact/">Plan My Event</a>
+    <ul>
+      {
+        primaryNavigation.map((item) => (
+          <li>
+            <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+  <p class="mobile-menu__promise">{siteConfig.brandPromise}</p>
+</dialog>
+
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>('#mobile-menu');
+  const openButton = document.querySelector<HTMLButtonElement>('[data-menu-open]');
+  const closeButton = document.querySelector<HTMLButtonElement>('[data-menu-close]');
+
+  openButton?.addEventListener('click', () => {
+    if (!dialog?.open) {
+      dialog?.showModal();
+      document.documentElement.classList.add('menu-is-open');
+      closeButton?.focus();
+    }
+  });
+
+  closeButton?.addEventListener('click', () => dialog?.close());
+  dialog?.addEventListener('close', () => {
+    document.documentElement.classList.remove('menu-is-open');
+    openButton?.focus();
+  });
+  dialog?.addEventListener('click', (event) => {
+    if (event.target === dialog) dialog.close();
+  });
+</script>

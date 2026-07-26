@@ -1,0 +1,67 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/global/PageHero.astro';
+import FinalCta from '@/components/global/FinalCta.astro';
+import { processSteps } from '@/data/site';
+import { media } from '@/data/media';
+import { breadcrumbSchema } from '@/lib/seo';
+
+const origin = Astro.site ?? new URL('https://the-oc-events-market.example');
+const breadcrumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Our Process', path: '/process/' },
+];
+---
+
+<BaseLayout
+  title="Our Event Planning Process"
+  description="See how discovery, planning and design, vendor coordination, and event-day management come together around one clear event plan."
+  jsonLd={[breadcrumbSchema(origin, breadcrumbs)]}
+>
+  <PageHero
+    title="A Clear Path From First Idea to Event Day"
+    summary="A well-run celebration starts before the first vendor arrives. The process turns priorities into decisions, decisions into a coordinated team, and the approved plan into an event the host can actually experience."
+    image={media.network}
+    imageAlt="Outdoor dining space arranged among greenery"
+    breadcrumbs={breadcrumbs}
+  />
+
+  <section class="section-shell process-section">
+    <div class="section-heading section-heading--split">
+      <h2>Four stages. One connected plan.</h2>
+      <p>
+        The timing and deliverables depend on the selected service. The structure keeps
+        responsibilities and next decisions visible.
+      </p>
+    </div>
+    <ol class="process-rail">
+      {
+        processSteps.map((step, index) => (
+          <li class="process-rail__step">
+            <span class="process-rail__number" aria-hidden="true">
+              0{index + 1}
+            </span>
+            <h3>{step.title}</h3>
+            <p>{step.body}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section class="section-shell detail-intro surface-white">
+    <h2>What makes the process feel calm?</h2>
+    <div class="detail-intro__body">
+      <p>
+        Calm does not mean casual. It means the owner of each decision is known, the vendor team
+        works from current information, and the next deadline arrives with enough context to make a
+        useful choice.
+      </p>
+      <p>
+        When conditions change, the team can see the dependencies and update the approved plan
+        without asking the host to personally relay every adjustment.
+      </p>
+    </div>
+  </section>
+  <FinalCta />
+</BaseLayout>

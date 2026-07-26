@@ -1,0 +1,235 @@
+---
+import FormEnhancer from './FormEnhancer.astro';
+
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+const staticPreview = import.meta.env.PUBLIC_STATIC_PREVIEW === 'true';
+---
+
+<form
+  class="inquiry-form"
+  id="vendor-inquiry"
+  action="/api/vendor-inquiry/"
+  method="post"
+  data-enhanced-form
+  data-analytics-context="vendor_inquiry"
+  data-static-preview={staticPreview ? 'true' : 'false'}
+  novalidate
+>
+  <div class="form-summary" data-form-summary tabindex="-1" role="alert" hidden></div>
+  <input type="hidden" name="submissionId" value="" />
+
+  <div class="honeypot" aria-hidden="true">
+    <label for="vendor-website-check">Leave this field empty</label>
+    <input id="vendor-website-check" name="website" type="text" tabindex="-1" autocomplete="off" />
+  </div>
+
+  <fieldset>
+    <legend>Business details</legend>
+    <div class="form-grid">
+      <div class="form-field">
+        <label for="businessName">Business name <span aria-hidden="true">*</span></label>
+        <input
+          id="businessName"
+          name="businessName"
+          type="text"
+          autocomplete="organization"
+          required
+          maxlength="140"
+          aria-describedby="error-businessName"
+        />
+        <span class="form-error" id="error-businessName" data-error-for="businessName"></span>
+      </div>
+      <div class="form-field">
+        <label for="contactName">Contact name <span aria-hidden="true">*</span></label>
+        <input
+          id="contactName"
+          name="contactName"
+          type="text"
+          autocomplete="name"
+          required
+          maxlength="100"
+          aria-describedby="error-contactName"
+        />
+        <span class="form-error" id="error-contactName" data-error-for="contactName"></span>
+      </div>
+      <div class="form-field">
+        <label for="vendorEmail">Email <span aria-hidden="true">*</span></label>
+        <input
+          id="vendorEmail"
+          name="email"
+          type="email"
+          autocomplete="email"
+          required
+          maxlength="254"
+          aria-describedby="error-vendor-email"
+        />
+        <span class="form-error" id="error-vendor-email" data-error-for="email"></span>
+      </div>
+      <div class="form-field">
+        <label for="vendorPhone">Phone</label>
+        <input
+          id="vendorPhone"
+          name="phone"
+          type="tel"
+          autocomplete="tel"
+          maxlength="40"
+          aria-describedby="error-vendor-phone"
+        />
+        <span class="form-error" id="error-vendor-phone" data-error-for="phone"></span>
+      </div>
+      <div class="form-field">
+        <label for="category">Vendor category <span aria-hidden="true">*</span></label>
+        <input
+          id="category"
+          name="category"
+          type="text"
+          required
+          maxlength="100"
+          placeholder="Florist, photographer, caterer…"
+          aria-describedby="error-category"
+        />
+        <span class="form-error" id="error-category" data-error-for="category"></span>
+      </div>
+      <div class="form-field">
+        <label for="serviceArea">Service area <span aria-hidden="true">*</span></label>
+        <input
+          id="serviceArea"
+          name="serviceArea"
+          type="text"
+          required
+          maxlength="180"
+          aria-describedby="error-serviceArea"
+        />
+        <span class="form-error" id="error-serviceArea" data-error-for="serviceArea"></span>
+      </div>
+      <div class="form-field">
+        <label for="websiteUrl">Business website</label>
+        <input
+          id="websiteUrl"
+          name="websiteUrl"
+          type="url"
+          inputmode="url"
+          autocomplete="url"
+          placeholder="https://"
+          maxlength="500"
+          aria-describedby="error-websiteUrl"
+        />
+        <span class="form-error" id="error-websiteUrl" data-error-for="websiteUrl"></span>
+      </div>
+      <div class="form-field">
+        <label for="socialUrl">Social profile</label>
+        <input
+          id="socialUrl"
+          name="socialUrl"
+          type="url"
+          inputmode="url"
+          placeholder="https://"
+          maxlength="500"
+          aria-describedby="error-socialUrl"
+        />
+        <span class="form-error" id="error-socialUrl" data-error-for="socialUrl"></span>
+      </div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Your work</legend>
+    <div class="form-grid">
+      <div class="form-field form-field--full">
+        <label for="insuranceLicense">Insurance or license information</label>
+        <input
+          id="insuranceLicense"
+          name="insuranceLicense"
+          type="text"
+          maxlength="500"
+          aria-describedby="insurance-hint"
+        />
+        <p class="form-hint" id="insurance-hint">
+          Share only information relevant to your category. Do not enter sensitive document numbers.
+        </p>
+      </div>
+      <div class="form-field form-field--full">
+        <label for="introduction">Short introduction <span aria-hidden="true">*</span></label>
+        <textarea
+          id="introduction"
+          name="introduction"
+          required
+          minlength="20"
+          maxlength="2500"
+          aria-describedby="error-introduction"
+          placeholder="Tell us what you do, the kinds of events you support, and how you work with planning teams."
+        ></textarea>
+        <span class="form-error" id="error-introduction" data-error-for="introduction"></span>
+      </div>
+      <div class="form-field form-field--full">
+        <label for="portfolioUrl">Portfolio link <span aria-hidden="true">*</span></label>
+        <input
+          id="portfolioUrl"
+          name="portfolioUrl"
+          type="url"
+          inputmode="url"
+          required
+          placeholder="https://"
+          maxlength="500"
+          aria-describedby="error-portfolioUrl"
+        />
+        <span class="form-error" id="error-portfolioUrl" data-error-for="portfolioUrl"></span>
+      </div>
+      <div class="form-field form-field--full">
+        <div class="form-option">
+          <input
+            id="vendorPrivacyConsent"
+            name="privacyConsent"
+            type="checkbox"
+            required
+            aria-describedby="error-vendorPrivacyConsent"
+          />
+          <label for="vendorPrivacyConsent"
+            >I agree that The OC Events Market may use these details to review and respond to this
+            introduction. <a href="/privacy/">Read the privacy notice.</a>
+            <span aria-hidden="true">*</span></label
+          >
+        </div>
+        <span class="form-error" id="error-vendorPrivacyConsent" data-error-for="privacyConsent"
+        ></span>
+      </div>
+    </div>
+  </fieldset>
+
+  {
+    turnstileSiteKey && (
+      <div
+        class="cf-turnstile"
+        data-sitekey={turnstileSiteKey}
+        data-action="vendor_inquiry"
+        data-theme="light"
+      />
+    )
+  }
+
+  {
+    staticPreview && (
+      <p class="static-preview-notice" role="status">
+        This staging preview does not send vendor introductions. Form delivery is enabled only on a
+        configured server host.
+      </p>
+    )
+  }
+  <button class="button button--dark" type="submit" disabled={staticPreview}>
+    Send Introduction
+  </button>
+  <p class="form-status" data-form-status role="status" aria-live="polite" hidden></p>
+</form>
+
+<section class="form-success" data-form-success="vendor-inquiry" tabindex="-1" role="status" hidden>
+  <h2>Thank you.</h2>
+  <p data-success-message>Your introduction was received.</p>
+  <p>An inquiry does not guarantee a partnership, recommendation, or directory listing.</p>
+</section>
+
+{
+  turnstileSiteKey && (
+    <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer />
+  )
+}
+<FormEnhancer />

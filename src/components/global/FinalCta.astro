@@ -1,0 +1,25 @@
+---
+type Props = {
+  heading?: string;
+  body?: string;
+  label?: string;
+  href?: string;
+};
+
+const {
+  heading = 'Tell us what you’re celebrating. We’ll help you shape the rest.',
+  body = 'Share the occasion, the planning window, and where you need support. We’ll start with the real details.',
+  label = 'Check Availability',
+  href = '/contact/',
+} = Astro.props;
+---
+
+<section class="final-cta">
+  <div class="final-cta__inner">
+    <div>
+      <h2>{heading}</h2>
+      <p>{body}</p>
+    </div>
+    <a class="button button--dark" href={href}>{label}</a>
+  </div>
+</section>

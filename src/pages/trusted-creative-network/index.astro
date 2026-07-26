@@ -1,0 +1,73 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/global/PageHero.astro';
+import FaqList from '@/components/global/FaqList.astro';
+import FinalCta from '@/components/global/FinalCta.astro';
+import { media } from '@/data/media';
+import { breadcrumbSchema } from '@/lib/seo';
+
+const origin = Astro.site ?? new URL('https://the-oc-events-market.example');
+const breadcrumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Trusted Creative Network', path: '/trusted-creative-network/' },
+];
+const faqs = [
+  {
+    question: 'Are clients required to use preferred vendors?',
+    answer:
+      'No. You may bring professionals you already know and love. The approved vendor team is coordinated according to the selected planning scope.',
+  },
+  {
+    question: 'Can the planning team recommend vendors?',
+    answer:
+      'Yes, when vendor sourcing is included. Recommendations should fit the event’s needs, visual direction, logistics, and working budget—not a generic directory category.',
+  },
+  {
+    question: 'Does a recommendation guarantee availability or pricing?',
+    answer:
+      'No. Vendor availability, contracts, pricing, insurance, licenses, and service terms belong to the vendor relationship and must be reviewed before booking.',
+  },
+  {
+    question: 'Will existing vendors be included in the timeline?',
+    answer:
+      'Existing vendors can be brought into the approved communication and timeline process when that coordination is included in the selected service.',
+  },
+];
+---
+
+<BaseLayout
+  title="Our Trusted Creative Network"
+  description="Use our trusted creative network or bring vendors you already know. We coordinate the approved team around one plan and timeline."
+  jsonLd={[breadcrumbSchema(origin, breadcrumbs)]}
+>
+  <PageHero
+    title="One Planning Team, Backed by the Right Creative Partners"
+    summary="The network is an operational advantage, not a marketplace. We can recommend professionals when sourcing is included or coordinate the vendors you already chose—without asking you to browse an unvetted directory."
+    image={media.network}
+    imageAlt="Intimate outdoor event setting surrounded by greenery"
+    breadcrumbs={breadcrumbs}
+  />
+
+  <section class="section-shell vendor-flex">
+    <div>
+      <h2>Vendor flexibility keeps the plan client-centered.</h2>
+      <p>
+        The right vendor team depends on the event, priorities, setting, working budget, and
+        responsibilities already in place. The planning team brings those professionals into a
+        shared direction and current timeline.
+      </p>
+      <a class="text-link" href="/for-vendors/">Vendor partner inquiries</a>
+    </div>
+    <p class="vendor-flex__rule">
+      Trusted recommendations when needed. Existing relationships when preferred.
+    </p>
+  </section>
+
+  <section class="section-shell">
+    <div class="section-heading">
+      <h2>What the network does—and does not—mean.</h2>
+    </div>
+    <FaqList faqs={faqs} />
+  </section>
+  <FinalCta />
+</BaseLayout>

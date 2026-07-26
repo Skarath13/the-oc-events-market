@@ -1,0 +1,209 @@
+<script>
+  const forms = document.querySelectorAll<HTMLFormElement>('[data-enhanced-form]');
+
+  for (const form of forms) {
+    if (form.dataset.staticPreview === 'true') continue;
+
+    const summary = form.querySelector<HTMLElement>('[data-form-summary]');
+    const status = form.querySelector<HTMLElement>('[data-form-status]');
+    const success = document.querySelector<HTMLElement>(`[data-form-success="${form.id}"]`);
+    const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+    const submissionId = form.querySelector<HTMLInputElement>('[name="submissionId"]');
+    let started = false;
+
+    if (submissionId && !submissionId.value) submissionId.value = crypto.randomUUID();
+
+    if (form.id === 'client-inquiry') {
+      const params = new URLSearchParams(window.location.search);
+      setAllowedValue(form, 'eventType', params.get('event'), [
+        'wedding',
+        'baby-bridal-shower',
+        'birthday-milestone',
+        'kids-party',
+        'corporate-brand',
+        'other',
+      ]);
+      setAllowedValue(form, 'planningSupport', params.get('support'), [
+        'start-to-finish',
+        'selected-support',
+        'coordination',
+        'not-sure',
+      ]);
+    }
+
+    form.addEventListener(
+      'input',
+      () => {
+        if (started) return;
+        started = true;
+        document.dispatchEvent(
+          new CustomEvent('oc:analytics', {
+            detail: { name: 'form_start', context: form.dataset.analyticsContext ?? 'form' },
+          }),
+        );
+      },
+      { once: true },
+    );
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      clearErrors(form, summary);
+      if (submit) {
+        submit.disabled = true;
+        submit.dataset.originalLabel = submit.textContent ?? '';
+        submit.textContent = 'Sending…';
+      }
+      form.setAttribute('aria-busy', 'true');
+      if (status) {
+        status.hidden = false;
+        status.textContent = 'Sending your information securely…';
+      }
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' },
+        });
+        const result = (await response.json()) as {
+          ok?: boolean;
+          message?: string;
+          errors?: Record<string, string>;
+        };
+
+        if (!response.ok || !result.ok) {
+          showErrors(form, summary, result.errors ?? {}, result.message ?? 'Please try again.');
+          if (status) {
+            status.hidden = false;
+            status.textContent = result.message ?? 'The form could not be sent.';
+          }
+          document.dispatchEvent(
+            new CustomEvent('oc:analytics', {
+              detail: {
+                name: 'form_validation_failure',
+                context: form.dataset.analyticsContext ?? 'form',
+              },
+            }),
+          );
+          return;
+        }
+
+        form.hidden = true;
+        if (status) status.hidden = true;
+        if (success) {
+          success.hidden = false;
+          const successMessage = success.querySelector<HTMLElement>('[data-success-message]');
+          if (successMessage && result.message) successMessage.textContent = result.message;
+          success.focus();
+        }
+        document.dispatchEvent(
+          new CustomEvent('oc:analytics', {
+            detail: { name: 'form_success', context: form.dataset.analyticsContext ?? 'form' },
+          }),
+        );
+      } catch {
+        const message =
+          'The form could not connect. Your information was not sent; please check the connection and try again.';
+        showErrors(form, summary, {}, message);
+        if (status) {
+          status.hidden = false;
+          status.textContent = message;
+        }
+      } finally {
+        form.removeAttribute('aria-busy');
+        if (submit) {
+          submit.disabled = false;
+          submit.textContent = submit.dataset.originalLabel ?? 'Submit';
+        }
+      }
+    });
+
+    const date = form.querySelector<HTMLInputElement>('[name="eventDate"]');
+    const unknownDate = form.querySelector<HTMLInputElement>('[name="dateNotSelected"]');
+    if (date && unknownDate) {
+      unknownDate.addEventListener('change', () => {
+        if (unknownDate.checked) {
+          date.value = '';
+          date.disabled = true;
+        } else {
+          date.disabled = false;
+        }
+      });
+      date.addEventListener('input', () => {
+        if (date.value) unknownDate.checked = false;
+      });
+    }
+  }
+
+  document.addEventListener('click', (event) => {
+    const link = (event.target as HTMLElement).closest<HTMLAnchorElement>('[data-error-link]');
+    if (!link) return;
+    const target = document.querySelector<HTMLElement>(link.getAttribute('href') ?? '');
+    target?.focus();
+  });
+
+  function clearErrors(form: HTMLFormElement, summary: HTMLElement | null) {
+    if (summary) {
+      summary.hidden = true;
+      summary.replaceChildren();
+    }
+    for (const error of form.querySelectorAll<HTMLElement>('[data-error-for]')) {
+      error.textContent = '';
+    }
+    for (const field of form.querySelectorAll<HTMLElement>('[aria-invalid="true"]')) {
+      field.removeAttribute('aria-invalid');
+    }
+  }
+
+  function setAllowedValue(
+    form: HTMLFormElement,
+    name: string,
+    value: string | null,
+    allowedValues: string[],
+  ) {
+    if (!value || !allowedValues.includes(value)) return;
+    const field = form.querySelector<HTMLInputElement | HTMLSelectElement>(
+      `[name="${CSS.escape(name)}"][value="${CSS.escape(value)}"], select[name="${CSS.escape(name)}"]`,
+    );
+    if (!field) return;
+    field.value = value;
+    if (field instanceof HTMLInputElement) field.checked = true;
+  }
+
+  function showErrors(
+    form: HTMLFormElement,
+    summary: HTMLElement | null,
+    errors: Record<string, string>,
+    message: string,
+  ) {
+    const entries = Object.entries(errors);
+    if (summary) {
+      const heading = document.createElement('p');
+      heading.textContent = message;
+      summary.append(heading);
+      if (entries.length > 0) {
+        const list = document.createElement('ul');
+        for (const [name, errorMessage] of entries) {
+          const field = form.querySelector<HTMLElement>(`[name="${CSS.escape(name)}"]`);
+          const error = form.querySelector<HTMLElement>(`[data-error-for="${CSS.escape(name)}"]`);
+          if (field) field.setAttribute('aria-invalid', 'true');
+          if (error) error.textContent = errorMessage;
+          const item = document.createElement('li');
+          if (field?.id) {
+            const link = document.createElement('a');
+            link.href = `#${field.id}`;
+            link.dataset.errorLink = '';
+            link.textContent = errorMessage;
+            item.append(link);
+          } else {
+            item.textContent = errorMessage;
+          }
+          list.append(item);
+        }
+        summary.append(list);
+      }
+      summary.hidden = false;
+      summary.focus();
+    }
+  }
+</script>
