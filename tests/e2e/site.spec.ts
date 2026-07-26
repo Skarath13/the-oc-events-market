@@ -3,7 +3,7 @@ import { publicRoutes } from '../helpers/routes';
 
 test.describe('site contracts', () => {
   for (const route of publicRoutes) {
-    test(`${route} has valid structure and metadata`, async ({ page }) => {
+    test(`${route} has valid structure and metadata`, async ({ page, viewport }) => {
       const response = await page.goto(route, { waitUntil: 'domcontentloaded' });
       expect(response?.status(), route).toBe(200);
       await expect(page.locator('main')).toHaveCount(1);
@@ -19,6 +19,42 @@ test.describe('site contracts', () => {
         () => document.documentElement.scrollWidth - window.innerWidth,
       );
       expect(overflow, `${route} horizontal overflow`).toBeLessThanOrEqual(1);
+
+      if (viewport && viewport.width <= 767) {
+        const headingWidths = await page
+          .locator(
+            [
+              '.section-heading h2',
+              '.clarification__copy h2',
+              '.network-statement h2',
+              '.final-cta h2',
+              '.page-hero h1',
+              '.detail-intro h2',
+              '.vendor-flex h2',
+              '.simple-hero h1',
+              '.form-layout__intro h1',
+            ].join(', '),
+          )
+          .evaluateAll((headings) =>
+            headings.map((heading) => {
+              const parent = heading.parentElement;
+              if (!parent) return { text: heading.textContent?.trim(), ratio: 1 };
+              const parentStyle = getComputedStyle(parent);
+              const parentContentWidth =
+                parent.getBoundingClientRect().width -
+                Number.parseFloat(parentStyle.paddingLeft) -
+                Number.parseFloat(parentStyle.paddingRight);
+              return {
+                text: heading.textContent?.trim(),
+                ratio: heading.getBoundingClientRect().width / parentContentWidth,
+              };
+            }),
+          );
+        expect(
+          headingWidths.every(({ ratio }) => ratio >= 0.95),
+          `${route} mobile heading width: ${JSON.stringify(headingWidths)}`,
+        ).toBe(true);
+      }
 
       const imageAltValues = await page
         .locator('img')
