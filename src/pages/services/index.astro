@@ -34,7 +34,6 @@ const breadcrumbs = [
     summary="Event planning should make responsibility clearer, not hide it behind a package name. We shape the vision, organize the decisions, coordinate the approved vendor team, and manage the work stated in your selected service."
     image={media.planningDetail}
     imageAlt="Flowers, glassware, and candlelight arranged for a dinner"
-    breadcrumbs={breadcrumbs}
     proof="One planning team · Exact scope confirmed in writing"
   />
 
@@ -65,11 +64,8 @@ const breadcrumbs = [
       </div>
       <div class="capability-index">
         {
-          capabilityRows.map((capability, index) => (
+          capabilityRows.map((capability) => (
             <article class="capability-index__item">
-              <span class="capability-index__number" aria-hidden="true">
-                0{index + 1}
-              </span>
               <div>
                 <h3>{capability.title}</h3>
                 <p>{capability.body}</p>

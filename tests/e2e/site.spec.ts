@@ -10,6 +10,7 @@ test.describe('site contracts', () => {
       await expect(page.locator('h1')).toHaveCount(1);
       await expect(page).toHaveTitle(/.+/);
       await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /.+/);
+      await expect(page.locator('nav[aria-label="Breadcrumb"]')).toHaveCount(0);
       await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
         'href',
         /^https:\/\/the-oc-events-market\.example\/.+|^https:\/\/the-oc-events-market\.example\/$/,
@@ -81,10 +82,20 @@ test.describe('navigation interactions', () => {
     await trigger.press('Enter');
     const dialog = page.getByRole('dialog');
     await expect(dialog).toBeVisible();
+    await expect(dialog).toBeFocused();
+    await page.keyboard.press('Tab');
     await expect(page.getByRole('button', { name: /Close/ })).toBeFocused();
     await page.keyboard.press('Escape');
     await expect(dialog).not.toBeVisible();
     await expect(trigger).toBeFocused();
+  });
+
+  test('process steps use only the designed sequence markers', async ({ page }) => {
+    await page.goto('/');
+    const listStyle = await page
+      .locator('.process-rail')
+      .evaluate((element) => getComputedStyle(element).listStyleType);
+    expect(listStyle).toBe('none');
   });
 
   test('skip link moves focus to main content', async ({ page, browserName }) => {

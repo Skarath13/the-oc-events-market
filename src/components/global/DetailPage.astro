@@ -7,15 +7,13 @@ import { eventTypes } from '@/data/eventTypes';
 import type { ServicePage } from '@/data/services';
 import type { EventTypePage } from '@/data/eventTypes';
 import { media } from '@/data/media';
-import type { Breadcrumb } from '@/lib/seo';
 
 type Props = {
   page: ServicePage | EventTypePage;
   kind: 'service' | 'event';
-  breadcrumbs: Breadcrumb[];
 };
 
-const { page, kind, breadcrumbs } = Astro.props;
+const { page, kind } = Astro.props;
 const forItems = 'forWhom' in page ? page.forWhom : [page.whoFor];
 const relatedEvents = eventTypes.filter((eventType) => eventType.slug !== page.slug).slice(0, 3);
 ---
@@ -25,7 +23,6 @@ const relatedEvents = eventTypes.filter((eventType) => eventType.slug !== page.s
   summary={page.summary}
   image={media[page.image]}
   imageAlt={page.imageAlt}
-  breadcrumbs={breadcrumbs}
   proof="Orange County planning · Trusted vendors or yours"
 />
 

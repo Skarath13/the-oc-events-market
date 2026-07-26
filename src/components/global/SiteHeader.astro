@@ -52,7 +52,7 @@ const isCurrent = (href: string) =>
   </div>
 </header>
 
-<dialog class="mobile-menu" id="mobile-menu" aria-labelledby="mobile-menu-title">
+<dialog class="mobile-menu" id="mobile-menu" aria-labelledby="mobile-menu-title" tabindex="-1">
   <div class="mobile-menu__header">
     <p id="mobile-menu-title">Navigation</p>
     <button class="menu-close" type="button" data-menu-close>
@@ -86,11 +86,17 @@ const isCurrent = (href: string) =>
     if (!dialog?.open) {
       dialog?.showModal();
       document.documentElement.classList.add('menu-is-open');
-      closeButton?.focus();
+      dialog?.focus({ preventScroll: true });
     }
   });
 
   closeButton?.addEventListener('click', () => dialog?.close());
+  dialog?.addEventListener('keydown', (event) => {
+    if (event.key === 'Tab' && !event.shiftKey && document.activeElement === dialog) {
+      event.preventDefault();
+      closeButton?.focus();
+    }
+  });
   dialog?.addEventListener('close', () => {
     document.documentElement.classList.remove('menu-is-open');
     openButton?.focus();

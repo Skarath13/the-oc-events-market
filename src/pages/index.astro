@@ -171,11 +171,8 @@ const origin = Astro.site ?? new URL('https://the-oc-events-market.example');
       </div>
       <div class="capability-index">
         {
-          capabilityRows.map((capability, index) => (
+          capabilityRows.map((capability) => (
             <article class="capability-index__item">
-              <span class="capability-index__number" aria-hidden="true">
-                0{index + 1}
-              </span>
               <div>
                 <h3>{capability.title}</h3>
                 <p>{capability.body}</p>
