@@ -9,18 +9,18 @@ import { breadcrumbSchema } from '@/lib/seo';
 const origin = Astro.site ?? new URL('https://the-oc-events-market.example');
 const breadcrumbs = [
   { name: 'Home', path: '/' },
-  { name: 'Our Process', path: '/process/' },
+  { name: 'The Process', path: '/process/' },
 ];
 ---
 
 <BaseLayout
-  title="Our Event Planning Process"
+  title="The Event Planning Process"
   description="See how discovery, planning and design, vendor coordination, and event-day management come together around one clear event plan."
   jsonLd={[breadcrumbSchema(origin, breadcrumbs)]}
 >
   <PageHero
     title="A Clear Path From First Idea to Event Day"
-    summary="A well-run celebration starts before the first vendor arrives. The process turns priorities into decisions, decisions into a coordinated team, and the approved plan into an event the host can actually experience."
+    summary="A well-run celebration starts before the first vendor arrives. We turn priorities into decisions, bring every contributor into one plan, and carry that plan through the event so you can experience it as the host."
     image={media.network}
     imageAlt="Outdoor dining space arranged among greenery"
   />
@@ -52,13 +52,13 @@ const breadcrumbs = [
     <h2>What makes the process feel calm?</h2>
     <div class="detail-intro__body">
       <p>
-        Calm does not mean casual. It means the owner of each decision is known, the vendor team
-        works from current information, and the next deadline arrives with enough context to make a
-        useful choice.
+        Calm does not mean casual. It means the owner of each decision is known, every vendor works
+        from current information, and the next deadline arrives with enough context to make a useful
+        choice.
       </p>
       <p>
-        When conditions change, the team can see the dependencies and update the approved plan
-        without asking the host to personally relay every adjustment.
+        When conditions change, we trace the dependencies, update the approved plan, and relay the
+        adjustment without turning you into the go-between.
       </p>
     </div>
   </section>

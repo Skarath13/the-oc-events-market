@@ -18,6 +18,7 @@ export function organizationSchema(origin: URL): JsonLd {
     name: siteConfig.businessName,
     description: siteConfig.fullDefinition,
     url: new URL('/', origin).href,
+    telephone: siteConfig.publicPhone,
     logo: siteConfig.logo.src ? new URL(siteConfig.logo.src, origin).href : undefined,
     areaServed: {
       '@type': 'AdministrativeArea',

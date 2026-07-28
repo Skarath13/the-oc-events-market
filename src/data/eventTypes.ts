@@ -19,9 +19,9 @@ export type EventTypePage = {
 };
 
 const vendorFaq: Faq = {
-  question: 'Can we keep the vendors we already selected?',
+  question: 'Can I keep the vendors I already selected?',
   answer:
-    'Yes. You can bring professionals you already know and love. We coordinate the approved team around the event plan and timeline according to your selected scope.',
+    'Yes. We can bring professionals you already know and love into the event plan and timeline according to your selected scope.',
 };
 
 export const eventTypes: EventTypePage[] = [
@@ -32,12 +32,12 @@ export const eventTypes: EventTypePage[] = [
     gatewayBody: 'A clear planning structure for a celebration with many connected decisions.',
     metaTitle: 'Orange County Wedding Planner & Designer',
     metaDescription:
-      'Plan an Orange County wedding with one team for vision, vendors, design, logistics, and event-day support included in your chosen service.',
+      'Plan an Orange County wedding with a planner connecting the vision, vendors, design, logistics, and included event-day support.',
     h1: 'Orange County Wedding Planning & Design',
     summary:
-      'A wedding planner brings the planning roadmap, design direction, vendor team, logistics, and included event-day responsibilities into one coherent plan. The OC Events Market helps Orange County couples make connected decisions without losing sight of the reason everyone is gathering.',
+      'We bring the planning roadmap, design direction, vendors, logistics, and included event-day responsibilities into one coherent wedding plan—so you can make connected decisions without losing sight of why everyone is gathering.',
     whoFor:
-      'For couples who want thoughtful design and an accountable planning structure—whether they are beginning with a date and a vision or bringing an existing venue and vendor team.',
+      'For couples who want thoughtful design and an accountable planner—whether they are beginning with a date and a vision or bringing an existing venue and vendors.',
     capabilities: [
       {
         title: 'Planning roadmap and priorities',
@@ -48,8 +48,8 @@ export const eventTypes: EventTypePage[] = [
         body: 'Shape a cohesive guest experience across ceremony, reception, tabletop, rentals, signage, and related visual decisions.',
       },
       {
-        title: 'Vendor team coordination',
-        body: 'Source trusted partners when included or coordinate the professionals already selected.',
+        title: 'Vendor coordination',
+        body: 'Source trusted professionals when included or coordinate the people already selected.',
       },
       {
         title: 'Wedding-day flow',
@@ -102,7 +102,7 @@ export const eventTypes: EventTypePage[] = [
       'Thoughtful planning and design for Orange County baby showers, bridal showers, and the people gathering to celebrate.',
     h1: 'Baby & Bridal Shower Planning in Orange County',
     summary:
-      'A shower planner coordinates the setting, guest flow, design choices, vendors, and included event-day details around one thoughtful plan. We help Orange County hosts create a gathering that feels personal without asking them to manage every moving piece.',
+      'We coordinate the setting, guest flow, design choices, vendors, and included event-day details around one thoughtful shower plan—without asking you to manage every moving piece.',
     whoFor:
       'For families, friends, and hosts planning a baby shower, bridal shower, or related celebration at a venue or another owner-approved setting.',
     capabilities: [
@@ -116,7 +116,7 @@ export const eventTypes: EventTypePage[] = [
       },
       {
         title: 'Vendor and rental coordination',
-        body: 'Organize catering, rentals, decor, entertainment, and other approved partners.',
+        body: 'Organize catering, rentals, decor, entertainment, and other approved professionals.',
       },
       {
         title: 'Setup and timing',
@@ -152,7 +152,7 @@ export const eventTypes: EventTypePage[] = [
       {
         question: 'Do you plan showers at private homes?',
         answer:
-          'Private-home event availability has not yet been confirmed by the owner. Share the setting in your inquiry so the team can review it honestly.',
+          'Private-home event availability has not yet been confirmed. Share the setting in your inquiry so we can review it honestly.',
       },
     ],
     image: 'showers',
@@ -168,7 +168,7 @@ export const eventTypes: EventTypePage[] = [
       'Planning and design for first birthdays, adult birthdays, and milestone celebrations across Orange County.',
     h1: 'Orange County Birthday & Milestone Event Planning',
     summary:
-      'A birthday or milestone planner brings the design, entertainment, food flow, vendors, and event-day timing into one organized celebration. We plan for the person being honored and the guests sharing the moment—not a one-size-fits-all party format.',
+      'We bring the design, entertainment, food flow, vendors, and event-day timing into one organized birthday or milestone celebration—planned for the person being honored, not a one-size-fits-all party format.',
     whoFor:
       'For hosts planning first birthdays, adult birthdays, anniversaries, private dinners, and milestone gatherings that need a cohesive plan and a clear point of contact.',
     capabilities: [
@@ -181,8 +181,8 @@ export const eventTypes: EventTypePage[] = [
         body: 'Coordinate the sequence and spatial needs of the approved catering, bar, music, and activities.',
       },
       {
-        title: 'Design and vendor team',
-        body: 'Organize the selected rentals, florals, decor, entertainment, and venue partners.',
+        title: 'Design and vendors',
+        body: 'Organize the selected rentals, florals, decor, entertainment, and venue professionals.',
       },
       {
         title: 'Milestone moments',
@@ -231,7 +231,7 @@ export const eventTypes: EventTypePage[] = [
     gatewayBody: 'Playful ideas grounded in timing, guest comfort, and a plan adults can follow.',
     metaTitle: 'Kids’ Party Planning & Design in Orange County',
     metaDescription:
-      'Orange County children’s party planning that brings the theme, vendor team, guest flow, and event-day details into one organized plan.',
+      'Orange County children’s party planning that brings the theme, vendors, guest flow, and event-day details into one organized plan.',
     h1: 'Kids’ Party Planning & Design in Orange County',
     summary:
       'A children’s party planner turns the theme, activities, food, vendors, and guest flow into one age-aware event plan. The result can feel imaginative without leaving the host to coordinate every delivery, transition, and cleanup handoff.',
@@ -248,7 +248,7 @@ export const eventTypes: EventTypePage[] = [
       },
       {
         title: 'Vendor coordination',
-        body: 'Coordinate approved entertainment, rentals, catering, decor, and venue partners within the selected scope.',
+        body: 'Coordinate approved entertainment, rentals, catering, decor, and venue professionals within the selected scope.',
       },
       {
         title: 'Setup and guest flow',
@@ -301,7 +301,7 @@ export const eventTypes: EventTypePage[] = [
       'Orange County corporate and brand event planning shaped around your audience, objectives, visual direction, vendors, and approved run of show.',
     h1: 'Corporate & Brand Event Planning in Orange County',
     summary:
-      'A corporate event planner aligns the event objective, audience, brand direction, vendors, production dependencies, and run of show. We help Orange County teams turn internal approvals and external partners into one coordinated guest experience.',
+      'We align the event objective, audience, brand direction, vendors, production dependencies, and run of show—giving Orange County organizations a connected planning path from internal approvals through the guest experience.',
     whoFor:
       'For office managers, founders, marketing teams, and organizational leads planning company gatherings, client events, launches, dinners, or brand experiences.',
     capabilities: [
@@ -315,7 +315,7 @@ export const eventTypes: EventTypePage[] = [
       },
       {
         title: 'Production and vendor coordination',
-        body: 'Organize approved venue, catering, rentals, audiovisual, entertainment, signage, and other partners.',
+        body: 'Organize approved venue, catering, rentals, audiovisual, entertainment, signage, and other professionals.',
       },
       {
         title: 'Run of show',

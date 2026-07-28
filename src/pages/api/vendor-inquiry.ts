@@ -96,7 +96,7 @@ export const POST: APIRoute = async ({ request }) => {
     {
       ok: true,
       message:
-        'Thank you — your introduction was received. An inquiry does not guarantee a partnership, recommendation, or listing.',
+        'Thank you — your introduction was received. An inquiry does not guarantee a partnership, recommendation, or preferred status.',
       correlationId,
     },
     200,

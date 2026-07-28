@@ -1,4 +1,6 @@
 ---
+import { contactLinks } from '@/data/site';
+
 type Props = {
   heading?: string;
   body?: string;
@@ -20,6 +22,14 @@ const {
       <h2>{heading}</h2>
       <p>{body}</p>
     </div>
-    <a class="button button--dark" href={href}>{label}</a>
+    <div class="final-cta__actions">
+      <a class="button button--dark" href={href}>{label}</a>
+      <a
+        class="button button--outline"
+        href={contactLinks.text}
+        data-analytics-event="text_cta_click"
+        data-analytics-context="final_cta">Text Event Details</a
+      >
+    </div>
   </div>
 </section>

@@ -96,8 +96,7 @@ export const POST: APIRoute = async ({ request }) => {
   return json(
     {
       ok: true,
-      message:
-        'Thank you — your inquiry was received. The planning team will review the details you shared.',
+      message: 'Thank you — your inquiry was received. We’ll review the details you shared.',
       correlationId,
     },
     200,

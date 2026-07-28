@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import ClientInquiryForm from '@/components/forms/ClientInquiryForm.astro';
+import { contactLinks, siteConfig } from '@/data/site';
 import { eventTypeOptions, planningSupportOptions } from '@/lib/forms';
 import { breadcrumbSchema } from '@/lib/seo';
 
@@ -22,11 +23,22 @@ const breadcrumbs = [
 >
   <div class="form-layout">
     <div class="form-layout__intro">
-      <h1>Tell us what you’re celebrating.</h1>
+      <h1>Tell us what you’re planning.</h1>
       <p>
         Share what is known, what is still open, and where you want help. A working date or planning
         window is enough to begin the conversation.
       </p>
+      <div class="contact-actions">
+        <a class="button button--outline" href={contactLinks.phone}
+          >Call {siteConfig.publicPhoneDisplay}</a
+        >
+        <a
+          class="button button--dark"
+          href={contactLinks.text}
+          data-analytics-event="text_cta_click"
+          data-analytics-context="contact_intro">Text Event Details</a
+        >
+      </div>
       <p class="form-layout__note">
         No response-time promise is published until the owner confirms it. Your information is sent
         only when the server delivery provider is configured and reports success.

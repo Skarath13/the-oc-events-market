@@ -110,6 +110,45 @@ test.describe('site contracts', () => {
 });
 
 test.describe('navigation interactions', () => {
+  test('presents a planner-led service instead of a marketplace', async ({ page }) => {
+    await page.goto('/');
+    await expect(
+      page.getByRole('heading', {
+        level: 1,
+        name: 'A Planner for Every Celebration.',
+      }),
+    ).toBeVisible();
+    await expect(page.getByText('Planner-led · Every moving piece')).toBeVisible();
+    await expect(page.locator('main')).not.toContainText(/planning team|marketplace|directory/i);
+
+    await page.goto('/trusted-creative-network/');
+    await expect(
+      page.getByRole('heading', {
+        level: 1,
+        name: 'A Planner at the Center of Every Moving Piece',
+      }),
+    ).toBeVisible();
+    await expect(page.locator('main')).not.toContainText(/marketplace|directory/i);
+  });
+
+  test('publishes phone and prefilled text actions', async ({ page }) => {
+    await page.goto('/contact/');
+    await expect(page.getByRole('link', { name: 'Call +1 (949) 591-3087' })).toHaveAttribute(
+      'href',
+      'tel:+19495913087',
+    );
+
+    const textAction = page.getByRole('link', { name: 'Text Event Details' }).first();
+    await expect(textAction).toHaveAttribute('href', /^sms:\+19495913087\?&body=.+/);
+    const href = await textAction.getAttribute('href');
+    expect(decodeURIComponent(href ?? '')).toContain('Event type: [type]');
+    expect(decodeURIComponent(href ?? '')).toContain('Estimated guest count: [count]');
+
+    await expect(
+      page.getByRole('link', { name: '+1 (949) 591-3087', exact: true }),
+    ).toHaveAttribute('href', 'tel:+19495913087');
+  });
+
   test('mobile menu opens, closes with Escape, and restores focus', async ({ page, viewport }) => {
     test.skip(!viewport || viewport.width > 767, 'Mobile interaction');
     await page.goto('/');

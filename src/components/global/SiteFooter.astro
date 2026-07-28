@@ -1,6 +1,6 @@
 ---
 import { footerNavigation, primaryNavigation } from '@/data/navigation';
-import { featureFlags, siteConfig } from '@/data/site';
+import { contactLinks, featureFlags, siteConfig } from '@/data/site';
 ---
 
 <footer class="site-footer">
@@ -15,8 +15,8 @@ import { featureFlags, siteConfig } from '@/data/site';
     <div>
       <h2 class="site-footer__heading">Plan a celebration</h2>
       <p>
-        One Orange County planning team for the vision, vendors, design, logistics, and approved
-        event-day details.
+        A planner-led approach to the vision, vendors, design, logistics, and approved event-day
+        details—at any scale.
       </p>
       <a class="text-link text-link--light" href="/contact/">Check availability</a>
     </div>
@@ -30,7 +30,7 @@ import { featureFlags, siteConfig } from '@/data/site';
             </li>
           ))
         }
-        <li><a href="/process/">Our Process</a></li>
+        <li><a href="/process/">The Process</a></li>
       </ul>
     </nav>
     <nav aria-label="Footer business and legal links">
@@ -50,9 +50,23 @@ import { featureFlags, siteConfig } from '@/data/site';
       <p>{siteConfig.serviceArea}</p>
       {
         featureFlags.showPhone && siteConfig.publicPhone && (
-          <p>
-            <a href={`tel:${siteConfig.publicPhone}`}>{siteConfig.publicPhone}</a>
-          </p>
+          <>
+            <p>
+              <a class="site-footer__contact-link" href={contactLinks.phone}>
+                {siteConfig.publicPhoneDisplay}
+              </a>
+            </p>
+            <p>
+              <a
+                class="site-footer__contact-link"
+                href={contactLinks.text}
+                data-analytics-event="text_cta_click"
+                data-analytics-context="footer"
+              >
+                Text event details
+              </a>
+            </p>
+          </>
         )
       }
       {

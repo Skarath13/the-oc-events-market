@@ -29,13 +29,13 @@ export const services: ServicePage[] = [
     shortTitle: 'Full-Service Planning & Design',
     metaTitle: 'Full-Service Event Planning & Design in Orange County',
     metaDescription:
-      'One planning partner for the roadmap, design direction, vendor coordination, logistics, and event-day execution included in your Orange County package.',
+      'A planner-led approach to the roadmap, design direction, vendor coordination, logistics, and included event-day execution in Orange County.',
     h1: 'Full-Service Event Planning & Design in Orange County',
     summary:
-      'A full-service event planner can manage the planning roadmap, design direction, vendor coordination, logistics, and event-day execution included in the client’s package. The exact scope, responsibilities, and availability of this service must be confirmed in the proposal.',
+      'We can manage the planning roadmap, design direction, vendor coordination, logistics, and event-day execution included in your full-service package. The proposal confirms the exact scope, responsibilities, and availability.',
     forWhom: [
-      'Hosts who want one planning partner to organize decisions from an early stage.',
-      'Clients who value cohesive design and a coordinated vendor team.',
+      'Hosts who want a planner to organize decisions from an early stage.',
+      'Clients who value cohesive design and well-coordinated vendors.',
       'Busy hosts who do not want to personally own every deadline, handoff, and event-day detail.',
     ],
     capabilities: [
@@ -49,7 +49,7 @@ export const services: ServicePage[] = [
       },
       {
         title: 'Vendor coordination',
-        body: 'Recommendations when included, plus organized communication with trusted partners or vendors already selected.',
+        body: 'Recommendations when included, plus organized communication with trusted professionals or vendors already selected.',
       },
       {
         title: 'Logistics and event flow',
@@ -74,12 +74,12 @@ export const services: ServicePage[] = [
       {
         question: 'What does a full-service event planner handle?',
         answer:
-          'A full-service planner may guide the roadmap, design, vendor team, logistics, and event-day work. The signed proposal is the authority for exactly what is included.',
+          'We may guide the roadmap, design, vendors, logistics, and event-day work. The signed proposal is the authority for exactly what is included.',
       },
       {
         question: 'Will you work with vendors we already booked?',
         answer:
-          'Yes. Your existing professionals can be coordinated into the approved plan and timeline according to the selected scope.',
+          'Yes. We can coordinate your existing professionals into the approved plan and timeline according to the selected scope.',
       },
       {
         question: 'Does full service include design and decor?',
@@ -105,7 +105,7 @@ export const services: ServicePage[] = [
       'Support for hosts who have started planning and need help with selected decisions, vendors, design, or logistics. Final scope is confirmed before booking.',
     h1: 'Partial Event Planning in Orange County',
     summary:
-      'Partial planning is designed for a host who has already made progress and needs experienced support across selected decisions, design work, vendors, or logistics. Availability and inclusions must be confirmed before this service is published as an active package.',
+      'Partial planning is for a host who has already made progress and wants a planner to take ownership of selected decisions, design work, vendor coordination, or logistics. Availability and inclusions must be confirmed before this service is published as an active package.',
     forWhom: [
       'Hosts who have chosen a venue or key vendors but need structure for what comes next.',
       'Clients who want professional help with specific planning or design workstreams.',
@@ -152,7 +152,7 @@ export const services: ServicePage[] = [
       {
         question: 'Can you review vendors we already hired?',
         answer:
-          'Existing vendor information can be reviewed and coordinated when that work is included. The planner does not replace the client’s legal review of contracts.',
+          'We can review and coordinate existing vendor information when that work is included. Planning support does not replace the client’s legal review of contracts.',
       },
       {
         question: 'Can partial planning include design help?',
@@ -178,7 +178,7 @@ export const services: ServicePage[] = [
       'For hosts who planned the event and need help aligning approved details, vendors, timelines, and event-day flow. Scope varies by selected service.',
     h1: 'Event Management & Coordination in Orange County',
     summary:
-      'Event management and coordination organize approved plans, vendor details, timelines, and the included event-day flow. It is not automatically the same as full planning, design, unlimited setup, or responsibility for decisions made before the handoff.',
+      'We organize the approved plan, vendor details, timeline, and included event-day flow through a connected communication process. Coordination does not automatically include full planning, design, unlimited setup, or responsibility for decisions made before the handoff.',
     forWhom: [
       'Hosts who have made the major planning and vendor decisions.',
       'Clients who need one timeline and communication point as the event approaches.',
@@ -199,7 +199,7 @@ export const services: ServicePage[] = [
       },
       {
         title: 'Included event-day flow',
-        body: 'Manage the stated hours, transitions, and escalation path with the approved team.',
+        body: 'Manage the stated hours, transitions, and escalation path with every approved vendor.',
       },
     ],
     considerations: [
