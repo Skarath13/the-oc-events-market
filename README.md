@@ -65,12 +65,17 @@ The Pages workflow builds the prerendered client, rewrites paths for the reposit
 ## Production deployment
 
 1. Complete `CONTENT_NEEDED.md` and `LAUNCH_CHECKLIST.md`.
-2. Deploy to Cloudflare Workers in `Ivoneatelegantlashes@gmail.com's Account`; do not use the
-   `Dylan` Cloudflare account. See `AGENTS.md` for the pinned account and zone identifiers.
-3. The canonical origin and Cloudflare account are pinned in `wrangler.jsonc`; configure only an
-   approved analytics provider if one is later selected.
-4. Run the complete validation suite against the final build.
-5. Production builds are indexable. GitHub Pages staging remains explicitly noindex.
+2. Run the complete validation suite against the final build.
+3. Merge the verified change to `main`. Cloudflare Workers Builds automatically runs
+   `pnpm run build:cloudflare` and `npx wrangler deploy` against the existing production Worker.
+4. Confirm the Git-triggered build succeeds in Cloudflare and smoke
+   `https://theoceventsmarket.com`.
+5. Production belongs to `Ivoneatelegantlashes@gmail.com's Account`; do not use the `Dylan`
+   Cloudflare account. See `AGENTS.md` for the pinned account, zone, branch, and fallback rules.
+
+The canonical origin and Cloudflare account are pinned in `wrangler.jsonc`. Production builds are
+indexable; GitHub Pages staging remains explicitly noindex. Local `pnpm run deploy` is an
+emergency/recovery fallback, not the normal release path.
 
 The public source repository grants no license to reuse the brand, copy, or code. Temporary
 photographs remain governed by the licenses recorded in `IMAGE_LICENSES.md`.
