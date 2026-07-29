@@ -17,18 +17,16 @@ const breadcrumbs = [
   noindex={publishedEntries.length === 0}
   jsonLd={[breadcrumbSchema(origin, breadcrumbs)]}
 >
-  <section class="simple-hero">
-    <h1>Planning Notes for Thoughtful Hosts</h1>
-    <p>
-      The journal is structured for planning guidance based on firsthand experience, not generic
-      inspiration. Articles publish only when the planner contributes a real process, examples, and
-      facts the owner has approved.
-    </p>
-  </section>
-
-  {
-    publishedEntries.length > 0 ? (
-      <section class="section-shell section-shell--tight">
+  <section class="section-shell journal-page">
+    <header class="journal-page__header">
+      <h1>Planning Notes for Thoughtful Hosts</h1>
+      <p>
+        Practical guidance based on firsthand planning experience. Articles publish only with a real
+        process, useful examples, and facts the owner has approved.
+      </p>
+    </header>
+    {
+      publishedEntries.length > 0 ? (
         <div class="detail-list">
           {publishedEntries.map((entry) => (
             <a class="detail-list__item" href={`/journal/${entry.id}/`}>
@@ -37,26 +35,22 @@ const breadcrumbs = [
             </a>
           ))}
         </div>
-      </section>
-    ) : (
-      <section class="section-shell section-shell--tight surface-white">
-        <div class="detail-intro">
-          <h2>Editorial briefs are ready. Published filler is not.</h2>
+      ) : (
+        <div class="journal-page__status">
+          <h2>Briefs are ready. Filler is not.</h2>
           <div class="detail-intro__body">
             <p>
-              Eight briefs ready for owner review live in the content collection. They cover
-              planning from start to finish, vendor flexibility, celebration timelines, baby
-              showers, venues, outdoor events, planning versus coordination, and timelines for
-              multiple vendors.
+              Eight briefs are ready for owner review. They cover planning from start to finish,
+              vendor flexibility, celebration timelines, showers, venues, outdoor events, planning
+              versus coordination, and timelines for multiple vendors.
             </p>
             <p>
-              This route remains noindex and out of primary navigation until a real article has
-              verified authorship, a contribution based on firsthand experience, useful supporting
-              material, and an approved publication date.
+              This route stays noindex and out of primary navigation until an article has verified
+              authorship, firsthand material, useful support, and an approved publication date.
             </p>
           </div>
         </div>
-      </section>
-    )
-  }
+      )
+    }
+  </section>
 </BaseLayout>

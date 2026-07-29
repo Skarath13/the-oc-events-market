@@ -41,32 +41,33 @@ const faqs = [
   jsonLd={[breadcrumbSchema(origin, breadcrumbs)]}
 >
   <PageHero
-    title="A Planner at the Center of Every Moving Piece"
-    summary="Bring the vendors you already trust or ask us to find the right professionals when sourcing is included. Your planner keeps the introductions, communication, dependencies, and timeline connected."
+    title="One Planner for Every Moving Piece"
+    summary="Bring vendors you trust or ask us to find the right professionals when sourcing is included. Your planner keeps the introductions, communication, dependencies, and timeline connected."
     image={media.network}
     imageAlt="Intimate outdoor event setting surrounded by greenery"
   />
 
-  <section class="section-shell vendor-flex">
-    <div>
-      <h2>The right vendors, coordinated around your event.</h2>
+  <section class="section-shell network-page">
+    <div class="network-page__brief">
+      <p class="eyebrow">A flexible network</p>
+      <h2>Coordinated around your event.</h2>
       <p>
-        The right group of professionals depends on the event, priorities, setting, working budget,
-        and responsibilities already in place. We bring everyone into a shared direction and one
-        current timeline.
+        The right professionals depend on the event, priorities, setting, working budget, and
+        responsibilities already in place. We bring everyone into one direction and one current
+        timeline.
       </p>
-      <a class="text-link" href="/for-vendors/">Introduce your work</a>
+      <p class="network-page__rule">
+        Trusted recommendations when needed. Existing relationships when preferred.
+      </p>
+      <a class="text-link text-link--light" href="/for-vendors/">Introduce your work</a>
     </div>
-    <p class="vendor-flex__rule">
-      Trusted recommendations when needed. Existing relationships when preferred.
-    </p>
-  </section>
-
-  <section class="section-shell">
-    <div class="section-heading">
-      <h2>How vendor coordination works.</h2>
+    <div class="network-page__faqs">
+      <div class="section-heading">
+        <p class="eyebrow">Before anyone is booked</p>
+        <h2>How vendor coordination works</h2>
+      </div>
+      <FaqList faqs={faqs} />
     </div>
-    <FaqList faqs={faqs} />
   </section>
   <FinalCta />
 </BaseLayout>

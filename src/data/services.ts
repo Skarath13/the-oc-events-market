@@ -30,9 +30,9 @@ export const services: ServicePage[] = [
     metaTitle: 'Event Planning and Design From Start to Finish in Orange County',
     metaDescription:
       'A dedicated planner can guide the roadmap, design direction, vendor coordination, logistics, and approved work on the event day in Orange County.',
-    h1: 'Event Planning and Design From Start to Finish in Orange County',
+    h1: 'Planning From Start to Finish',
     summary:
-      'We can manage the planning roadmap, design direction, vendor coordination, logistics, and work on the event day included in a package that covers your event from start to finish. The proposal confirms the exact scope, responsibilities, and availability.',
+      'We can manage the roadmap, design, vendors, logistics, and included work on the event day from the first decisions forward. Your proposal confirms the exact scope, responsibilities, and availability.',
     forWhom: [
       'Hosts who want a planner to organize decisions from an early stage.',
       'Clients who value cohesive design and coordinated vendors.',
@@ -103,9 +103,9 @@ export const services: ServicePage[] = [
     metaTitle: 'Partial Event Planning in Orange County',
     metaDescription:
       'Support for hosts who have started planning and need help with selected decisions, vendors, design, or logistics. Final scope is confirmed before booking.',
-    h1: 'Partial Event Planning in Orange County',
+    h1: 'Partial Planning for What Comes Next',
     summary:
-      'Partial planning is for a host who has already made progress and wants a planner to take ownership of selected decisions, design work, vendor coordination, or logistics. Availability and inclusions must be confirmed before this service is published as an active package.',
+      'For hosts who have made progress and want a planner to own selected decisions, design work, vendor coordination, or logistics. Availability and inclusions must be confirmed before this becomes an active package.',
     forWhom: [
       'Hosts who have chosen a venue or key vendors but need structure for what comes next.',
       'Clients who want professional help with specific planning or design workstreams.',
@@ -176,9 +176,9 @@ export const services: ServicePage[] = [
     metaTitle: 'Event Management and Coordination in Orange County',
     metaDescription:
       'For hosts who planned the event and need help aligning approved details, vendors, timelines, and the flow on the event day. Scope varies by selected service.',
-    h1: 'Event Management and Coordination in Orange County',
+    h1: 'Event Management and Coordination',
     summary:
-      'We organize the approved plan, vendor details, timeline, and the flow included on the event day through one connected communication process. Coordination does not automatically include planning from start to finish, design, unlimited setup, or responsibility for decisions made before the handoff.',
+      'We organize the approved plan, vendor details, timeline, and included flow on the event day. Coordination does not automatically include earlier planning, design, unlimited setup, or responsibility for decisions made before the handoff.',
     forWhom: [
       'Hosts who have made the major planning and vendor decisions.',
       'Clients who need one timeline and communication point as the event approaches.',

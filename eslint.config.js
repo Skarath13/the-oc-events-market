@@ -7,6 +7,7 @@ export default [
     ignores: [
       'dist/**',
       '.astro/**',
+      '.wrangler/**',
       'node_modules/**',
       'playwright-report/**',
       'test-results/**',

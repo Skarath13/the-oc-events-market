@@ -6,11 +6,13 @@ import { media } from '@/data/media';
 type Props = {
   heading?: string;
   intro?: string;
+  note?: string;
 };
 
 const {
-  heading = 'From intimate moments to large events.',
-  intro = 'The size may change, but the promise does not. Your planner keeps every decision and moving piece connected.',
+  heading = 'A plan for every kind of celebration.',
+  intro = 'The size may change, but your planner still keeps every decision and moving piece connected.',
+  note,
 } = Astro.props;
 const items = await Promise.all(
   eventTypes.map(async (eventType) => ({
@@ -28,7 +30,10 @@ const items = await Promise.all(
 <section class="section-shell gateway-section">
   <div class="section-heading section-heading--split">
     <h2>{heading}</h2>
-    <p>{intro}</p>
+    <div>
+      <p>{intro}</p>
+      {note && <p class="gateway-section__note">{note}</p>}
+    </div>
   </div>
   <div class="event-gateway">
     {
