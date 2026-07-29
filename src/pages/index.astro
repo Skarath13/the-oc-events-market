@@ -191,8 +191,8 @@ const origin = Astro.site ?? new URL('https://the-oc-events-market.example');
         <Image
           src={media.network}
           alt="Intimate outdoor dining area set among deep green plants"
-          widths={[560, 840, 1120]}
-          sizes="(max-width: 767px) 100vw, 42vw"
+          widths={[400, 560, 660, 744, 840, 1120]}
+          sizes="(max-width: 767px) calc(100vw - 2.5rem), 42vw"
           loading="lazy"
           quality={76}
         />

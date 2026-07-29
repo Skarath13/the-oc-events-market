@@ -168,6 +168,18 @@ test.describe('navigation interactions', () => {
       const pageHeight = await page.evaluate(() => document.documentElement.scrollHeight);
       expect(pageHeight, `${route.path} page height`).toBeLessThanOrEqual(route.maxHeight);
     }
+
+    await page.goto('/');
+    const networkImage = page.getByAltText(
+      'Intimate outdoor dining area set among deep green plants',
+    );
+    await expect(networkImage).toHaveAttribute('srcset', / 400w(?:,|$)/);
+    await expect(networkImage).toHaveAttribute('srcset', / 660w(?:,|$)/);
+    await expect(networkImage).toHaveAttribute('srcset', / 744w(?:,|$)/);
+    await expect(networkImage).toHaveAttribute(
+      'sizes',
+      '(max-width: 767px) calc(100vw - 2.5rem), 42vw',
+    );
   });
 
   test('presents a planner-led service instead of a marketplace', async ({ page }) => {
