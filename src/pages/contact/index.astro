@@ -1,14 +1,8 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import ClientInquiryForm from '@/components/forms/ClientInquiryForm.astro';
-import { contactLinks, siteConfig } from '@/data/site';
-import { eventTypeOptions, planningSupportOptions } from '@/lib/forms';
+import TextContact from '@/components/global/TextContact.astro';
 import { breadcrumbSchema } from '@/lib/seo';
 
-const event = Astro.url.searchParams.get('event') ?? '';
-const support = Astro.url.searchParams.get('support') ?? '';
-const validEvent = eventTypeOptions.some(([value]) => value === event) ? event : '';
-const validSupport = planningSupportOptions.some(([value]) => value === support) ? support : '';
 const origin = Astro.site ?? new URL('https://the-oc-events-market.example');
 const breadcrumbs = [
   { name: 'Home', path: '/' },
@@ -18,32 +12,26 @@ const breadcrumbs = [
 
 <BaseLayout
   title="Plan Your Orange County Event"
-  description="Tell The OC Events Market what you are celebrating, when and where it may happen, and what planning support you need."
+  description="Text The OC Events Market to begin planning an Orange County wedding, shower, birthday, children’s party, corporate event, or other celebration."
   jsonLd={[breadcrumbSchema(origin, breadcrumbs)]}
 >
-  <div class="form-layout">
-    <div class="form-layout__intro">
+  <div class="contact-layout">
+    <div class="contact-layout__intro">
       <h1>Tell us what you’re planning.</h1>
       <p>
-        Share what is known, what is still open, and where you want help. A working date or planning
-        window is enough to begin the conversation.
+        Start with a text. Share the occasion, a working date or planning window, and where you want
+        help. What is still undecided can stay open.
       </p>
-      <div class="contact-actions">
-        <a class="button button--outline" href={contactLinks.phone}
-          >Call {siteConfig.publicPhoneDisplay}</a
-        >
-        <a
-          class="button button--dark"
-          href={contactLinks.text}
-          data-analytics-event="text_cta_click"
-          data-analytics-context="contact_intro">Text Event Details</a
-        >
-      </div>
-      <p class="form-layout__note">
-        No response-time promise is published until the owner confirms it. Your information is sent
-        only when the server delivery provider is configured and reports success.
+      <p class="contact-layout__note">
+        Sending a text starts a conversation. It does not reserve a date or create a planning
+        agreement.
       </p>
     </div>
-    <ClientInquiryForm selectedEvent={validEvent} selectedSupport={validSupport} />
+    <TextContact
+      heading="Start the conversation by text."
+      body="Include the event type, estimated date, city, and guest count if you know them. A short first message is enough."
+      buttonLabel="Text Event Details"
+      analyticsContext="contact"
+    />
   </div>
 </BaseLayout>

@@ -14,8 +14,8 @@
   owner-review briefs.
 - Unique metadata, canonicals, noindex controls, sitemap exclusions, robots, RSS, redirects,
   breadcrumbs, and accurate reusable JSON-LD.
-- Separate accessible inquiry flows with client/server validation, optional Turnstile, Resend
-  delivery, honeypot, size/rate limits, idempotency, and safe failure states.
+- Text-only client and vendor contact paths with native messaging links and locally generated
+  desktop QR codes; no website form submission or third-party QR service.
 - Configurable analytics, production header template, GitHub Pages staging workflow, Playwright,
   axe, Lighthouse CI, link checking, and required viewport screenshots.
 
@@ -23,15 +23,15 @@
 
 - Public positioning is limited to Orange County, California.
 - All package names and inclusions are owner-review previews until verified.
-- No public phone, email, address, owner biography, pricing, testimonial, award, portfolio story,
-  partnership, or response-time claim is available.
+- No public email, address, owner biography, pricing, testimonial, award, portfolio story,
+  partnership, or response-time claim is available. The verified text number is visible only in the
+  footer and otherwise stays behind text actions.
 - The supplied logo and social screenshots were not present in the workspace, so a live-text
   lockup and temporary generated icons are used.
 - Unsplash images are temporary editorial staging assets, never represented as client work.
-- GitHub Pages is a noindex static staging target; a server-capable host is required for live forms.
+- GitHub Pages is a noindex static staging target; Cloudflare Workers serves production.
 
 ## Exact launch path
 
-Complete `CONTENT_NEEDED.md`, replace temporary media, verify packages and legal copy, configure a
-server host and form credentials, run `LAUNCH_CHECKLIST.md`, smoke the deployed origin with indexing
-disabled, then enable indexing and submit the sitemap.
+Complete `CONTENT_NEEDED.md`, replace temporary media, verify packages and legal copy, run
+`LAUNCH_CHECKLIST.md`, smoke the deployed origin, and submit the indexable sitemap.

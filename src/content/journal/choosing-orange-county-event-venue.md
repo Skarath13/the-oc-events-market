@@ -1,10 +1,10 @@
 ---
 title: How to Choose an Orange County Event Venue for Your Guest Experience
-description: Venue-selection guidance centered on access, flow, production, and guest comfort.
+description: Guidance for choosing a venue based on access, flow, production, and guest comfort.
 searchIntent: Compare Orange County event venues using practical criteria.
 audienceQuestion: How do we know whether a venue works for the event we want?
 ownerContributionNeeded:
-  - First-hand venue-selection criteria
+  - Criteria for choosing a venue based on firsthand experience
   - Real logistical constraints encountered
   - Examples that do not imply an unverified partnership
 proposedOutline:
@@ -19,7 +19,7 @@ internalLinks:
   - /process/
   - /contact/
 assetsNeeded:
-  - Original venue-walkthrough checklist
+  - Original checklist for walking through a venue
   - Approved venue atmosphere photography
 factsToVerify:
   - Any venue names or examples
@@ -28,4 +28,4 @@ conversionCta: Bring the venue options into one planning conversation.
 draft: true
 ---
 
-Owner-review brief only. Do not name venues without first-hand knowledge and approval.
+Brief for owner review only. Do not name venues without firsthand knowledge and approval.

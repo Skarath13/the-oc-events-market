@@ -15,8 +15,8 @@ import { contactLinks, featureFlags, siteConfig } from '@/data/site';
     <div>
       <h2 class="site-footer__heading">Plan a celebration</h2>
       <p>
-        A planner-led approach to the vision, vendors, design, logistics, and approved event-day
-        details—at any scale.
+        A dedicated planner connects the vision, vendors, design, logistics, and approved details
+        for events of every size.
       </p>
       <a class="text-link text-link--light" href="/contact/">Check availability</a>
     </div>
@@ -51,11 +51,7 @@ import { contactLinks, featureFlags, siteConfig } from '@/data/site';
       {
         featureFlags.showPhone && siteConfig.publicPhone && (
           <>
-            <p>
-              <a class="site-footer__contact-link" href={contactLinks.phone}>
-                {siteConfig.publicPhoneDisplay}
-              </a>
-            </p>
+            <p class="site-footer__phone">{siteConfig.publicPhoneDisplay}</p>
             <p>
               <a
                 class="site-footer__contact-link"
@@ -80,6 +76,6 @@ import { contactLinks, featureFlags, siteConfig } from '@/data/site';
   </div>
   <div class="site-footer__bottom">
     <p>© {new Date().getFullYear()} {siteConfig.businessName}</p>
-    <p>Event Planning & Design · Orange County, California</p>
+    <p>Event Planning and Design in Orange County, California</p>
   </div>
 </footer>

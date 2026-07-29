@@ -7,25 +7,24 @@
       images.
 - [ ] Verify active packages, exact inclusions/exclusions, event types, and service area.
 - [ ] Approve portfolio facts, image permissions, vendor credits, and testimonials.
-- [ ] Have the privacy notice, terms, consent language, and data retention reviewed.
+- [ ] Have the privacy notice, terms, messaging practices, and data retention reviewed.
 
 ## Production configuration
 
-- [ ] Choose a server-capable Astro host; GitHub Pages is staging-only and cannot deliver forms.
-- [ ] Set `PUBLIC_SITE_URL` to the final HTTPS origin.
-- [ ] Configure `FORM_DELIVERY_MODE=resend`, `RESEND_API_KEY`, `INQUIRY_TO_EMAIL`, and
-      `INQUIRY_FROM_EMAIL`.
-- [ ] Configure both Turnstile variables and verify the widget and server result.
-- [ ] Replace the in-memory rate limiter with a host-appropriate shared limiter before multi-instance
-      production traffic.
-- [ ] Configure production security headers and HSTS at the host; update CSP only for enabled
-      analytics, Turnstile, or provider endpoints.
-- [ ] Confirm secrets never enter client bundles, logs, screenshots, or the repository.
+- [x] Use Cloudflare Workers in the pinned production account; GitHub Pages remains staging-only.
+- [x] Set `PUBLIC_SITE_URL=https://theoceventsmarket.com`.
+- [x] Remove website forms, delivery credentials, bot defense, and form rate limiting; contact is
+      text-only.
+- [x] Configure production security headers and HSTS; update CSP only for an approved future
+      analytics provider.
+- [x] Confirm deployment credentials never enter client bundles or repository files; scan for
+      Cloudflare token patterns after release.
 
 ## Search and local discovery
 
-- [ ] Keep `PUBLIC_SITE_INDEXABLE=false` through final-domain QA.
-- [ ] Verify canonical URLs, sitemap URLs, redirects, robots response, 404 status, RSS, and JSON-LD.
+- [x] Enable `PUBLIC_SITE_INDEXABLE=true` for production while keeping GitHub Pages staging noindex.
+- [x] Verify canonical URLs, sitemap URLs, redirects, robots response, 404 status, RSS, and JSON-LD
+      on the indexable production deployment.
 - [ ] Submit the sitemap in Google Search Console and Bing Webmaster Tools after indexing is enabled.
 - [ ] Align name, contact details, service area, hours, and URL with Google Business Profile.
 - [ ] Verify Bing Webmaster Tools, citation consistency, and links from owned social profiles.
@@ -33,20 +32,27 @@
 
 ## Analytics and conversion
 
-- [ ] Select no analytics, GA4, Plausible, or Umami; set only the approved provider and ID.
-- [ ] Verify CTA, service CTA, form start, validation failure, success, portfolio, and vendor-inquiry
-      events.
+- [x] Keep production analytics disabled unless an owner-approved provider and ID are selected.
+- [ ] Verify primary, service, client-text, vendor-text, and portfolio events if analytics is enabled.
 - [ ] Add consent tooling only if the selected technology and applicable policy require it.
-- [ ] Send real inbox tests from desktop and mobile; verify failure behavior and provider logs.
+- [ ] Scan the desktop QR code with iPhone and Android hardware and send one real client and vendor
+      text.
 
 ## Engineering and release
 
-- [ ] Run `pnpm install --frozen-lockfile`.
-- [ ] Run `pnpm format:check`, `pnpm lint`, `pnpm check`, `pnpm build`, `pnpm test:e2e`,
+- [x] Run `pnpm install --frozen-lockfile`.
+- [x] Run `pnpm format:check`, `pnpm lint`, `pnpm check`, `pnpm build`, `pnpm test:e2e`,
       `pnpm lighthouse`, and a recursive link check.
-- [ ] Inspect the six required viewports and manual keyboard paths.
-- [ ] Test Chrome, Firefox, WebKit/Safari, Edge, and Android/iOS-equivalent mobile profiles.
-- [ ] Verify reduced motion, zoom/reflow, tap targets, mobile keyboard form flow, and no horizontal
+- [x] Inspect the six required viewports and keyboard paths.
+- [x] Test Chrome, Firefox, WebKit/Safari, and Android/iOS-equivalent mobile profiles.
+- [ ] Run the release matrix in Microsoft Edge on a machine with Edge installed.
+- [ ] Verify reduced motion, zoom/reflow, tap targets, native SMS handoff, and no horizontal
       overflow.
-- [ ] Back up DNS, record rollback steps, deploy, smoke the live origin, then enable indexing.
-- [ ] Monitor form delivery, crawl/index state, Core Web Vitals, and conversion events after launch.
+- [x] Leave DNS unchanged, record the previous Worker version for rollback, deploy, and smoke the
+      indexable live origin.
+- [ ] Monitor crawl/index state, Core Web Vitals, and conversion events after launch.
+
+Release record:
+
+- Previous Worker version: `83207577-12b2-4d86-865e-9a7a75981cf1`
+- Indexable text-contact release: `c2882bfe-340e-450d-850d-1f5b490e249e`

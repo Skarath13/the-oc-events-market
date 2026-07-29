@@ -18,7 +18,7 @@ internalLinks:
   - /services/
   - /contact/
 assetsNeeded:
-  - Anonymized vendor-information checklist
+  - Anonymized checklist for vendor information
 factsToVerify:
   - Required vendor documentation
   - Any categories with special requirements
@@ -26,4 +26,4 @@ conversionCta: Bring your vendor list to the first planning conversation.
 draft: true
 ---
 
-Owner-review brief only. The published article must use the planner’s real onboarding practice.
+Brief for owner review only. The published article must use the planner’s real onboarding practice.

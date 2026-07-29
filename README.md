@@ -14,27 +14,30 @@ cp .env.example .env
 pnpm dev
 ```
 
-The default build is intentionally noindex and uses the reserved
-`https://the-oc-events-market.example` canonical origin until production configuration is supplied.
+The default build is intentionally noindex. The canonical production origin is
+`https://theoceventsmarket.com`.
 
 ## Commands
 
 ```sh
 pnpm dev
 pnpm build
+pnpm build:cloudflare
 pnpm start
 pnpm check
 pnpm lint
 pnpm format:check
 pnpm test:e2e
 pnpm test:a11y
-pnpm test:forms
+pnpm test:contact
 pnpm lighthouse
 pnpm verify
+pnpm verify:cloudflare
+pnpm run deploy
 ```
 
-Playwright starts a production Node build on port 4377. Lighthouse uses port 4388. Required visual
-screenshots are written to `reports/screenshots`.
+Playwright starts the Cloudflare Worker build over local HTTPS on port 4377. Lighthouse uses the
+same runtime on port 4388. Required visual screenshots are written to `reports/screenshots`.
 
 ## Content and claims
 
@@ -48,30 +51,26 @@ screenshots are written to `reports/screenshots`.
 Celebration and journal entries are draft-only until verified. Stock photographs are not client
 stories or portfolio proof.
 
-## Forms
+## Text contact
 
-`/contact/` and `/for-vendors/` submit to separate server endpoints with Zod validation, output
-sanitization, size limits, a honeypot, optional Turnstile validation, safe errors, and Resend
-delivery. Configure the server-only variables in `.env.example`. Production should replace the
-process-local limiter with a shared host-level implementation.
-
-No provider response means no success state. `FORM_DELIVERY_MODE=test` works only when
-`NODE_ENV=test`.
+`/contact/` and `/for-vendors/` provide native `sms:` links instead of collecting information in
+website forms. The phone number is printed only in the footer. On desktop, each contact page renders
+a locally generated QR code for the same SMS action; no QR-code service receives visitor data.
 
 ## GitHub Pages staging
 
 The Pages workflow builds the prerendered client, rewrites paths for the repository base, adds
-`.nojekyll`, and deploys a public noindex preview. GitHub Pages cannot run Astro server endpoints, so
-both forms are clearly disabled in that build. Use a server-capable host for production.
+`.nojekyll`, and deploys a public noindex preview. Cloudflare Workers is the production runtime.
 
 ## Production deployment
 
 1. Complete `CONTENT_NEEDED.md` and `LAUNCH_CHECKLIST.md`.
-2. Choose an Astro-compatible server host because forms require runtime endpoints.
-3. Set the final canonical origin, delivery credentials, optional Turnstile, and optional analytics.
+2. Deploy to Cloudflare Workers in `Ivoneatelegantlashes@gmail.com's Account`; do not use the
+   `Dylan` Cloudflare account. See `AGENTS.md` for the pinned account and zone identifiers.
+3. The canonical origin and Cloudflare account are pinned in `wrangler.jsonc`; configure only an
+   approved analytics provider if one is later selected.
 4. Run the complete validation suite against the final build.
-5. Deploy with indexing still disabled, smoke the live origin, then set
-   `PUBLIC_SITE_INDEXABLE=true` and redeploy.
+5. Production builds are indexable. GitHub Pages staging remains explicitly noindex.
 
 The public source repository grants no license to reuse the brand, copy, or code. Temporary
 photographs remain governed by the licenses recorded in `IMAGE_LICENSES.md`.

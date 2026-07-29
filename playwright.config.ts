@@ -8,7 +8,8 @@ export default defineConfig({
   ...(process.env.CI ? { workers: 2 } : {}),
   reporter: [['list'], ['html', { outputFolder: 'playwright-report', open: 'never' }]],
   use: {
-    baseURL: 'http://127.0.0.1:4377',
+    baseURL: 'https://127.0.0.1:4377',
+    ignoreHTTPSErrors: true,
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
@@ -19,8 +20,9 @@ export default defineConfig({
   },
   webServer: {
     command:
-      'NODE_ENV=test FORM_DELIVERY_MODE=test PUBLIC_SITE_URL=https://the-oc-events-market.example PUBLIC_SITE_INDEXABLE=false pnpm build && NODE_ENV=test FORM_DELIVERY_MODE=test HOST=127.0.0.1 PORT=4377 node dist/server/entry.mjs',
-    url: 'http://127.0.0.1:4377',
+      'PUBLIC_SITE_URL=https://theoceventsmarket.com PUBLIC_SITE_INDEXABLE=true CLOUDFLARE_ENV=test pnpm build && pnpm exec wrangler dev --env test --ip 127.0.0.1 --port 4377 --local-protocol https',
+    url: 'https://127.0.0.1:4377',
+    ignoreHTTPSErrors: true,
     reuseExistingServer: false,
     timeout: 180_000,
   },

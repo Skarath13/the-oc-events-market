@@ -43,8 +43,6 @@ jobs:
         env:
           PUBLIC_SITE_URL: https://the-oc-events-market.example
           PUBLIC_SITE_INDEXABLE: 'false'
-          PUBLIC_STATIC_PREVIEW: 'true'
-          FORM_DELIVERY_MODE: disabled
 
       - name: Prepare repository base path
         run: pnpm pages:prepare
