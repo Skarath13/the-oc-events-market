@@ -52,8 +52,16 @@ export const siteConfig = {
   ogImage: '/social/og-default.jpg',
 } as const;
 
+const inquiryDraft =
+  'Hi! I’d like to plan an event with The OC Events Market. Event type: [type]. Date or planning window: [date]. Estimated guest count: [count].';
+const vendorIntroductionDraft =
+  'Hi! I’d like to introduce my event business to The OC Events Market. Business name: [name]. Service category: [category]. Service area: [area]. Portfolio or website: [link].';
+const createTextLink = (body: string) =>
+  `sms:${siteConfig.publicPhone}?&body=${encodeURIComponent(body)}`;
+
 export const contactLinks = {
-  text: `sms:${siteConfig.publicPhone}`,
+  inquiryText: createTextLink(inquiryDraft),
+  vendorIntroductionText: createTextLink(vendorIntroductionDraft),
 } as const;
 
 export const coreFaqs = [

@@ -54,8 +54,9 @@ stories or portfolio proof.
 ## Text contact
 
 `/contact/` and `/for-vendors/` provide native `sms:` links instead of collecting information in
-website forms. The phone number is printed only in the footer. On desktop, each contact page renders
-a locally generated QR code for the same SMS action; no QR-code service receives visitor data.
+website forms. Client and vendor links open with separate, editable starter messages. The phone
+number is printed only in the footer. On desktop, each contact page renders a locally generated QR
+code for the same SMS action; no QR-code service receives visitor data.
 
 ## GitHub Pages staging
 
