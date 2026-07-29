@@ -7,11 +7,18 @@ type Props = {
   body: string;
   buttonLabel: string;
   analyticsContext: string;
+  href?: string;
 };
 
-const { heading, body, buttonLabel, analyticsContext } = Astro.props;
+const {
+  heading,
+  body,
+  buttonLabel,
+  analyticsContext,
+  href = contactLinks.inquiryText,
+} = Astro.props;
 const headingId = `text-contact-${analyticsContext}`;
-const qrCode = await QRCode.toString(contactLinks.text, {
+const qrCode = await QRCode.toString(href, {
   type: 'svg',
   errorCorrectionLevel: 'M',
   margin: 4,
@@ -29,7 +36,7 @@ const qrCode = await QRCode.toString(contactLinks.text, {
     <p>{body}</p>
     <a
       class="button button--dark"
-      href={contactLinks.text}
+      href={href}
       data-analytics-event="text_cta_click"
       data-analytics-context={analyticsContext}
     >

@@ -1,7 +1,11 @@
 import { expect, test } from '@playwright/test';
 
 const phoneDisplay = '+1 (949) 591-3087';
-const smsHref = 'sms:+19495913087';
+const inquiryDraft =
+  'Hi! I’d like to plan an event with The OC Events Market. Event type: [type]. Date or planning window: [date]. Estimated guest count: [count].';
+const vendorIntroductionDraft =
+  'Hi! I’d like to introduce my event business to The OC Events Market. Business name: [name]. Service category: [category]. Service area: [area]. Portfolio or website: [link].';
+const textHref = (body: string) => `sms:+19495913087?&body=${encodeURIComponent(body)}`;
 
 test.describe('text-only contact @contact', () => {
   test('client contact uses the native messaging app and keeps the number in the footer', async ({
@@ -14,8 +18,12 @@ test.describe('text-only contact @contact', () => {
     await expect(page.locator('a[href^="tel:"]')).toHaveCount(0);
     await expect(page.getByRole('link', { name: 'Text Event Details' }).first()).toHaveAttribute(
       'href',
-      smsHref,
+      textHref(inquiryDraft),
     );
+    const inquiryLinks = page.locator('a[data-analytics-event="text_cta_click"]');
+    await expect(inquiryLinks).toHaveCount(2);
+    await expect(inquiryLinks.nth(0)).toHaveAttribute('href', textHref(inquiryDraft));
+    await expect(inquiryLinks.nth(1)).toHaveAttribute('href', textHref(inquiryDraft));
     await expect(page.getByText(phoneDisplay, { exact: true })).toHaveCount(1);
     await expect(page.locator('footer').getByText(phoneDisplay, { exact: true })).toHaveCount(1);
 
@@ -37,7 +45,11 @@ test.describe('text-only contact @contact', () => {
     await expect(page.locator('form')).toHaveCount(0);
     await expect(page.getByRole('link', { name: 'Text a Vendor Introduction' })).toHaveAttribute(
       'href',
-      smsHref,
+      textHref(vendorIntroductionDraft),
+    );
+    await expect(page.locator('footer a[data-analytics-event="text_cta_click"]')).toHaveAttribute(
+      'href',
+      textHref(inquiryDraft),
     );
     await expect(page.getByText(phoneDisplay, { exact: true })).toHaveCount(1);
 

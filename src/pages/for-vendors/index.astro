@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import TextContact from '@/components/global/TextContact.astro';
+import { contactLinks } from '@/data/site';
 import { breadcrumbSchema } from '@/lib/seo';
 
 const origin = Astro.site ?? new URL('https://the-oc-events-market.example');
@@ -32,6 +33,7 @@ const breadcrumbs = [
       body="Include a portfolio or website link and a concise explanation of how you support coordinated events."
       buttonLabel="Text a Vendor Introduction"
       analyticsContext="vendor"
+      href={contactLinks.vendorIntroductionText}
     />
   </div>
 </BaseLayout>
