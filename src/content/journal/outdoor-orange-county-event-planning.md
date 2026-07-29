@@ -1,12 +1,12 @@
 ---
 title: 'Planning an Outdoor Orange County Event: Weather, Parking, Power, and Guest Comfort'
-description: A practical outdoor-event risk and logistics guide based on real planning experience.
+description: A practical guide to outdoor event risks and logistics based on real planning experience.
 searchIntent: Prepare an outdoor Orange County event.
 audienceQuestion: What operational details can derail an outdoor event?
 ownerContributionNeeded:
-  - Real weather and backup-plan lessons
+  - Real lessons about weather and backup plans
   - Power, parking, sound, shade, and access examples
-  - Local permitting or venue-rule experience
+  - Local experience with permits or venue rules
 proposedOutline:
   - Start with the fallback plan
   - Weather, sun, temperature, and guest comfort
@@ -28,4 +28,4 @@ conversionCta: Build the outdoor plan and its backup together.
 draft: true
 ---
 
-Owner-review brief only. Regulatory statements require current authoritative verification.
+Brief for owner review only. Regulatory statements require current authoritative verification.

@@ -1,0 +1,55 @@
+---
+import QRCode from 'qrcode';
+import { contactLinks } from '@/data/site';
+
+type Props = {
+  heading: string;
+  body: string;
+  buttonLabel: string;
+  analyticsContext: string;
+};
+
+const { heading, body, buttonLabel, analyticsContext } = Astro.props;
+const headingId = `text-contact-${analyticsContext}`;
+const qrCode = await QRCode.toString(contactLinks.text, {
+  type: 'svg',
+  errorCorrectionLevel: 'M',
+  margin: 4,
+  color: {
+    dark: '#24241fff',
+    light: '#fffdf8ff',
+  },
+});
+---
+
+<section class="text-contact" aria-labelledby={headingId} data-text-contact>
+  <div class="text-contact__copy">
+    <p class="eyebrow">Text to begin</p>
+    <h2 id={headingId}>{heading}</h2>
+    <p>{body}</p>
+    <a
+      class="button button--dark"
+      href={contactLinks.text}
+      data-analytics-event="text_cta_click"
+      data-analytics-context={analyticsContext}
+    >
+      {buttonLabel}
+    </a>
+    <p class="text-contact__note">
+      On a phone, this opens your usual messaging app. Message and data rates may apply.
+    </p>
+  </div>
+
+  <div class="text-contact__desktop" data-desktop-qr>
+    <div
+      class="text-contact__qr"
+      role="img"
+      aria-label="QR code that opens a new text message to The OC Events Market"
+      set:html={qrCode}
+    />
+    <div>
+      <h3>On a computer?</h3>
+      <p>Scan the code with your phone’s camera, then open the message it creates.</p>
+    </div>
+  </div>
+</section>

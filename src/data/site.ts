@@ -28,12 +28,12 @@ export const featureFlags: FeatureFlags = {
 
 export const siteConfig = {
   businessName: 'The OC Events Market',
-  descriptor: 'Event Planning & Design',
+  descriptor: 'Event Planning and Design',
   brandPromise: 'Your vision. Every detail. Thoughtfully coordinated.',
   shortDefinition:
-    'The OC Events Market is a planner-led event planning and design practice in Orange County.',
+    'The OC Events Market is an event planning and design practice led by a dedicated planner in Orange County.',
   fullDefinition:
-    'The OC Events Market is a planner-led event planning and design practice in Orange County. From intimate gatherings to large-scale events, the work connects the vision, plan, vendors, and approved details through event day.',
+    'The OC Events Market is an event planning and design practice led by a dedicated planner in Orange County. From intimate gatherings to large events, the work connects the vision, plan, vendors, and approved details through the event.',
   serviceArea: 'Orange County, California',
   serviceAreaShort: 'Orange County',
   logo: {
@@ -52,12 +52,8 @@ export const siteConfig = {
   ogImage: '/social/og-default.jpg',
 } as const;
 
-const textMessageBody =
-  'Hi! I’d like to plan an event with The OC Events Market. Event type: [type]. Date or planning window: [date]. Estimated guest count: [count].';
-
 export const contactLinks = {
-  phone: `tel:${siteConfig.publicPhone}`,
-  text: `sms:${siteConfig.publicPhone}?&body=${encodeURIComponent(textMessageBody)}`,
+  text: `sms:${siteConfig.publicPhone}`,
 } as const;
 
 export const coreFaqs = [
@@ -89,12 +85,12 @@ export const coreFaqs = [
   {
     question: 'Do you manage the event day?',
     answer:
-      'Event-day management is included only when stated in the selected service. When included, we coordinate the approved timeline, vendor arrivals, setup flow, and planned event transitions.',
+      'Management on the day of the event is included only when stated in the selected service. When included, we coordinate the approved timeline, vendor arrivals, setup flow, and planned event transitions.',
   },
   {
     question: 'What is the difference between planning and coordination?',
     answer:
-      'Planning shapes decisions before the event: scope, budget structure, design, vendors, logistics, and timeline. Coordination organizes approved plans and vendor details closer to the event and manages the included event-day flow.',
+      'Planning shapes decisions before the event, including scope, budget structure, design, vendors, logistics, and the timeline. Coordination organizes approved plans and vendor details closer to the event and manages the flow included on the event day.',
   },
 ] as const;
 
@@ -120,7 +116,7 @@ export const capabilityRows = [
     body: 'Build the working schedule, arrival details, dependencies, and transitions that keep the event moving.',
   },
   {
-    title: 'Event-day management',
+    title: 'Management on the event day',
     body: 'When included, oversee the approved timeline, vendor flow, setup priorities, and key event transitions.',
   },
 ] as const;
@@ -131,7 +127,7 @@ export const processSteps = [
     body: 'Learn the occasion, priorities, guest experience, working budget, and visual direction.',
   },
   {
-    title: 'Plan & Design',
+    title: 'Plan and Design',
     body: 'Build the roadmap, concept, timeline, layout, and decision structure included in the service.',
   },
   {
@@ -140,6 +136,6 @@ export const processSteps = [
   },
   {
     title: 'Bring It to Life',
-    body: 'Manage the approved details and event-day flow so the host can stay present.',
+    body: 'Manage the approved details and flow on the event day so the host can stay present.',
   },
 ] as const;

@@ -1,10 +1,10 @@
 ---
-title: A Practical Event-Planning Timeline by Celebration Type
-description: A first-hand guide to sequencing decisions for different kinds of celebrations.
+title: A Practical Planning Timeline for Each Celebration Type
+description: A firsthand guide to sequencing decisions for different kinds of celebrations.
 searchIntent: Learn when to start and what to decide first.
 audienceQuestion: How does the planning timeline change by event type?
 ownerContributionNeeded:
-  - Real lead-time ranges by celebration type
+  - Real time frames for planning each celebration type
   - Common bottlenecks and vendor deadlines
   - What changes for venues, homes, and outdoor settings
 proposedOutline:
@@ -20,12 +20,12 @@ internalLinks:
   - /events/baby-bridal-showers/
   - /events/corporate-brand-events/
 assetsNeeded:
-  - Owner-approved timeline diagram
+  - Timeline diagram approved by the owner
 factsToVerify:
-  - Lead-time ranges
+  - Time frames for planning
   - Rush or cutoff policies
 conversionCta: Share your date or planning window.
 draft: true
 ---
 
-Owner-review brief only. Avoid universal timeline claims until real ranges are supplied.
+Brief for owner review only. Avoid universal timeline claims until real ranges are supplied.

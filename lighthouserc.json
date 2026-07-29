@@ -1,8 +1,8 @@
 {
   "ci": {
     "collect": {
-      "startServerCommand": "HOST=127.0.0.1 PORT=4388 node dist/server/entry.mjs",
-      "startServerReadyPattern": "listening on",
+      "startServerCommand": "pnpm exec wrangler dev --env lighthouse --ip 127.0.0.1 --port 4388",
+      "startServerReadyPattern": "Ready on",
       "url": [
         "http://127.0.0.1:4388/",
         "http://127.0.0.1:4388/services/",

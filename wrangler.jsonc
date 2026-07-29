@@ -1,0 +1,48 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "the-oc-events-market",
+  "account_id": "23f44eec8348248aa186c7511ed36e07",
+  "main": "@astrojs/cloudflare/entrypoints/server",
+  "compatibility_date": "2026-07-28",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "routes": [
+    {
+      "pattern": "theoceventsmarket.com",
+      "custom_domain": true,
+    },
+    {
+      "pattern": "www.theoceventsmarket.com",
+      "custom_domain": true,
+    },
+  ],
+  "vars": {
+    "PUBLIC_SITE_URL": "https://theoceventsmarket.com",
+    "PUBLIC_SITE_INDEXABLE": "true",
+    "PUBLIC_ANALYTICS_PROVIDER": "none",
+  },
+  "env": {
+    "test": {
+      "routes": [],
+      "vars": {
+        "PUBLIC_SITE_URL": "https://theoceventsmarket.com",
+        "PUBLIC_SITE_INDEXABLE": "true",
+        "PUBLIC_ANALYTICS_PROVIDER": "none",
+      },
+    },
+    "lighthouse": {
+      "routes": [],
+      "vars": {
+        "PUBLIC_SITE_URL": "https://events.test",
+        "PUBLIC_SITE_INDEXABLE": "true",
+        "PUBLIC_ANALYTICS_PROVIDER": "none",
+      },
+    },
+  },
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+  },
+  "observability": {
+    "enabled": true,
+  },
+}

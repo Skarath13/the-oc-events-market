@@ -8,3 +8,4 @@ reports
 src/assets/images
 public/favicon
 public/social
+worker-configuration.d.ts

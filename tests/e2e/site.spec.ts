@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { publicRoutes } from '../helpers/routes';
+import { indexableRoutes, publicRoutes } from '../helpers/routes';
 
 test.describe('site contracts', () => {
   for (const route of publicRoutes) {
@@ -13,7 +13,13 @@ test.describe('site contracts', () => {
       await expect(page.locator('nav[aria-label="Breadcrumb"]')).toHaveCount(0);
       await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
         'href',
-        /^https:\/\/the-oc-events-market\.example\/.+|^https:\/\/the-oc-events-market\.example\/$/,
+        /^https:\/\/theoceventsmarket\.com\/.+|^https:\/\/theoceventsmarket\.com\/$/,
+      );
+      await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
+        'content',
+        indexableRoutes.includes(route as (typeof indexableRoutes)[number])
+          ? 'index, follow'
+          : 'noindex, nofollow',
       );
       const overflow = await page.evaluate(
         () => document.documentElement.scrollWidth - window.innerWidth,
@@ -32,7 +38,8 @@ test.describe('site contracts', () => {
               '.detail-intro h2',
               '.vendor-flex h2',
               '.simple-hero h1',
-              '.form-layout__intro h1',
+              '.contact-layout__intro h1',
+              '.text-contact__copy h2',
             ].join(', '),
           )
           .evaluateAll((headings) =>
@@ -89,7 +96,8 @@ test.describe('site contracts', () => {
   }) => {
     const robots = await request.get('/robots.txt');
     expect(robots.status()).toBe(200);
-    expect(await robots.text()).toContain('Disallow: /');
+    expect(await robots.text()).toContain('Allow: /');
+    expect(await robots.text()).not.toContain('Disallow: /');
 
     const sitemap = await request.get('/sitemap-index.xml');
     expect(sitemap.status()).toBe(200);
@@ -118,7 +126,7 @@ test.describe('navigation interactions', () => {
         name: 'A Planner for Every Celebration.',
       }),
     ).toBeVisible();
-    await expect(page.getByText('Planner-led · Every moving piece')).toBeVisible();
+    await expect(page.getByText('Your planner keeps every detail connected')).toBeVisible();
     await expect(page.locator('main')).not.toContainText(/planning team|marketplace|directory/i);
 
     await page.goto('/trusted-creative-network/');
@@ -129,24 +137,6 @@ test.describe('navigation interactions', () => {
       }),
     ).toBeVisible();
     await expect(page.locator('main')).not.toContainText(/marketplace|directory/i);
-  });
-
-  test('publishes phone and prefilled text actions', async ({ page }) => {
-    await page.goto('/contact/');
-    await expect(page.getByRole('link', { name: 'Call +1 (949) 591-3087' })).toHaveAttribute(
-      'href',
-      'tel:+19495913087',
-    );
-
-    const textAction = page.getByRole('link', { name: 'Text Event Details' }).first();
-    await expect(textAction).toHaveAttribute('href', /^sms:\+19495913087\?&body=.+/);
-    const href = await textAction.getAttribute('href');
-    expect(decodeURIComponent(href ?? '')).toContain('Event type: [type]');
-    expect(decodeURIComponent(href ?? '')).toContain('Estimated guest count: [count]');
-
-    await expect(
-      page.getByRole('link', { name: '+1 (949) 591-3087', exact: true }),
-    ).toHaveAttribute('href', 'tel:+19495913087');
   });
 
   test('mobile menu opens, closes with Escape, and restores focus', async ({ page, viewport }) => {

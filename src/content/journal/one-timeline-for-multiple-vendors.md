@@ -1,6 +1,6 @@
 ---
 title: How a Planner Keeps Multiple Vendors Working From One Timeline
-description: A first-hand look at timeline structure, dependencies, approvals, and event-day changes.
+description: A firsthand look at timeline structure, dependencies, approvals, and changes on the event day.
 searchIntent: Understand vendor timeline coordination.
 audienceQuestion: How does one timeline keep a vendor team aligned?
 ownerContributionNeeded:
@@ -12,7 +12,7 @@ proposedOutline:
   - Arrival, setup, service, transition, and removal fields
   - Dependencies and decision deadlines
   - Who receives which version
-  - Managing approved event-day changes
+  - Managing approved changes on the event day
 internalLinks:
   - /trusted-creative-network/
   - /process/
@@ -27,4 +27,4 @@ conversionCta: Bring every approved vendor into one clear plan.
 draft: true
 ---
 
-Owner-review brief only. The published version should show the planner’s real process.
+Brief for owner review only. The published version should show the planner’s real process.

@@ -8,3 +8,9 @@ playwright-report/
 test-results/
 .lighthouseci/
 reports/contact-sheet.jpg
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example

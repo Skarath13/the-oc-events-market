@@ -8,7 +8,7 @@ export const GET: APIRoute = async (context) => {
   return rss({
     title: `${siteConfig.businessName} Journal`,
     description:
-      'Practical Orange County event-planning guidance about timelines, vendors, venues, design, and logistics.',
+      'Practical Orange County event planning guidance about timelines, vendors, venues, design, and logistics.',
     site: context.site ?? 'https://the-oc-events-market.example',
     items: posts.map((post) => ({
       title: post.data.title,

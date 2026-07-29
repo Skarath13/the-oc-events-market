@@ -53,6 +53,18 @@ test('required viewport screenshots and hero safety', async ({ page, browserName
       caret: 'hide',
     });
   }
+
+  await page.setViewportSize({ width: 1440, height: 900 });
+  for (const route of ['/contact/', '/for-vendors/']) {
+    await page.goto(route, { waitUntil: 'networkidle' });
+    const slug = route.replaceAll('/', '-').replace(/^-|-$/g, '');
+    await page.screenshot({
+      path: path.join(output, `${slug}-1440x900.png`),
+      fullPage: true,
+      animations: 'disabled',
+      caret: 'hide',
+    });
+  }
 });
 
 async function loadDeferredImages(page: import('@playwright/test').Page) {

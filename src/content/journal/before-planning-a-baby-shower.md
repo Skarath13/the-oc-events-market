@@ -1,12 +1,12 @@
 ---
 title: What to Decide Before Planning a Baby Shower
 description: A useful sequence for guest experience, setting, food, rentals, and event flow.
-searchIntent: Prepare for baby-shower planning.
+searchIntent: Prepare to plan a baby shower.
 audienceQuestion: Which decisions should a host make first?
 ownerContributionNeeded:
   - Real sequencing from past planning work
-  - Home-versus-venue lessons
-  - Rental, food-flow, and gifting examples
+  - Lessons about choosing a home or venue
+  - Examples involving rentals, food flow, and gifting
 proposedOutline:
   - Start with the guest and honoree experience
   - Choose the setting and understand its constraints
@@ -21,10 +21,10 @@ assetsNeeded:
   - Approved shower planning photography
   - Owner checklist
 factsToVerify:
-  - Private-home event availability
+  - Availability for events at private homes
   - Verified service inclusions
 conversionCta: Plan a shower around the people gathering.
 draft: true
 ---
 
-Owner-review brief only. Temporary stock imagery cannot be presented as a client shower.
+Brief for owner review only. Temporary stock imagery cannot be presented as a client shower.

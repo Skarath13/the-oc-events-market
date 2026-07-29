@@ -9,8 +9,8 @@ type Props = {
 };
 
 const {
-  heading = 'From intimate moments to full-scale events.',
-  intro = 'The size may change. The promise does not: your planner keeps every decision and moving piece connected.',
+  heading = 'From intimate moments to large events.',
+  intro = 'The size may change, but the promise does not. Your planner keeps every decision and moving piece connected.',
 } = Astro.props;
 const items = await Promise.all(
   eventTypes.map(async (eventType) => ({
