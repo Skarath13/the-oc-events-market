@@ -116,7 +116,7 @@ test.describe('site contracts', () => {
     expect(response.status()).toBe(404);
   });
 
-  test('robots, sitemap, RSS, redirects, and sitemap exclusions are correct', async ({
+  test('robots, llms.txt, sitemap, RSS, redirects, and sitemap exclusions are correct', async ({
     page,
     request,
   }) => {
@@ -131,6 +131,17 @@ test.describe('site contracts', () => {
     expect(sitemapText).not.toContain('full-service-planning-design');
     expect(sitemapText).not.toContain('/journal/');
     expect(sitemapText).not.toContain('/privacy/');
+
+    const llms = await request.get('/llms.txt');
+    expect(llms.status()).toBe(200);
+    expect(llms.headers()['content-type']).toContain('text/plain');
+    const llmsText = await llms.text();
+    expect(llmsText).toMatch(/^# The OC Events Market\n\n>/);
+    expect(llmsText).toContain('https://theoceventsmarket.com/events/weddings/');
+    expect(llmsText).toContain('https://theoceventsmarket.com/events/corporate-brand-events/');
+    expect(llmsText).toContain('https://theoceventsmarket.com/contact/');
+    expect(llmsText).not.toContain('/services/full-service-planning-design/');
+    expect(llmsText).not.toContain('/privacy/');
 
     const rss = await request.get('/rss.xml');
     expect(rss.status()).toBe(200);
