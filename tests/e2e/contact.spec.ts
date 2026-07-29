@@ -1,10 +1,9 @@
 import { expect, test } from '@playwright/test';
 
 const phoneDisplay = '+1 (949) 591-3087';
-const inquiryDraft =
-  'Hi! I’d like to plan an event with The OC Events Market. Event type: [type]. Date or planning window: [date]. Estimated guest count: [count].';
+const inquiryDraft = 'Hi! I’d like to inquire about planning an event with The OC Events Market.';
 const vendorIntroductionDraft =
-  'Hi! I’d like to introduce my event business to The OC Events Market. Business name: [name]. Service category: [category]. Service area: [area]. Portfolio or website: [link].';
+  'Hi! I’d like to introduce my event business to The OC Events Market.';
 const textHref = (body: string) => `sms:+19495913087?&body=${encodeURIComponent(body)}`;
 
 test.describe('text-only contact @contact', () => {
