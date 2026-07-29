@@ -26,6 +26,21 @@ test.describe('site contracts', () => {
       );
       expect(overflow, `${route} horizontal overflow`).toBeLessThanOrEqual(1);
 
+      const headingLineCounts = await page.locator('main h1, main h2').evaluateAll((headings) =>
+        headings.map((heading) => {
+          const range = document.createRange();
+          range.selectNodeContents(heading);
+          return {
+            text: heading.textContent?.trim(),
+            lines: range.getClientRects().length,
+          };
+        }),
+      );
+      expect(
+        headingLineCounts.every(({ lines }) => lines <= 3),
+        `${route} heading wrapping: ${JSON.stringify(headingLineCounts)}`,
+      ).toBe(true);
+
       if (viewport && viewport.width <= 767) {
         const headingWidths = await page
           .locator(
@@ -33,11 +48,22 @@ test.describe('site contracts', () => {
               '.section-heading h2',
               '.clarification__copy h2',
               '.network-statement h2',
+              '.network-brief h2',
               '.final-cta h2',
               '.page-hero h1',
               '.detail-intro h2',
+              '.detail-overview__fit h2',
+              '.detail-overview__scope h2',
+              '.detail-method h2',
+              '.detail-answers h2',
+              '.related-strip h2',
               '.vendor-flex h2',
+              '.service-scope__intro h2',
+              '.profile-panel__copy h2',
+              '.network-page h2',
               '.simple-hero h1',
+              '.journal-page h1',
+              '.journal-page h2',
               '.contact-layout__intro h1',
               '.text-contact__copy h2',
             ].join(', '),
@@ -118,12 +144,38 @@ test.describe('site contracts', () => {
 });
 
 test.describe('navigation interactions', () => {
+  test('representative pages stay within the responsive density budget', async ({
+    page,
+    viewport,
+  }, testInfo) => {
+    test.skip(
+      !['chromium-desktop', 'chromium-mobile'].includes(testInfo.project.name),
+      'Canonical responsive density check',
+    );
+
+    const mobile = Boolean(viewport && viewport.width <= 767);
+    const routes = [
+      { path: '/', maxHeight: mobile ? 6_300 : 4_300 },
+      { path: '/services/', maxHeight: mobile ? 4_400 : 3_300 },
+      {
+        path: '/services/full-service-planning-design/',
+        maxHeight: mobile ? 6_200 : 4_200,
+      },
+    ];
+
+    for (const route of routes) {
+      await page.goto(route.path);
+      const pageHeight = await page.evaluate(() => document.documentElement.scrollHeight);
+      expect(pageHeight, `${route.path} page height`).toBeLessThanOrEqual(route.maxHeight);
+    }
+  });
+
   test('presents a planner-led service instead of a marketplace', async ({ page }) => {
     await page.goto('/');
     await expect(
       page.getByRole('heading', {
         level: 1,
-        name: 'A Planner for Every Celebration.',
+        name: 'A Planner for Every Celebration',
       }),
     ).toBeVisible();
     await expect(page.getByText('Your planner keeps every detail connected')).toBeVisible();
@@ -133,7 +185,7 @@ test.describe('navigation interactions', () => {
     await expect(
       page.getByRole('heading', {
         level: 1,
-        name: 'A Planner at the Center of Every Moving Piece',
+        name: 'One Planner for Every Moving Piece',
       }),
     ).toBeVisible();
     await expect(page.locator('main')).not.toContainText(/marketplace|directory/i);
@@ -158,7 +210,7 @@ test.describe('navigation interactions', () => {
   test('process steps use only the designed sequence markers', async ({ page }) => {
     await page.goto('/');
     const listStyle = await page
-      .locator('.process-rail')
+      .locator('.process-stack')
       .evaluate((element) => getComputedStyle(element).listStyleType);
     expect(listStyle).toBe('none');
   });

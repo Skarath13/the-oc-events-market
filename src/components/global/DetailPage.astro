@@ -26,82 +26,28 @@ const relatedEvents = eventTypes.filter((eventType) => eventType.slug !== page.s
   proof="Your planner brings every vendor into one plan"
 />
 
-<section class="section-shell detail-intro">
-  <div>
-    <h2>Who this planning is for</h2>
-  </div>
-  <div class="detail-intro__body">
-    {forItems.map((item) => <p>{item}</p>)}
-  </div>
-</section>
-
-<section class="section-shell section-shell--tight surface-white">
-  <div class="section-heading section-heading--split">
-    <h2>What the planning can handle</h2>
-    <p>
-      Responsibilities are confirmed in the selected service. The proposal defines exactly what we
-      manage, not a broad label on the website.
-    </p>
-  </div>
-  <div class="detail-list">
-    {
-      page.capabilities.map((capability) => (
-        <article class="detail-list__item">
-          <h3>{capability.title}</h3>
-          <p>{capability.body}</p>
-        </article>
-      ))
-    }
-  </div>
-</section>
-
-<section class="section-shell process-section">
-  <div class="section-heading">
-    <h2>A clear planning rhythm</h2>
-    <p>
-      We move the work from priorities to decisions, then bring every vendor and detail for the
-      event day into one approved plan.
-    </p>
-  </div>
-  <ol class="process-rail">
-    {
-      processSteps.map((step, index) => (
-        <li class="process-rail__step">
-          <span class="process-rail__number" aria-hidden="true">
-            0{index + 1}
-          </span>
-          <h3>{step.title}</h3>
-          <p>{step.body}</p>
-        </li>
-      ))
-    }
-  </ol>
-</section>
-
-<section class="section-shell vendor-flex">
-  <div>
-    <h2>Your planner, whichever vendors you choose.</h2>
-    <p>
-      We can recommend the right professionals when sourcing is included or coordinate the vendors
-      you have already chosen. Either way, your planner keeps the relationship, timeline, and shared
-      direction connected.
-    </p>
-    <a class="text-link" href="/trusted-creative-network/">How vendor coordination works</a>
-  </div>
-  <p class="vendor-flex__rule">Your vendors or trusted recommendations. A coordinated plan.</p>
-</section>
-
-<section class="considerations">
-  <div class="section-shell">
-    <div class="section-heading">
-      <h2>Planning considerations that matter here</h2>
+<section class="section-shell detail-overview">
+  <div class="detail-overview__fit">
+    <p class="eyebrow">Best fit</p>
+    <h2>Is this the right fit?</h2>
+    <div class="detail-overview__fit-copy">
+      {forItems.map((item) => <p>{item}</p>)}
     </div>
-    <div class="considerations-grid">
+  </div>
+  <div class="detail-overview__scope">
+    <div class="detail-overview__scope-heading">
+      <div>
+        <p class="eyebrow">Possible scope</p>
+        <h2>What your plan can cover</h2>
+      </div>
+      <p>Your proposal confirms what we manage, what you approve, and what each vendor handles.</p>
+    </div>
+    <div class="detail-list detail-list--grid">
       {
-        page.considerations.map((consideration) => (
-          <article>
-            <h3>{consideration.title}</h3>
-            <p>{consideration.body}</p>
+        page.capabilities.map((capability) => (
+          <article class="detail-list__item">
+            <h3>{capability.title}</h3>
+            <p>{capability.body}</p>
           </article>
         ))
       }
@@ -109,20 +55,82 @@ const relatedEvents = eventTypes.filter((eventType) => eventType.slug !== page.s
   </div>
 </section>
 
-<section class="section-shell">
-  <div class="section-heading section-heading--split">
-    <h2>Questions, answered plainly</h2>
+<section class="section-shell detail-method">
+  <div class="section-heading">
+    <p class="eyebrow">How the work moves</p>
+    <h2>One clear planning rhythm</h2>
     <p>
-      These answers avoid assumptions about packages. Your proposal should settle every
-      responsibility for your event before work begins.
+      We move from priorities to decisions, then bring every vendor and detail for the event day
+      into one approved plan.
     </p>
   </div>
-  <FaqList faqs={page.faqs} />
+  <div class="detail-method__grid">
+    <ol class="process-stack">
+      {
+        processSteps.map((step, index) => (
+          <li class="process-stack__step">
+            <span class="process-stack__number" aria-hidden="true">
+              0{index + 1}
+            </span>
+            <div>
+              <h3>{step.title}</h3>
+              <p>{step.body}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+    <aside class="vendor-brief">
+      <p class="eyebrow">Vendor flexibility</p>
+      <h3>Bring your vendors or ask us to find them.</h3>
+      <p>
+        When sourcing is included, we can recommend professionals. We can also coordinate vendors
+        you have already chosen. Either way, your planner keeps the relationships, timeline, and
+        direction connected.
+      </p>
+      <p class="vendor-brief__rule">Your vendors. Trusted recommendations. One coordinated plan.</p>
+      <a class="text-link text-link--light" href="/trusted-creative-network/"
+        >How vendor coordination works</a
+      >
+    </aside>
+  </div>
 </section>
 
-<section class="section-shell section-shell--tight">
-  <div class="section-heading section-heading--split">
-    <h2>Keep exploring</h2>
+<section class="detail-answers surface-white">
+  <div class="section-shell">
+    <div class="section-heading section-heading--split">
+      <h2>Important details and clear answers</h2>
+      <p>
+        These points help shape the plan. Your proposal settles every responsibility before work
+        begins.
+      </p>
+    </div>
+    <div class="detail-answers__grid">
+      <div class="consideration-list">
+        <h3>What matters here</h3>
+        {
+          page.considerations.map((consideration) => (
+            <article>
+              <h4>{consideration.title}</h4>
+              <p>{consideration.body}</p>
+            </article>
+          ))
+        }
+      </div>
+      <div class="detail-answers__faqs">
+        <h3>Questions, answered plainly</h3>
+        <FaqList faqs={page.faqs} />
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-shell related-strip">
+  <div class="related-strip__heading">
+    <div>
+      <p class="eyebrow">Keep exploring</p>
+      <h2>Compare another path</h2>
+    </div>
     <div>
       <p>
         {
@@ -138,10 +146,10 @@ const relatedEvents = eventTypes.filter((eventType) => eventType.slug !== page.s
       </p>
     </div>
   </div>
-  <div class="detail-list">
+  <div class="related-strip__list">
     {
       relatedEvents.map((eventType) => (
-        <a class="detail-list__item" href={`/events/${eventType.slug}/`}>
+        <a class="related-strip__item" href={`/events/${eventType.slug}/`}>
           <h3>{eventType.title}</h3>
           <p>{eventType.gatewayBody}</p>
         </a>

@@ -57,7 +57,7 @@ const origin = Astro.site ?? new URL('https://the-oc-events-market.example');
       type="image/avif"
       media="(min-width: 768px)"
       imagesrcset={toSrcset(desktopAvif)}
-      imagesizes="58vw"
+      imagesizes="50vw"
       fetchpriority="high"
     />
   </Fragment>
@@ -65,7 +65,7 @@ const origin = Astro.site ?? new URL('https://the-oc-events-market.example');
   <section class="home-hero">
     <div class="home-hero__copy">
       <div class="home-hero__copy-inner">
-        <h1>A Planner for Every Celebration.</h1>
+        <h1>A Planner for Every Celebration</h1>
         <p class="home-hero__body">
           Across Orange County, from intimate showers and milestone dinners to weddings and large
           corporate events, we shape the vision, coordinate every vendor, and manage the details so
@@ -107,18 +107,18 @@ const origin = Astro.site ?? new URL('https://the-oc-events-market.example');
           media="(min-width: 768px)"
           type="image/avif"
           srcset={toSrcset(desktopAvif)}
-          sizes="58vw"
+          sizes="50vw"
         />
         <source
           media="(min-width: 768px)"
           type="image/webp"
           srcset={toSrcset(desktopWebp)}
-          sizes="58vw"
+          sizes="50vw"
         />
         <img
           src={desktopJpeg.at(-1)?.src}
           srcset={toSrcset(desktopJpeg)}
-          sizes="58vw"
+          sizes="50vw"
           alt="Outdoor event table layered with yellow flowers, glassware, woven place settings, and soft blue linens"
           width={1920}
           height={1280}
@@ -130,123 +130,93 @@ const origin = Astro.site ?? new URL('https://the-oc-events-market.example');
     </div>
   </section>
 
-  <section class="clarification">
-    <div class="clarification__copy">
-      <h2>Small gathering or large production, we plan the whole event.</h2>
-      <p>
-        From the first idea to the final vendor arrival, we build the plan, guide the creative
-        direction, and keep every moving part aligned. Your planner stays close to the decisions
-        while you keep the space to enjoy the reason everyone is gathering.
-      </p>
-    </div>
-    <div class="clarification__media">
-      <picture>
-        <source
-          media="(max-width: 767px)"
-          type="image/avif"
-          srcset={(
-            await getImage({
-              src: media.planningDetail,
-              width: 480,
-              format: 'avif',
-              quality: 68,
-            })
-          ).src}
-        />
-        <Image
-          src={media.planningDetail}
-          alt="Warm floral arrangement, candles, and glassware prepared for a dinner"
-          widths={[560, 720, 960]}
-          sizes="40vw"
-          loading="lazy"
-          quality={76}
-        />
-      </picture>
-    </div>
-  </section>
+  <EventGateway
+    heading="We plan the whole event, at every size."
+    intro="From the first idea to the final vendor arrival, we build the plan, guide the creative direction, and keep every moving part aligned. Your planner stays close to the decisions while you keep the space to enjoy the reason everyone is gathering."
+  />
 
-  <EventGateway />
-
-  <section class="capabilities-section">
+  <section class="planning-system">
     <div class="section-shell">
       <div class="section-heading section-heading--split">
-        <h2>A planner at the center of every moving piece.</h2>
+        <h2>One plan for every moving piece.</h2>
         <p>
           The exact work depends on your selected service. What we own, what you approve, and what
           each vendor handles are made clear before planning starts.
         </p>
       </div>
-      <div class="capability-index">
-        {
-          capabilityRows.map((capability) => (
-            <article class="capability-index__item">
-              <div>
-                <h3>{capability.title}</h3>
-                <p>{capability.body}</p>
-              </div>
-            </article>
-          ))
-        }
+      <div class="planning-system__grid">
+        <div class="planning-system__capabilities">
+          <h3>What planning can connect</h3>
+          <div class="capability-index">
+            {
+              capabilityRows.map((capability) => (
+                <article class="capability-index__item">
+                  <div>
+                    <h4>{capability.title}</h4>
+                    <p>{capability.body}</p>
+                  </div>
+                </article>
+              ))
+            }
+          </div>
+        </div>
+        <div class="planning-system__process">
+          <h3>How the work moves</h3>
+          <p class="planning-system__process-intro">
+            A calm process is still detailed. The plan is simply presented in the order you need it.
+          </p>
+          <ol class="process-stack">
+            {
+              processSteps.map((step, index) => (
+                <li class="process-stack__step">
+                  <span class="process-stack__number" aria-hidden="true">
+                    0{index + 1}
+                  </span>
+                  <div>
+                    <h4>{step.title}</h4>
+                    <p>{step.body}</p>
+                  </div>
+                </li>
+              ))
+            }
+          </ol>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="section-shell process-section">
-    <div class="section-heading section-heading--split">
-      <h2>From first idea to event day.</h2>
-      <p>
-        A calm process is not less detailed. It is a detailed plan presented in the order you need
-        it.
-      </p>
+  <section class="section-shell home-guidance">
+    <article class="network-brief">
+      <div class="network-brief__media">
+        <Image
+          src={media.network}
+          alt="Intimate outdoor dining area set among deep green plants"
+          widths={[560, 840, 1120]}
+          sizes="(max-width: 767px) 100vw, 42vw"
+          loading="lazy"
+          quality={76}
+        />
+      </div>
+      <div class="network-brief__copy">
+        <p class="eyebrow">Vendor flexibility</p>
+        <h2>Bring your vendors or ask us to find them.</h2>
+        <p>
+          We can recommend professionals when sourcing is included or coordinate vendors you have
+          already chosen. Either way, everyone works from one plan, one timeline, and one direction.
+        </p>
+        <a class="text-link text-link--light" href="/trusted-creative-network/"
+          >How vendor coordination works</a
+        >
+      </div>
+    </article>
+    <div class="home-guidance__faqs">
+      <div class="section-heading">
+        <p class="eyebrow">Before you inquire</p>
+        <h2>Useful answers before we talk.</h2>
+        <p>Package details are always confirmed in writing.</p>
+      </div>
+      <FaqList faqs={coreFaqs} />
     </div>
-    <ol class="process-rail">
-      {
-        processSteps.map((step, index) => (
-          <li class="process-rail__step">
-            <span class="process-rail__number" aria-hidden="true">
-              0{index + 1}
-            </span>
-            <h3>{step.title}</h3>
-            <p>{step.body}</p>
-          </li>
-        ))
-      }
-    </ol>
-  </section>
-
-  <section class="network-statement">
-    <div class="network-statement__media">
-      <Image
-        src={media.network}
-        alt="Intimate outdoor dining area set among deep green plants"
-        widths={[720, 1080, 1440]}
-        sizes="(max-width: 767px) 100vw, 50vw"
-        loading="lazy"
-        quality={76}
-      />
-    </div>
-    <div class="network-statement__copy">
-      <h2>Bring your vendors, or let us find the right ones.</h2>
-      <p>
-        We can recommend professionals for your event when sourcing is included or step in alongside
-        vendors you have already chosen. Either way, your planner brings everyone into one plan, one
-        timeline, and one shared direction.
-      </p>
-      <a class="text-link text-link--light" href="/trusted-creative-network/"
-        >How vendor coordination works</a
-      >
-    </div>
-  </section>
-
-  <section class="section-shell">
-    <div class="section-heading section-heading--split">
-      <h2>Before you inquire</h2>
-      <p>
-        Clear answers now make for a better first conversation. Package details are always confirmed
-        in writing.
-      </p>
-    </div>
-    <FaqList faqs={coreFaqs} />
   </section>
 
   <FinalCta />
