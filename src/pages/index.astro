@@ -1,5 +1,5 @@
 ---
-import { Image, getImage } from 'astro:assets';
+import { Image } from 'astro:assets';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import EventGateway from '@/components/global/EventGateway.astro';
 import FaqList from '@/components/global/FaqList.astro';
@@ -8,30 +8,18 @@ import { capabilityRows, contactLinks, coreFaqs, processSteps } from '@/data/sit
 import { media } from '@/data/media';
 import { organizationSchema, websiteSchema } from '@/lib/seo';
 
-const mobileWidths = [430, 640];
-const desktopWidths = [960, 1440, 1920];
-const imageSet = async (
-  src: typeof media.heroDesktop,
-  widths: number[],
-  format: 'avif' | 'webp' | 'jpeg',
-  quality: number,
-) =>
-  Promise.all(
-    widths.map(async (width) => {
-      const image = await getImage({ src, width, format, quality });
-      return { src: image.src, width };
-    }),
-  );
-
-const [mobileAvif, mobileWebp, desktopAvif, desktopWebp, desktopJpeg] = await Promise.all([
-  imageSet(media.heroMobile, mobileWidths, 'avif', 62),
-  imageSet(media.heroMobile, mobileWidths, 'webp', 68),
-  imageSet(media.heroDesktop, desktopWidths, 'avif', 72),
-  imageSet(media.heroDesktop, desktopWidths, 'webp', 72),
-  imageSet(media.heroDesktop, desktopWidths, 'jpeg', 78),
-]);
-const toSrcset = (images: Array<{ src: string; width: number }>) =>
-  images.map((image) => `${image.src} ${image.width}w`).join(', ');
+const heroMedia = {
+  desktop: {
+    mp4: '/videos/hero/oc-events-hero-desktop-v1.mp4',
+    webm: '/videos/hero/oc-events-hero-desktop-v1.webm',
+    poster: '/videos/hero/oc-events-hero-desktop-v1-poster.webp',
+  },
+  mobile: {
+    mp4: '/videos/hero/oc-events-hero-mobile-v1.mp4',
+    webm: '/videos/hero/oc-events-hero-mobile-v1.webm',
+    poster: '/videos/hero/oc-events-hero-mobile-v1-poster.webp',
+  },
+} as const;
 const origin = Astro.site ?? new URL('https://the-oc-events-market.example');
 ---
 
@@ -45,19 +33,17 @@ const origin = Astro.site ?? new URL('https://the-oc-events-market.example');
     <link
       rel="preload"
       as="image"
-      type="image/avif"
+      type="image/webp"
       media="(max-width: 767px)"
-      imagesrcset={toSrcset(mobileAvif)}
-      imagesizes="100vw"
+      href={heroMedia.mobile.poster}
       fetchpriority="high"
     />
     <link
       rel="preload"
       as="image"
-      type="image/avif"
+      type="image/webp"
       media="(min-width: 768px)"
-      imagesrcset={toSrcset(desktopAvif)}
-      imagesizes="50vw"
+      href={heroMedia.desktop.poster}
       fetchpriority="high"
     />
   </Fragment>
@@ -89,44 +75,50 @@ const origin = Astro.site ?? new URL('https://the-oc-events-market.example');
         <p class="home-hero__proof">Your planner keeps every detail connected</p>
       </div>
     </div>
-    <div class="home-hero__media">
-      <picture>
-        <source
-          media="(max-width: 767px)"
-          type="image/avif"
-          srcset={toSrcset(mobileAvif)}
-          sizes="100vw"
-        />
+    <div class="home-hero__media" data-home-hero-media data-video-state="poster">
+      <picture class="home-hero__poster">
         <source
           media="(max-width: 767px)"
           type="image/webp"
-          srcset={toSrcset(mobileWebp)}
+          srcset={heroMedia.mobile.poster}
           sizes="100vw"
         />
         <source
           media="(min-width: 768px)"
-          type="image/avif"
-          srcset={toSrcset(desktopAvif)}
-          sizes="50vw"
-        />
-        <source
-          media="(min-width: 768px)"
           type="image/webp"
-          srcset={toSrcset(desktopWebp)}
+          srcset={heroMedia.desktop.poster}
           sizes="50vw"
         />
         <img
-          src={desktopJpeg.at(-1)?.src}
-          srcset={toSrcset(desktopJpeg)}
+          src={heroMedia.desktop.poster}
           sizes="50vw"
-          alt="Outdoor event table layered with yellow flowers, glassware, woven place settings, and soft blue linens"
-          width={1920}
-          height={1280}
+          alt="Sunlit outdoor event table arranged with greenery, flowers, glassware, and woven place settings"
+          width={1440}
+          height={810}
           loading="eager"
           fetchpriority="high"
           decoding="sync"
         />
       </picture>
+      <video
+        class="home-hero__video"
+        data-home-hero-video
+        data-src-desktop-mp4={heroMedia.desktop.mp4}
+        data-src-desktop-webm={heroMedia.desktop.webm}
+        data-src-mobile-mp4={heroMedia.mobile.mp4}
+        data-src-mobile-webm={heroMedia.mobile.webm}
+        data-poster-desktop={heroMedia.desktop.poster}
+        data-poster-mobile={heroMedia.mobile.poster}
+        autoplay
+        muted
+        loop
+        playsinline
+        webkit-playsinline
+        preload="metadata"
+        disablepictureinpicture
+        disableRemotePlayback
+        aria-hidden="true"
+        tabindex="-1"></video>
     </div>
   </section>
 
@@ -221,3 +213,9 @@ const origin = Astro.site ?? new URL('https://the-oc-events-market.example');
 
   <FinalCta />
 </BaseLayout>
+
+<script>
+  import { initHomeHeroVideo } from '@/lib/home-hero-video';
+
+  initHomeHeroVideo();
+</script>
