@@ -1,6 +1,5 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
-import cloudflare from '@astrojs/cloudflare';
 
 const site = process.env.PUBLIC_SITE_URL ?? 'https://the-oc-events-market.example';
 const excludedFromSitemap = [
@@ -16,7 +15,6 @@ export default defineConfig({
   site,
   trailingSlash: 'always',
   output: 'static',
-  adapter: cloudflare({ imageService: 'compile' }),
   integrations: [
     sitemap({
       filter: (page) => {

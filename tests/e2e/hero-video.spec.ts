@@ -147,7 +147,7 @@ test.describe('autoplay rejection fallback', () => {
   });
 });
 
-test('hero media declares immutable byte-range delivery', async ({ request }, testInfo) => {
+test('hero media provides immutable byte-range delivery', async ({ request }, testInfo) => {
   test.skip(testInfo.project.name !== 'chromium-desktop', 'One canonical response assertion');
 
   const full = await request.get(desktopVideo);
@@ -155,4 +155,20 @@ test('hero media declares immutable byte-range delivery', async ({ request }, te
   expect(full.headers()['content-type']).toContain('video/mp4');
   expect(full.headers()['cache-control']).toContain('immutable');
   expect(full.headers()['accept-ranges']).toBe('bytes');
+
+  const range = await request.get(desktopVideo, { headers: { Range: 'bytes=0-15' } });
+  expect(range.status()).toBe(206);
+  expect(range.headers()['content-range']).toMatch(/^bytes 0-15\/\d+$/);
+  expect((await range.body()).byteLength).toBe(16);
+
+  const suffix = await request.get(desktopVideo, { headers: { Range: 'bytes=-16' } });
+  expect(suffix.status()).toBe(206);
+  expect(suffix.headers()['content-range']).toMatch(/^bytes \d+-\d+\/\d+$/);
+  expect((await suffix.body()).byteLength).toBe(16);
+
+  const invalid = await request.get(desktopVideo, {
+    headers: { Range: 'bytes=999999999-' },
+  });
+  expect(invalid.status()).toBe(416);
+  expect(invalid.headers()['content-range']).toMatch(/^bytes \*\/\d+$/);
 });

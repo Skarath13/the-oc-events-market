@@ -10,10 +10,6 @@
 /_assets/*
   Cache-Control: public, max-age=31536000, immutable
 
-/videos/hero/*
-  Cache-Control: public, max-age=31536000, immutable, no-transform
-  Accept-Ranges: bytes
-
 /favicon/*
   Cache-Control: public, max-age=604800
 

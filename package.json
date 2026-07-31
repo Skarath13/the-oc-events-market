@@ -10,8 +10,8 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
-    "build:cloudflare": "PUBLIC_SITE_URL=https://theoceventsmarket.com PUBLIC_SITE_INDEXABLE=true astro build",
+    "build": "astro build && node scripts/prepare-worker-deploy.mjs",
+    "build:cloudflare": "PUBLIC_SITE_URL=https://theoceventsmarket.com PUBLIC_SITE_INDEXABLE=true astro build && node scripts/prepare-worker-deploy.mjs",
     "preview": "pnpm run build:cloudflare && wrangler dev",
     "start": "wrangler dev",
     "check": "astro check",

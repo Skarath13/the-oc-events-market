@@ -3,6 +3,9 @@ import { URL } from 'node:url';
 
 const expected = {
   accountId: '23f44eec8348248aa186c7511ed36e07',
+  assetDirectory: './dist',
+  assetWorkerRoutes: ['/videos/hero/*'],
+  main: './src/worker.ts',
   workerName: 'the-oc-events-market',
   domains: ['theoceventsmarket.com', 'www.theoceventsmarket.com'],
 };
@@ -20,6 +23,18 @@ if (config.account_id !== expected.accountId) {
 }
 if (config.name !== expected.workerName) {
   failures.push(`Worker name must be ${expected.workerName}`);
+}
+if (config.main !== expected.main) {
+  failures.push(`Worker entrypoint must be ${expected.main}`);
+}
+if (config.assets?.directory !== expected.assetDirectory) {
+  failures.push(`static asset directory must be ${expected.assetDirectory}`);
+}
+if (
+  JSON.stringify(config.assets?.run_worker_first ?? []) !==
+  JSON.stringify(expected.assetWorkerRoutes)
+) {
+  failures.push(`Worker-first routes must be exactly ${expected.assetWorkerRoutes.join(', ')}`);
 }
 if (JSON.stringify(configuredDomains) !== JSON.stringify([...expected.domains].sort())) {
   failures.push(`custom domains must be exactly ${expected.domains.join(', ')}`);
