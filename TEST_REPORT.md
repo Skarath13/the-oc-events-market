@@ -73,7 +73,5 @@ All ten artifacts are in `reports/screenshots`.
 ## Remaining launch verification
 
 Playwright's iPhone and Android coverage uses browser-engine device profiles rather than physical
-hardware. Complete a final smoke test on current physical iOS and Android devices after the
-production origin and form credentials are configured. GitHub Pages is a static, noindex visual
-preview, so its inquiry buttons are intentionally disabled; server-form delivery must be verified
-on the eventual server-capable production host.
+hardware. Complete a final smoke test on current physical iOS and Android devices against the
+production origin, including the native client and vendor SMS handoffs.

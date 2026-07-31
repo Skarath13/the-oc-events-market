@@ -58,11 +58,6 @@ website forms. Client and vendor links open with separate, editable starter mess
 number is printed only in the footer. On desktop, each contact page renders a locally generated QR
 code for the same SMS action; no QR-code service receives visitor data.
 
-## GitHub Pages staging
-
-The Pages workflow builds the prerendered client, rewrites paths for the repository base, adds
-`.nojekyll`, and deploys a public noindex preview. Cloudflare Workers is the production runtime.
-
 ## Production deployment
 
 1. Complete `CONTENT_NEEDED.md` and `LAUNCH_CHECKLIST.md`.
@@ -75,8 +70,7 @@ The Pages workflow builds the prerendered client, rewrites paths for the reposit
    Cloudflare account. See `AGENTS.md` for the pinned account, zone, branch, and fallback rules.
 
 The canonical origin and Cloudflare account are pinned in `wrangler.jsonc`. Production builds are
-indexable; GitHub Pages staging remains explicitly noindex. Local `pnpm run deploy` is an
-emergency/recovery fallback, not the normal release path.
+indexable. Local `pnpm run deploy` is an emergency/recovery fallback, not the normal release path.
 
 The public source repository grants no license to reuse the brand, copy, or code. Temporary
 photographs remain governed by the licenses recorded in `IMAGE_LICENSES.md`.

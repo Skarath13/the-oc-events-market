@@ -11,7 +11,7 @@
 
 ## Production configuration
 
-- [x] Use Cloudflare Workers in the pinned production account; GitHub Pages remains staging-only.
+- [x] Use Cloudflare Workers Builds in the pinned production account as the only deployment path.
 - [x] Set `PUBLIC_SITE_URL=https://theoceventsmarket.com`.
 - [x] Remove website forms, delivery credentials, bot defense, and form rate limiting; contact is
       text-only.
@@ -22,7 +22,7 @@
 
 ## Search and local discovery
 
-- [x] Enable `PUBLIC_SITE_INDEXABLE=true` for production while keeping GitHub Pages staging noindex.
+- [x] Enable `PUBLIC_SITE_INDEXABLE=true` for production.
 - [x] Verify canonical URLs, sitemap URLs, redirects, robots response, 404 status, RSS, and JSON-LD
       on the indexable production deployment.
 - [ ] Submit the sitemap in Google Search Console and Bing Webmaster Tools after indexing is enabled.

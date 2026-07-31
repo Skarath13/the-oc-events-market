@@ -16,8 +16,8 @@
   breadcrumbs, and accurate reusable JSON-LD.
 - Text-only client and vendor contact paths with native messaging links and locally generated
   desktop QR codes; no website form submission or third-party QR service.
-- Configurable analytics, production header template, GitHub Pages staging workflow, Playwright,
-  axe, Lighthouse CI, link checking, and required viewport screenshots.
+- Configurable analytics, production header template, Playwright, axe, Lighthouse CI, link
+  checking, and required viewport screenshots.
 
 ## Safe assumptions
 
@@ -29,7 +29,7 @@
 - The supplied logo and social screenshots were not present in the workspace, so a live-text
   lockup and temporary generated icons are used.
 - Unsplash images are temporary editorial staging assets, never represented as client work.
-- GitHub Pages is a noindex static staging target; Cloudflare Workers serves production.
+- Cloudflare Workers Builds from `main` is the only deployment path.
 
 ## Exact launch path
 
