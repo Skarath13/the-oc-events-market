@@ -111,6 +111,57 @@ test.describe('site contracts', () => {
     expect(journal.status()).toBe(404);
   });
 
+  test('maps Search Console opportunity clusters to distinct landing pages', async ({ page }) => {
+    const targets = [
+      {
+        route: '/',
+        title: 'Orange County Event Planner and Designer | The OC Events Market',
+        h1: 'Orange County Event Planner for Every Celebration',
+      },
+      {
+        route: '/services/',
+        title: 'Event Planning Services in Orange County | The OC Events Market',
+        h1: 'Event Planning Services in Orange County',
+      },
+      {
+        route: '/events/weddings/',
+        title: 'Wedding Planner in Orange County | The OC Events Market',
+        h1: 'Wedding Planner in Orange County',
+        serviceType: 'Wedding planning and design',
+      },
+      {
+        route: '/events/birthdays-milestones/',
+        title: 'Party Planner in Orange County | The OC Events Market',
+        h1: 'Orange County Party Planner for Birthdays and Milestones',
+        serviceType: 'Birthday party and milestone event planning',
+      },
+      {
+        route: '/events/corporate-brand-events/',
+        title: 'Corporate Event Planner in Orange County | The OC Events Market',
+        h1: 'Corporate Event Planner in Orange County',
+        serviceType: 'Corporate and brand event planning',
+      },
+    ] as const;
+
+    for (const target of targets) {
+      await page.goto(target.route);
+      await expect(page).toHaveTitle(target.title);
+      await expect(page.getByRole('heading', { level: 1, name: target.h1 })).toBeVisible();
+
+      if ('serviceType' in target) {
+        const schemas = await page.locator('script[type="application/ld+json"]').allTextContents();
+        const service = schemas
+          .map((schema) => JSON.parse(schema))
+          .find((schema) =>
+            Array.isArray(schema['@type'])
+              ? schema['@type'].includes('Service')
+              : schema['@type'] === 'Service',
+          );
+        expect(service?.serviceType).toBe(target.serviceType);
+      }
+    }
+  });
+
   test('unknown route returns an actual 404', async ({ request }) => {
     const response = await request.get('/this-route-does-not-exist/');
     expect(response.status()).toBe(404);
@@ -198,7 +249,7 @@ test.describe('navigation interactions', () => {
     await expect(
       page.getByRole('heading', {
         level: 1,
-        name: 'A Planner for Every Celebration',
+        name: 'Orange County Event Planner for Every Celebration',
       }),
     ).toBeVisible();
     await expect(page.getByText('Your planner keeps every detail connected')).toBeVisible();
