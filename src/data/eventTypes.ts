@@ -8,6 +8,7 @@ export type EventTypePage = {
   gatewayBody: string;
   metaTitle: string;
   metaDescription: string;
+  serviceType: string;
   h1: string;
   summary: string;
   whoFor: string;
@@ -30,10 +31,11 @@ export const eventTypes: EventTypePage[] = [
     title: 'Weddings',
     gatewayTitle: 'Weddings',
     gatewayBody: 'A clear planning structure for a celebration with many connected decisions.',
-    metaTitle: 'Orange County Wedding Planner and Designer',
+    metaTitle: 'Wedding Planner in Orange County',
     metaDescription:
-      'Plan an Orange County wedding with a planner connecting the vision, vendors, design, logistics, and included support on the event day.',
-    h1: 'Wedding Planning and Design',
+      'Plan your wedding with an Orange County wedding planner connecting the vision, vendors, design, logistics, and included support on the event day.',
+    serviceType: 'Wedding planning and design',
+    h1: 'Wedding Planner in Orange County',
     summary:
       'We connect the roadmap, design, vendors, logistics, and included responsibilities on the wedding day so each decision supports the next and you can stay focused on the celebration.',
     whoFor:
@@ -100,7 +102,8 @@ export const eventTypes: EventTypePage[] = [
     metaTitle: 'Baby and Bridal Shower Planner in Orange County',
     metaDescription:
       'Thoughtful planning and design for Orange County baby showers, bridal showers, and the people gathering to celebrate.',
-    h1: 'Baby and Bridal Shower Planning',
+    serviceType: 'Baby and bridal shower planning and design',
+    h1: 'Baby and Bridal Shower Planner in Orange County',
     summary:
       'We connect the setting, guest flow, design, vendors, and included details on the event day in one thoughtful plan so you do not have to manage every moving piece.',
     whoFor:
@@ -163,10 +166,11 @@ export const eventTypes: EventTypePage[] = [
     title: 'Birthdays and Milestones',
     gatewayTitle: 'Birthdays and Milestones',
     gatewayBody: 'Meaningful dinners and lively parties organized around the person and the room.',
-    metaTitle: 'Orange County Birthday and Milestone Event Planner',
+    metaTitle: 'Party Planner in Orange County',
     metaDescription:
-      'Planning and design for first birthdays, adult birthdays, and milestone celebrations across Orange County.',
-    h1: 'Birthday and Milestone Planning',
+      'Work with an Orange County party planner on first birthdays, adult birthdays, anniversaries, private dinners, and milestone celebrations.',
+    serviceType: 'Birthday party and milestone event planning',
+    h1: 'Orange County Party Planner for Birthdays and Milestones',
     summary:
       'We organize the design, entertainment, food flow, vendors, and timing around the person being honored instead of a generic party format.',
     whoFor:
@@ -232,6 +236,7 @@ export const eventTypes: EventTypePage[] = [
     metaTitle: 'Kids’ Party Planning and Design in Orange County',
     metaDescription:
       'Orange County children’s party planning that brings the theme, vendors, guest flow, and details on the event day into one organized plan.',
+    serviceType: 'Kids’ party planning and design',
     h1: 'Kids’ Party Planning and Design',
     summary:
       'We turn the theme, activities, food, vendors, and guest flow into one plan suited to the age group. The party can feel imaginative without leaving you to coordinate every delivery, transition, and cleanup handoff.',
@@ -296,10 +301,11 @@ export const eventTypes: EventTypePage[] = [
     gatewayTitle: 'Corporate and Brand Events',
     gatewayBody:
       'Guest experience, brand standards, vendors, and run of show brought into one production plan.',
-    metaTitle: 'Corporate and Brand Event Planner in Orange County',
+    metaTitle: 'Corporate Event Planner in Orange County',
     metaDescription:
-      'Orange County corporate and brand event planning shaped around your audience, objectives, visual direction, vendors, and approved run of show.',
-    h1: 'Corporate and Brand Event Planning',
+      'Work with an Orange County corporate event planner to align the audience, objectives, brand direction, vendors, production details, and run of show.',
+    serviceType: 'Corporate and brand event planning',
+    h1: 'Corporate Event Planner in Orange County',
     summary:
       'We align the objective, audience, brand direction, vendors, production dependencies, and run of show from internal approvals through the guest experience.',
     whoFor:
