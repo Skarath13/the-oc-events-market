@@ -22,13 +22,14 @@ const relatedEvents = eventTypes.filter((eventType) => eventType.slug !== page.s
   summary={page.summary}
   image={media[page.image]}
   imageAlt={page.imageAlt}
-  proof="Your planner brings every vendor into one plan"
+  imageFit={'imageFit' in page ? page.imageFit : 'cover'}
+  proof="One creative direction. One current plan. One accountable planner."
 />
 
 <section class="section-shell detail-overview">
   <div class="detail-overview__fit">
-    <p class="eyebrow">Best fit</p>
-    <h2>Is this the right fit?</h2>
+    <p class="eyebrow">Designed for</p>
+    <h2>A smart fit if…</h2>
     <div class="detail-overview__fit-copy">
       {forItems.map((item) => <p>{item}</p>)}
     </div>
@@ -36,10 +37,10 @@ const relatedEvents = eventTypes.filter((eventType) => eventType.slug !== page.s
   <div class="detail-overview__scope">
     <div class="detail-overview__scope-heading">
       <div>
-        <p class="eyebrow">Possible scope</p>
-        <h2>What your plan can cover</h2>
+        <p class="eyebrow">Inside the plan</p>
+        <h2>What we can bring together</h2>
       </div>
-      <p>Your proposal confirms what we manage, what you approve, and what each vendor handles.</p>
+      <p>Your proposal makes every deliverable, approval, and vendor role unmistakably clear.</p>
     </div>
     <div class="detail-list detail-list--grid">
       {
@@ -56,14 +57,13 @@ const relatedEvents = eventTypes.filter((eventType) => eventType.slug !== page.s
 
 <section class="section-shell detail-vendor">
   <aside class="vendor-brief">
-    <p class="eyebrow">Vendor flexibility</p>
-    <h3>Bring your vendors or ask us to find them.</h3>
+    <p class="eyebrow">Your team, beautifully coordinated</p>
+    <h3>Bring your favorites. We’ll bring the plan.</h3>
     <p>
-      When sourcing is included, we can recommend professionals. We can also coordinate vendors you
-      have already chosen. Either way, your planner keeps the relationships, timeline, and direction
-      connected.
+      Keep the creative partners you already trust or ask us to source the missing pieces. Your
+      planner keeps every relationship, deadline, and dependency moving in the same direction.
     </p>
-    <p class="vendor-brief__rule">Your vendors. Trusted recommendations. One coordinated plan.</p>
+    <p class="vendor-brief__rule">Your people. Our recommendations. One beautifully run event.</p>
     <a class="text-link text-link--light" href="/trusted-creative-network/"
       >How vendor coordination works</a
     >
@@ -73,15 +73,15 @@ const relatedEvents = eventTypes.filter((eventType) => eventType.slug !== page.s
 <section class="detail-answers surface-white">
   <div class="section-shell">
     <div class="section-heading section-heading--split">
-      <h2>Important details and clear answers</h2>
+      <h2>The details that make it work</h2>
       <p>
-        These points help shape the plan. Your proposal settles every responsibility before work
-        begins.
+        The polish comes from decisions guests never see. We surface them early, assign them
+        clearly, and keep them moving.
       </p>
     </div>
     <div class="detail-answers__grid">
       <div class="consideration-list">
-        <h3>What matters here</h3>
+        <h3>What deserves attention</h3>
         {
           page.considerations.map((consideration) => (
             <article>
@@ -92,7 +92,7 @@ const relatedEvents = eventTypes.filter((eventType) => eventType.slug !== page.s
         }
       </div>
       <div class="detail-answers__faqs">
-        <h3>Questions, answered plainly</h3>
+        <h3>Straight answers</h3>
         <FaqList faqs={page.faqs} />
       </div>
     </div>
@@ -102,15 +102,15 @@ const relatedEvents = eventTypes.filter((eventType) => eventType.slug !== page.s
 <section class="section-shell related-strip">
   <div class="related-strip__heading">
     <div>
-      <p class="eyebrow">Keep exploring</p>
-      <h2>Compare another path</h2>
+      <p class="eyebrow">Find your celebration</p>
+      <h2>See what else we plan</h2>
     </div>
     <div>
       <p>
         {
           kind === 'service'
-            ? 'See how planning changes across different celebrations.'
-            : 'Compare other event types or explore planning services.'
+            ? 'The creative and operational priorities shift with every kind of gathering.'
+            : 'Explore another celebration or see how planning support can meet you where you are.'
         }
       </p>
       <p>

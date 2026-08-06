@@ -4,7 +4,6 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import EventGateway from '@/components/global/EventGateway.astro';
 import FaqList from '@/components/global/FaqList.astro';
 import FinalCta from '@/components/global/FinalCta.astro';
-import ActualEventDetails from '@/components/global/ActualEventDetails.astro';
 import { capabilityRows, contactLinks, coreFaqs } from '@/data/site';
 import { media } from '@/data/media';
 import { organizationSchema, websiteSchema } from '@/lib/seo';
@@ -52,11 +51,10 @@ const origin = Astro.site ?? new URL('https://the-oc-events-market.example');
   <section class="home-hero">
     <div class="home-hero__copy">
       <div class="home-hero__copy-inner">
-        <h1>Orange County Event Planner for Every Celebration</h1>
+        <h1>Orange County Event Planning, Beautifully Run</h1>
         <p class="home-hero__body">
-          Across Orange County, from intimate showers and milestone dinners to weddings and large
-          corporate events, we shape the vision, coordinate every vendor, and manage the details so
-          you can be fully present.
+          We turn weddings, milestones, and brand moments into beautifully paced experiences—with a
+          clear creative point of view, the right people, and every detail in sync.
         </p>
         <div class="home-hero__actions">
           <a
@@ -73,7 +71,7 @@ const origin = Astro.site ?? new URL('https://the-oc-events-market.example');
           >
           <a class="text-link" href="/celebrations/">Explore Celebrations</a>
         </div>
-        <p class="home-hero__proof">Your planner keeps every detail connected</p>
+        <p class="home-hero__proof">Creative vision. Calm execution. One accountable planner.</p>
       </div>
     </div>
     <div class="home-hero__media" data-home-hero-media data-video-state="poster">
@@ -124,22 +122,23 @@ const origin = Astro.site ?? new URL('https://the-oc-events-market.example');
   </section>
 
   <EventGateway
-    heading="We plan the whole event, at every size."
-    intro="From the first idea to the final vendor arrival, we build the plan, guide the creative direction, and keep every moving part aligned. Your planner stays close to the decisions while you keep the space to enjoy the reason everyone is gathering."
+    heading="We plan the whole event—then make it feel effortless."
+    intro="Big room or backyard, black tie or cake pops, the standard stays the same: considered design, sharp logistics, and a guest experience that never shows the work behind it."
+    enableMotion={true}
   />
 
   <section class="planning-system">
     <div class="section-shell">
       <div class="section-heading section-heading--split">
-        <h2>One plan for every moving piece.</h2>
+        <h2>The vision is the easy part. We make it work.</h2>
         <p>
-          The exact work depends on your selected service. What we own, what you approve, and what
-          each vendor handles are made clear before planning starts.
+          Behind every beautiful room is a hundred well-timed decisions. We turn them into one clear
+          plan, so the experience feels polished instead of produced.
         </p>
       </div>
       <div class="planning-system__grid">
         <div class="planning-system__capabilities">
-          <h3>What planning can connect</h3>
+          <h3>What your planner keeps in sync</h3>
           <div class="capability-index">
             {
               capabilityRows.map((capability) => (
@@ -157,8 +156,6 @@ const origin = Astro.site ?? new URL('https://the-oc-events-market.example');
     </div>
   </section>
 
-  <ActualEventDetails />
-
   <section class="section-shell home-guidance">
     <article class="network-brief">
       <div class="network-brief__media">
@@ -172,22 +169,22 @@ const origin = Astro.site ?? new URL('https://the-oc-events-market.example');
         />
       </div>
       <div class="network-brief__copy">
-        <p class="eyebrow">Vendor flexibility</p>
-        <h2>Bring your vendors or ask us to find them.</h2>
+        <p class="eyebrow">Your team, beautifully coordinated</p>
+        <h2>Bring your favorites. We’ll bring the plan.</h2>
         <p>
-          We can recommend professionals when sourcing is included or coordinate vendors you have
-          already chosen. Either way, everyone works from one plan, one timeline, and one direction.
+          Keep the vendors you love or ask us to source the missing pieces. Either way, every
+          creative partner works from the same vision, timeline, and set of priorities.
         </p>
         <a class="text-link text-link--light" href="/trusted-creative-network/"
-          >How vendor coordination works</a
+          >Meet the coordination approach</a
         >
       </div>
     </article>
     <div class="home-guidance__faqs">
       <div class="section-heading">
-        <p class="eyebrow">Before you inquire</p>
-        <h2>Useful answers before we talk.</h2>
-        <p>Package details are always confirmed in writing.</p>
+        <p class="eyebrow">The quick read</p>
+        <h2>Everything you want to know before hello.</h2>
+        <p>Clear answers, no event-industry fog.</p>
       </div>
       <FaqList faqs={coreFaqs} />
     </div>

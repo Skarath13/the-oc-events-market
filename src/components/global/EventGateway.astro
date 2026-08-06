@@ -1,5 +1,6 @@
 ---
 import { Image, getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import { eventTypes } from '@/data/eventTypes';
 import { media } from '@/data/media';
 
@@ -7,63 +8,345 @@ type Props = {
   heading?: string;
   intro?: string;
   note?: string;
+  enableMotion?: boolean;
+};
+
+type MotionPresentation = {
+  id: 'dessert' | 'ivone';
+  mp4: string;
+  poster?: string;
+  width: number;
+  height: number;
+  description: string;
+};
+
+type GatewayPresentation = {
+  image: ImageMetadata;
+  alt: string;
+  caption: string;
+  label: string;
+  ratio: 'landscape' | 'portrait';
+  fit: 'cover' | 'contain';
+  motion?: MotionPresentation;
 };
 
 const {
-  heading = 'A plan for every kind of celebration.',
-  intro = 'The size may change, but your planner still keeps every decision and moving piece connected.',
+  heading = 'One studio. Every kind of celebration.',
+  intro = 'The guest list changes. The standard does not: considered design, sharp logistics, and a celebration that never shows the work behind it.',
   note,
+  enableMotion = false,
 } = Astro.props;
+
+const presentations: Record<string, GatewayPresentation> = {
+  weddings: {
+    image: media.actualDessertFavorCollection,
+    alt: 'A four-panel collage of packaged mini cakes and decorated cake pops in pink boxes',
+    caption: 'A sweet send-off, down to the last detail.',
+    label: 'Wedding planning and design',
+    ratio: 'landscape',
+    fit: 'contain',
+  },
+  'baby-bridal-showers': {
+    image: media.actualDuckCakePops,
+    alt: 'Mint-green cake pops topped with yellow ducks and pearl sprinkles in a clear stand',
+    caption: 'The finishing touch, right on cue.',
+    label: 'Baby and bridal showers',
+    ratio: 'landscape',
+    fit: 'contain',
+    motion: {
+      id: 'dessert',
+      mp4: '/videos/actual/actual-dessert-finishing-v1.mp4',
+      width: 576,
+      height: 480,
+      description: 'dessert finishing detail',
+    },
+  },
+  'birthdays-milestones': {
+    image: media.actualFiftiethMilestoneBalloonBackdrop,
+    alt: 'Black, gold, and silver balloons frame a round black backdrop with gold number 50 balloons',
+    caption: 'A milestone that owns the room.',
+    label: 'Birthdays and milestones',
+    ratio: 'portrait',
+    fit: 'contain',
+  },
+  'kids-parties': {
+    image: media.actualFirstBirthdayBalloonBackdrop,
+    alt: 'Red, white, and yellow balloons frame a white backdrop with a gold number-one balloon',
+    caption: 'A first birthday with full-scale personality.',
+    label: 'Kids’ parties',
+    ratio: 'portrait',
+    fit: 'contain',
+  },
+  'corporate-brand-events': {
+    image: media.corporate,
+    alt: 'Formal event space arranged with round tables and warm lighting',
+    caption: 'A hands-on moment before guests arrive.',
+    label: 'Corporate and brand events',
+    ratio: 'portrait',
+    fit: 'contain',
+    motion: {
+      id: 'ivone',
+      mp4: '/videos/actual/actual-ivone-event-details-v1.mp4',
+      poster: '/videos/actual/actual-ivone-event-details-v1-poster.webp',
+      width: 576,
+      height: 768,
+      description: 'Ivone arranging an outdoor sweets display',
+    },
+  },
+};
+
 const items = await Promise.all(
-  eventTypes.map(async (eventType) => ({
-    eventType,
-    mobileImage: await getImage({
-      src: media[eventType.image],
-      width: 480,
-      format: 'avif',
-      quality: 68,
-    }),
-  })),
+  eventTypes.map(async (eventType) => {
+    const presentation = presentations[eventType.slug] ?? {
+      image: media[eventType.image],
+      alt: eventType.imageAlt,
+      caption: eventType.gatewayBody,
+      label: eventType.title,
+      ratio: 'landscape' as const,
+      fit: 'cover' as const,
+    };
+    const mobileWidths = [480, 720, 960].filter((width) => width <= presentation.image.width);
+    if (!mobileWidths.includes(presentation.image.width) && presentation.image.width < 960) {
+      mobileWidths.push(presentation.image.width);
+    }
+    const mobileImages = await Promise.all(
+      mobileWidths.map((width) =>
+        getImage({
+          src: presentation.image,
+          width,
+          format: 'avif',
+          quality: 72,
+        }),
+      ),
+    );
+    const mobileSrcset = mobileImages
+      .map((mobileImage, mobileIndex) => `${mobileImage.src} ${mobileWidths[mobileIndex]}w`)
+      .join(', ');
+    const posterImage =
+      mobileImages[mobileWidths.indexOf(720)] ?? mobileImages.at(-1) ?? mobileImages[0];
+
+    return {
+      eventType,
+      presentation,
+      mobileSrcset,
+      videoPoster:
+        presentation.motion?.id === 'dessert' ? posterImage?.src : presentation.motion?.poster,
+    };
+  }),
 );
 ---
 
 <section class="section-shell gateway-section">
-  <div class="section-heading section-heading--split">
+  <div class="section-heading section-heading--split gateway-section__heading">
     <h2>{heading}</h2>
     <div>
       <p>{intro}</p>
       {note && <p class="gateway-section__note">{note}</p>}
     </div>
   </div>
-  <div class="event-gateway">
+  <div class="event-gateway" aria-label="Celebration planning options">
     {
-      items.map(({ eventType, mobileImage }, index) => (
-        <a
-          class:list={['event-gateway__item', `event-gateway__item--${index + 1}`]}
-          href={`/events/${eventType.slug}/`}
-        >
-          <div class="event-gateway__media">
-            <picture>
-              <source media="(max-width: 767px)" type="image/avif" srcset={mobileImage.src} />
-              <Image
-                src={media[eventType.image]}
-                alt={eventType.imageAlt}
-                widths={[480, 720, 960]}
-                sizes="(max-width: 1100px) 50vw, 33vw"
-                loading="lazy"
-                quality={76}
-              />
-            </picture>
-          </div>
-          <div class="event-gateway__copy">
-            <h3>{eventType.gatewayTitle}</h3>
-            <p>{eventType.gatewayBody}</p>
-            <span>
-              Explore planning <span aria-hidden="true">→</span>
-            </span>
-          </div>
-        </a>
-      ))
+      items.map(({ eventType, presentation, mobileSrcset, videoPoster }, index) => {
+        const motion = enableMotion ? presentation.motion : undefined;
+
+        return (
+          <article
+            class:list={[
+              'event-gateway__item',
+              `event-gateway__item--${index + 1}`,
+              `event-gateway__item--${presentation.ratio}`,
+              `event-gateway__item--${presentation.fit}`,
+            ]}
+          >
+            <div
+              class:list={['event-gateway__media', motion && 'event-gateway__media--motion']}
+              data-actual-video={motion?.id}
+              data-video-description={motion?.description}
+              data-video-state={motion ? 'poster' : undefined}
+              role={motion ? 'button' : undefined}
+              tabindex={motion ? '0' : undefined}
+              aria-label={motion ? `Pause motion: ${motion.description}` : undefined}
+            >
+              {motion ? (
+                <video
+                  data-actual-video-element
+                  data-src-mp4={motion.mp4}
+                  poster={videoPoster}
+                  width={motion.width}
+                  height={motion.height}
+                  autoplay
+                  muted
+                  loop
+                  playsinline
+                  preload="none"
+                  disablepictureinpicture
+                  disableRemotePlayback
+                  aria-hidden="true"
+                  tabindex="-1"
+                />
+              ) : (
+                <picture>
+                  <source
+                    media="(max-width: 767px)"
+                    type="image/avif"
+                    srcset={mobileSrcset}
+                    sizes="calc(100vw - 2.5rem)"
+                  />
+                  <Image
+                    src={presentation.image}
+                    alt={presentation.alt}
+                    widths={[480, 720, 960, 1200]}
+                    fit={presentation.fit}
+                    sizes="(max-width: 767px) calc(100vw - 2.5rem), (max-width: 1199px) 48vw, 38vw"
+                    loading="lazy"
+                    quality={80}
+                  />
+                </picture>
+              )}
+              <p class="event-gateway__caption">{presentation.caption}</p>
+            </div>
+            <a class="event-gateway__copy" href={`/events/${eventType.slug}/`}>
+              <p class="event-gateway__label">{presentation.label}</p>
+              <h3>{eventType.gatewayTitle}</h3>
+              <p>{eventType.gatewayBody}</p>
+              <span>
+                Explore the celebration <span aria-hidden="true">→</span>
+              </span>
+            </a>
+          </article>
+        );
+      })
     }
   </div>
 </section>
+
+<script>
+  type NavigatorWithSaveData = Navigator & {
+    connection?: { saveData?: boolean };
+  };
+
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const saveData = Boolean((navigator as NavigatorWithSaveData).connection?.saveData);
+
+  document.querySelectorAll<HTMLElement>('[data-actual-video]').forEach((root) => {
+    const video = root.querySelector<HTMLVideoElement>('[data-actual-video-element]');
+    if (!video) return;
+
+    let isVisible = false;
+    let userPaused = false;
+    const videoDescription = root.dataset.videoDescription ?? 'event detail';
+
+    const setState = (state: string) => {
+      root.dataset.videoState = state;
+    };
+
+    const setControlState = (paused: boolean) => {
+      root.setAttribute('aria-label', `${paused ? 'Play' : 'Pause'} motion: ${videoDescription}`);
+    };
+
+    const disableMotionControl = (state: 'reduced-motion' | 'save-data') => {
+      video.pause();
+      root.removeAttribute('role');
+      root.removeAttribute('aria-label');
+      root.removeAttribute('tabindex');
+      setState(state);
+    };
+
+    const disableUnavailableControl = () => {
+      video.pause();
+      root.removeAttribute('role');
+      root.removeAttribute('aria-label');
+      root.removeAttribute('tabindex');
+      setState('unsupported');
+    };
+
+    const loadVideo = () => {
+      if (video.getAttribute('src')) return true;
+      const source = video.dataset.srcMp4;
+      if (!source || !video.canPlayType('video/mp4')) return false;
+      video.src = source;
+      video.load();
+      return true;
+    };
+
+    const attemptPlayback = async () => {
+      if (reducedMotion.matches) {
+        disableMotionControl('reduced-motion');
+        return;
+      }
+      if (saveData) {
+        disableMotionControl('save-data');
+        return;
+      }
+      root.setAttribute('role', 'button');
+      root.setAttribute('tabindex', '0');
+      setControlState(video.paused);
+      if (!isVisible || document.hidden || userPaused) {
+        video.pause();
+        return;
+      }
+      if (!loadVideo()) {
+        disableUnavailableControl();
+        return;
+      }
+
+      video.defaultMuted = true;
+      video.muted = true;
+      video.playsInline = true;
+      setState('loading');
+      try {
+        await video.play();
+      } catch {
+        setState('poster');
+        setControlState(true);
+      }
+    };
+
+    const togglePlayback = () => {
+      if (video.paused) {
+        userPaused = false;
+        void attemptPlayback();
+        return;
+      }
+      userPaused = true;
+      video.pause();
+      setState('paused');
+      setControlState(true);
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = Boolean(entry?.isIntersecting);
+        if (!isVisible) {
+          video.pause();
+          setState('paused');
+          setControlState(true);
+          return;
+        }
+        void attemptPlayback();
+      },
+      { rootMargin: '120px 0px', threshold: 0.2 },
+    );
+
+    video.addEventListener('playing', () => {
+      setState('playing');
+      setControlState(false);
+    });
+    video.addEventListener('error', () => {
+      setState('poster');
+      setControlState(true);
+    });
+    root.addEventListener('click', togglePlayback);
+    root.addEventListener('keydown', (event) => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      event.preventDefault();
+      togglePlayback();
+    });
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) video.pause();
+      else void attemptPlayback();
+    });
+    reducedMotion.addEventListener('change', () => void attemptPlayback());
+    observer.observe(root);
+  });
+</script>

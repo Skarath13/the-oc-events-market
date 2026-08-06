@@ -115,7 +115,7 @@ test.describe('site contracts', () => {
       {
         route: '/',
         title: 'Orange County Event Planner and Designer | The OC Events Market',
-        h1: 'Orange County Event Planner for Every Celebration',
+        h1: 'Orange County Event Planning, Beautifully Run',
       },
       {
         route: '/services/',
@@ -229,8 +229,8 @@ test.describe('navigation interactions', () => {
 
     const mobile = Boolean(viewport && viewport.width <= 767);
     const routes = [
-      { path: '/', maxHeight: mobile ? 6_300 : 4_500 },
-      { path: '/services/', maxHeight: mobile ? 4_400 : 3_300 },
+      { path: '/', maxHeight: mobile ? 6_400 : 5_200 },
+      { path: '/services/', maxHeight: mobile ? 4_400 : 4_200 },
       {
         path: '/services/full-service-planning-design/',
         maxHeight: mobile ? 6_200 : 4_200,
@@ -258,22 +258,37 @@ test.describe('navigation interactions', () => {
     const actualImage = page.getByAltText(
       'A four-panel collage of packaged mini cakes and decorated cake pops in pink boxes',
     );
-    await expect(actualImage).toHaveAttribute('srcset', / 400w(?:,|$)/);
-    await expect(actualImage).toHaveAttribute('srcset', / 640w(?:,|$)/);
+    await expect(actualImage).toHaveAttribute('srcset', / 480w(?:,|$)/);
+    await expect(actualImage).toHaveAttribute('srcset', / 960w(?:,|$)/);
     await expect(actualImage).toHaveAttribute(
       'sizes',
-      '(max-width: 767px) calc(100vw - 2.5rem), 18vw',
+      '(max-width: 767px) calc(100vw - 2.5rem), (max-width: 1199px) 48vw, 38vw',
     );
+    const actualMobileSource = page
+      .locator('.event-gateway__item')
+      .first()
+      .locator('source[type="image/avif"]');
+    await expect(actualMobileSource).toHaveAttribute('srcset', / 480w(?:,|$)/);
+    await expect(actualMobileSource).toHaveAttribute('srcset', / 960w(?:,|$)/);
+    await expect(actualMobileSource).toHaveAttribute('sizes', 'calc(100vw - 2.5rem)');
 
     const milestoneImage = page.getByAltText(
       'Black, gold, and silver balloons frame a round black backdrop with gold number 50 balloons',
     );
-    await expect(milestoneImage).toHaveAttribute('srcset', / 360w(?:,|$)/);
+    await expect(milestoneImage).toHaveAttribute('srcset', / 480w(?:,|$)/);
     await expect(milestoneImage).toHaveAttribute('srcset', / 900w(?:,|$)/);
     await expect(milestoneImage).toHaveAttribute(
       'sizes',
-      '(max-width: 767px) calc(100vw - 2.5rem), 18vw',
+      '(max-width: 767px) calc(100vw - 2.5rem), (max-width: 1199px) 48vw, 38vw',
     );
+
+    await page.goto('/events/weddings/');
+    const mobileHeroSource = page.locator(
+      '.page-hero source[type="image/avif"][media="(max-width: 767px)"]',
+    );
+    await expect(mobileHeroSource).toHaveAttribute('srcset', / 480w(?:,|$)/);
+    await expect(mobileHeroSource).toHaveAttribute('srcset', / 960w(?:,|$)/);
+    await expect(mobileHeroSource).toHaveAttribute('sizes', '100vw');
   });
 
   test('presents a planner-led service instead of a marketplace', async ({ page }) => {
@@ -281,17 +296,19 @@ test.describe('navigation interactions', () => {
     await expect(
       page.getByRole('heading', {
         level: 1,
-        name: 'Orange County Event Planner for Every Celebration',
+        name: 'Orange County Event Planning, Beautifully Run',
       }),
     ).toBeVisible();
-    await expect(page.getByText('Your planner keeps every detail connected')).toBeVisible();
+    await expect(
+      page.getByText('Creative vision. Calm execution. One accountable planner.'),
+    ).toBeVisible();
     await expect(page.locator('main')).not.toContainText(/planning team|marketplace|directory/i);
 
     await page.goto('/trusted-creative-network/');
     await expect(
       page.getByRole('heading', {
         level: 1,
-        name: 'One Planner for Every Moving Piece',
+        name: 'Great Events Need More Than Great Vendors',
       }),
     ).toBeVisible();
     await expect(page.locator('main')).not.toContainText(/marketplace|directory/i);

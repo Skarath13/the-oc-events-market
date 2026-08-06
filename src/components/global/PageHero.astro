@@ -7,16 +7,34 @@ type Props = {
   summary: string;
   image?: ImageMetadata;
   imageAlt?: string;
+  imageFit?: 'cover' | 'contain';
   proof?: string;
 };
 
-const { title, summary, image, imageAlt = '', proof } = Astro.props;
-const mobileImage = image
-  ? await getImage({ src: image, width: 480, format: 'avif', quality: 68 })
-  : null;
+const { title, summary, image, imageAlt = '', imageFit = 'cover', proof } = Astro.props;
+const imageOrientation = image && image.width >= image.height ? 'landscape' : 'portrait';
+const mobileWidths = image
+  ? [...new Set([...[480, 720, 960].filter((width) => width <= image.width), image.width])]
+      .sort((a, b) => a - b)
+      .slice(0, 3)
+  : [];
+const mobileImages = image
+  ? await Promise.all(
+      mobileWidths.map((width) => getImage({ src: image, width, format: 'avif', quality: 72 })),
+    )
+  : [];
+const mobileSrcset = mobileImages
+  .map((mobileImage, index) => `${mobileImage.src} ${mobileWidths[index]}w`)
+  .join(', ');
 ---
 
-<section class="page-hero">
+<section
+  class:list={[
+    'page-hero',
+    image && `page-hero--${imageFit}`,
+    image && `page-hero--${imageOrientation}`,
+  ]}
+>
   <div class="page-hero__copy">
     <h1>{title}</h1>
     <p class="page-hero__summary">{summary}</p>
@@ -24,14 +42,30 @@ const mobileImage = image
   </div>
   {
     image && (
-      <div class="page-hero__media">
+      <div
+        class:list={[
+          'page-hero__media',
+          `page-hero__media--${imageFit}`,
+          `page-hero__media--${imageOrientation}`,
+        ]}
+      >
         <picture>
-          <source media="(max-width: 767px)" type="image/avif" srcset={mobileImage?.src} />
+          <source
+            media="(max-width: 767px)"
+            type="image/avif"
+            srcset={mobileSrcset}
+            sizes="100vw"
+          />
           <Image
             src={image}
             alt={imageAlt}
             widths={[720, 960, 1280]}
-            sizes="(max-width: 767px) 100vw, 45vw"
+            fit={imageFit}
+            sizes={
+              imageFit === 'contain'
+                ? '(max-width: 767px) 100vw, 50vw'
+                : '(max-width: 767px) 100vw, 45vw'
+            }
             loading="eager"
             fetchpriority="high"
             quality={78}

@@ -17,12 +17,13 @@ export type EventTypePage = {
   faqs: Faq[];
   image: MediaKey;
   imageAlt: string;
+  imageFit?: 'cover' | 'contain';
 };
 
 const vendorFaq: Faq = {
   question: 'Can I keep the vendors I already selected?',
   answer:
-    'Yes. We can bring professionals you already know and love into the event plan and timeline according to your selected scope.',
+    'Absolutely. We bring the professionals you already love into the same creative direction, communication flow, and event timeline.',
 };
 
 export const eventTypes: EventTypePage[] = [
@@ -30,46 +31,46 @@ export const eventTypes: EventTypePage[] = [
     slug: 'weddings',
     title: 'Weddings',
     gatewayTitle: 'Weddings',
-    gatewayBody: 'A clear planning structure for a celebration with many connected decisions.',
+    gatewayBody: 'Personal, polished, and paced so you can actually live the day you planned.',
     metaTitle: 'Wedding Planner in Orange County',
     metaDescription:
       'Plan your wedding with an Orange County wedding planner connecting the vision, vendors, design, logistics, and included support on the event day.',
     serviceType: 'Wedding planning and design',
     h1: 'Wedding Planner in Orange County',
     summary:
-      'We connect the roadmap, design, vendors, logistics, and included responsibilities on the wedding day so each decision supports the next and you can stay focused on the celebration.',
+      'A wedding should feel deeply personal and completely effortless. We connect the creative direction, vendors, logistics, and event-day flow so every moment belongs to the same story.',
     whoFor:
-      'For couples who want thoughtful design and an accountable planner, whether they are beginning with a date and a vision or bringing an existing venue and vendors.',
+      'For couples who want a distinct point of view, one accountable planner, and the freedom to be present from the first look to the last song.',
     capabilities: [
       {
-        title: 'Planning roadmap and priorities',
-        body: 'Organize the decision sequence, working budget, approvals, and milestones included in the selected service.',
+        title: 'The wedding roadmap',
+        body: 'Put priorities, budget decisions, approvals, and deadlines in the right order from the beginning.',
       },
       {
-        title: 'Design direction and layout',
-        body: 'Shape a cohesive guest experience across ceremony, reception, tabletop, rentals, signage, and related visual decisions.',
+        title: 'A cohesive visual world',
+        body: 'Shape the ceremony, reception, tabletop, rentals, signage, and guest flow around one recognizable point of view.',
       },
       {
-        title: 'Vendor coordination',
-        body: 'Source trusted professionals when included or coordinate the people already selected.',
+        title: 'The right team, in sync',
+        body: 'Source the missing specialists or bring your chosen professionals into one communication and production plan.',
       },
       {
-        title: 'Wedding day flow',
-        body: 'When included, manage the approved timeline, vendor arrivals, key transitions, and escalation path.',
+        title: 'A day that moves beautifully',
+        body: 'When event-day management is included, run the timeline, arrivals, room transitions, and behind-the-scenes decisions.',
       },
     ],
     considerations: [
       {
-        title: 'Ceremony and reception transitions',
-        body: 'Guest movement, room turns, transportation, photo timing, and vendor resets can affect the entire schedule.',
+        title: 'Every transition changes the room',
+        body: 'Guest movement, room turns, transportation, portrait timing, and vendor resets all shape the pace of the day.',
       },
       {
-        title: 'Venue requirements',
-        body: 'Access windows, insurance, sound rules, rentals, power, parking, and required vendor procedures should be understood early.',
+        title: 'The venue sets the rules',
+        body: 'Access windows, sound limits, rentals, power, parking, insurance, and required procedures belong in the plan early.',
       },
       {
-        title: 'Interdependent vendors',
-        body: 'Catering, rentals, florals, entertainment, photography, and venue teams need one current timeline and clear handoffs.',
+        title: 'One timeline, no crossed wires',
+        body: 'Catering, rentals, florals, entertainment, photography, and the venue team need one current source of truth.',
       },
     ],
     faqs: [
@@ -77,67 +78,67 @@ export const eventTypes: EventTypePage[] = [
       {
         question: 'Do you help with wedding design?',
         answer:
-          'Design direction, layouts, rentals, decor, florals, and related coordination may be included depending on the selected service.',
+          'Yes, when design is part of your proposal. We can shape the visual direction, layouts, rentals, decor, florals, and the team that brings them together.',
       },
       {
         question: 'Do you run the rehearsal?',
         answer:
-          'Rehearsal support is not assumed. It must be listed in the selected package or proposal.',
+          'Rehearsal support is available when included in your proposal, with timing and responsibilities confirmed before you book.',
       },
       {
         question: 'Will you manage the wedding day?',
         answer:
-          'Management on the event day is included only when stated in the selected service, including the approved staffing and hours.',
+          'Event-day management is available when included in your proposal. Team size, coverage, hours, and handoffs are confirmed before you book.',
       },
     ],
-    image: 'weddings',
-    imageAlt: 'Wedding reception tables with colorful floral centerpieces',
+    image: 'actualDessertFavorCollection',
+    imageAlt: 'Packaged mini cakes and decorated cake pops presented in blush-pink favor boxes',
+    imageFit: 'contain',
   },
   {
     slug: 'baby-bridal-showers',
     title: 'Baby and Bridal Showers',
     gatewayTitle: 'Showers',
-    gatewayBody:
-      'Warm, layered gatherings designed around the guest of honor and the people showing up for them.',
+    gatewayBody: 'Charming without the cliché—every toast, table, and sweet detail in its place.',
     metaTitle: 'Baby and Bridal Shower Planner in Orange County',
     metaDescription:
       'Thoughtful planning and design for Orange County baby showers, bridal showers, and the people gathering to celebrate.',
     serviceType: 'Baby and bridal shower planning and design',
     h1: 'Baby and Bridal Shower Planner in Orange County',
     summary:
-      'We connect the setting, guest flow, design, vendors, and included details on the event day in one thoughtful plan so you do not have to manage every moving piece.',
+      'We turn a beautiful idea into a gathering that feels warm, polished, and easy to enjoy—from the welcome moment to the final favor.',
     whoFor:
-      'For families, friends, and hosts planning a baby shower, bridal shower, or related celebration at a venue or another setting the owner has approved.',
+      'For families, friends, and hosts who want the shower to feel personal and elevated without spending the celebration managing deliveries, decor, and timing.',
     capabilities: [
       {
-        title: 'Plan for the guest experience',
-        body: 'Shape the arrival, food, activities, gifting, speeches, and transitions around the pace of the gathering.',
+        title: 'A welcome that sets the tone',
+        body: 'Shape arrival, food, activities, gifting, and toasts around a pace that feels social instead of scheduled.',
       },
       {
-        title: 'Design and tabletop direction',
-        body: 'Guide color, florals, rentals, paper details, dessert displays, and focal moments when included.',
+        title: 'Details worth gathering around',
+        body: 'Connect color, florals, tabletop, rentals, paper details, dessert, and the focal moments guests will photograph.',
       },
       {
-        title: 'Vendor and rental coordination',
-        body: 'Organize catering, rentals, decor, entertainment, and other approved professionals.',
+        title: 'A vendor team that moves together',
+        body: 'Organize catering, rentals, decor, entertainment, and every scheduled arrival around one current plan.',
       },
       {
-        title: 'Setup and timing',
-        body: 'Define what arrives when, who installs it, and how the event moves from welcome through farewell.',
+        title: 'A seamless setup',
+        body: 'Define what arrives when, who installs it, and how the celebration moves from welcome through farewell.',
       },
     ],
     considerations: [
       {
-        title: 'Home versus venue logistics',
-        body: 'Access, power, restrooms, parking, rentals, cleanup, and weather protection change substantially by setting.',
+        title: 'The setting changes everything',
+        body: 'Access, power, restrooms, parking, rentals, cleanup, and weather protection look very different at home and at a venue.',
       },
       {
-        title: 'Activities without a traffic jam',
-        body: 'Food, games, gifting, photos, and dessert need enough room and a sequence that keeps guests comfortable.',
+        title: 'Give every moment room',
+        body: 'Food, games, gifting, photos, and dessert need enough space and a sequence that keeps guests comfortable.',
       },
       {
-        title: 'Setup and breakdown ownership',
-        body: 'Every rental, floral piece, personal item, and gift should have a clear arrival and removal plan.',
+        title: 'Nothing gets left to chance',
+        body: 'Every rental, floral piece, personal item, gift, and leftover needs a clear arrival and departure plan.',
       },
     ],
     faqs: [
@@ -145,67 +146,68 @@ export const eventTypes: EventTypePage[] = [
       {
         question: 'Can you help with the shower theme and decor?',
         answer:
-          'Design direction and decor coordination may be included. The selected service should define sourcing, purchasing, rentals, installation, and breakdown.',
+          'Yes, when design is part of your proposal. We define the creative direction and make sourcing, rentals, installation, and breakdown responsibilities clear from the start.',
       },
       {
         question: 'Can you coordinate activities and gifting?',
         answer:
-          'Those moments can be incorporated into the approved event flow when they are part of the planning scope.',
+          'Yes. Activities, gifting, toasts, and dessert can be built into the event flow so they feel natural rather than announced one after another.',
       },
       {
         question: 'Do you plan showers at private homes?',
         answer:
-          'Availability for events at private homes has not yet been confirmed. Share the setting in your inquiry so we can review it honestly.',
+          'Tell us the setting in your inquiry. We will review access, parking, power, rentals, cleanup, and weather needs before recommending the right planning approach.',
       },
     ],
     image: 'actualDuckCakePops',
     imageAlt:
       'Mint-green cake pops topped with yellow ducks and pearl sprinkles sit in a clear stand',
+    imageFit: 'contain',
   },
   {
     slug: 'birthdays-milestones',
     title: 'Birthdays and Milestones',
     gatewayTitle: 'Birthdays and Milestones',
-    gatewayBody: 'Meaningful dinners and lively parties organized around the person and the room.',
+    gatewayBody: 'Big number. Bigger feeling. Built around the person everyone came to celebrate.',
     metaTitle: 'Party Planner in Orange County',
     metaDescription:
       'Work with an Orange County party planner on first birthdays, adult birthdays, anniversaries, private dinners, and milestone celebrations.',
     serviceType: 'Birthday party and milestone event planning',
     h1: 'Orange County Party Planner for Birthdays and Milestones',
     summary:
-      'We organize the design, entertainment, food flow, vendors, and timing around the person being honored instead of a generic party format.',
+      'Milestones deserve more than a theme. We build the room, rhythm, food, entertainment, and signature moments around the person at the center of it all.',
     whoFor:
-      'For hosts planning first birthdays, adult birthdays, anniversaries, private dinners, and milestone gatherings that need a cohesive plan and a clear point of contact.',
+      'For hosts planning an adult birthday, anniversary, private dinner, or landmark celebration that should feel unmistakably personal.',
     capabilities: [
       {
-        title: 'Celebration concept',
-        body: 'Translate the guest of honor, priorities, and desired atmosphere into a useful creative direction.',
+        title: 'A concept with a point of view',
+        body: 'Translate the guest of honor, the setting, and the desired atmosphere into a direction that feels specific—not themed by default.',
       },
       {
-        title: 'Food, bar, and entertainment flow',
-        body: 'Coordinate the sequence and spatial needs of the approved catering, bar, music, and activities.',
+        title: 'A room with rhythm',
+        body: 'Sequence food, bar, music, and entertainment so the energy builds naturally and guests always know where to go next.',
       },
       {
-        title: 'Design and vendors',
-        body: 'Organize the selected rentals, florals, decor, entertainment, and venue professionals.',
+        title: 'Every creative partner aligned',
+        body: 'Bring rentals, florals, decor, entertainment, catering, and the venue into one creative and production plan.',
       },
       {
-        title: 'Milestone moments',
-        body: 'Plan the timing for welcomes, speeches, cake, performances, surprises, and other approved moments.',
+        title: 'The moments everyone remembers',
+        body: 'Give welcomes, speeches, cake, performances, and surprises the timing and space they deserve.',
       },
     ],
     considerations: [
       {
-        title: 'The needs of guests of different ages',
-        body: 'Seating, sound, food timing, mobility, and entertainment should work for the actual guest list.',
+        title: 'Plan for the whole guest list',
+        body: 'Seating, sound, food timing, mobility, and entertainment should work beautifully across generations.',
       },
       {
-        title: 'A program with room to breathe',
-        body: 'Speeches, performances, surprises, and dining need breathing room so the celebration still feels social.',
+        title: 'Leave room for the party',
+        body: 'Speeches, performances, surprises, and dinner need breathing room so the celebration never turns into a program.',
       },
       {
-        title: 'Room transitions',
-        body: 'Cocktails, dinner, entertainment, dessert, and dancing may compete for the same space or vendor window.',
+        title: 'Make the room change gracefully',
+        body: 'Cocktails, dinner, entertainment, dessert, and dancing may share the same space; every reset needs a clean handoff.',
       },
     ],
     faqs: [
@@ -218,60 +220,63 @@ export const eventTypes: EventTypePage[] = [
       {
         question: 'Can you coordinate a surprise?',
         answer:
-          'Surprise logistics may be planned when the confidentiality, access, communication, and timing responsibilities are included in the scope.',
+          'Yes, when it is part of the plan. We define the private communication, access, timing, and decision path needed to keep the surprise intact.',
       },
       {
         question: 'Can you help with entertainment?',
         answer:
-          'Entertainment recommendations and coordination may be included depending on the selected service and event needs.',
+          'Yes, when entertainment sourcing or coordination is included in your proposal. We match the recommendation to the room, audience, timing, and desired energy.',
       },
     ],
-    image: 'birthdays',
-    imageAlt: 'A candlelit dinner table set for an evening celebration',
+    image: 'actualFiftiethMilestoneBalloonBackdrop',
+    imageAlt:
+      'Black, gold, and silver balloons frame a round black backdrop with gold number 50 balloons',
+    imageFit: 'contain',
   },
   {
     slug: 'kids-parties',
     title: 'Kids’ Parties',
     gatewayTitle: 'Kids’ Parties',
-    gatewayBody: 'Playful ideas grounded in timing, guest comfort, and a plan adults can follow.',
+    gatewayBody:
+      'High imagination, low chaos—the theme, timing, and grown-up logistics in one plan.',
     metaTitle: 'Kids’ Party Planning and Design in Orange County',
     metaDescription:
       'Orange County children’s party planning that brings the theme, vendors, guest flow, and details on the event day into one organized plan.',
     serviceType: 'Kids’ party planning and design',
     h1: 'Kids’ Party Planning and Design',
     summary:
-      'We turn the theme, activities, food, vendors, and guest flow into one plan suited to the age group. The party can feel imaginative without leaving you to coordinate every delivery, transition, and cleanup handoff.',
+      'We make the party feel magical for them and manageable for you, connecting the theme, activities, food, vendors, and timing around the age group in the room.',
     whoFor:
-      'For parents and families planning first birthdays, children’s birthdays, and playful milestone events with a considered design and manageable flow.',
+      'For parents and families who want a first birthday or kids’ celebration with big personality, smart pacing, and a plan adults can actually follow.',
     capabilities: [
       {
-        title: 'Theme with a real plan',
-        body: 'Translate the child’s interests into a visual direction without letting decorations overwhelm the event experience.',
+        title: 'A theme with taste',
+        body: 'Turn the child’s current obsession into a visual direction that feels playful, intentional, and never overdone.',
       },
       {
-        title: 'Timing suited to the age group',
-        body: 'Sequence food, activities, entertainment, cake, and transitions around the age range and event window.',
+        title: 'Pacing built for the age group',
+        body: 'Sequence food, activities, entertainment, and cake around attention spans, energy, and the event window.',
       },
       {
-        title: 'Vendor coordination',
-        body: 'Coordinate approved entertainment, rentals, catering, decor, and venue professionals within the selected scope.',
+        title: 'A team adults can follow',
+        body: 'Coordinate entertainment, rentals, catering, decor, and the venue around one arrival and activity plan.',
       },
       {
-        title: 'Setup and guest flow',
-        body: 'Plan circulation, activity zones, adult seating, gifts, food, and the included setup responsibilities.',
+        title: 'Space for kids and grown-ups',
+        body: 'Plan activity zones, adult seating, food, gifts, circulation, and setup so the room works for everyone.',
       },
     ],
     considerations: [
       {
-        title: 'Safety roles stay explicit',
-        body: 'Planning and vendor coordination do not imply childcare, lifeguarding, medical supervision, or responsibility for children unless separately contracted and legally appropriate.',
+        title: 'Safety roles stay clear',
+        body: 'Parents, guardians, and qualified providers remain responsible for childcare, lifeguarding, and medical supervision.',
       },
       {
-        title: 'Entertainment transitions',
-        body: 'Performers, play areas, crafts, food, and cake work best when setup windows and attention spans inform the schedule.',
+        title: 'Keep the energy moving',
+        body: 'Performers, play areas, crafts, food, and cake work best when setup windows and attention spans shape the schedule.',
       },
       {
-        title: 'Weather and cleanup backup',
+        title: 'Have a beautiful Plan B',
         body: 'Outdoor play, food service, rentals, waste, and breakdown need a workable alternative when conditions change.',
       },
     ],
@@ -280,67 +285,68 @@ export const eventTypes: EventTypePage[] = [
       {
         question: 'Can you work with a theme my child already chose?',
         answer:
-          'Yes. A chosen theme can guide the approved design and vendor plan without forcing every detail into a branded template.',
+          'Of course. We use the chosen theme as creative direction, then give it enough restraint and structure to feel designed rather than templated.',
       },
       {
         question: 'Do you provide childcare or supervise children?',
         answer:
-          'No childcare or safety supervision service is claimed. Those responsibilities must remain with the appropriate adults or separately contracted qualified providers.',
+          'No. Childcare and safety supervision remain with parents, guardians, and separately contracted qualified providers.',
       },
       {
         question: 'Can you coordinate entertainment and rentals?',
         answer:
-          'Those vendors may be sourced or coordinated when included in the selected planning scope.',
+          'Yes, when sourcing or coordination is included in your proposal. We align their space, arrival, power, timing, and handoffs with the rest of the party.',
       },
     ],
-    image: 'kidsParties',
-    imageAlt: 'Gold birthday balloon and colorful party details',
+    image: 'actualFirstBirthdayBalloonBackdrop',
+    imageAlt:
+      'Red, white, and yellow balloons frame a white backdrop with a gold number-one balloon',
+    imageFit: 'contain',
   },
   {
     slug: 'corporate-brand-events',
     title: 'Corporate and Brand Events',
     gatewayTitle: 'Corporate and Brand Events',
-    gatewayBody:
-      'Guest experience, brand standards, vendors, and run of show brought into one production plan.',
+    gatewayBody: 'On-brand, on-message, and on cue—from the first arrival to the final frame.',
     metaTitle: 'Corporate Event Planner in Orange County',
     metaDescription:
       'Work with an Orange County corporate event planner to align the audience, objectives, brand direction, vendors, production details, and run of show.',
     serviceType: 'Corporate and brand event planning',
     h1: 'Corporate Event Planner in Orange County',
     summary:
-      'We align the objective, audience, brand direction, vendors, production dependencies, and run of show from internal approvals through the guest experience.',
+      'We translate the business objective into an experience people want to be part of, then align the brand, stakeholders, vendors, and production plan behind it.',
     whoFor:
-      'For office managers, founders, marketing teams, and organizational leads planning company gatherings, client events, launches, dinners, or brand experiences.',
+      'For founders, marketing teams, office leaders, and organizations planning a launch, client event, company gathering, dinner, or branded experience.',
     capabilities: [
       {
-        title: 'Objective and audience alignment',
-        body: 'Start with what the gathering needs to accomplish and how guests should move through the experience.',
+        title: 'Start with the outcome',
+        body: 'Define what the gathering needs to accomplish and what guests should think, feel, or do when they leave.',
       },
       {
-        title: 'Stakeholder and approval structure',
-        body: 'Clarify decision owners, review points, brand requirements, budget responsibilities, and the final escalation path.',
+        title: 'Keep approvals moving',
+        body: 'Clarify decision owners, review moments, brand requirements, budget responsibilities, and the final escalation path.',
       },
       {
-        title: 'Production and vendor coordination',
-        body: 'Organize approved venue, catering, rentals, audiovisual, entertainment, signage, and other professionals.',
+        title: 'One production plan',
+        body: 'Align the venue, catering, rentals, audiovisual, entertainment, signage, and every scheduled partner.',
       },
       {
-        title: 'Run of show',
-        body: 'Build the schedule around arrivals, program moments, speakers, service, transitions, and production dependencies.',
+        title: 'A run of show that runs',
+        body: 'Build the schedule around arrivals, speakers, service, transitions, and the technical dependencies behind every cue.',
       },
     ],
     considerations: [
       {
-        title: 'Brand standards need an owner',
-        body: 'Logos, colors, signage, presentations, sponsor requirements, and approvals should have one current source and decision path.',
+        title: 'Protect the brand in the room',
+        body: 'Logos, color, signage, presentations, sponsor requirements, and approvals need one current source and decision path.',
       },
       {
-        title: 'Accessibility is a production input',
-        body: 'Venue access, seating, sound, visual content, dietary needs, and program formats should be considered before the final run of show.',
+        title: 'Design for the whole audience',
+        body: 'Venue access, seating, sound, visual content, dietary needs, and program formats belong in the production plan—not at the end of it.',
       },
       {
-        title: 'Every cue has a dependency',
-        body: 'Speakers, audiovisual teams, catering, lighting, photography, and venue operations need aligned timing and contingencies.',
+        title: 'Every cue has a consequence',
+        body: 'Speakers, audiovisual, catering, lighting, photography, and venue operations need aligned timing and a smart contingency.',
       },
     ],
     faqs: [
@@ -348,17 +354,17 @@ export const eventTypes: EventTypePage[] = [
       {
         question: 'Can you work with our internal marketing or operations team?',
         answer:
-          'Yes. The planning structure can include defined client stakeholders, approvals, and communication handoffs.',
+          'Yes. We create a clear working rhythm for stakeholders, approvals, creative reviews, and communication handoffs.',
       },
       {
         question: 'Do you manage audiovisual production?',
         answer:
-          'Audiovisual sourcing or coordination may be included, but technical production scope and vendor responsibility must be defined in the proposal.',
+          'Audiovisual sourcing or coordination can be included. Your proposal defines the technical partner, production responsibilities, equipment, rehearsals, and show-day coverage.',
       },
       {
         question: 'Can you follow existing brand standards?',
         answer:
-          'Approved brand standards can guide the visual and production plan when the client supplies current assets and names someone authorized to make decisions.',
+          'Absolutely. Give us the current assets, brand standards, and an empowered decision-maker; we will carry that system through the room and production plan.',
       },
     ],
     image: 'corporate',

@@ -29,67 +29,67 @@ export const services: ServicePage[] = [
     shortTitle: 'Planning From Start to Finish',
     metaTitle: 'Event Planning and Design From Start to Finish in Orange County',
     metaDescription:
-      'A dedicated planner can guide the roadmap, design direction, vendor coordination, logistics, and approved work on the event day in Orange County.',
+      'Orange County event planning and design that connects the roadmap, creative direction, vendors, logistics, and event-day flow from the first decisions forward.',
     h1: 'Planning From Start to Finish',
     summary:
-      'We can manage the roadmap, design, vendors, logistics, and included work on the event day from the first decisions forward. Your proposal confirms the exact scope, responsibilities, and availability.',
+      'For hosts who want the entire event to speak the same language. We connect the roadmap, design, vendors, logistics, and event-day flow from the first decisions forward.',
     forWhom: [
-      'Hosts who want a planner to organize decisions from an early stage.',
-      'Clients who value cohesive design and coordinated vendors.',
-      'Busy hosts who do not want to personally own every deadline, handoff, and detail on the event day.',
+      'You want an expert to shape the plan before the big decisions harden.',
+      'A cohesive visual direction matters as much as sharp execution.',
+      'You want one accountable planner across deadlines, vendors, handoffs, and event-day flow.',
     ],
     capabilities: [
       {
-        title: 'Planning roadmap',
-        body: 'A clear sequence for decisions, deadlines, approvals, and responsibilities included in the engagement.',
+        title: 'A roadmap with momentum',
+        body: 'Sequence decisions, deadlines, approvals, and responsibilities so every next move is clear.',
       },
       {
-        title: 'Creative direction',
-        body: 'A shared visual direction that can guide layout, rentals, florals, tabletop, signage, and related choices.',
+        title: 'A recognizable point of view',
+        body: 'Give layout, rentals, florals, tabletop, signage, and the guest experience one visual language.',
       },
       {
-        title: 'Vendor coordination',
-        body: 'Recommendations when included, plus organized communication with trusted professionals or vendors already selected.',
+        title: 'The right team, working as one',
+        body: 'Source the missing specialists or bring your chosen vendors into one communication and production plan.',
       },
       {
-        title: 'Logistics and event flow',
-        body: 'An approved timeline, arrival plan, production dependencies, and transitions for the guest experience.',
+        title: 'A room that runs beautifully',
+        body: 'Connect arrivals, production dependencies, service, transitions, and the moments guests actually experience.',
       },
     ],
     considerations: [
       {
-        title: 'Scope before assumptions',
-        body: 'Planning from start to finish means different things across planning companies. The proposal should state the meetings, sourcing, design work, purchasing, production, staffing, and hours on the event day that are included.',
+        title: 'Clarity before the work begins',
+        body: 'Your proposal defines meetings, sourcing, design, purchasing, production, staffing, and event-day coverage in plain language.',
       },
       {
-        title: 'Decision ownership',
-        body: 'The strongest engagements identify what the client approves, what the planner manages, and how vendor contracts and payments are handled.',
+        title: 'Fast decisions need clear owners',
+        body: 'We identify what you approve, what your planner manages, and how vendor contracts and payments move.',
       },
       {
-        title: 'Budget structure',
-        body: 'A working budget is most useful when it connects priorities to real decisions. No savings, discount, or fixed investment claim is made without verified package data.',
+        title: 'Let the budget express the priorities',
+        body: 'A useful working budget turns what matters most into a sequence of informed creative and production decisions.',
       },
     ],
     faqs: [
       {
         question: 'What does an event planner handle from start to finish?',
         answer:
-          'We may guide the roadmap, design, vendors, logistics, and work on the event day. The signed proposal is the authority for exactly what is included.',
+          'The engagement can cover the roadmap, design, vendors, logistics, and event-day management. Your proposal defines the exact deliverables and coverage before you book.',
       },
       {
         question: 'Will you work with vendors we already booked?',
         answer:
-          'Yes. We can coordinate your existing professionals into the approved plan and timeline according to the selected scope.',
+          'Absolutely. We bring your existing professionals into the same creative direction, communication flow, and event timeline.',
       },
       {
         question: 'Does planning from start to finish include design and decor?',
         answer:
-          'It may include design direction, decor planning, rentals, layouts, and related coordination. Those responsibilities must be listed in the proposal before booking.',
+          'Design direction, decor planning, rentals, layouts, and related coordination can be included. The proposal makes each creative deliverable and installation responsibility clear.',
       },
       {
         question: 'Is management on the event day included?',
         answer:
-          'Only when stated in the selected service. The proposal should define staffing, hours, setup responsibilities, and handoffs on the event day.',
+          'Event-day management is included when it appears in your proposal, along with team size, hours, setup responsibilities, and handoffs.',
       },
     ],
     image: 'planningDetail',
@@ -102,67 +102,67 @@ export const services: ServicePage[] = [
     shortTitle: 'Partial Planning',
     metaTitle: 'Partial Event Planning in Orange County',
     metaDescription:
-      'Support for hosts who have started planning and need help with selected decisions, vendors, design, or logistics. Final scope is confirmed before booking.',
+      'Partial event planning in Orange County for hosts who have started and want expert help with selected decisions, design, vendors, or logistics.',
     h1: 'Partial Planning for What Comes Next',
     summary:
-      'For hosts who have made progress and want a planner to own selected decisions, design work, vendor coordination, or logistics. Availability and inclusions must be confirmed before this becomes an active package.',
+      'You have momentum. We bring the perspective, structure, and accountability to make the remaining decisions feel intentional instead of inherited.',
     forWhom: [
-      'Hosts who have chosen a venue or key vendors but need structure for what comes next.',
-      'Clients who want professional help with specific planning or design workstreams.',
-      'Events where the remaining responsibilities need to be clearly divided between host and planner.',
+      'You have a venue or key vendors and need a smarter plan for what comes next.',
+      'Specific creative or planning workstreams need an experienced owner.',
+      'The remaining responsibilities need a clean divide between host, planner, and vendors.',
     ],
     capabilities: [
       {
-        title: 'Planning audit',
-        body: 'Review what is decided, contracted, outstanding, and at risk before setting the next priorities.',
+        title: 'A sharp reset',
+        body: 'See what is decided, contracted, outstanding, and at risk before setting the next priorities.',
       },
       {
-        title: 'Selected vendor support',
-        body: 'Coordinate defined vendor categories or communication handoffs without implying that every vendor is sourced.',
+        title: 'Focused vendor support',
+        body: 'Take ownership of the vendor categories and communication handoffs that need it most.',
       },
       {
-        title: 'Design refinement',
-        body: 'Bring selected visual decisions into a more cohesive direction when design support is part of the scope.',
+        title: 'A stronger creative through-line',
+        body: 'Bring existing inspiration, rentals, decor, and visual decisions into a more cohesive direction.',
       },
       {
-        title: 'Logistics structure',
-        body: 'Organize the timeline, layouts, arrivals, and dependencies included in the engagement.',
+        title: 'Structure for the final stretch',
+        body: 'Organize timelines, layouts, arrivals, and dependencies before the event starts moving fast.',
       },
     ],
     considerations: [
       {
-        title: 'Start with an honest status review',
-        body: 'The planner needs contracts, deadlines, budgets, and existing decisions before accepting responsibility for a plan that is already in progress.',
+        title: 'Start with the full picture',
+        body: 'Contracts, deadlines, budgets, and existing decisions show us where the plan is strong and where it needs attention.',
       },
       {
-        title: 'Define the handoff',
-        body: 'A partial scope should make clear which decisions remain with the client and which workstreams move to the planner.',
+        title: 'Make the handoff clean',
+        body: 'We define which decisions stay with you and which workstreams move to your planner.',
       },
       {
-        title: 'Protect the critical path',
-        body: 'Venue requirements, vendor dependencies, rental deadlines, and guest communications may constrain what can still change.',
+        title: 'Protect what cannot slip',
+        body: 'Venue requirements, vendor dependencies, rental deadlines, and guest communication set the critical path.',
       },
     ],
     faqs: [
       {
         question: 'When is partial planning a good fit?',
         answer:
-          'It can fit when meaningful planning is already complete but selected workstreams still need structure or professional guidance.',
+          'It is a strong fit when meaningful planning is complete but the remaining creative or operational work needs an expert owner.',
       },
       {
         question: 'Can you review vendors we already hired?',
         answer:
-          'We can review and coordinate existing vendor information when that work is included. Planning support does not replace the client’s legal review of contracts.',
+          'Yes, when vendor review or coordination is part of your proposal. You remain responsible for legal review of the contracts you sign.',
       },
       {
         question: 'Can partial planning include design help?',
         answer:
-          'It may. The proposal should identify the design decisions, deliverables, sourcing, and installation responsibilities included.',
+          'Yes. Your proposal can define the creative decisions, design deliverables, sourcing, and installation responsibilities you want us to own.',
       },
       {
         question: 'How is this different from coordination?',
         answer:
-          'Partial planning can shape remaining decisions before the final coordination period. Coordination generally organizes an approved plan closer to the event.',
+          'Partial planning still shapes open decisions. Coordination takes an established plan, aligns the final details, and carries it into the event-day flow.',
       },
     ],
     image: 'venue',
@@ -175,45 +175,45 @@ export const services: ServicePage[] = [
     shortTitle: 'Event Management',
     metaTitle: 'Event Management and Coordination in Orange County',
     metaDescription:
-      'For hosts who planned the event and need help aligning approved details, vendors, timelines, and the flow on the event day. Scope varies by selected service.',
+      'Orange County event management and coordination that aligns established plans, vendors, timelines, and the event-day flow.',
     h1: 'Event Management and Coordination',
     summary:
-      'We organize the approved plan, vendor details, timeline, and included flow on the event day. Coordination does not automatically include earlier planning, design, unlimited setup, or responsibility for decisions made before the handoff.',
+      'You built the event. We turn the established plan into one current timeline, align the vendors, and keep the day moving with calm authority.',
     forWhom: [
-      'Hosts who have made the major planning and vendor decisions.',
-      'Clients who need one timeline and communication point as the event approaches.',
-      'Events with a defined plan that needs a careful operational handoff.',
+      'The major creative, venue, and vendor decisions are already made.',
+      'You need one current timeline and communication point as the date approaches.',
+      'The plan is established and ready for a disciplined operational handoff.',
     ],
     capabilities: [
       {
-        title: 'Plan handoff',
-        body: 'Gather the approved contracts, contacts, decisions, floor plans, and schedules included in the engagement.',
+        title: 'A disciplined handoff',
+        body: 'Bring contracts, contacts, decisions, floor plans, and schedules into one working source of truth.',
       },
       {
-        title: 'Vendor confirmations',
-        body: 'Confirm defined arrival details and dependencies without silently assuming responsibilities outside the scope.',
+        title: 'Every arrival accounted for',
+        body: 'Confirm vendor arrivals, access details, dependencies, and the handoffs that keep setup moving.',
       },
       {
-        title: 'Working timeline',
-        body: 'Bring the event sequence, production moments, and vendor movements into one usable run of show.',
+        title: 'A timeline people can use',
+        body: 'Bring the event sequence, production moments, and vendor movements into one clear run of show.',
       },
       {
-        title: 'Flow included on the event day',
-        body: 'Manage the stated hours, transitions, and escalation path with every approved vendor.',
+        title: 'Calm control on event day',
+        body: 'Manage the confirmed hours, transitions, vendor flow, and escalation path when event-day coverage is included.',
       },
     ],
     considerations: [
       {
-        title: 'A coordinated plan must already exist',
-        body: 'Coordination that begins late cannot safely replace unresolved decisions about the venue, design, vendors, budget, or guest experience.',
+        title: 'Coordination starts with a plan',
+        body: 'Open decisions about the venue, design, vendors, budget, or guest experience need to be settled before the handoff.',
       },
       {
-        title: 'Setup and breakdown need owners',
-        body: 'Every rental, decor, personal item, and vendor delivery should have a named setup and removal responsibility.',
+        title: 'Setup and strike need names',
+        body: 'Every rental, decor piece, personal item, and delivery needs a named arrival, installation, and removal owner.',
       },
       {
-        title: 'Authority prevents confusion',
-        body: 'The planner, client, venue, and vendors should understand who can approve timeline changes and resolve conflicts on the event day.',
+        title: 'Clear authority keeps the room calm',
+        body: 'The planner, client, venue, and vendors need to know who can approve changes and resolve conflicts in the moment.',
       },
     ],
     faqs: [
@@ -225,17 +225,17 @@ export const services: ServicePage[] = [
       {
         question: 'When does the coordination handoff begin?',
         answer:
-          'Timing must be confirmed in the package. No handoff window is published until the owner verifies the service terms.',
+          'Your proposal confirms the handoff window and exactly what we need from you, the venue, and each vendor before it begins.',
       },
       {
         question: 'Will you contact every vendor?',
         answer:
-          'Defined vendor confirmations may be included. The proposal should identify the communication scope and any vendors the client continues to manage.',
+          'Your proposal identifies the vendors we confirm and coordinate, along with any relationships you continue to manage directly.',
       },
       {
         question: 'Does coordination include decorating?',
         answer:
-          'Not automatically. Setup, styling, personal decor, rentals, and breakdown should be separately defined in the selected service.',
+          'Setup, styling, personal decor, rentals, and breakdown are included only when listed in your proposal, with clear installation and removal owners.',
       },
     ],
     image: 'network',

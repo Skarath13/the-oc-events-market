@@ -18,7 +18,7 @@ export const GET: APIRoute = ({ site }) => {
     '',
     `> ${siteConfig.fullDefinition}`,
     '',
-    'The public contact method is text message. Exact service scope, availability, inclusions, staffing, and event-day hours are confirmed in the selected service or proposal.',
+    'The public contact method is text message. Each proposal confirms availability, deliverables, staffing, responsibilities, and event-day coverage before booking.',
     '',
     '## Planning and Business',
     '',
@@ -32,13 +32,13 @@ export const GET: APIRoute = ({ site }) => {
       origin,
       'Services',
       '/services/',
-      'Planning, design, vendor coordination, logistics, and event-day workstreams, with scope limitations stated clearly.',
+      'Planning, design, vendor coordination, logistics, and event-day support shaped around the event and its starting point.',
     ),
     formatLink(
       origin,
       'About',
       '/about/',
-      'The planning approach and the role of a dedicated planner for Orange County events.',
+      'Meet Ivone and discover the thoughtful, hands-on approach behind The OC Events Market.',
     ),
     formatLink(
       origin,
@@ -57,7 +57,7 @@ export const GET: APIRoute = ({ site }) => {
       origin,
       'Vendor Coordination',
       '/trusted-creative-network/',
-      'How existing vendors and recommended professionals can be coordinated within the selected planning scope.',
+      'How existing vendors and recommended professionals work from one creative direction and current timeline.',
     ),
     formatLink(
       origin,
@@ -72,7 +72,7 @@ export const GET: APIRoute = ({ site }) => {
       origin,
       'Celebrations',
       '/celebrations/',
-      'An overview of supported celebration types; client stories are withheld until facts and photography are approved.',
+      'An overview of the weddings, showers, birthdays, kids’ parties, and corporate or brand events the studio plans.',
     ),
     formatLink(
       origin,

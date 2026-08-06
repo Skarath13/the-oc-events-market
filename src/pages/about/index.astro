@@ -1,5 +1,4 @@
 ---
-import { Image } from 'astro:assets';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PageHero from '@/components/global/PageHero.astro';
 import FinalCta from '@/components/global/FinalCta.astro';
@@ -14,45 +13,45 @@ const breadcrumbs = [
 ---
 
 <BaseLayout
-  title="About The OC Events Market"
-  description="Meet the dedicated planner behind The OC Events Market, connecting the vision, vendors, logistics, and event day for Orange County celebrations."
+  title="About Ivone and The OC Events Market"
+  description="Meet Ivone and discover the thoughtful, hands-on approach behind The OC Events Market."
   jsonLd={[breadcrumbSchema(origin, breadcrumbs)]}
 >
   <PageHero
-    title="One Planner for the Whole Event"
-    summary="The OC Events Market is an Orange County planning and design practice led by a dedicated planner who keeps the vision, decisions, vendors, and logistics connected."
+    title="Meet Ivone. Close to Every Detail."
+    summary="At The OC Events Market, creative choices, vendor handoffs, and event-day logistics belong to one connected plan—so the celebration can feel beautifully effortless."
     image={media.heroDesktop}
     imageAlt="Layered outdoor event table with florals, linens, and glassware"
   />
 
   <section class="section-shell profile-panel">
     <div class="profile-panel__media">
-      <Image
-        src={media.planningDetail}
-        alt="Event table detail with flowers, candles, and glassware"
-        widths={[560, 840, 1120]}
-        sizes="(max-width: 767px) 100vw, 42vw"
+      <img
+        src="/videos/actual/actual-ivone-event-details-v1-poster.webp"
+        alt="Ivone arranging a sweets display before an outdoor event"
+        width="576"
+        height="768"
         loading="lazy"
-        quality={76}
+        decoding="async"
       />
     </div>
     <div class="profile-panel__copy">
-      <p class="eyebrow">Planning and design</p>
-      <h2>Creative direction meets operational clarity.</h2>
+      <p class="eyebrow">A hands-on point of view</p>
+      <h2>Good taste is only the beginning.</h2>
       <p>
-        A celebration can look cohesive only when the choices behind it connect: the room, guest
-        flow, food, rentals, florals, entertainment, lighting, schedule, and vendor handoffs.
+        A beautiful event starts with a point of view. A great one also knows exactly when the
+        rentals arrive, where guests naturally gather, and who owns every handoff behind the scenes.
       </p>
       <p>
-        We shape those connected decisions and coordinate every approved professional around one
-        plan. You can use trusted recommendations or bring people you already know.
+        The OC Events Market brings those worlds together: the room, the rhythm, the food, the
+        florals, the entertainment, and the people making it happen. Bring vendors you trust or ask
+        for recommendations that fit the plan.
       </p>
       <aside class="profile-panel__note">
-        <h3>A direct planning relationship</h3>
+        <h3>One direction, from idea to event day.</h3>
         <p>
-          Your planner stays close to the vision and decisions while every approved contributor
-          works from the same direction. A fuller biography and portrait will be added when those
-          details and photography are verified and ready to share.
+          Creative decisions, vendor communication, and the current timeline stay connected, so the
+          people bringing the event to life are working from the same direction.
         </p>
       </aside>
     </div>

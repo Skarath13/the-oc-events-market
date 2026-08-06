@@ -30,26 +30,27 @@ The derivatives are silent, resized, web-optimized background media. They are ed
 imagery and must not be represented as The OC Events Market portfolio work, staff, clients, venue,
 or event documentation.
 
-## Owner-provided event-detail media
+## Owner-supplied event media
 
-Provided August 3, 2026 for use on this website. The selected files are presented as real event
-details, not as complete portfolio case studies and not as proof that The OC Events Market made a
-product, owns equipment, or has a standing partnership with a depicted vendor.
+Source filenames are dated August 1 and August 3, 2026; the files were supplied for this website on
+August 6, 2026. The site places selected owner-supplied event details alongside visually relevant
+celebration categories. Those placements do not establish the depicted event’s client, venue,
+vendor, category, or The OC Events Market’s exact scope of work.
 
 ### Published still derivatives
 
 - `src/assets/images/actual/dessert-favor-collection.webp`
   - Source: `WhatsApp Image 2026-08-01 at 4.50.42 PM.jpeg`
-  - Use: homepage actual-details module
+  - Use: wedding planning card and wedding page hero
 - `src/assets/images/actual/duck-cake-pops.webp`
   - Source: `WhatsApp Image 2026-08-01 at 7.23.58 PM.jpeg`
-  - Use: shower event card and hero
+  - Use: shower planning card, shower page hero, and dessert-video poster
 - `src/assets/images/actual/first-birthday-balloon-backdrop.webp`
   - Source: `WhatsApp Image 2026-08-03 at 11.20.07 AM.jpeg`
-  - Use: homepage portrait actual-details card
+  - Use: kids’ party planning card and kids’ party page hero
 - `src/assets/images/actual/fiftieth-milestone-balloon-backdrop.webp`
   - Source: owner-provided `Pasted Image 1.jpg`, supplied August 6, 2026
-  - Use: homepage portrait actual-details card
+  - Use: birthday and milestone planning card and page hero
 
 The WebP derivatives are resized only when needed, stripped of source metadata, and served through
 Astro’s responsive image pipeline.
@@ -58,22 +59,26 @@ Astro’s responsive image pipeline.
 
 - Source: `WhatsApp Video 2026-08-01 at 4.27.45 PM.mp4`
   - The featured person was confirmed by the project owner as Ivone.
+  - Use: homepage hands-on setup motion card
   - Local derivatives:
     - `public/videos/actual/actual-ivone-event-details-v1.mp4`
     - `public/videos/actual/actual-ivone-event-details-v1-poster.webp`
 - Source: `WhatsApp Video 2026-08-01 at 4.38.31 PM.mp4`
+  - Use: homepage shower-detail motion card
   - Local derivatives:
     - `public/videos/actual/actual-dessert-finishing-v1.mp4`
     - `public/videos/actual/actual-dessert-finishing-v1-poster.webp`
 
 The published clips are 24 fps, silent H.264 loops with fast-start metadata. Ivone's portrait clip
 is 576 by 768 pixels and the dessert close-up is 576 by 480 pixels. Both are lazy-loaded near the
-viewport and fall back to their posters for reduced motion, Save-Data, playback failure, or
-unsupported media.
+viewport. Ivone’s clip uses its optimized WebP poster. The dessert clip uses a generated AVIF
+derivative of the duck-cake-pop still as its poster. Both retain a poster surface for reduced
+motion, Save-Data, playback failure, or unsupported media.
 
-The project owner directed that the supplied media be treated as actual event content. Independent
-confirmation of photographer rights, client or venue permission, vendor-credit requirements, and
-decor or product-provider attribution remains a release gate. Ivone's identity has been confirmed,
-but the repository does not yet publish an owner role, title, or biography. Other media with
-recognizable attendees, client/event names, separate business branding, or visible AI-edit/export
-marks was not published.
+The project owner directed that the supplied media be published as event work. Photographer rights,
+client or venue permission, vendor-credit requirements, and decor or product-provider attribution
+must remain documented outside the repository. Ivone's identity in the supplied clip and poster is
+confirmed, and the About page uses that portrait and name. No role, title, ownership, or biography
+is inferred from the identity confirmation. Other supplied media with recognizable attendees,
+client or event names, separate business branding, or visible AI-edit/export marks was not
+published.
