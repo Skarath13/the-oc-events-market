@@ -100,6 +100,56 @@ test.describe('actual event media playback', () => {
       .poll(() => video.evaluate((element: HTMLVideoElement) => element.paused))
       .toBe(false);
   });
+
+  test('plays Ivone motion on About instead of freezing on the poster', async ({
+    page,
+  }, testInfo) => {
+    test.skip(testInfo.project.name !== 'chromium-desktop', 'One canonical About playback check');
+
+    await page.goto('/about/', { waitUntil: 'domcontentloaded' });
+    const root = page.locator('[data-actual-video="ivone-about"]');
+    const video = root.locator('[data-actual-video-element]');
+    await root.scrollIntoViewIfNeeded();
+    await expect(root).toHaveAttribute('data-video-state', 'playing', { timeout: 15_000 });
+    await expect(root).toHaveAttribute(
+      'aria-label',
+      'Pause motion: Ivone arranging an outdoor sweets display',
+    );
+
+    const playback = await video.evaluate((element: HTMLVideoElement) => ({
+      currentSrc: element.currentSrc,
+      muted: element.muted,
+      paused: element.paused,
+      videoWidth: element.videoWidth,
+      videoHeight: element.videoHeight,
+    }));
+    expect(playback.currentSrc).toContain(actualVideos.ivone.path);
+    expect(playback.muted).toBe(true);
+    expect(playback.paused).toBe(false);
+    expect(playback.videoWidth).toBe(actualVideos.ivone.width);
+    expect(playback.videoHeight).toBe(actualVideos.ivone.height);
+  });
+
+  test('plays the actual corporate card motion on every gallery route', async ({
+    page,
+  }, testInfo) => {
+    test.skip(
+      testInfo.project.name !== 'chromium-desktop',
+      'One canonical cross-route corporate playback check',
+    );
+
+    for (const route of ['/celebrations/', '/services/']) {
+      await page.goto(route, { waitUntil: 'domcontentloaded' });
+      const root = page.locator('[data-actual-video="ivone"]');
+      await root.scrollIntoViewIfNeeded();
+      await expect(root).toHaveAttribute('data-video-state', 'playing', { timeout: 15_000 });
+      expect(
+        await root
+          .locator('[data-actual-video-element]')
+          .evaluate((element: HTMLVideoElement) => element.currentSrc),
+      ).toContain(actualVideos.ivone.path);
+    }
+  });
 });
 
 test('celebration media fills the mobile bento grid and editorial desktop grid', async ({

@@ -92,8 +92,8 @@ export const services: ServicePage[] = [
           'Event day management is included when it appears in your proposal, along with team size, hours, setup responsibilities, and handoffs.',
       },
     ],
-    image: 'planningDetail',
-    imageAlt: 'Flowers, candles, and glassware arranged on a warm dinner table',
+    image: 'actualDessertFavorCollection',
+    imageAlt: 'Packaged mini cakes and decorated cake pops presented in blush pink favor boxes',
     verified: false,
   },
   {
@@ -165,8 +165,9 @@ export const services: ServicePage[] = [
           'Partial planning still shapes open decisions. Coordination takes an established plan, aligns the final details, and carries it into the event day flow.',
       },
     ],
-    image: 'venue',
-    imageAlt: 'Outdoor event tables arranged among greenery',
+    image: 'actualFiftiethMilestoneBalloonBackdrop',
+    imageAlt:
+      'Black, gold, and silver balloons frame a round black backdrop with gold number 50 balloons',
     verified: false,
   },
   {
@@ -238,8 +239,9 @@ export const services: ServicePage[] = [
           'Setup, styling, personal decor, rentals, and breakdown are included only when listed in your proposal, with clear installation and removal owners.',
       },
     ],
-    image: 'network',
-    imageAlt: 'An intimate outdoor dining setup surrounded by greenery',
+    image: 'actualDuckCakePops',
+    imageAlt:
+      'Mint green cake pops topped with yellow ducks and pearl sprinkles sit in a clear stand',
     verified: false,
   },
 ];

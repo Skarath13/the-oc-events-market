@@ -96,6 +96,26 @@ test.describe('site contracts', () => {
         `${route} image alt`,
       ).toBe(true);
 
+      const retiredStockSources = await page
+        .locator('img, source, video')
+        .evaluateAll((elements) =>
+          elements
+            .flatMap((element) => [
+              element.getAttribute('src') ?? '',
+              element.getAttribute('srcset') ?? '',
+              element.getAttribute('poster') ?? '',
+              ...Object.values((element as HTMLElement).dataset).filter((value): value is string =>
+                Boolean(value),
+              ),
+            ])
+            .filter((source) =>
+              /(?:hero-desktop|hero-mobile|weddings|birthdays|kids-parties|corporate|planning-detail|network|venue|oc-events-hero|og-default)[._/-]/i.test(
+                source,
+              ),
+            ),
+        );
+      expect(retiredStockSources, `${route} retired stock media`).toEqual([]);
+
       const copyWithDashes = await page.evaluate(() => {
         const values = [
           document.title,
@@ -260,7 +280,7 @@ test.describe('navigation interactions', () => {
 
     await page.goto('/');
     const networkImage = page.getByAltText(
-      'Intimate outdoor dining area set among deep green plants',
+      'Mint green cake pops topped with yellow ducks and pearl sprinkles in a clear stand',
     );
     await expect(networkImage).toHaveAttribute('srcset', / 400w(?:,|$)/);
     await expect(networkImage).toHaveAttribute('srcset', / 660w(?:,|$)/);

@@ -369,8 +369,9 @@ export const eventTypes: EventTypePage[] = [
           'Absolutely. Give us the current assets, brand standards, and someone empowered to make decisions. We will carry that system through the room and production plan.',
       },
     ],
-    image: 'corporate',
-    imageAlt: 'Formal event space arranged with round tables and warm lighting',
+    image: 'actualDessertFavorCollection',
+    imageAlt: 'Packaged mini cakes and decorated cake pops presented in blush pink favor boxes',
+    imageFit: 'contain',
   },
 ];
 

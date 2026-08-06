@@ -13,6 +13,7 @@ const viewports = [
 ];
 
 test('required viewport screenshots and hero safety', async ({ page, browserName }, testInfo) => {
+  test.setTimeout(180_000);
   test.skip(
     browserName !== 'chromium' || testInfo.project.name !== 'chromium-desktop',
     'One canonical screenshot run',
@@ -68,6 +69,7 @@ test('required viewport screenshots and hero safety', async ({ page, browserName
   for (const route of [
     '/services/',
     '/events/weddings/',
+    '/events/corporate-brand-events/',
     '/celebrations/',
     '/about/',
     '/contact/',
@@ -86,7 +88,9 @@ test('required viewport screenshots and hero safety', async ({ page, browserName
 
   await page.setViewportSize({ width: 1440, height: 900 });
   for (const route of [
+    '/services/',
     '/events/birthdays-milestones/',
+    '/events/corporate-brand-events/',
     '/celebrations/',
     '/about/',
     '/contact/',

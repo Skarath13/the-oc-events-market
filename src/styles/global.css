@@ -1414,10 +1414,20 @@
     background: var(--color-charcoal);
   }
 
-  .profile-panel__media img {
+  .profile-panel__media img,
+  .profile-panel__media video {
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  .profile-panel__media--motion {
+    cursor: pointer;
+  }
+
+  .profile-panel__media--motion:focus-visible {
+    outline: 2px solid var(--color-deep-olive);
+    outline-offset: 4px;
   }
 
   .profile-panel__copy h2 {

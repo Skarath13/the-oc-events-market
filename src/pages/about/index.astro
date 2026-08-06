@@ -20,20 +20,36 @@ const breadcrumbs = [
   <PageHero
     title="Meet Ivone. Close to Every Detail."
     summary="At The OC Events Market, creative choices, vendor handoffs, and event day logistics belong to one connected plan. That lets the celebration feel beautifully effortless."
-    image={media.heroDesktop}
-    imageAlt="Layered outdoor event table with florals, linens, and glassware"
+    image={media.actualDessertFavorCollection}
+    imageAlt="Packaged mini cakes and decorated cake pops presented in blush pink favor boxes"
+    imageFit="contain"
   />
 
   <section class="section-shell profile-panel">
-    <div class="profile-panel__media">
-      <img
-        src="/videos/actual/actual-ivone-event-details-v1-poster.webp"
-        alt="Ivone arranging a sweets display before an outdoor event"
+    <div
+      class="profile-panel__media profile-panel__media--motion"
+      data-actual-video="ivone-about"
+      data-video-description="Ivone arranging an outdoor sweets display"
+      data-video-state="poster"
+      role="button"
+      tabindex="0"
+      aria-label="Play motion: Ivone arranging an outdoor sweets display"
+    >
+      <video
+        data-actual-video-element
+        data-src-mp4="/videos/actual/actual-ivone-event-details-v1.mp4"
+        poster="/videos/actual/actual-ivone-event-details-v1-poster.webp"
         width="576"
         height="768"
-        loading="lazy"
-        decoding="async"
-      />
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="none"
+        disablepictureinpicture
+        disableRemotePlayback
+        aria-hidden="true"
+        tabindex="-1"></video>
     </div>
     <div class="profile-panel__copy">
       <p class="eyebrow">An attentive point of view</p>
@@ -58,3 +74,9 @@ const breadcrumbs = [
   </section>
   <FinalCta />
 </BaseLayout>
+
+<script>
+  import { initActualMediaVideos } from '@/lib/actual-media-video';
+
+  initActualMediaVideos();
+</script>

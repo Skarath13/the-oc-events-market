@@ -48,7 +48,7 @@ export const siteConfig = {
   googleBusinessProfile: null as string | null,
   legalName: null as string | null,
   locale: 'en_US',
-  ogImage: '/social/og-default.jpg',
+  ogImage: '/videos/actual/actual-dessert-finishing-v1-poster.webp',
 } as const;
 
 const inquiryDraft = 'Hi! I’d like to inquire about planning an event with The OC Events Market.';

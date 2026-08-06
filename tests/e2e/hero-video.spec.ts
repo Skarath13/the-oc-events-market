@@ -1,6 +1,17 @@
 import { expect, test } from '@playwright/test';
 
-const desktopVideo = '/videos/hero/oc-events-hero-desktop-v1.mp4';
+const heroVideos = {
+  desktop: {
+    path: '/videos/actual/actual-dessert-finishing-v1.mp4',
+    width: 576,
+    height: 480,
+  },
+  mobile: {
+    path: '/videos/actual/actual-ivone-event-details-v1.mp4',
+    width: 576,
+    height: 768,
+  },
+} as const;
 
 test.describe('home hero video playback', () => {
   test.use({ contextOptions: { reducedMotion: 'no-preference' } });
@@ -21,6 +32,7 @@ test.describe('home hero video playback', () => {
     await expect(root).toHaveAttribute('data-video-state', 'playing', { timeout: 15_000 });
 
     const expectedVariant = (viewport?.width ?? 1440) <= 767 ? 'mobile' : 'desktop';
+    const expectedVideo = heroVideos[expectedVariant];
     await expect(root).toHaveAttribute('data-video-variant', expectedVariant);
     const playback = await video.evaluate((element: HTMLVideoElement) => ({
       currentSrc: element.currentSrc,
@@ -33,14 +45,14 @@ test.describe('home hero video playback', () => {
       videoWidth: element.videoWidth,
     }));
 
-    expect(playback.currentSrc).toContain(`oc-events-hero-${expectedVariant}-v1.`);
+    expect(playback.currentSrc).toContain(expectedVideo.path);
     expect(playback.currentTime).toBeGreaterThanOrEqual(0);
     expect(playback.muted).toBe(true);
     expect(playback.paused).toBe(false);
     expect(playback.playsInline).toBe(true);
     expect(playback.readyState).toBeGreaterThanOrEqual(2);
-    expect(playback.videoWidth).toBeGreaterThan(0);
-    expect(playback.videoHeight).toBeGreaterThan(0);
+    expect(playback.videoWidth).toBe(expectedVideo.width);
+    expect(playback.videoHeight).toBe(expectedVideo.height);
   });
 
   test('pauses offscreen and resumes after returning to the hero', async ({
@@ -150,23 +162,23 @@ test.describe('autoplay rejection fallback', () => {
 test('hero media provides immutable byte-range delivery', async ({ request }, testInfo) => {
   test.skip(testInfo.project.name !== 'chromium-desktop', 'One canonical response assertion');
 
-  const full = await request.get(desktopVideo);
+  const full = await request.get(heroVideos.desktop.path);
   expect(full.status()).toBe(200);
   expect(full.headers()['content-type']).toContain('video/mp4');
   expect(full.headers()['cache-control']).toContain('immutable');
   expect(full.headers()['accept-ranges']).toBe('bytes');
 
-  const range = await request.get(desktopVideo, { headers: { Range: 'bytes=0-15' } });
+  const range = await request.get(heroVideos.desktop.path, { headers: { Range: 'bytes=0-15' } });
   expect(range.status()).toBe(206);
   expect(range.headers()['content-range']).toMatch(/^bytes 0-15\/\d+$/);
   expect((await range.body()).byteLength).toBe(16);
 
-  const suffix = await request.get(desktopVideo, { headers: { Range: 'bytes=-16' } });
+  const suffix = await request.get(heroVideos.desktop.path, { headers: { Range: 'bytes=-16' } });
   expect(suffix.status()).toBe(206);
   expect(suffix.headers()['content-range']).toMatch(/^bytes \d+-\d+\/\d+$/);
   expect((await suffix.body()).byteLength).toBe(16);
 
-  const invalid = await request.get(desktopVideo, {
+  const invalid = await request.get(heroVideos.desktop.path, {
     headers: { Range: 'bytes=999999999-' },
   });
   expect(invalid.status()).toBe(416);

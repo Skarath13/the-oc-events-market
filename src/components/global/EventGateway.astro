@@ -73,8 +73,8 @@ const presentations: Record<string, GatewayPresentation> = {
     ratio: 'portrait',
   },
   'corporate-brand-events': {
-    image: media.corporate,
-    alt: 'Formal event space arranged with round tables and warm lighting',
+    image: media.actualDessertFavorCollection,
+    alt: 'A four panel collage of packaged mini cakes and decorated cake pops in pink boxes',
     caption: 'A hands on moment before guests arrive.',
     label: 'Corporate and brand events',
     ratio: 'portrait',
@@ -171,7 +171,7 @@ const items = await Promise.all(
                 data-video-state={motion ? 'poster' : undefined}
                 role={motion ? 'button' : undefined}
                 tabindex={motion ? '0' : undefined}
-                aria-label={motion ? `Pause motion: ${motion.description}` : undefined}
+                aria-label={motion ? `Play motion: ${motion.description}` : undefined}
               >
                 {motion ? (
                   <video
@@ -228,132 +228,7 @@ const items = await Promise.all(
 </section>
 
 <script>
-  type NavigatorWithSaveData = Navigator & {
-    connection?: { saveData?: boolean };
-  };
+  import { initActualMediaVideos } from '@/lib/actual-media-video';
 
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const saveData = Boolean((navigator as NavigatorWithSaveData).connection?.saveData);
-
-  document.querySelectorAll<HTMLElement>('[data-actual-video]').forEach((root) => {
-    const video = root.querySelector<HTMLVideoElement>('[data-actual-video-element]');
-    if (!video) return;
-
-    let isVisible = false;
-    let userPaused = false;
-    const videoDescription = root.dataset.videoDescription ?? 'event detail';
-
-    const setState = (state: string) => {
-      root.dataset.videoState = state;
-    };
-
-    const setControlState = (paused: boolean) => {
-      root.setAttribute('aria-label', `${paused ? 'Play' : 'Pause'} motion: ${videoDescription}`);
-    };
-
-    const disableMotionControl = (state: 'reduced-motion' | 'save-data') => {
-      video.pause();
-      root.removeAttribute('role');
-      root.removeAttribute('aria-label');
-      root.removeAttribute('tabindex');
-      setState(state);
-    };
-
-    const disableUnavailableControl = () => {
-      video.pause();
-      root.removeAttribute('role');
-      root.removeAttribute('aria-label');
-      root.removeAttribute('tabindex');
-      setState('unsupported');
-    };
-
-    const loadVideo = () => {
-      if (video.getAttribute('src')) return true;
-      const source = video.dataset.srcMp4;
-      if (!source || !video.canPlayType('video/mp4')) return false;
-      video.src = source;
-      video.load();
-      return true;
-    };
-
-    const attemptPlayback = async () => {
-      if (reducedMotion.matches) {
-        disableMotionControl('reduced-motion');
-        return;
-      }
-      if (saveData) {
-        disableMotionControl('save-data');
-        return;
-      }
-      root.setAttribute('role', 'button');
-      root.setAttribute('tabindex', '0');
-      setControlState(video.paused);
-      if (!isVisible || document.hidden || userPaused) {
-        video.pause();
-        return;
-      }
-      if (!loadVideo()) {
-        disableUnavailableControl();
-        return;
-      }
-
-      video.defaultMuted = true;
-      video.muted = true;
-      video.playsInline = true;
-      setState('loading');
-      try {
-        await video.play();
-      } catch {
-        setState('poster');
-        setControlState(true);
-      }
-    };
-
-    const togglePlayback = () => {
-      if (video.paused) {
-        userPaused = false;
-        void attemptPlayback();
-        return;
-      }
-      userPaused = true;
-      video.pause();
-      setState('paused');
-      setControlState(true);
-    };
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        isVisible = Boolean(entry?.isIntersecting);
-        if (!isVisible) {
-          video.pause();
-          setState('paused');
-          setControlState(true);
-          return;
-        }
-        void attemptPlayback();
-      },
-      { rootMargin: '120px 0px', threshold: 0.2 },
-    );
-
-    video.addEventListener('playing', () => {
-      setState('playing');
-      setControlState(false);
-    });
-    video.addEventListener('error', () => {
-      setState('poster');
-      setControlState(true);
-    });
-    root.addEventListener('click', togglePlayback);
-    root.addEventListener('keydown', (event) => {
-      if (event.key !== 'Enter' && event.key !== ' ') return;
-      event.preventDefault();
-      togglePlayback();
-    });
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) video.pause();
-      else void attemptPlayback();
-    });
-    reducedMotion.addEventListener('change', () => void attemptPlayback());
-    observer.observe(root);
-  });
+  initActualMediaVideos();
 </script>

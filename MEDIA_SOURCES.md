@@ -1,8 +1,9 @@
 # Media sources and licenses
 
-## Homepage hero video
+## Retired stock hero video
 
-Retrieved July 30, 2026.
+Retrieved July 30, 2026. These files are retained for provenance but are no longer referenced by a
+public route or site metadata.
 
 ### Desktop
 
@@ -59,21 +60,21 @@ Astro’s responsive image pipeline.
 
 - Source: `WhatsApp Video 2026-08-01 at 4.27.45 PM.mp4`
   - The featured person was confirmed by the project owner as Ivone.
-  - Use: homepage hands-on setup motion card
+  - Use: mobile homepage hero, hands-on setup motion cards, and About profile motion
   - Local derivatives:
     - `public/videos/actual/actual-ivone-event-details-v1.mp4`
     - `public/videos/actual/actual-ivone-event-details-v1-poster.webp`
 - Source: `WhatsApp Video 2026-08-01 at 4.38.31 PM.mp4`
-  - Use: homepage shower-detail motion card
+  - Use: desktop homepage hero and shower-detail motion cards
   - Local derivatives:
     - `public/videos/actual/actual-dessert-finishing-v1.mp4`
     - `public/videos/actual/actual-dessert-finishing-v1-poster.webp`
 
 The published clips are 24 fps, silent H.264 loops with fast-start metadata. Ivone's portrait clip
 is 576 by 768 pixels and the dessert close-up is 576 by 480 pixels. Both are lazy-loaded near the
-viewport. Ivone’s clip uses its optimized WebP poster. The dessert clip uses a generated AVIF
-derivative of the duck-cake-pop still as its poster. Both retain a poster surface for reduced
-motion, Save-Data, playback failure, or unsupported media.
+viewport. Ivone’s clip uses its optimized WebP poster. The dessert gateway card uses a generated
+AVIF derivative of the duck-cake-pop still while the homepage hero uses the video’s WebP poster.
+Both retain a poster surface for reduced motion, Save-Data, playback failure, or unsupported media.
 
 The project owner directed that the supplied media be published as event work. Photographer rights,
 client or venue permission, vendor-credit requirements, and decor or product-provider attribution

@@ -11,14 +11,14 @@ import { organizationSchema, websiteSchema } from '@/lib/seo';
 
 const heroMedia = {
   desktop: {
-    mp4: '/videos/hero/oc-events-hero-desktop-v1.mp4',
-    webm: '/videos/hero/oc-events-hero-desktop-v1.webm',
-    poster: '/videos/hero/oc-events-hero-desktop-v1-poster.webp',
+    mp4: '/videos/actual/actual-dessert-finishing-v1.mp4',
+    webm: undefined,
+    poster: '/videos/actual/actual-dessert-finishing-v1-poster.webp',
   },
   mobile: {
-    mp4: '/videos/hero/oc-events-hero-mobile-v1.mp4',
-    webm: '/videos/hero/oc-events-hero-mobile-v1.webm',
-    poster: '/videos/hero/oc-events-hero-mobile-v1-poster.webp',
+    mp4: '/videos/actual/actual-ivone-event-details-v1.mp4',
+    webm: undefined,
+    poster: '/videos/actual/actual-ivone-event-details-v1-poster.webp',
   },
 } as const;
 const origin = Astro.site ?? new URL('https://the-oc-events-market.example');
@@ -92,9 +92,9 @@ const origin = Astro.site ?? new URL('https://the-oc-events-market.example');
         <img
           src={heroMedia.desktop.poster}
           sizes="50vw"
-          alt="Sunlit outdoor event table arranged with greenery, flowers, glassware, and woven place settings"
-          width={1440}
-          height={810}
+          alt="A close event detail moment from The OC Events Market"
+          width={576}
+          height={480}
           loading="eager"
           fetchpriority="high"
           decoding="sync"
@@ -150,8 +150,8 @@ const origin = Astro.site ?? new URL('https://the-oc-events-market.example');
     <article class="network-brief">
       <div class="network-brief__media">
         <Image
-          src={media.network}
-          alt="Intimate outdoor dining area set among deep green plants"
+          src={media.actualDuckCakePops}
+          alt="Mint green cake pops topped with yellow ducks and pearl sprinkles in a clear stand"
           widths={[400, 560, 660, 744, 840, 1120]}
           sizes="(max-width: 767px) calc(100vw - 2.5rem), 42vw"
           loading="lazy"
