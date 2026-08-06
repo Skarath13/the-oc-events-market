@@ -54,7 +54,6 @@ test.describe('site contracts', () => {
               '.detail-intro h2',
               '.detail-overview__fit h2',
               '.detail-overview__scope h2',
-              '.detail-method h2',
               '.detail-answers h2',
               '.related-strip h2',
               '.vendor-flex h2',
@@ -111,9 +110,71 @@ test.describe('site contracts', () => {
     expect(journal.status()).toBe(404);
   });
 
+  test('maps Search Console opportunity clusters to distinct landing pages', async ({ page }) => {
+    const targets = [
+      {
+        route: '/',
+        title: 'Orange County Event Planner and Designer | The OC Events Market',
+        h1: 'Orange County Event Planner for Every Celebration',
+      },
+      {
+        route: '/services/',
+        title: 'Event Planning Services in Orange County | The OC Events Market',
+        h1: 'Event Planning Services in Orange County',
+      },
+      {
+        route: '/events/weddings/',
+        title: 'Wedding Planner in Orange County | The OC Events Market',
+        h1: 'Wedding Planner in Orange County',
+        serviceType: 'Wedding planning and design',
+      },
+      {
+        route: '/events/birthdays-milestones/',
+        title: 'Party Planner in Orange County | The OC Events Market',
+        h1: 'Orange County Party Planner for Birthdays and Milestones',
+        serviceType: 'Birthday party and milestone event planning',
+      },
+      {
+        route: '/events/corporate-brand-events/',
+        title: 'Corporate Event Planner in Orange County | The OC Events Market',
+        h1: 'Corporate Event Planner in Orange County',
+        serviceType: 'Corporate and brand event planning',
+      },
+    ] as const;
+
+    for (const target of targets) {
+      await page.goto(target.route);
+      await expect(page).toHaveTitle(target.title);
+      await expect(page.getByRole('heading', { level: 1, name: target.h1 })).toBeVisible();
+
+      if ('serviceType' in target) {
+        const schemas = await page.locator('script[type="application/ld+json"]').allTextContents();
+        const service = schemas
+          .map((schema) => JSON.parse(schema))
+          .find((schema) =>
+            Array.isArray(schema['@type'])
+              ? schema['@type'].includes('Service')
+              : schema['@type'] === 'Service',
+          );
+        expect(service?.serviceType).toBe(target.serviceType);
+      }
+    }
+  });
+
   test('unknown route returns an actual 404', async ({ request }) => {
     const response = await request.get('/this-route-does-not-exist/');
     expect(response.status()).toBe(404);
+  });
+
+  test('the removed process page redirects without leaving dedicated content behind', async ({
+    page,
+  }) => {
+    await page.goto('/process/');
+    await expect(page).toHaveURL(/\/services\/$/);
+
+    await page.goto('/');
+    await expect(page.locator('a[href="/process/"]')).toHaveCount(0);
+    await expect(page.locator('.process-rail, .process-stack')).toHaveCount(0);
   });
 
   test('robots, llms.txt, sitemap, RSS, redirects, and sitemap exclusions are correct', async ({
@@ -131,6 +192,7 @@ test.describe('site contracts', () => {
     expect(sitemapText).not.toContain('full-service-planning-design');
     expect(sitemapText).not.toContain('/journal/');
     expect(sitemapText).not.toContain('/privacy/');
+    expect(sitemapText).not.toContain('/process/');
 
     const llms = await request.get('/llms.txt');
     expect(llms.status()).toBe(200);
@@ -142,6 +204,7 @@ test.describe('site contracts', () => {
     expect(llmsText).toContain('https://theoceventsmarket.com/contact/');
     expect(llmsText).not.toContain('/services/full-service-planning-design/');
     expect(llmsText).not.toContain('/privacy/');
+    expect(llmsText).not.toContain('/process/');
 
     const rss = await request.get('/rss.xml');
     expect(rss.status()).toBe(200);
@@ -166,7 +229,7 @@ test.describe('navigation interactions', () => {
 
     const mobile = Boolean(viewport && viewport.width <= 767);
     const routes = [
-      { path: '/', maxHeight: mobile ? 6_300 : 4_300 },
+      { path: '/', maxHeight: mobile ? 6_300 : 4_500 },
       { path: '/services/', maxHeight: mobile ? 4_400 : 3_300 },
       {
         path: '/services/full-service-planning-design/',
@@ -191,6 +254,26 @@ test.describe('navigation interactions', () => {
       'sizes',
       '(max-width: 767px) calc(100vw - 2.5rem), 42vw',
     );
+
+    const actualImage = page.getByAltText(
+      'A four-panel collage of packaged mini cakes and decorated cake pops in pink boxes',
+    );
+    await expect(actualImage).toHaveAttribute('srcset', / 400w(?:,|$)/);
+    await expect(actualImage).toHaveAttribute('srcset', / 640w(?:,|$)/);
+    await expect(actualImage).toHaveAttribute(
+      'sizes',
+      '(max-width: 767px) calc(100vw - 2.5rem), 18vw',
+    );
+
+    const milestoneImage = page.getByAltText(
+      'Black, gold, and silver balloons frame a round black backdrop with gold number 50 balloons',
+    );
+    await expect(milestoneImage).toHaveAttribute('srcset', / 360w(?:,|$)/);
+    await expect(milestoneImage).toHaveAttribute('srcset', / 900w(?:,|$)/);
+    await expect(milestoneImage).toHaveAttribute(
+      'sizes',
+      '(max-width: 767px) calc(100vw - 2.5rem), 18vw',
+    );
   });
 
   test('presents a planner-led service instead of a marketplace', async ({ page }) => {
@@ -198,7 +281,7 @@ test.describe('navigation interactions', () => {
     await expect(
       page.getByRole('heading', {
         level: 1,
-        name: 'A Planner for Every Celebration',
+        name: 'Orange County Event Planner for Every Celebration',
       }),
     ).toBeVisible();
     await expect(page.getByText('Your planner keeps every detail connected')).toBeVisible();
@@ -228,14 +311,6 @@ test.describe('navigation interactions', () => {
     await page.keyboard.press('Escape');
     await expect(dialog).not.toBeVisible();
     await expect(trigger).toBeFocused();
-  });
-
-  test('process steps use only the designed sequence markers', async ({ page }) => {
-    await page.goto('/');
-    const listStyle = await page
-      .locator('.process-stack')
-      .evaluate((element) => getComputedStyle(element).listStyleType);
-    expect(listStyle).toBe('none');
   });
 
   test('skip link moves focus to main content', async ({ page, browserName }) => {

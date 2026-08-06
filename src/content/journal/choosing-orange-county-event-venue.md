@@ -16,7 +16,6 @@ proposedOutline:
   - Questions to take to every walkthrough
 internalLinks:
   - /services/
-  - /process/
   - /contact/
 assetsNeeded:
   - Original checklist for walking through a venue

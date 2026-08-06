@@ -9,7 +9,6 @@ export const primaryNavigation = [
 ] as const;
 
 export const footerNavigation = [
-  { label: 'The Process', href: '/process/' },
   { label: 'Vendor Coordination', href: '/trusted-creative-network/' },
   { label: 'Introduce Your Work', href: '/for-vendors/' },
   { label: 'Privacy', href: '/privacy/' },

@@ -6,38 +6,64 @@ import sharp from 'sharp';
 
 const root = process.cwd();
 const maxStaticAssetBytes = 25 * 1024 * 1024;
-const mediaDirectory = path.join(root, 'public/videos/hero');
+const mediaDirectory = path.join(root, 'public/videos');
 
 const videos = [
   {
-    filename: 'oc-events-hero-desktop-v1.mp4',
+    filename: 'hero/oc-events-hero-desktop-v1.mp4',
     codec: 'h264',
     width: 1440,
     height: 810,
   },
   {
-    filename: 'oc-events-hero-desktop-v1.webm',
+    filename: 'hero/oc-events-hero-desktop-v1.webm',
     codec: 'vp9',
     width: 1440,
     height: 810,
   },
   {
-    filename: 'oc-events-hero-mobile-v1.mp4',
+    filename: 'hero/oc-events-hero-mobile-v1.mp4',
     codec: 'h264',
     width: 720,
     height: 1280,
   },
   {
-    filename: 'oc-events-hero-mobile-v1.webm',
+    filename: 'hero/oc-events-hero-mobile-v1.webm',
     codec: 'vp9',
     width: 720,
     height: 1280,
+  },
+  {
+    filename: 'actual/actual-dessert-finishing-v1.mp4',
+    codec: 'h264',
+    width: 576,
+    height: 480,
+    minDuration: 2.9,
+    maxBytes: 300 * 1024,
+  },
+  {
+    filename: 'actual/actual-ivone-event-details-v1.mp4',
+    codec: 'h264',
+    width: 576,
+    height: 768,
+    minDuration: 7.5,
+    maxBytes: 1100 * 1024,
   },
 ];
 
 const posters = [
-  { filename: 'oc-events-hero-desktop-v1-poster.webp', width: 1440, height: 810 },
-  { filename: 'oc-events-hero-mobile-v1-poster.webp', width: 720, height: 1280 },
+  { filename: 'hero/oc-events-hero-desktop-v1-poster.webp', width: 1440, height: 810 },
+  { filename: 'hero/oc-events-hero-mobile-v1-poster.webp', width: 720, height: 1280 },
+  {
+    filename: 'actual/actual-dessert-finishing-v1-poster.webp',
+    width: 576,
+    height: 480,
+  },
+  {
+    filename: 'actual/actual-ivone-event-details-v1-poster.webp',
+    width: 576,
+    height: 768,
+  },
 ];
 
 for (const expected of videos) {
@@ -48,6 +74,9 @@ for (const expected of videos) {
     file.size < maxStaticAssetBytes,
     `${expected.filename} exceeds the Cloudflare 25 MiB static-asset limit`,
   );
+  if (expected.maxBytes) {
+    assert(file.size <= expected.maxBytes, `${expected.filename} exceeds its web delivery budget`);
+  }
 
   const probe = JSON.parse(
     execFileSync(
@@ -75,7 +104,10 @@ for (const expected of videos) {
   assert.equal(stream.height, expected.height, `${expected.filename} height`);
   assert.equal(stream.pix_fmt, 'yuv420p', `${expected.filename} pixel format`);
   assert.equal(stream.avg_frame_rate, '24/1', `${expected.filename} frame rate`);
-  assert(Number(probe.format.duration) >= 6, `${expected.filename} is too short to loop calmly`);
+  assert(
+    Number(probe.format.duration) >= (expected.minDuration ?? 6),
+    `${expected.filename} is shorter than its approved loop`,
+  );
 
   if (expected.filename.endsWith('.mp4')) {
     const bytes = await readFile(filename);
@@ -95,4 +127,4 @@ for (const expected of posters) {
   assert.equal(metadata.height, expected.height, `${expected.filename} height`);
 }
 
-console.log('Hero media contracts verified.');
+console.log('Site video media contracts verified.');

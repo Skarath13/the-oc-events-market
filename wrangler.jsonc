@@ -41,7 +41,7 @@
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
-    "run_worker_first": ["/videos/hero/*"],
+    "run_worker_first": ["/videos/hero/*", "/videos/actual/*"],
   },
   "observability": {
     "enabled": true,

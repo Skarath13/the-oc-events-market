@@ -2,7 +2,6 @@
 import PageHero from './PageHero.astro';
 import FaqList from './FaqList.astro';
 import FinalCta from './FinalCta.astro';
-import { processSteps } from '@/data/site';
 import { eventTypes } from '@/data/eventTypes';
 import type { ServicePage } from '@/data/services';
 import type { EventTypePage } from '@/data/eventTypes';
@@ -55,45 +54,20 @@ const relatedEvents = eventTypes.filter((eventType) => eventType.slug !== page.s
   </div>
 </section>
 
-<section class="section-shell detail-method">
-  <div class="section-heading">
-    <p class="eyebrow">How the work moves</p>
-    <h2>One clear planning rhythm</h2>
+<section class="section-shell detail-vendor">
+  <aside class="vendor-brief">
+    <p class="eyebrow">Vendor flexibility</p>
+    <h3>Bring your vendors or ask us to find them.</h3>
     <p>
-      We move from priorities to decisions, then bring every vendor and detail for the event day
-      into one approved plan.
+      When sourcing is included, we can recommend professionals. We can also coordinate vendors you
+      have already chosen. Either way, your planner keeps the relationships, timeline, and direction
+      connected.
     </p>
-  </div>
-  <div class="detail-method__grid">
-    <ol class="process-stack">
-      {
-        processSteps.map((step, index) => (
-          <li class="process-stack__step">
-            <span class="process-stack__number" aria-hidden="true">
-              0{index + 1}
-            </span>
-            <div>
-              <h3>{step.title}</h3>
-              <p>{step.body}</p>
-            </div>
-          </li>
-        ))
-      }
-    </ol>
-    <aside class="vendor-brief">
-      <p class="eyebrow">Vendor flexibility</p>
-      <h3>Bring your vendors or ask us to find them.</h3>
-      <p>
-        When sourcing is included, we can recommend professionals. We can also coordinate vendors
-        you have already chosen. Either way, your planner keeps the relationships, timeline, and
-        direction connected.
-      </p>
-      <p class="vendor-brief__rule">Your vendors. Trusted recommendations. One coordinated plan.</p>
-      <a class="text-link text-link--light" href="/trusted-creative-network/"
-        >How vendor coordination works</a
-      >
-    </aside>
-  </div>
+    <p class="vendor-brief__rule">Your vendors. Trusted recommendations. One coordinated plan.</p>
+    <a class="text-link text-link--light" href="/trusted-creative-network/"
+      >How vendor coordination works</a
+    >
+  </aside>
 </section>
 
 <section class="detail-answers surface-white">
@@ -136,13 +110,11 @@ const relatedEvents = eventTypes.filter((eventType) => eventType.slug !== page.s
         {
           kind === 'service'
             ? 'See how planning changes across different celebrations.'
-            : 'Compare other event types or review the planning process.'
+            : 'Compare other event types or explore planning services.'
         }
       </p>
       <p>
         <a class="text-link" href="/services/">Planning services</a>
-        {' or '}
-        <a class="text-link" href="/process/">The process</a>
       </p>
     </div>
   </div>

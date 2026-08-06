@@ -15,7 +15,6 @@ proposedOutline:
   - Managing approved changes on the event day
 internalLinks:
   - /trusted-creative-network/
-  - /process/
   - /services/
 assetsNeeded:
   - Anonymized timeline excerpt

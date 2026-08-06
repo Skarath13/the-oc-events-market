@@ -1,6 +1,6 @@
-const HERO_MEDIA_PATH = /^\/videos\/hero\/.+\.(?:mp4|webm|webp)$/;
-const HERO_VIDEO_PATH = /^\/videos\/hero\/.+\.(?:mp4|webm)$/;
-const HERO_CACHE_CONTROL = 'public, max-age=31536000, immutable, no-transform';
+const VIDEO_MEDIA_PATH = /^\/videos\/(?:hero|actual)\/.+\.(?:mp4|webm|webp)$/;
+const VIDEO_FILE_PATH = /^\/videos\/(?:hero|actual)\/.+\.(?:mp4|webm)$/;
+const VIDEO_CACHE_CONTROL = 'public, max-age=31536000, immutable, no-transform';
 
 type WorkerEnv = {
   ASSETS: {
@@ -38,15 +38,15 @@ export const parseByteRange = (value: string, size: number): ByteRange | null =>
   return { start, end: Math.min(requestedEnd, size - 1) };
 };
 
-const withHeroCacheHeaders = (response: Response, supportsRanges: boolean) => {
+const withVideoCacheHeaders = (response: Response, supportsRanges: boolean) => {
   const headers = new Headers(response.headers);
-  headers.set('Cache-Control', HERO_CACHE_CONTROL);
+  headers.set('Cache-Control', VIDEO_CACHE_CONTROL);
   if (supportsRanges) headers.set('Accept-Ranges', 'bytes');
   else headers.delete('Accept-Ranges');
   return headers;
 };
 
-const serveHeroMedia = async (request: Request, env: WorkerEnv, supportsRanges: boolean) => {
+const serveVideoMedia = async (request: Request, env: WorkerEnv, supportsRanges: boolean) => {
   const rangeHeader = request.headers.get('Range');
   const shouldHandleRange = request.method === 'GET' && supportsRanges && rangeHeader;
   const assetHeaders = new Headers(request.headers);
@@ -55,7 +55,7 @@ const serveHeroMedia = async (request: Request, env: WorkerEnv, supportsRanges: 
   const assetResponse = await env.ASSETS.fetch(new Request(request, { headers: assetHeaders }));
   if (assetResponse.status === 404) return assetResponse;
 
-  const headers = withHeroCacheHeaders(assetResponse, supportsRanges);
+  const headers = withVideoCacheHeaders(assetResponse, supportsRanges);
   if (!shouldHandleRange || assetResponse.status !== 200) {
     return new Response(assetResponse.body, {
       headers,
@@ -90,7 +90,7 @@ const serveHeroMedia = async (request: Request, env: WorkerEnv, supportsRanges: 
 export default {
   async fetch(request: Request, env: WorkerEnv) {
     const pathname = new URL(request.url).pathname;
-    if (!HERO_MEDIA_PATH.test(pathname)) return env.ASSETS.fetch(request);
-    return serveHeroMedia(request, env, HERO_VIDEO_PATH.test(pathname));
+    if (!VIDEO_MEDIA_PATH.test(pathname)) return env.ASSETS.fetch(request);
+    return serveVideoMedia(request, env, VIDEO_FILE_PATH.test(pathname));
   },
 };

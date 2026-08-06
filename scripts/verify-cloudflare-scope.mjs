@@ -4,7 +4,7 @@ import { URL } from 'node:url';
 const expected = {
   accountId: '23f44eec8348248aa186c7511ed36e07',
   assetDirectory: './dist',
-  assetWorkerRoutes: ['/videos/hero/*'],
+  assetWorkerRoutes: ['/videos/hero/*', '/videos/actual/*'],
   main: './src/worker.ts',
   workerName: 'the-oc-events-market',
   domains: ['theoceventsmarket.com', 'www.theoceventsmarket.com'],

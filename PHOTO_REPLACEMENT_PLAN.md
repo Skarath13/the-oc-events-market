@@ -3,6 +3,14 @@
 The stock set is suitable for a noindex staging preview, not final portfolio proof. Replace images
 only with files the owner controls or has written commercial permission to publish.
 
+## Current partial replacement
+
+The homepage actual-details module and the shower event image now use selected owner-provided real
+event details, including first-birthday and 50th-milestone backdrops. Wedding, birthday, kids’ party
+gateway, corporate, hero, About, venue, and broader planning imagery remain editorial stock until
+matching rights-cleared actuals are available. The portrait balloon images are intentionally kept in
+portrait cards instead of being forced into landscape hero crops.
+
 ## Replacement order
 
 1. **Hero — critical.** Supply one signature real event with separate landscape and portrait crops.

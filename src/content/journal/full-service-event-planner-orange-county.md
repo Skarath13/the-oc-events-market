@@ -15,7 +15,6 @@ proposedOutline:
   - Questions to ask before comparing proposals
 internalLinks:
   - /services/full-service-planning-design/
-  - /process/
   - /contact/
 assetsNeeded:
   - Anonymized excerpt from a planning roadmap

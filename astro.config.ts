@@ -40,6 +40,7 @@ export default defineConfig({
     '/services/coordination/': '/services/event-management-coordination/',
     '/events/showers/': '/events/baby-bridal-showers/',
     '/events/birthdays/': '/events/birthdays-milestones/',
+    '/process/': '/services/',
     '/portfolio/': '/celebrations/',
     '/vendors/': '/for-vendors/',
   },

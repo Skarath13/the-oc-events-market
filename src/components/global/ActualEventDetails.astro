@@ -1,0 +1,270 @@
+---
+import { Image } from 'astro:assets';
+import { media } from '@/data/media';
+
+const videos = {
+  ivone: {
+    mp4: '/videos/actual/actual-ivone-event-details-v1.mp4',
+    poster: '/videos/actual/actual-ivone-event-details-v1-poster.webp',
+    width: 576,
+    height: 768,
+  },
+  dessert: {
+    mp4: '/videos/actual/actual-dessert-finishing-v1.mp4',
+    poster: '/videos/actual/actual-dessert-finishing-v1-poster.webp',
+    width: 576,
+    height: 480,
+  },
+} as const;
+---
+
+<section class="section-shell actual-details" aria-labelledby="actual-details-title">
+  <div class="section-heading section-heading--split">
+    <div>
+      <p class="eyebrow">Real event details</p>
+      <h2 id="actual-details-title">
+        Details guests remember. Planning that keeps them connected.
+      </h2>
+    </div>
+    <div class="actual-details__intro">
+      <p>
+        From a themed sweet to a photo backdrop, every element needs the right space, timing, and
+        vendor handoff. Your planner brings those decisions into the approved plan.
+      </p>
+      <p class="actual-details__note">
+        These are real event details provided for this site. Specific vendors, products, and
+        services vary by event and are not promised inclusions.
+      </p>
+    </div>
+  </div>
+
+  <div
+    class="actual-details__grid"
+    role="region"
+    aria-label="Real event detail gallery"
+    tabindex="0"
+  >
+    <figure
+      class="actual-details__card actual-details__card--portrait"
+      data-actual-video="ivone"
+      data-video-description="Ivone arranging an outdoor sweets display"
+      data-video-state="poster"
+    >
+      <div class="actual-details__media actual-details__media--video">
+        <video
+          data-actual-video-element
+          data-src-mp4={videos.ivone.mp4}
+          poster={videos.ivone.poster}
+          width={videos.ivone.width}
+          height={videos.ivone.height}
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="none"
+          disablepictureinpicture
+          disableRemotePlayback
+          aria-hidden="true"
+          tabindex="-1"></video>
+        <button
+          class="actual-details__video-toggle"
+          type="button"
+          data-actual-video-toggle
+          aria-label="Pause Ivone arranging an outdoor sweets display video"
+          hidden>Pause clip</button
+        >
+      </div>
+      <figcaption>Ivone arranges sweets at an outdoor event display.</figcaption>
+    </figure>
+
+    <figure
+      class="actual-details__card"
+      data-actual-video="dessert"
+      data-video-description="dessert finishing detail"
+      data-video-state="poster"
+    >
+      <div class="actual-details__media actual-details__media--video">
+        <video
+          data-actual-video-element
+          data-src-mp4={videos.dessert.mp4}
+          poster={videos.dessert.poster}
+          width={videos.dessert.width}
+          height={videos.dessert.height}
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="none"
+          disablepictureinpicture
+          disableRemotePlayback
+          aria-hidden="true"
+          tabindex="-1"></video>
+        <button
+          class="actual-details__video-toggle"
+          type="button"
+          data-actual-video-toggle
+          aria-label="Pause dessert finishing detail video"
+          hidden>Pause clip</button
+        >
+      </div>
+      <figcaption>A dessert detail finished by hand.</figcaption>
+    </figure>
+
+    <figure class="actual-details__card actual-details__card--contain">
+      <div class="actual-details__media">
+        <Image
+          src={media.actualDessertFavorCollection}
+          alt="A four-panel collage of packaged mini cakes and decorated cake pops in pink boxes"
+          widths={[400, 640, 840]}
+          sizes="(max-width: 767px) calc(100vw - 2.5rem), 18vw"
+          loading="lazy"
+          quality={80}
+        />
+      </div>
+      <figcaption>Packaged sweets presented as thank-you favors.</figcaption>
+    </figure>
+
+    <figure
+      class="actual-details__card actual-details__card--portrait actual-details__card--contain"
+    >
+      <div class="actual-details__media">
+        <Image
+          src={media.actualFirstBirthdayBalloonBackdrop}
+          alt="Red, white, and yellow balloons frame a white backdrop with a gold number-one balloon"
+          widths={[360, 540, 720, 900]}
+          sizes="(max-width: 767px) calc(100vw - 2.5rem), 18vw"
+          loading="lazy"
+          quality={80}
+        />
+      </div>
+      <figcaption>A first-birthday balloon photo backdrop.</figcaption>
+    </figure>
+
+    <figure
+      class="actual-details__card actual-details__card--portrait actual-details__card--contain"
+    >
+      <div class="actual-details__media">
+        <Image
+          src={media.actualFiftiethMilestoneBalloonBackdrop}
+          alt="Black, gold, and silver balloons frame a round black backdrop with gold number 50 balloons"
+          widths={[360, 540, 720, 900]}
+          sizes="(max-width: 767px) calc(100vw - 2.5rem), 18vw"
+          loading="lazy"
+          quality={80}
+        />
+      </div>
+      <figcaption>A gold, black, and silver milestone backdrop.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<script>
+  type NavigatorWithSaveData = Navigator & {
+    connection?: { saveData?: boolean };
+  };
+
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const saveData = Boolean((navigator as NavigatorWithSaveData).connection?.saveData);
+
+  document.querySelectorAll<HTMLElement>('[data-actual-video]').forEach((root) => {
+    const video = root.querySelector<HTMLVideoElement>('[data-actual-video-element]');
+    const toggle = root.querySelector<HTMLButtonElement>('[data-actual-video-toggle]');
+    if (!video || !toggle) return;
+
+    let isVisible = false;
+    let userPaused = false;
+    const videoDescription = root.dataset.videoDescription ?? 'event detail';
+
+    const setState = (state: string) => {
+      root.dataset.videoState = state;
+    };
+
+    const setToggle = (paused: boolean) => {
+      toggle.textContent = paused ? 'Play clip' : 'Pause clip';
+      toggle.setAttribute('aria-label', `${paused ? 'Play' : 'Pause'} ${videoDescription} video`);
+    };
+
+    const loadVideo = () => {
+      if (video.getAttribute('src')) return true;
+      const source = video.dataset.srcMp4;
+      if (!source || !video.canPlayType('video/mp4')) return false;
+      video.src = source;
+      video.load();
+      return true;
+    };
+
+    const attemptPlayback = async () => {
+      if (reducedMotion.matches) {
+        video.pause();
+        toggle.hidden = true;
+        setState('reduced-motion');
+        return;
+      }
+      if (saveData) {
+        video.pause();
+        toggle.hidden = true;
+        setState('save-data');
+        return;
+      }
+      if (!isVisible || document.hidden || userPaused) {
+        video.pause();
+        return;
+      }
+      if (!loadVideo()) {
+        toggle.hidden = true;
+        setState('unsupported');
+        return;
+      }
+
+      toggle.hidden = false;
+      video.defaultMuted = true;
+      video.muted = true;
+      video.playsInline = true;
+      setState('loading');
+      try {
+        await video.play();
+      } catch {
+        setState('poster');
+        setToggle(true);
+      }
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = Boolean(entry?.isIntersecting);
+        if (!isVisible) {
+          video.pause();
+          return;
+        }
+        void attemptPlayback();
+      },
+      { rootMargin: '160px 0px', threshold: 0.05 },
+    );
+
+    video.addEventListener('playing', () => {
+      setState('playing');
+      setToggle(false);
+    });
+    video.addEventListener('error', () => {
+      setState('poster');
+      setToggle(true);
+    });
+    toggle.addEventListener('click', () => {
+      if (video.paused) {
+        userPaused = false;
+        void attemptPlayback();
+        return;
+      }
+      userPaused = true;
+      video.pause();
+      setState('paused');
+      setToggle(true);
+    });
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) video.pause();
+      else void attemptPlayback();
+    });
+    reducedMotion.addEventListener('change', () => void attemptPlayback());
+    observer.observe(root);
+  });
+</script>

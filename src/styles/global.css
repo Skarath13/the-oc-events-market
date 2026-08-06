@@ -772,56 +772,13 @@
     line-height: 1.52;
   }
 
-  .process-section {
-    overflow: hidden;
-  }
-
-  .process-rail {
-    display: grid;
-    border-top: 1px solid var(--color-rose-brass);
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    list-style: none;
-  }
-
-  .process-rail__step {
-    position: relative;
-    min-height: 12rem;
-    padding: 1.5rem clamp(1rem, 2vw, 2rem) 1.5rem 0;
-    border-right: 1px solid var(--line);
-  }
-
-  .process-rail__step:not(:first-child) {
-    padding-left: clamp(1rem, 2.5vw, 2.5rem);
-  }
-
-  .process-rail__step:last-child {
-    border-right: 0;
-  }
-
-  .process-rail__number {
-    color: var(--color-deep-olive);
-    font-family: var(--font-display);
-    font-size: 2.2rem;
-  }
-
-  .process-rail__step h3 {
-    margin-top: 1.4rem;
-  }
-
-  .process-rail__step p {
-    margin-top: 0.65rem;
-    font-size: 0.88rem;
-    line-height: 1.5;
-  }
-
   .planning-system {
     background: var(--color-white);
   }
 
   .planning-system__grid {
     display: grid;
-    grid-template-columns: minmax(0, 1.15fr) minmax(19rem, 0.85fr);
-    gap: clamp(2.5rem, 5vw, 5rem);
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .planning-system__grid > div > h3 {
@@ -829,48 +786,100 @@
     font-size: clamp(1.7rem, 2vw, 2.15rem);
   }
 
-  .planning-system__process {
-    padding-left: clamp(2rem, 4vw, 4rem);
-    border-left: 1px solid var(--line);
+  .actual-details {
+    padding-top: 0;
+    padding-bottom: 0;
   }
 
-  .planning-system__process-intro {
-    margin: -0.55rem 0 1.25rem;
-    font-size: 0.9rem;
+  .actual-details .section-heading {
+    margin-bottom: 1rem;
   }
 
-  .process-stack {
-    border-top: 1px solid var(--color-rose-brass);
-    list-style: none;
+  .actual-details .section-heading h2 {
+    margin-top: 0.55rem;
   }
 
-  .process-stack__step {
+  .actual-details__grid {
     display: grid;
-    grid-template-columns: 2.5rem minmax(0, 1fr);
-    gap: 1rem;
-    padding: 1.1rem 0;
-    border-bottom: 1px solid var(--line);
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    align-items: start;
+    gap: clamp(1rem, 2vw, 2rem);
   }
 
-  .process-stack__number {
-    color: var(--color-deep-olive);
-    font-family: var(--font-display);
-    font-size: 1.65rem;
-    line-height: 1;
+  .actual-details__card {
+    margin: 0;
   }
 
-  .process-stack__step h3,
-  .process-stack__step h4 {
-    font-family: var(--font-sans);
-    font-size: 0.94rem;
-    font-weight: 720;
-    letter-spacing: -0.01em;
+  .actual-details__media {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 5 / 4;
+    background: var(--color-oat);
   }
 
-  .process-stack__step p {
-    margin-top: 0.35rem;
-    font-size: 0.86rem;
+  .actual-details__card--portrait .actual-details__media {
+    background: var(--color-charcoal);
+  }
+
+  .actual-details__media--video {
+    background: var(--color-charcoal);
+  }
+
+  .actual-details__media picture,
+  .actual-details__media img,
+  .actual-details__media video {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .actual-details__media img,
+  .actual-details__media video {
+    object-fit: cover;
+  }
+
+  .actual-details__card--contain .actual-details__media img {
+    object-fit: contain;
+  }
+
+  .actual-details__media--video video {
+    object-fit: contain;
+  }
+
+  .actual-details__video-toggle {
+    position: absolute;
+    right: 0.75rem;
+    bottom: 0.75rem;
+    min-height: 2.75rem;
+    padding: 0.65rem 0.85rem;
+    border: 1px solid rgb(255 255 255 / 0.62);
+    border-radius: 999px;
+    background: rgb(16 20 17 / 0.78);
+    color: var(--color-white);
+    font: inherit;
+    font-size: 0.76rem;
+    font-weight: 700;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+  }
+
+  .actual-details__video-toggle:hover,
+  .actual-details__video-toggle:focus-visible {
+    background: var(--color-charcoal);
+  }
+
+  .actual-details__card figcaption {
+    margin-top: 0.8rem;
+    font-size: 0.84rem;
     line-height: 1.5;
+  }
+
+  .actual-details__note {
+    margin-top: 0.9rem !important;
+    padding-left: 1rem;
+    border-left: 1px solid var(--color-rose-brass);
+    font-size: 0.82rem;
+    line-height: 1.55;
   }
 
   .home-guidance {
@@ -1214,39 +1223,13 @@
     line-height: 1.5;
   }
 
-  .detail-method {
+  .detail-vendor {
     padding-top: 0;
   }
 
-  .detail-method .section-heading {
-    display: grid;
-    max-width: none;
-    grid-template-columns: minmax(0, 0.7fr) minmax(18rem, 1.3fr);
-    align-items: end;
-    gap: clamp(2rem, 5vw, 5rem);
-  }
-
-  .detail-method .section-heading .eyebrow {
-    grid-column: 1;
-  }
-
-  .detail-method .section-heading h2 {
-    grid-column: 1;
-    max-width: 16ch;
-    margin-top: 0.45rem;
-  }
-
-  .detail-method .section-heading > p:not(.eyebrow) {
-    grid-column: 2;
-    grid-row: 1 / span 2;
-    margin: 0;
-  }
-
-  .detail-method__grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1.05fr) minmax(18rem, 0.95fr);
-    align-items: stretch;
-    gap: clamp(2rem, 4vw, 4rem);
+  .detail-vendor .vendor-brief {
+    max-width: 46rem;
+    margin-inline: auto;
   }
 
   .vendor-brief {
@@ -1444,28 +1427,6 @@
 
   .service-scope__capabilities {
     padding-top: clamp(2.5rem, 4vw, 4rem);
-  }
-
-  .process-page__note {
-    display: grid;
-    grid-template-columns: minmax(16rem, 0.72fr) minmax(0, 1.28fr);
-    gap: clamp(2rem, 5vw, 5rem);
-    margin-top: 2rem;
-    padding: clamp(1.75rem, 3vw, 2.75rem);
-    background: var(--color-white);
-  }
-
-  .process-page__note h3 {
-    max-width: 15ch;
-    font-size: clamp(1.8rem, 2.5vw, 2.5rem);
-  }
-
-  .process-page__note p {
-    font-size: 0.92rem;
-  }
-
-  .process-page__note p + p {
-    margin-top: 0.75rem;
   }
 
   .profile-panel {
@@ -2110,10 +2071,8 @@
   .planning-system__grid,
   .home-guidance,
   .detail-overview,
-  .detail-method__grid,
   .detail-answers__grid,
   .service-scope__intro,
-  .process-page__note,
   .profile-panel,
   .network-page,
   .journal-page__header,
@@ -2179,17 +2138,41 @@
     grid-template-columns: 1fr;
   }
 
+  .actual-details__grid {
+    display: grid;
+    margin-inline: calc(var(--page-gutter) * -1);
+    padding: 0 var(--page-gutter) 0.75rem;
+    overflow-x: auto;
+    grid-auto-columns: minmax(16rem, 82vw);
+    grid-auto-flow: column;
+    grid-template-columns: none;
+    gap: 1rem;
+    overscroll-behavior-inline: contain;
+    scroll-padding-inline: var(--page-gutter);
+    scroll-snap-type: inline mandatory;
+    scrollbar-width: thin;
+  }
+
+  .actual-details__card {
+    scroll-snap-align: start;
+  }
+
+  .actual-details__media,
+  .actual-details__card--portrait .actual-details__media {
+    width: 100%;
+    max-height: none;
+    aspect-ratio: 5 / 4;
+  }
+
+  .actual-details__card--portrait .actual-details__media {
+    margin-inline: 0;
+  }
+
   .capability-index__item,
   .capability-index__item:nth-child(even) {
     min-height: 0;
     padding: 1.1rem 0;
     border-right: 0;
-  }
-
-  .planning-system__process {
-    padding: 2rem 0 0;
-    border-top: 1px solid var(--line);
-    border-left: 0;
   }
 
   .home-guidance {
@@ -2198,28 +2181,6 @@
 
   .network-brief__media {
     aspect-ratio: 16 / 10;
-  }
-
-  .process-rail {
-    grid-template-columns: 1fr;
-  }
-
-  .process-rail__step,
-  .process-rail__step:not(:first-child) {
-    min-height: 0;
-    padding: 1.4rem 0 1.8rem 3.15rem;
-    border-right: 0;
-    border-bottom: 1px solid var(--line);
-  }
-
-  .process-rail__number {
-    position: absolute;
-    top: 1.4rem;
-    left: 0;
-  }
-
-  .process-rail__step h3 {
-    margin-top: 0;
   }
 
   .network-statement {
@@ -2269,22 +2230,15 @@
   }
 
   .detail-overview,
-  .detail-method__grid,
   .detail-answers__grid {
     gap: 2rem;
   }
 
   .detail-overview__scope-heading,
-  .detail-method .section-heading,
   .related-strip__heading {
     grid-template-columns: 1fr;
     align-items: start;
     gap: 1rem;
-  }
-
-  .detail-method .section-heading > p:not(.eyebrow) {
-    grid-column: 1;
-    grid-row: auto;
   }
 
   .detail-list--grid {
@@ -2354,11 +2308,6 @@
 
   .service-scope__capabilities {
     padding-top: 2.25rem;
-  }
-
-  .process-page__note {
-    margin-top: 1.5rem;
-    padding: 1.5rem;
   }
 
   .profile-panel__media {
@@ -2475,7 +2424,6 @@
   .detail-intro h2,
   .detail-overview__fit h2,
   .detail-overview__scope h2,
-  .detail-method .section-heading h2,
   .vendor-flex h2,
   .simple-hero h1,
   .service-scope__intro h2,

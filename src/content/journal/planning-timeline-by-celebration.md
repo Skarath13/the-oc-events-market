@@ -15,7 +15,7 @@ proposedOutline:
   - Corporate and brand events
   - When a compressed timeline changes the plan
 internalLinks:
-  - /process/
+  - /services/
   - /events/weddings/
   - /events/baby-bridal-showers/
   - /events/corporate-brand-events/

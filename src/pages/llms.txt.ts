@@ -36,12 +36,6 @@ export const GET: APIRoute = ({ site }) => {
     ),
     formatLink(
       origin,
-      'Planning Process',
-      '/process/',
-      'How discovery, planning and design, vendor coordination, and the approved event-day plan connect.',
-    ),
-    formatLink(
-      origin,
       'About',
       '/about/',
       'The planning approach and the role of a dedicated planner for Orange County events.',

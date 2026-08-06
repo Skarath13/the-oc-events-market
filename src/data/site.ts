@@ -127,22 +127,3 @@ export const capabilityRows = [
     body: 'When included, oversee the approved timeline, vendor flow, setup priorities, and key event transitions.',
   },
 ] as const;
-
-export const processSteps = [
-  {
-    title: 'Discover',
-    body: 'Learn the occasion, priorities, guest experience, working budget, and visual direction.',
-  },
-  {
-    title: 'Plan and Design',
-    body: 'Build the roadmap, concept, timeline, layout, and decision structure included in the service.',
-  },
-  {
-    title: 'Coordinate Every Piece',
-    body: 'Source the right professionals when included or organize the vendors already selected.',
-  },
-  {
-    title: 'Bring It to Life',
-    body: 'Manage the approved details and flow on the event day so the host can stay present.',
-  },
-] as const;

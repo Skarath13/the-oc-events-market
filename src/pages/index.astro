@@ -4,7 +4,8 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import EventGateway from '@/components/global/EventGateway.astro';
 import FaqList from '@/components/global/FaqList.astro';
 import FinalCta from '@/components/global/FinalCta.astro';
-import { capabilityRows, contactLinks, coreFaqs, processSteps } from '@/data/site';
+import ActualEventDetails from '@/components/global/ActualEventDetails.astro';
+import { capabilityRows, contactLinks, coreFaqs } from '@/data/site';
 import { media } from '@/data/media';
 import { organizationSchema, websiteSchema } from '@/lib/seo';
 
@@ -51,7 +52,7 @@ const origin = Astro.site ?? new URL('https://the-oc-events-market.example');
   <section class="home-hero">
     <div class="home-hero__copy">
       <div class="home-hero__copy-inner">
-        <h1>A Planner for Every Celebration</h1>
+        <h1>Orange County Event Planner for Every Celebration</h1>
         <p class="home-hero__body">
           Across Orange County, from intimate showers and milestone dinners to weddings and large
           corporate events, we shape the vision, coordinate every vendor, and manage the details so
@@ -152,30 +153,11 @@ const origin = Astro.site ?? new URL('https://the-oc-events-market.example');
             }
           </div>
         </div>
-        <div class="planning-system__process">
-          <h3>How the work moves</h3>
-          <p class="planning-system__process-intro">
-            A calm process is still detailed. The plan is simply presented in the order you need it.
-          </p>
-          <ol class="process-stack">
-            {
-              processSteps.map((step, index) => (
-                <li class="process-stack__step">
-                  <span class="process-stack__number" aria-hidden="true">
-                    0{index + 1}
-                  </span>
-                  <div>
-                    <h4>{step.title}</h4>
-                    <p>{step.body}</p>
-                  </div>
-                </li>
-              ))
-            }
-          </ol>
-        </div>
       </div>
     </div>
   </section>
+
+  <ActualEventDetails />
 
   <section class="section-shell home-guidance">
     <article class="network-brief">
