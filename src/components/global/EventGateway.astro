@@ -26,7 +26,6 @@ type GatewayPresentation = {
   caption: string;
   label: string;
   ratio: 'landscape' | 'portrait';
-  fit: 'cover' | 'contain';
   motion?: MotionPresentation;
 };
 
@@ -44,7 +43,6 @@ const presentations: Record<string, GatewayPresentation> = {
     caption: 'A sweet farewell, down to the last detail.',
     label: 'Wedding planning and design',
     ratio: 'landscape',
-    fit: 'contain',
   },
   'baby-bridal-showers': {
     image: media.actualDuckCakePops,
@@ -52,7 +50,6 @@ const presentations: Record<string, GatewayPresentation> = {
     caption: 'The finishing touch, right on cue.',
     label: 'Baby and bridal showers',
     ratio: 'landscape',
-    fit: 'contain',
     motion: {
       id: 'dessert',
       mp4: '/videos/actual/actual-dessert-finishing-v1.mp4',
@@ -67,7 +64,6 @@ const presentations: Record<string, GatewayPresentation> = {
     caption: 'A milestone that owns the room.',
     label: 'Birthdays and milestones',
     ratio: 'portrait',
-    fit: 'contain',
   },
   'kids-parties': {
     image: media.actualFirstBirthdayBalloonBackdrop,
@@ -75,7 +71,6 @@ const presentations: Record<string, GatewayPresentation> = {
     caption: 'A first birthday with a big personality.',
     label: 'Kids’ parties',
     ratio: 'portrait',
-    fit: 'contain',
   },
   'corporate-brand-events': {
     image: media.corporate,
@@ -83,7 +78,6 @@ const presentations: Record<string, GatewayPresentation> = {
     caption: 'A hands on moment before guests arrive.',
     label: 'Corporate and brand events',
     ratio: 'portrait',
-    fit: 'contain',
     motion: {
       id: 'ivone',
       mp4: '/videos/actual/actual-ivone-event-details-v1.mp4',
@@ -103,7 +97,6 @@ const items = await Promise.all(
       caption: eventType.gatewayBody,
       label: eventType.title,
       ratio: 'landscape' as const,
-      fit: 'cover' as const,
     };
     const compactMobileCard = itemIndex === 2 || itemIndex === 3;
     const mobileWidthTargets = compactMobileCard ? [240, 360, 480, 720] : [480, 720, 960];
@@ -169,7 +162,6 @@ const items = await Promise.all(
                 'event-gateway__item',
                 `event-gateway__item--${index + 1}`,
                 `event-gateway__item--${presentation.ratio}`,
-                `event-gateway__item--${presentation.fit}`,
               ]}
             >
               <div
@@ -210,7 +202,7 @@ const items = await Promise.all(
                       src={presentation.image}
                       alt={presentation.alt}
                       widths={[480, 720, 960, 1200]}
-                      fit={presentation.fit}
+                      fit="cover"
                       sizes={responsiveSizes}
                       loading="lazy"
                       quality={80}

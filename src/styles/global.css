@@ -711,11 +711,6 @@
     transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  .event-gateway__item--contain .event-gateway__media img,
-  .event-gateway__item--contain .event-gateway__media video {
-    object-fit: contain;
-  }
-
   .event-gateway__item:hover .event-gateway__media img,
   .event-gateway__item:hover .event-gateway__media video {
     transform: scale(1.025);

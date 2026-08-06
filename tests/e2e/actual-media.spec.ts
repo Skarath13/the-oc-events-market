@@ -102,7 +102,7 @@ test.describe('actual event media playback', () => {
   });
 });
 
-test('celebration media uses a visible mobile bento grid and an editorial desktop grid', async ({
+test('celebration media fills the mobile bento grid and editorial desktop grid', async ({
   page,
 }, testInfo) => {
   test.skip(testInfo.project.name !== 'chromium-desktop', 'One canonical layout contract');
@@ -135,7 +135,11 @@ test('celebration media uses a visible mobile bento grid and an editorial deskto
   await expect(page.locator('.event-gateway')).toHaveCSS('overflow-x', 'visible');
   await expect(page.locator('.event-gateway')).toHaveCSS('scroll-snap-type', 'none');
   expect((milestoneMedia?.height ?? 0) / (milestoneMedia?.width ?? 1)).toBeCloseTo(1.25, 1);
-  await expect(cards.first().locator('img')).toHaveCSS('object-fit', 'contain');
+  const mediaObjectFits = await page
+    .locator('.event-gateway__media img, .event-gateway__media video')
+    .evaluateAll((elements) => elements.map((element) => getComputedStyle(element).objectFit));
+  expect(mediaObjectFits).not.toHaveLength(0);
+  expect(mediaObjectFits.every((objectFit) => objectFit === 'cover')).toBe(true);
   await expect(page.locator('[data-actual-video] button')).toHaveCount(0);
   await expect(page.locator('video[controls]')).toHaveCount(0);
 
