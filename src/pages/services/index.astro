@@ -1,9 +1,9 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import CapabilityIndex from '@/components/global/CapabilityIndex.astro';
 import PageHero from '@/components/global/PageHero.astro';
 import EventGateway from '@/components/global/EventGateway.astro';
 import FinalCta from '@/components/global/FinalCta.astro';
-import { capabilityRows } from '@/data/site';
 import { media } from '@/data/media';
 import { breadcrumbSchema, serviceSchema } from '@/lib/seo';
 
@@ -62,18 +62,7 @@ const breadcrumbs = [
           momentum for your celebration.
         </p>
       </div>
-      <div class="capability-index">
-        {
-          capabilityRows.map((capability) => (
-            <article class="capability-index__item">
-              <div>
-                <h3>{capability.title}</h3>
-                <p>{capability.body}</p>
-              </div>
-            </article>
-          ))
-        }
-      </div>
+      <CapabilityIndex headingLevel={3} />
     </div>
   </section>
 

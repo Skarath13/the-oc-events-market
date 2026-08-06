@@ -1,6 +1,36 @@
 ---
+import {
+  IconAccessible,
+  IconBible,
+  IconBriefcase,
+  IconCalendarEvent,
+  IconChecklist,
+  IconConfetti,
+  IconFileDescription,
+  IconMail,
+  IconMessage,
+  IconShieldLock,
+  IconUser,
+  IconUsersGroup,
+} from '@tabler/icons-astro';
 import { footerNavigation, primaryNavigation } from '@/data/navigation';
 import { contactLinks, featureFlags, siteConfig } from '@/data/site';
+
+const primaryNavigationIcons = {
+  '/services/': IconChecklist,
+  '/celebrations/': IconConfetti,
+  '/about/': IconUser,
+  '/journal/': IconFileDescription,
+  '/contact/': IconMessage,
+} as const;
+
+const footerNavigationIcons = {
+  '/trusted-creative-network/': IconUsersGroup,
+  '/for-vendors/': IconBriefcase,
+  '/privacy/': IconShieldLock,
+  '/terms/': IconFileDescription,
+  '/accessibility/': IconAccessible,
+} as const;
 ---
 
 <footer class="site-footer">
@@ -18,17 +48,27 @@ import { contactLinks, featureFlags, siteConfig } from '@/data/site';
         Distinct creative direction, calm execution, and one planner keeping every moving piece in
         sync.
       </p>
-      <a class="text-link text-link--light" href="/contact/">Check availability</a>
+      <a class="text-link text-link--light site-footer__link" href="/contact/">
+        <IconCalendarEvent aria-hidden="true" size={17} stroke={1.6} />
+        <span>Check availability</span>
+      </a>
     </div>
     <nav aria-label="Footer client links">
       <h2 class="site-footer__heading">Explore</h2>
       <ul>
         {
-          primaryNavigation.map((item) => (
-            <li>
-              <a href={item.href}>{item.label}</a>
-            </li>
-          ))
+          primaryNavigation.map((item) => {
+            const Icon = primaryNavigationIcons[item.href as keyof typeof primaryNavigationIcons];
+
+            return (
+              <li>
+                <a class="site-footer__link" href={item.href}>
+                  <Icon aria-hidden="true" size={16} stroke={1.6} />
+                  <span>{item.label}</span>
+                </a>
+              </li>
+            );
+          })
         }
       </ul>
     </nav>
@@ -36,11 +76,18 @@ import { contactLinks, featureFlags, siteConfig } from '@/data/site';
       <h2 class="site-footer__heading">More</h2>
       <ul>
         {
-          footerNavigation.map((item) => (
-            <li>
-              <a href={item.href}>{item.label}</a>
-            </li>
-          ))
+          footerNavigation.map((item) => {
+            const Icon = footerNavigationIcons[item.href];
+
+            return (
+              <li>
+                <a class="site-footer__link" href={item.href}>
+                  <Icon aria-hidden="true" size={16} stroke={1.6} />
+                  <span>{item.label}</span>
+                </a>
+              </li>
+            );
+          })
         }
       </ul>
     </nav>
@@ -53,12 +100,13 @@ import { contactLinks, featureFlags, siteConfig } from '@/data/site';
             <p class="site-footer__phone">{siteConfig.publicPhoneDisplay}</p>
             <p>
               <a
-                class="site-footer__contact-link"
+                class="site-footer__contact-link site-footer__link"
                 href={contactLinks.inquiryText}
                 data-analytics-event="text_cta_click"
                 data-analytics-context="footer"
               >
-                Text event details
+                <IconMessage aria-hidden="true" size={16} stroke={1.6} />
+                <span>Text event details</span>
               </a>
             </p>
           </>
@@ -67,13 +115,19 @@ import { contactLinks, featureFlags, siteConfig } from '@/data/site';
       {
         siteConfig.publicEmail && (
           <p>
-            <a href={`mailto:${siteConfig.publicEmail}`}>{siteConfig.publicEmail}</a>
+            <a class="site-footer__link" href={`mailto:${siteConfig.publicEmail}`}>
+              <IconMail aria-hidden="true" size={16} stroke={1.6} />
+              <span>{siteConfig.publicEmail}</span>
+            </a>
           </p>
         )
       }
     </div>
   </div>
   <blockquote class="site-footer__verse" cite="https://ebible.org/eng-web/ROM10.htm">
+    <span class="site-footer__verse-icon" aria-hidden="true">
+      <IconBible size={24} stroke={1.4} />
+    </span>
     <p>
       “that if you will confess with your mouth that Jesus is Lord and believe in your heart that
       God raised him from the dead, you will be saved.”

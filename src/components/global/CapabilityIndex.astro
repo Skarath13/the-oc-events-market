@@ -1,0 +1,45 @@
+---
+import {
+  IconClock,
+  IconHeartHandshake,
+  IconLayoutGrid,
+  IconRoute,
+  IconSparkles,
+  IconUsersGroup,
+} from '@tabler/icons-astro';
+import { capabilityRows } from '@/data/site';
+
+interface Props {
+  headingLevel: 3 | 4;
+}
+
+const { headingLevel } = Astro.props;
+const capabilityIcons = {
+  'A point of view': IconSparkles,
+  'A smarter roadmap': IconRoute,
+  'The right creative team': IconUsersGroup,
+  'A room that works beautifully': IconLayoutGrid,
+  'Timing without the tension': IconClock,
+  'A calm center on event day': IconHeartHandshake,
+} as const;
+---
+
+<div class="capability-index">
+  {
+    capabilityRows.map((capability) => {
+      const Icon = capabilityIcons[capability.title];
+
+      return (
+        <article class="capability-index__item">
+          <span class="capability-index__icon" aria-hidden="true">
+            <Icon size={22} stroke={1.5} />
+          </span>
+          <div>
+            {headingLevel === 3 ? <h3>{capability.title}</h3> : <h4>{capability.title}</h4>}
+            <p>{capability.body}</p>
+          </div>
+        </article>
+      );
+    })
+  }
+</div>

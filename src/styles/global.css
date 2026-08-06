@@ -781,18 +781,25 @@
   .capability-index__item {
     display: grid;
     min-height: 0;
-    grid-template-columns: 1.5rem 1fr;
-    gap: 0.9rem;
+    grid-template-columns: 1.6rem 1fr;
+    gap: 1rem;
     padding: 1.25rem clamp(0rem, 2vw, 2rem) 1.25rem 0;
     border-bottom: 1px solid var(--line);
   }
 
-  .capability-index__item::before {
+  .capability-index__icon {
+    display: grid;
+    width: 1.6rem;
+    height: 1.6rem;
+    place-items: center;
+    margin-top: -0.1rem;
+    color: var(--color-rose-brass);
+  }
+
+  .capability-index__icon svg {
+    display: block;
     width: 100%;
-    height: 1px;
-    margin-top: 0.7rem;
-    background: var(--color-rose-brass);
-    content: '';
+    height: 100%;
   }
 
   .capability-index__item:nth-child(odd) {
@@ -1371,7 +1378,7 @@
     display: grid;
     grid-template-columns: minmax(0, 0.88fr) minmax(20rem, 1.12fr);
     gap: clamp(2.5rem, 5vw, 5.5rem);
-    padding-bottom: clamp(2.5rem, 4vw, 4rem);
+    padding-bottom: clamp(1.5rem, 1.75vw, 2.25rem);
     border-bottom: 1px solid var(--line);
   }
 
@@ -1391,7 +1398,7 @@
   }
 
   .service-scope__capabilities {
-    padding-top: clamp(2.5rem, 4vw, 4rem);
+    padding-top: clamp(1.5rem, 1.75vw, 2.25rem);
   }
 
   .profile-panel {
@@ -1751,6 +1758,18 @@
     text-decoration-color: color-mix(in srgb, var(--color-white) 40%, transparent);
   }
 
+  .site-footer__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+
+  .site-footer__link svg {
+    flex: 0 0 auto;
+    color: var(--color-logo-cream);
+    opacity: 0.78;
+  }
+
   .site-footer__contact-link {
     display: inline-flex;
     min-height: 2.75rem;
@@ -1763,6 +1782,19 @@
     padding-block: clamp(1.5rem, 3vw, 2.25rem);
     border-top: 1px solid color-mix(in srgb, var(--color-white) 22%, transparent);
     text-align: center;
+  }
+
+  .site-footer__verse-icon {
+    display: grid;
+    width: 2rem;
+    height: 2rem;
+    place-items: center;
+    margin: 0 auto 0.8rem;
+    color: var(--color-logo-cream);
+  }
+
+  .site-footer__verse-icon svg {
+    display: block;
   }
 
   .site-footer__verse p {

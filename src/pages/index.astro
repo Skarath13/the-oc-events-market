@@ -1,10 +1,11 @@
 ---
 import { Image } from 'astro:assets';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import CapabilityIndex from '@/components/global/CapabilityIndex.astro';
 import EventGateway from '@/components/global/EventGateway.astro';
 import FaqList from '@/components/global/FaqList.astro';
 import FinalCta from '@/components/global/FinalCta.astro';
-import { capabilityRows, contactLinks, coreFaqs } from '@/data/site';
+import { contactLinks, coreFaqs } from '@/data/site';
 import { media } from '@/data/media';
 import { organizationSchema, websiteSchema } from '@/lib/seo';
 
@@ -139,18 +140,7 @@ const origin = Astro.site ?? new URL('https://the-oc-events-market.example');
       <div class="planning-system__grid">
         <div class="planning-system__capabilities">
           <h3>What your planner keeps in sync</h3>
-          <div class="capability-index">
-            {
-              capabilityRows.map((capability) => (
-                <article class="capability-index__item">
-                  <div>
-                    <h4>{capability.title}</h4>
-                    <p>{capability.body}</p>
-                  </div>
-                </article>
-              ))
-            }
-          </div>
+          <CapabilityIndex headingLevel={4} />
         </div>
       </div>
     </div>
