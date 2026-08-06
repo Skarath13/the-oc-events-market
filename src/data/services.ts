@@ -29,14 +29,14 @@ export const services: ServicePage[] = [
     shortTitle: 'Planning From Start to Finish',
     metaTitle: 'Event Planning and Design From Start to Finish in Orange County',
     metaDescription:
-      'Orange County event planning and design that connects the roadmap, creative direction, vendors, logistics, and event-day flow from the first decisions forward.',
+      'Orange County event planning and design that connects the roadmap, creative direction, vendors, logistics, and event day flow from the first decisions forward.',
     h1: 'Planning From Start to Finish',
     summary:
-      'For hosts who want the entire event to speak the same language. We connect the roadmap, design, vendors, logistics, and event-day flow from the first decisions forward.',
+      'For hosts who want the entire event to speak the same language. We connect the roadmap, design, vendors, logistics, and event day flow from the first decisions forward.',
     forWhom: [
       'You want an expert to shape the plan before the big decisions harden.',
       'A cohesive visual direction matters as much as sharp execution.',
-      'You want one accountable planner across deadlines, vendors, handoffs, and event-day flow.',
+      'You want one accountable planner across deadlines, vendors, handoffs, and event day flow.',
     ],
     capabilities: [
       {
@@ -59,7 +59,7 @@ export const services: ServicePage[] = [
     considerations: [
       {
         title: 'Clarity before the work begins',
-        body: 'Your proposal defines meetings, sourcing, design, purchasing, production, staffing, and event-day coverage in plain language.',
+        body: 'Your proposal defines meetings, sourcing, design, purchasing, production, staffing, and event day coverage in plain language.',
       },
       {
         title: 'Fast decisions need clear owners',
@@ -74,7 +74,7 @@ export const services: ServicePage[] = [
       {
         question: 'What does an event planner handle from start to finish?',
         answer:
-          'The engagement can cover the roadmap, design, vendors, logistics, and event-day management. Your proposal defines the exact deliverables and coverage before you book.',
+          'The engagement can cover the roadmap, design, vendors, logistics, and event day management. Your proposal defines the exact deliverables and coverage before you book.',
       },
       {
         question: 'Will you work with vendors we already booked?',
@@ -89,7 +89,7 @@ export const services: ServicePage[] = [
       {
         question: 'Is management on the event day included?',
         answer:
-          'Event-day management is included when it appears in your proposal, along with team size, hours, setup responsibilities, and handoffs.',
+          'Event day management is included when it appears in your proposal, along with team size, hours, setup responsibilities, and handoffs.',
       },
     ],
     image: 'planningDetail',
@@ -121,7 +121,7 @@ export const services: ServicePage[] = [
         body: 'Take ownership of the vendor categories and communication handoffs that need it most.',
       },
       {
-        title: 'A stronger creative through-line',
+        title: 'A stronger creative direction',
         body: 'Bring existing inspiration, rentals, decor, and visual decisions into a more cohesive direction.',
       },
       {
@@ -162,7 +162,7 @@ export const services: ServicePage[] = [
       {
         question: 'How is this different from coordination?',
         answer:
-          'Partial planning still shapes open decisions. Coordination takes an established plan, aligns the final details, and carries it into the event-day flow.',
+          'Partial planning still shapes open decisions. Coordination takes an established plan, aligns the final details, and carries it into the event day flow.',
       },
     ],
     image: 'venue',
@@ -175,7 +175,7 @@ export const services: ServicePage[] = [
     shortTitle: 'Event Management',
     metaTitle: 'Event Management and Coordination in Orange County',
     metaDescription:
-      'Orange County event management and coordination that aligns established plans, vendors, timelines, and the event-day flow.',
+      'Orange County event management and coordination that aligns established plans, vendors, timelines, and the event day flow.',
     h1: 'Event Management and Coordination',
     summary:
       'You built the event. We turn the established plan into one current timeline, align the vendors, and keep the day moving with calm authority.',
@@ -199,7 +199,7 @@ export const services: ServicePage[] = [
       },
       {
         title: 'Calm control on event day',
-        body: 'Manage the confirmed hours, transitions, vendor flow, and escalation path when event-day coverage is included.',
+        body: 'Manage the confirmed hours, transitions, vendor flow, and escalation path when event day coverage is included.',
       },
     ],
     considerations: [

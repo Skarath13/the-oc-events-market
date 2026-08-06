@@ -38,7 +38,7 @@ export const eventTypes: EventTypePage[] = [
     serviceType: 'Wedding planning and design',
     h1: 'Wedding Planner in Orange County',
     summary:
-      'A wedding should feel deeply personal and completely effortless. We connect the creative direction, vendors, logistics, and event-day flow so every moment belongs to the same story.',
+      'A wedding should feel deeply personal and completely effortless. We connect the creative direction, vendors, logistics, and event day flow so every moment belongs to the same story.',
     whoFor:
       'For couples who want a distinct point of view, one accountable planner, and the freedom to be present from the first look to the last song.',
     capabilities: [
@@ -56,7 +56,7 @@ export const eventTypes: EventTypePage[] = [
       },
       {
         title: 'A day that moves beautifully',
-        body: 'When event-day management is included, run the timeline, arrivals, room transitions, and behind-the-scenes decisions.',
+        body: 'When event day management is included, run the timeline, arrivals, room transitions, and quiet decisions in the background.',
       },
     ],
     considerations: [
@@ -88,25 +88,26 @@ export const eventTypes: EventTypePage[] = [
       {
         question: 'Will you manage the wedding day?',
         answer:
-          'Event-day management is available when included in your proposal. Team size, coverage, hours, and handoffs are confirmed before you book.',
+          'Event day management is available when included in your proposal. Team size, coverage, hours, and handoffs are confirmed before you book.',
       },
     ],
     image: 'actualDessertFavorCollection',
-    imageAlt: 'Packaged mini cakes and decorated cake pops presented in blush-pink favor boxes',
+    imageAlt: 'Packaged mini cakes and decorated cake pops presented in blush pink favor boxes',
     imageFit: 'contain',
   },
   {
     slug: 'baby-bridal-showers',
     title: 'Baby and Bridal Showers',
     gatewayTitle: 'Showers',
-    gatewayBody: 'Charming without the cliché—every toast, table, and sweet detail in its place.',
+    gatewayBody:
+      'Charming without the cliché. Every toast, table, and sweet detail is in its place.',
     metaTitle: 'Baby and Bridal Shower Planner in Orange County',
     metaDescription:
       'Thoughtful planning and design for Orange County baby showers, bridal showers, and the people gathering to celebrate.',
     serviceType: 'Baby and bridal shower planning and design',
     h1: 'Baby and Bridal Shower Planner in Orange County',
     summary:
-      'We turn a beautiful idea into a gathering that feels warm, polished, and easy to enjoy—from the welcome moment to the final favor.',
+      'We turn a beautiful idea into a gathering that feels warm, polished, and easy to enjoy from the welcome moment to the final favor.',
     whoFor:
       'For families, friends, and hosts who want the shower to feel personal and elevated without spending the celebration managing deliveries, decor, and timing.',
     capabilities: [
@@ -161,7 +162,7 @@ export const eventTypes: EventTypePage[] = [
     ],
     image: 'actualDuckCakePops',
     imageAlt:
-      'Mint-green cake pops topped with yellow ducks and pearl sprinkles sit in a clear stand',
+      'Mint green cake pops topped with yellow ducks and pearl sprinkles sit in a clear stand',
     imageFit: 'contain',
   },
   {
@@ -181,7 +182,7 @@ export const eventTypes: EventTypePage[] = [
     capabilities: [
       {
         title: 'A concept with a point of view',
-        body: 'Translate the guest of honor, the setting, and the desired atmosphere into a direction that feels specific—not themed by default.',
+        body: 'Translate the guest of honor, the setting, and the desired atmosphere into a direction that feels specific instead of themed by default.',
       },
       {
         title: 'A room with rhythm',
@@ -238,7 +239,7 @@ export const eventTypes: EventTypePage[] = [
     title: 'Kids’ Parties',
     gatewayTitle: 'Kids’ Parties',
     gatewayBody:
-      'High imagination, low chaos—the theme, timing, and grown-up logistics in one plan.',
+      'High imagination and low chaos. The theme, timing, and adult logistics come together in one plan.',
     metaTitle: 'Kids’ Party Planning and Design in Orange County',
     metaDescription:
       'Orange County children’s party planning that brings the theme, vendors, guest flow, and details on the event day into one organized plan.',
@@ -262,7 +263,7 @@ export const eventTypes: EventTypePage[] = [
         body: 'Coordinate entertainment, rentals, catering, decor, and the venue around one arrival and activity plan.',
       },
       {
-        title: 'Space for kids and grown-ups',
+        title: 'Space for kids and adults',
         body: 'Plan activity zones, adult seating, food, gifts, circulation, and setup so the room works for everyone.',
       },
     ],
@@ -300,14 +301,15 @@ export const eventTypes: EventTypePage[] = [
     ],
     image: 'actualFirstBirthdayBalloonBackdrop',
     imageAlt:
-      'Red, white, and yellow balloons frame a white backdrop with a gold number-one balloon',
+      'Red, white, and yellow balloons frame a white backdrop with a gold number one balloon',
     imageFit: 'contain',
   },
   {
     slug: 'corporate-brand-events',
     title: 'Corporate and Brand Events',
     gatewayTitle: 'Corporate and Brand Events',
-    gatewayBody: 'On-brand, on-message, and on cue—from the first arrival to the final frame.',
+    gatewayBody:
+      'Aligned with the brand, clear in the message, and on cue from the first arrival to the final frame.',
     metaTitle: 'Corporate Event Planner in Orange County',
     metaDescription:
       'Work with an Orange County corporate event planner to align the audience, objectives, brand direction, vendors, production details, and run of show.',
@@ -342,7 +344,7 @@ export const eventTypes: EventTypePage[] = [
       },
       {
         title: 'Design for the whole audience',
-        body: 'Venue access, seating, sound, visual content, dietary needs, and program formats belong in the production plan—not at the end of it.',
+        body: 'Venue access, seating, sound, visual content, dietary needs, and program formats belong in the production plan from the beginning.',
       },
       {
         title: 'Every cue has a consequence',
@@ -359,12 +361,12 @@ export const eventTypes: EventTypePage[] = [
       {
         question: 'Do you manage audiovisual production?',
         answer:
-          'Audiovisual sourcing or coordination can be included. Your proposal defines the technical partner, production responsibilities, equipment, rehearsals, and show-day coverage.',
+          'Audiovisual sourcing or coordination can be included. Your proposal defines the technical partner, production responsibilities, equipment, rehearsals, and coverage on the event day.',
       },
       {
         question: 'Can you follow existing brand standards?',
         answer:
-          'Absolutely. Give us the current assets, brand standards, and an empowered decision-maker; we will carry that system through the room and production plan.',
+          'Absolutely. Give us the current assets, brand standards, and someone empowered to make decisions. We will carry that system through the room and production plan.',
       },
     ],
     image: 'corporate',

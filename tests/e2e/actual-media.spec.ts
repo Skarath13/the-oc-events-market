@@ -5,7 +5,7 @@ const actualVideos = {
     path: '/videos/actual/actual-ivone-event-details-v1.mp4',
     width: 576,
     height: 768,
-    caption: 'A hands-on moment before guests arrive.',
+    caption: 'A hands on moment before guests arrive.',
   },
   dessert: {
     path: '/videos/actual/actual-dessert-finishing-v1.mp4',
@@ -102,7 +102,7 @@ test.describe('actual event media playback', () => {
   });
 });
 
-test('celebration media stays large on mobile and resolves into an editorial desktop grid', async ({
+test('celebration media uses a visible mobile bento grid and an editorial desktop grid', async ({
   page,
 }, testInfo) => {
   test.skip(testInfo.project.name !== 'chromium-desktop', 'One canonical layout contract');
@@ -112,10 +112,29 @@ test('celebration media stays large on mobile and resolves into an editorial des
 
   const cards = page.locator('.event-gateway__item');
   await expect(cards).toHaveCount(5);
-  const firstCard = await cards.first().boundingBox();
+  const mobileBoxes = await cards.evaluateAll((items) =>
+    items.map((item) => {
+      const box = item.getBoundingClientRect();
+      return { width: box.width, x: box.x, y: box.y };
+    }),
+  );
+  const gatewayOverflow = await page
+    .locator('.event-gateway')
+    .evaluate((gateway) => gateway.scrollWidth - gateway.clientWidth);
   const milestoneMedia = await cards.nth(2).locator('.event-gateway__media').boundingBox();
-  expect(firstCard?.width ?? 0).toBeGreaterThanOrEqual(345);
-  expect((milestoneMedia?.height ?? 0) / (milestoneMedia?.width ?? 1)).toBeGreaterThan(1.3);
+  expect(mobileBoxes[0]!.width).toBeGreaterThanOrEqual(345);
+  expect(mobileBoxes[1]!.width).toBeGreaterThanOrEqual(345);
+  expect(mobileBoxes[2]!.width).toBeGreaterThanOrEqual(160);
+  expect(Math.abs(mobileBoxes[2]!.y - mobileBoxes[3]!.y)).toBeLessThanOrEqual(1);
+  expect(mobileBoxes[3]!.x).toBeGreaterThan(mobileBoxes[2]!.x);
+  expect(mobileBoxes[4]!.width).toBeGreaterThanOrEqual(345);
+  expect(mobileBoxes[0]!.y).toBeLessThan(mobileBoxes[1]!.y);
+  expect(mobileBoxes[1]!.y).toBeLessThan(mobileBoxes[2]!.y);
+  expect(mobileBoxes[2]!.y).toBeLessThan(mobileBoxes[4]!.y);
+  expect(gatewayOverflow).toBeLessThanOrEqual(1);
+  await expect(page.locator('.event-gateway')).toHaveCSS('overflow-x', 'visible');
+  await expect(page.locator('.event-gateway')).toHaveCSS('scroll-snap-type', 'none');
+  expect((milestoneMedia?.height ?? 0) / (milestoneMedia?.width ?? 1)).toBeCloseTo(1.25, 1);
   await expect(cards.first().locator('img')).toHaveCSS('object-fit', 'contain');
   await expect(page.locator('[data-actual-video] button')).toHaveCount(0);
   await expect(page.locator('video[controls]')).toHaveCount(0);

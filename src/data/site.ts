@@ -32,7 +32,7 @@ export const siteConfig = {
   brandPromise: 'Beautifully imagined. Impeccably run.',
   shortDefinition: 'The OC Events Market is an Orange County event planning and design studio.',
   fullDefinition:
-    'The OC Events Market is an Orange County event planning and design studio. From intimate gatherings to large-scale celebrations, the studio brings creative direction, vendors, logistics, and event-day flow into one beautifully considered plan.',
+    'The OC Events Market is an Orange County event planning and design studio. From intimate gatherings to celebrations of every scale, the studio brings creative direction, vendors, logistics, and event day flow into one beautifully considered plan.',
   serviceArea: 'Orange County, California',
   serviceAreaShort: 'Orange County',
   logo: {
@@ -71,7 +71,7 @@ export const coreFaqs = [
   {
     question: 'Can you recommend vendors?',
     answer:
-      'Yes. When sourcing is part of the plan, we recommend professionals who fit the vision, logistics, and working budget—without asking you to replace a great team you already have.',
+      'Yes. When sourcing is part of the plan, we recommend professionals who fit the vision, logistics, and working budget. You can keep a great team you already have.',
   },
   {
     question: 'What kinds of events do you plan?',
@@ -91,12 +91,12 @@ export const coreFaqs = [
   {
     question: 'Do you manage the event day?',
     answer:
-      'Event-day management is available when included in your proposal. We run the approved timeline, vendor arrivals, setup flow, and key transitions so the plan holds when the room comes alive.',
+      'Event day management is available when included in your proposal. We run the approved timeline, vendor arrivals, setup flow, and key transitions so the plan holds when the room comes alive.',
   },
   {
     question: 'What is the difference between planning and coordination?',
     answer:
-      'Planning shapes the event: priorities, budget structure, design, vendors, logistics, and timeline. Coordination takes an established plan, aligns the final details, and runs the event-day flow included in your proposal.',
+      'Planning shapes the priorities, budget structure, design, vendors, logistics, and timeline. Coordination takes an established plan, aligns the final details, and runs the event day flow included in your proposal.',
   },
 ] as const;
 
@@ -107,7 +107,7 @@ export const capabilityRows = [
   },
   {
     title: 'A smarter roadmap',
-    body: 'Put priorities, budget decisions, deadlines, and approvals in the right order—before they become expensive surprises.',
+    body: 'Put priorities, budget decisions, deadlines, and approvals in the right order before they become expensive surprises.',
   },
   {
     title: 'The right creative team',
@@ -123,6 +123,6 @@ export const capabilityRows = [
   },
   {
     title: 'A calm center on event day',
-    body: 'When event-day management is included, oversee the timeline, vendor flow, setup priorities, and key transitions.',
+    body: 'When event day management is included, oversee the timeline, vendor flow, setup priorities, and key transitions.',
   },
 ] as const;

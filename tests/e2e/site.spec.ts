@@ -96,6 +96,21 @@ test.describe('site contracts', () => {
         `${route} image alt`,
       ).toBe(true);
 
+      const copyWithDashes = await page.evaluate(() => {
+        const values = [
+          document.title,
+          document.body.innerText,
+          document.querySelector('meta[name="description"]')?.getAttribute('content') ?? '',
+          ...Array.from(document.querySelectorAll('img[alt], [aria-label]')).flatMap((element) => [
+            element.getAttribute('alt') ?? '',
+            element.getAttribute('aria-label') ?? '',
+          ]),
+        ];
+        const dashPattern = /[—–]|[A-Za-z]-[A-Za-z]/;
+        return values.filter((value) => dashPattern.test(value));
+      });
+      expect(copyWithDashes, `${route} customer copy with dash punctuation`).toEqual([]);
+
       const jsonLd = await page.locator('script[type="application/ld+json"]').allTextContents();
       for (const value of jsonLd) expect(() => JSON.parse(value)).not.toThrow();
     });
@@ -229,8 +244,8 @@ test.describe('navigation interactions', () => {
 
     const mobile = Boolean(viewport && viewport.width <= 767);
     const routes = [
-      { path: '/', maxHeight: mobile ? 6_400 : 5_200 },
-      { path: '/services/', maxHeight: mobile ? 4_400 : 4_200 },
+      { path: '/', maxHeight: mobile ? 6_900 : 5_200 },
+      { path: '/services/', maxHeight: mobile ? 5_600 : 4_200 },
       {
         path: '/services/full-service-planning-design/',
         maxHeight: mobile ? 6_200 : 4_200,
@@ -256,7 +271,7 @@ test.describe('navigation interactions', () => {
     );
 
     const actualImage = page.getByAltText(
-      'A four-panel collage of packaged mini cakes and decorated cake pops in pink boxes',
+      'A four panel collage of packaged mini cakes and decorated cake pops in pink boxes',
     );
     await expect(actualImage).toHaveAttribute('srcset', / 480w(?:,|$)/);
     await expect(actualImage).toHaveAttribute('srcset', / 960w(?:,|$)/);
@@ -279,7 +294,17 @@ test.describe('navigation interactions', () => {
     await expect(milestoneImage).toHaveAttribute('srcset', / 900w(?:,|$)/);
     await expect(milestoneImage).toHaveAttribute(
       'sizes',
-      '(max-width: 767px) calc(100vw - 2.5rem), (max-width: 1199px) 48vw, 38vw',
+      '(max-width: 367px) calc(100vw - 2.5rem), (max-width: 767px) calc((100vw - 3.35rem) / 2), (max-width: 1199px) 48vw, 38vw',
+    );
+    const milestoneMobileSource = page
+      .locator('.event-gateway__item')
+      .nth(2)
+      .locator('source[type="image/avif"]');
+    await expect(milestoneMobileSource).toHaveAttribute('srcset', / 240w(?:,|$)/);
+    await expect(milestoneMobileSource).toHaveAttribute('srcset', / 360w(?:,|$)/);
+    await expect(milestoneMobileSource).toHaveAttribute(
+      'sizes',
+      '(max-width: 367px) calc(100vw - 2.5rem), calc((100vw - 3.35rem) / 2)',
     );
 
     await page.goto('/events/weddings/');

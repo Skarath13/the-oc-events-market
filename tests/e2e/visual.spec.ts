@@ -3,6 +3,7 @@ import path from 'node:path';
 import { expect, test } from '@playwright/test';
 
 const viewports = [
+  { width: 360, height: 800 },
   { width: 390, height: 844 },
   { width: 430, height: 932 },
   { width: 768, height: 1024 },
@@ -50,7 +51,10 @@ test('required viewport screenshots and hero safety', async ({ page, browserName
       viewport.width <= 767 ? viewport.width - 42 : 300,
     );
     expect((leadMedia?.height ?? 0) / (leadMedia?.width ?? 1)).toBeCloseTo(0.75, 1);
-    expect((milestoneMedia?.height ?? 0) / (milestoneMedia?.width ?? 1)).toBeCloseTo(4 / 3, 1);
+    expect((milestoneMedia?.height ?? 0) / (milestoneMedia?.width ?? 1)).toBeCloseTo(
+      viewport.width <= 380 ? 0.75 : viewport.width <= 767 ? 1.25 : 4 / 3,
+      1,
+    );
     expect(Math.abs((kidsMedia?.height ?? 0) - (kidsImage?.height ?? 0))).toBeLessThanOrEqual(1);
     await expect(page.locator('[data-actual-video] button')).toHaveCount(0);
     expect(

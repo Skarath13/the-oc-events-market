@@ -32,7 +32,7 @@ type GatewayPresentation = {
 
 const {
   heading = 'One studio. Every kind of celebration.',
-  intro = 'The guest list changes. The standard does not: considered design, sharp logistics, and a celebration that never shows the work behind it.',
+  intro = 'The guest list changes. The standard does not. Expect considered design, sharp logistics, and a celebration that never shows the work behind it.',
   note,
   enableMotion = false,
 } = Astro.props;
@@ -40,15 +40,15 @@ const {
 const presentations: Record<string, GatewayPresentation> = {
   weddings: {
     image: media.actualDessertFavorCollection,
-    alt: 'A four-panel collage of packaged mini cakes and decorated cake pops in pink boxes',
-    caption: 'A sweet send-off, down to the last detail.',
+    alt: 'A four panel collage of packaged mini cakes and decorated cake pops in pink boxes',
+    caption: 'A sweet farewell, down to the last detail.',
     label: 'Wedding planning and design',
     ratio: 'landscape',
     fit: 'contain',
   },
   'baby-bridal-showers': {
     image: media.actualDuckCakePops,
-    alt: 'Mint-green cake pops topped with yellow ducks and pearl sprinkles in a clear stand',
+    alt: 'Mint green cake pops topped with yellow ducks and pearl sprinkles in a clear stand',
     caption: 'The finishing touch, right on cue.',
     label: 'Baby and bridal showers',
     ratio: 'landscape',
@@ -71,8 +71,8 @@ const presentations: Record<string, GatewayPresentation> = {
   },
   'kids-parties': {
     image: media.actualFirstBirthdayBalloonBackdrop,
-    alt: 'Red, white, and yellow balloons frame a white backdrop with a gold number-one balloon',
-    caption: 'A first birthday with full-scale personality.',
+    alt: 'Red, white, and yellow balloons frame a white backdrop with a gold number one balloon',
+    caption: 'A first birthday with a big personality.',
     label: 'Kids’ parties',
     ratio: 'portrait',
     fit: 'contain',
@@ -80,7 +80,7 @@ const presentations: Record<string, GatewayPresentation> = {
   'corporate-brand-events': {
     image: media.corporate,
     alt: 'Formal event space arranged with round tables and warm lighting',
-    caption: 'A hands-on moment before guests arrive.',
+    caption: 'A hands on moment before guests arrive.',
     label: 'Corporate and brand events',
     ratio: 'portrait',
     fit: 'contain',
@@ -96,7 +96,7 @@ const presentations: Record<string, GatewayPresentation> = {
 };
 
 const items = await Promise.all(
-  eventTypes.map(async (eventType) => {
+  eventTypes.map(async (eventType, itemIndex) => {
     const presentation = presentations[eventType.slug] ?? {
       image: media[eventType.image],
       alt: eventType.imageAlt,
@@ -105,7 +105,9 @@ const items = await Promise.all(
       ratio: 'landscape' as const,
       fit: 'cover' as const,
     };
-    const mobileWidths = [480, 720, 960].filter((width) => width <= presentation.image.width);
+    const compactMobileCard = itemIndex === 2 || itemIndex === 3;
+    const mobileWidthTargets = compactMobileCard ? [240, 360, 480, 720] : [480, 720, 960];
+    const mobileWidths = mobileWidthTargets.filter((width) => width <= presentation.image.width);
     if (!mobileWidths.includes(presentation.image.width) && presentation.image.width < 960) {
       mobileWidths.push(presentation.image.width);
     }
@@ -122,6 +124,12 @@ const items = await Promise.all(
     const mobileSrcset = mobileImages
       .map((mobileImage, mobileIndex) => `${mobileImage.src} ${mobileWidths[mobileIndex]}w`)
       .join(', ');
+    const mobileSizes = compactMobileCard
+      ? '(max-width: 367px) calc(100vw - 2.5rem), calc((100vw - 3.35rem) / 2)'
+      : 'calc(100vw - 2.5rem)';
+    const responsiveSizes = compactMobileCard
+      ? '(max-width: 367px) calc(100vw - 2.5rem), (max-width: 767px) calc((100vw - 3.35rem) / 2), (max-width: 1199px) 48vw, 38vw'
+      : '(max-width: 767px) calc(100vw - 2.5rem), (max-width: 1199px) 48vw, 38vw';
     const posterImage =
       mobileImages[mobileWidths.indexOf(720)] ?? mobileImages.at(-1) ?? mobileImages[0];
 
@@ -129,6 +137,8 @@ const items = await Promise.all(
       eventType,
       presentation,
       mobileSrcset,
+      mobileSizes,
+      responsiveSizes,
       videoPoster:
         presentation.motion?.id === 'dessert' ? posterImage?.src : presentation.motion?.poster,
     };
@@ -146,76 +156,81 @@ const items = await Promise.all(
   </div>
   <div class="event-gateway" aria-label="Celebration planning options">
     {
-      items.map(({ eventType, presentation, mobileSrcset, videoPoster }, index) => {
-        const motion = enableMotion ? presentation.motion : undefined;
+      items.map(
+        (
+          { eventType, presentation, mobileSrcset, mobileSizes, responsiveSizes, videoPoster },
+          index,
+        ) => {
+          const motion = enableMotion ? presentation.motion : undefined;
 
-        return (
-          <article
-            class:list={[
-              'event-gateway__item',
-              `event-gateway__item--${index + 1}`,
-              `event-gateway__item--${presentation.ratio}`,
-              `event-gateway__item--${presentation.fit}`,
-            ]}
-          >
-            <div
-              class:list={['event-gateway__media', motion && 'event-gateway__media--motion']}
-              data-actual-video={motion?.id}
-              data-video-description={motion?.description}
-              data-video-state={motion ? 'poster' : undefined}
-              role={motion ? 'button' : undefined}
-              tabindex={motion ? '0' : undefined}
-              aria-label={motion ? `Pause motion: ${motion.description}` : undefined}
+          return (
+            <article
+              class:list={[
+                'event-gateway__item',
+                `event-gateway__item--${index + 1}`,
+                `event-gateway__item--${presentation.ratio}`,
+                `event-gateway__item--${presentation.fit}`,
+              ]}
             >
-              {motion ? (
-                <video
-                  data-actual-video-element
-                  data-src-mp4={motion.mp4}
-                  poster={videoPoster}
-                  width={motion.width}
-                  height={motion.height}
-                  autoplay
-                  muted
-                  loop
-                  playsinline
-                  preload="none"
-                  disablepictureinpicture
-                  disableRemotePlayback
-                  aria-hidden="true"
-                  tabindex="-1"
-                />
-              ) : (
-                <picture>
-                  <source
-                    media="(max-width: 767px)"
-                    type="image/avif"
-                    srcset={mobileSrcset}
-                    sizes="calc(100vw - 2.5rem)"
+              <div
+                class:list={['event-gateway__media', motion && 'event-gateway__media--motion']}
+                data-actual-video={motion?.id}
+                data-video-description={motion?.description}
+                data-video-state={motion ? 'poster' : undefined}
+                role={motion ? 'button' : undefined}
+                tabindex={motion ? '0' : undefined}
+                aria-label={motion ? `Pause motion: ${motion.description}` : undefined}
+              >
+                {motion ? (
+                  <video
+                    data-actual-video-element
+                    data-src-mp4={motion.mp4}
+                    poster={videoPoster}
+                    width={motion.width}
+                    height={motion.height}
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                    preload="none"
+                    disablepictureinpicture
+                    disableRemotePlayback
+                    aria-hidden="true"
+                    tabindex="-1"
                   />
-                  <Image
-                    src={presentation.image}
-                    alt={presentation.alt}
-                    widths={[480, 720, 960, 1200]}
-                    fit={presentation.fit}
-                    sizes="(max-width: 767px) calc(100vw - 2.5rem), (max-width: 1199px) 48vw, 38vw"
-                    loading="lazy"
-                    quality={80}
-                  />
-                </picture>
-              )}
-              <p class="event-gateway__caption">{presentation.caption}</p>
-            </div>
-            <a class="event-gateway__copy" href={`/events/${eventType.slug}/`}>
-              <p class="event-gateway__label">{presentation.label}</p>
-              <h3>{eventType.gatewayTitle}</h3>
-              <p>{eventType.gatewayBody}</p>
-              <span>
-                Explore the celebration <span aria-hidden="true">→</span>
-              </span>
-            </a>
-          </article>
-        );
-      })
+                ) : (
+                  <picture>
+                    <source
+                      media="(max-width: 767px)"
+                      type="image/avif"
+                      srcset={mobileSrcset}
+                      sizes={mobileSizes}
+                    />
+                    <Image
+                      src={presentation.image}
+                      alt={presentation.alt}
+                      widths={[480, 720, 960, 1200]}
+                      fit={presentation.fit}
+                      sizes={responsiveSizes}
+                      loading="lazy"
+                      quality={80}
+                    />
+                  </picture>
+                )}
+                <p class="event-gateway__caption">{presentation.caption}</p>
+              </div>
+              <a class="event-gateway__copy" href={`/events/${eventType.slug}/`}>
+                <p class="event-gateway__label">{presentation.label}</p>
+                <h3>{eventType.gatewayTitle}</h3>
+                <p>{eventType.gatewayBody}</p>
+                <span>
+                  Explore the celebration <span aria-hidden="true">→</span>
+                </span>
+              </a>
+            </article>
+          );
+        },
+      )
     }
   </div>
 </section>
