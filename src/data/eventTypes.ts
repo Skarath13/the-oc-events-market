@@ -31,7 +31,7 @@ export const eventTypes: EventTypePage[] = [
     slug: 'weddings',
     title: 'Weddings',
     gatewayTitle: 'Weddings',
-    gatewayBody: 'Personal, polished, and paced so you can actually live the day you planned.',
+    gatewayBody: 'Personal in every detail, composed from first look to last dance.',
     metaTitle: 'Wedding Planner in Orange County',
     metaDescription:
       'Plan your wedding with an Orange County wedding planner connecting the vision, vendors, design, logistics, and included support on the event day.',
@@ -99,8 +99,7 @@ export const eventTypes: EventTypePage[] = [
     slug: 'baby-bridal-showers',
     title: 'Baby and Bridal Showers',
     gatewayTitle: 'Showers',
-    gatewayBody:
-      'Charming without the cliché. Every toast, table, and sweet detail is in its place.',
+    gatewayBody: 'Warm, polished, and entirely personal, with every toast and table considered.',
     metaTitle: 'Baby and Bridal Shower Planner in Orange County',
     metaDescription:
       'Thoughtful planning and design for Orange County baby showers, bridal showers, and the people gathering to celebrate.',
@@ -169,7 +168,8 @@ export const eventTypes: EventTypePage[] = [
     slug: 'birthdays-milestones',
     title: 'Birthdays and Milestones',
     gatewayTitle: 'Birthdays and Milestones',
-    gatewayBody: 'Big number. Bigger feeling. Built around the person everyone came to celebrate.',
+    gatewayBody:
+      'A celebration with the confidence, character, and energy of the person at its center.',
     metaTitle: 'Party Planner in Orange County',
     metaDescription:
       'Work with an Orange County party planner on first birthdays, adult birthdays, anniversaries, private dinners, and milestone celebrations.',
@@ -238,8 +238,7 @@ export const eventTypes: EventTypePage[] = [
     slug: 'kids-parties',
     title: 'Kids’ Parties',
     gatewayTitle: 'Kids’ Parties',
-    gatewayBody:
-      'High imagination and low chaos. The theme, timing, and adult logistics come together in one plan.',
+    gatewayBody: 'Big imagination, smart pacing, and a plan that keeps the magic moving.',
     metaTitle: 'Kids’ Party Planning and Design in Orange County',
     metaDescription:
       'Orange County children’s party planning that brings the theme, vendors, guest flow, and details on the event day into one organized plan.',
@@ -308,8 +307,7 @@ export const eventTypes: EventTypePage[] = [
     slug: 'corporate-brand-events',
     title: 'Corporate and Brand Events',
     gatewayTitle: 'Corporate and Brand Events',
-    gatewayBody:
-      'Aligned with the brand, clear in the message, and on cue from the first arrival to the final frame.',
+    gatewayBody: 'Purposeful, polished, and on brand from first arrival through final cue.',
     metaTitle: 'Corporate Event Planner in Orange County',
     metaDescription:
       'Work with an Orange County corporate event planner to align the audience, objectives, brand direction, vendors, production details, and run of show.',

@@ -109,7 +109,7 @@ test.describe('site contracts', () => {
               ),
             ])
             .filter((source) =>
-              /(?:hero-desktop|hero-mobile|weddings|birthdays|kids-parties|corporate|planning-detail|network|venue|oc-events-hero|og-default)[._/-]/i.test(
+              /(?:hero-desktop|weddings|birthdays|kids-parties|corporate|planning-detail|network|venue|og-default)[._/-]/i.test(
                 source,
               ),
             ),
@@ -150,7 +150,7 @@ test.describe('site contracts', () => {
       {
         route: '/',
         title: 'Orange County Event Planner and Designer | The OC Events Market',
-        h1: 'Orange County Event Planning, Beautifully Run',
+        h1: 'Events With a Point of View',
       },
       {
         route: '/services/',
@@ -280,7 +280,7 @@ test.describe('navigation interactions', () => {
 
     await page.goto('/');
     const networkImage = page.getByAltText(
-      'Mint green cake pops topped with yellow ducks and pearl sprinkles in a clear stand',
+      'Mint green cake pops finished with yellow ducks and pearl sprinkles',
     );
     await expect(networkImage).toHaveAttribute('srcset', / 400w(?:,|$)/);
     await expect(networkImage).toHaveAttribute('srcset', / 660w(?:,|$)/);
@@ -291,7 +291,7 @@ test.describe('navigation interactions', () => {
     );
 
     const actualImage = page.getByAltText(
-      'A four panel collage of packaged mini cakes and decorated cake pops in pink boxes',
+      'Four dessert favor presentations with mini cakes and decorated cake pops in blush packaging',
     );
     await expect(actualImage).toHaveAttribute('srcset', / 480w(?:,|$)/);
     await expect(actualImage).toHaveAttribute('srcset', / 960w(?:,|$)/);
@@ -341,12 +341,12 @@ test.describe('navigation interactions', () => {
     await expect(
       page.getByRole('heading', {
         level: 1,
-        name: 'Orange County Event Planning, Beautifully Run',
+        name: 'Events With a Point of View',
       }),
     ).toBeVisible();
-    await expect(
-      page.getByText('Creative vision. Calm execution. One accountable planner.'),
-    ).toBeVisible();
+    await expect(page.locator('.home-hero__proof')).toHaveText(
+      'Beautifully imagined. Impeccably run.',
+    );
     await expect(page.locator('main')).not.toContainText(/planning team|marketplace|directory/i);
 
     await page.goto('/trusted-creative-network/');

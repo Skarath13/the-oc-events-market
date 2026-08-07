@@ -58,6 +58,15 @@ When publishing, also set `author`, `publishedAt`, and—when applicable—`upda
 ## Editorial rules
 
 - Use one clear H1, direct answer-first openings, descriptive headings, and useful internal links.
+- Every line must earn its place by creating desire, expressing a point of view, clarifying a
+  decision, or moving the reader forward. Cut copy that merely narrates the image, restates the
+  section, or announces the obvious. Phrases such as "real events, real details" are labels, not
+  ideas.
+- Keep visible image captions editorial and restrained. Let the surrounding headline and body
+  carry the brand promise; use alt text only to describe the meaningful visual content accurately
+  for someone who cannot see it.
+- Prefer confident, specific language over filler such as "beautiful moments," "special details,"
+  "made with love," or "we bring your vision to life."
 - Describe scope with “may” or “when included” until package inclusions are contractually verified.
 - Never create a case study from stock photography.
 - Never publish client names, addresses, dates, budgets, images, or vendor credits without

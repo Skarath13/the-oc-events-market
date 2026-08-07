@@ -102,27 +102,27 @@ export const coreFaqs = [
 
 export const capabilityRows = [
   {
-    title: 'A point of view',
-    body: 'Translate the occasion, the people, and the feeling you want into a creative direction every decision can follow.',
+    title: 'Creative direction',
+    body: 'Give the occasion a distinct visual language, grounded in the people, setting, and feeling at its center.',
   },
   {
-    title: 'A smarter roadmap',
-    body: 'Put priorities, budget decisions, deadlines, and approvals in the right order before they become expensive surprises.',
+    title: 'Intelligent priorities',
+    body: 'Sequence the budget, scope, approvals, and deadlines so each decision strengthens the next.',
   },
   {
-    title: 'The right creative team',
-    body: 'Source the missing specialists or bring your chosen vendors into one clear communication rhythm.',
+    title: 'The right collaborators',
+    body: 'Curate the missing specialists or bring your chosen partners into one clear working rhythm.',
   },
   {
-    title: 'A room that works beautifully',
-    body: 'Connect layout, rentals, decor, lighting, and guest flow so the design is as functional as it is memorable.',
+    title: 'Space with purpose',
+    body: 'Shape the layout, rentals, lighting, and guest flow so beauty and function feel inseparable.',
   },
   {
-    title: 'Timing without the tension',
-    body: 'Build the schedule, arrival plan, handoffs, and contingencies that keep the celebration moving naturally.',
+    title: 'Production with precision',
+    body: 'Build the timing, arrivals, handoffs, and contingencies that keep the experience moving naturally.',
   },
   {
-    title: 'A calm center on event day',
-    body: 'When event day management is included, oversee the timeline, vendor flow, setup priorities, and key transitions.',
+    title: 'A calm command',
+    body: 'When event day management is included, direct the timeline, vendor flow, setup, and key transitions.',
   },
 ] as const;

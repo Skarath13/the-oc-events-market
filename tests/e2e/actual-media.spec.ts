@@ -5,23 +5,34 @@ const actualVideos = {
     path: '/videos/actual/actual-ivone-event-details-v1.mp4',
     width: 576,
     height: 768,
-    caption: 'A hands on moment before guests arrive.',
+    caption: 'Every touchpoint considered.',
+    description: 'a planner arranging the final details of an outdoor sweets display',
   },
   dessert: {
     path: '/videos/actual/actual-dessert-finishing-v1.mp4',
     width: 576,
     height: 480,
-    caption: 'The finishing touch, right on cue.',
+    caption: 'Small detail. Signature impact.',
+    description: 'a planner adding the final touches to a dessert display',
   },
 } as const;
 
 const actualGalleryAlts = [
-  'Buffet table set with In N Out meal bags, salad, drinks, and vintage car centerpieces',
-  'Black luxury restroom trailer with two lit guest entrances at dusk',
-  'Red and black guest tables arranged with chairs and place settings',
-  'Birthday gift table with colorful bags, framed family photos, and red mirrored linen',
-  'Pink and chocolate cupcakes with cherries displayed on floral tiered stands',
-  'Refreshment table with popcorn, red licorice, soda, and pink drinks',
+  'Buffet with individual meal bags, fresh salad, bottled soda, and vintage car accents',
+  'Black restroom trailer with two illuminated guest entrances at dusk',
+  'Guest tables with red linens, black chairs, and custom place settings',
+  'Birthday gift display with colorful bags, framed family photos, and metallic red linen',
+  'Cupcakes topped with cherries and arranged on vintage floral tiered stands',
+  'Popcorn, candy, soda, and pink drinks arranged for guests to serve themselves',
+] as const;
+
+const actualGalleryCaptions = [
+  'Guest Hospitality',
+  'Guest Comfort',
+  'Tablescape and Flow',
+  'Personal Details',
+  'Dessert Styling',
+  'Refreshment Service',
 ] as const;
 
 test('homepage flows through all six new owner supplied event photos', async ({
@@ -41,7 +52,12 @@ test('homepage flows through all six new owner supplied event photos', async ({
     await expect(image).toHaveAttribute('srcset', / 320w(?:,|$)/);
   }
 
-  await expect(gallery.locator('figcaption')).toHaveCount(actualGalleryAlts.length);
+  await expect(page.getByText('Selected Work', { exact: true })).toBeVisible();
+  await expect(
+    page.getByRole('heading', { level: 2, name: 'Every Detail Earns Its Place.' }),
+  ).toBeVisible();
+  await expect(gallery.locator('figcaption')).toHaveText(actualGalleryCaptions);
+  await expect(page.getByText('Real events, real details', { exact: true })).toHaveCount(0);
   expect(
     await gallery
       .locator('img')
@@ -79,10 +95,7 @@ test.describe('actual event media playback', () => {
       await expect(root).toHaveAttribute('role', 'button');
       await expect(root).toHaveAttribute('tabindex', '0');
       await expect(root.locator('.event-gateway__caption')).toHaveText(expected.caption);
-      await expect(root).toHaveAttribute(
-        'aria-label',
-        `Pause motion: ${id === 'ivone' ? 'Ivone arranging an outdoor sweets display' : 'dessert finishing detail'}`,
-      );
+      await expect(root).toHaveAttribute('aria-label', `Pause motion: ${expected.description}`);
 
       const playback = await video.evaluate((element: HTMLVideoElement) => ({
         currentSrc: element.currentSrc,
@@ -149,7 +162,7 @@ test.describe('actual event media playback', () => {
     await expect(root).toHaveAttribute('data-video-state', 'playing', { timeout: 15_000 });
     await expect(root).toHaveAttribute(
       'aria-label',
-      'Pause motion: Ivone arranging an outdoor sweets display',
+      'Pause motion: Ivone arranging the final details of an outdoor sweets display',
     );
 
     const playback = await video.evaluate((element: HTMLVideoElement) => ({

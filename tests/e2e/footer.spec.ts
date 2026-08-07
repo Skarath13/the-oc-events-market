@@ -41,5 +41,5 @@ test('footer links use decorative icons without changing names', async ({ page }
   );
 
   await expect(footer.getByRole('link', { name: 'Services', exact: true })).toBeVisible();
-  await expect(footer.getByRole('link', { name: 'Check availability', exact: true })).toBeVisible();
+  await expect(footer.getByRole('link', { name: 'Begin Planning', exact: true })).toBeVisible();
 });

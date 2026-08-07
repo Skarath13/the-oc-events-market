@@ -529,6 +529,10 @@
     margin-left: max(0px, calc((100vw - var(--content-max)) / 2));
   }
 
+  .home-hero__copy-inner > .eyebrow {
+    margin-bottom: 0.85rem;
+  }
+
   .home-hero h1 {
     max-width: 16ch;
     font-size: clamp(3.35rem, 5.2vw, 4.9rem);
@@ -2064,6 +2068,11 @@
   .home-hero h1,
   .home-hero__copy {
     color: var(--color-white);
+  }
+
+  .home-hero__copy-inner > .eyebrow {
+    color: var(--color-logo-cream);
+    text-shadow: 0 1px 12px rgb(0 0 0 / 0.58);
   }
 
   .home-hero h1 {
