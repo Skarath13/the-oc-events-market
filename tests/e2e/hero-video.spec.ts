@@ -7,9 +7,9 @@ const heroVideos = {
     height: 480,
   },
   mobile: {
-    path: '/videos/actual/actual-ivone-event-details-v1.mp4',
-    width: 576,
-    height: 768,
+    path: '/videos/hero/oc-events-hero-mobile-v1.mp4',
+    width: 720,
+    height: 1280,
   },
 } as const;
 
