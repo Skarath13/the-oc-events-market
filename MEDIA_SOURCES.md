@@ -33,10 +33,10 @@ or event documentation.
 
 ## Owner-supplied event media
 
-Source filenames are dated August 1 and August 3, 2026; the files were supplied for this website on
-August 6, 2026. The site places selected owner-supplied event details alongside visually relevant
-celebration categories. Those placements do not establish the depicted event’s client, venue,
-vendor, category, or The OC Events Market’s exact scope of work.
+Source filenames are dated August 1, August 3, and August 7, 2026; the files were supplied for this
+website on August 6 and August 7, 2026. The site places selected owner-supplied event details
+alongside visually relevant celebration categories. Those placements do not establish the depicted
+event’s client, venue, vendor, category, or The OC Events Market’s exact scope of work.
 
 ### Published still derivatives
 
@@ -52,6 +52,24 @@ vendor, category, or The OC Events Market’s exact scope of work.
 - `src/assets/images/actual/fiftieth-milestone-balloon-backdrop.webp`
   - Source: owner-provided `Pasted Image 1.jpg`, supplied August 6, 2026
   - Use: birthday and milestone planning card and page hero
+- `src/assets/images/actual/buffet-service-table.webp`
+  - Source: `WhatsApp Image 2026-08-07 at 12.55.34 PM.jpeg`
+  - Use: homepage real event detail gallery
+- `src/assets/images/actual/restroom-trailer.webp`
+  - Source: `WhatsApp Image 2026-08-07 at 12.55.34 PM (1).jpeg`
+  - Use: homepage real event detail gallery; phone interface was cropped out
+- `src/assets/images/actual/guest-table-setup.webp`
+  - Source: `WhatsApp Image 2026-08-07 at 12.55.33 PM (2).jpeg`
+  - Use: homepage real event detail gallery
+- `src/assets/images/actual/birthday-gift-table.webp`
+  - Source: `WhatsApp Image 2026-08-07 at 12.55.33 PM (3).jpeg`
+  - Use: homepage real event detail gallery
+- `src/assets/images/actual/cupcake-display.webp`
+  - Source: `WhatsApp Image 2026-08-07 at 12.55.33 PM (1).jpeg`
+  - Use: homepage real event detail gallery
+- `src/assets/images/actual/refreshment-table.webp`
+  - Source: `WhatsApp Image 2026-08-07 at 12.55.33 PM.jpeg`
+  - Use: homepage real event detail gallery
 
 The WebP derivatives are resized only when needed, stripped of source metadata, and served through
 Astro’s responsive image pipeline.
@@ -80,6 +98,8 @@ The project owner directed that the supplied media be published as event work. P
 client or venue permission, vendor-credit requirements, and decor or product-provider attribution
 must remain documented outside the repository. Ivone's identity in the supplied clip and poster is
 confirmed, and the About page uses that portrait and name. No role, title, ownership, or biography
-is inferred from the identity confirmation. Other supplied media with recognizable attendees,
-client or event names, separate business branding, or visible AI-edit/export marks was not
-published.
+is inferred from the identity confirmation. The August 7 gallery includes visible third-party
+product branding and small family photographs at the project owner’s direct request. Captions remain
+category-neutral and do not present any brand, person, venue, or vendor as a client, partner, or
+endorser. Supplied media with visible AI-edit or export marks is not published; the trailer
+screenshot was cropped to remove the phone interface.

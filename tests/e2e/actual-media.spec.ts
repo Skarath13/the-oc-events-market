@@ -15,6 +15,42 @@ const actualVideos = {
   },
 } as const;
 
+const actualGalleryAlts = [
+  'Buffet table set with In N Out meal bags, salad, drinks, and vintage car centerpieces',
+  'Black luxury restroom trailer with two lit guest entrances at dusk',
+  'Red and black guest tables arranged with chairs and place settings',
+  'Birthday gift table with colorful bags, framed family photos, and red mirrored linen',
+  'Pink and chocolate cupcakes with cherries displayed on floral tiered stands',
+  'Refreshment table with popcorn, red licorice, soda, and pink drinks',
+] as const;
+
+test('homepage flows through all six new owner supplied event photos', async ({
+  page,
+}, testInfo) => {
+  test.skip(testInfo.project.name !== 'chromium-desktop', 'One canonical gallery contract');
+
+  await page.goto('/', { waitUntil: 'domcontentloaded' });
+  const gallery = page.locator('.actual-work__grid');
+  await gallery.scrollIntoViewIfNeeded();
+  await expect(gallery.locator('.actual-work__item')).toHaveCount(actualGalleryAlts.length);
+
+  for (const alt of actualGalleryAlts) {
+    const image = gallery.getByAltText(alt);
+    await expect(image).toBeVisible();
+    await expect(image).toHaveAttribute('loading', 'lazy');
+    await expect(image).toHaveAttribute('srcset', / 320w(?:,|$)/);
+  }
+
+  await expect(gallery.locator('figcaption')).toHaveCount(actualGalleryAlts.length);
+  expect(
+    await gallery
+      .locator('img')
+      .evaluateAll((images) =>
+        images.every((image) => getComputedStyle(image).objectFit === 'cover'),
+      ),
+  ).toBe(true);
+});
+
 test.describe('actual event media playback', () => {
   test.use({ contextOptions: { reducedMotion: 'no-preference' } });
 

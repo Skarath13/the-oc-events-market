@@ -20,22 +20,30 @@ owner-supplied event media is recorded separately below.
 
 ## Owner-supplied event media
 
-Source filenames are dated August 1 and August 3, 2026; the files were supplied for this website on
-August 6, 2026. The site places selected details alongside visually relevant celebration categories.
-Those placements do not establish the depicted event’s client, venue, vendor, category, or The OC
-Events Market’s exact scope of work. Photographer, client, venue, and provider permissions and any
-credit requirements must remain documented.
+Source filenames are dated August 1, August 3, and August 7, 2026; the files were supplied for this
+website on August 6 and August 7, 2026. The site places selected details alongside visually relevant
+celebration categories. Those placements do not establish the depicted event’s client, venue,
+vendor, category, or The OC Events Market’s exact scope of work. Photographer, client, venue, and
+provider permissions and any credit requirements must remain documented.
 
-| Local derivative                                                         | Owner-provided source                           | Intended use                                      |
-| ------------------------------------------------------------------------ | ----------------------------------------------- | ------------------------------------------------- |
-| `src/assets/images/actual/dessert-favor-collection.webp`                 | `WhatsApp Image 2026-08-01 at 4.50.42 PM.jpeg`  | Wedding planning card and page hero               |
-| `src/assets/images/actual/duck-cake-pops.webp`                           | `WhatsApp Image 2026-08-01 at 7.23.58 PM.jpeg`  | Shower planning card, page hero, and video poster |
-| `src/assets/images/actual/first-birthday-balloon-backdrop.webp`          | `WhatsApp Image 2026-08-03 at 11.20.07 AM.jpeg` | Kids’ party planning card and page hero           |
-| `src/assets/images/actual/fiftieth-milestone-balloon-backdrop.webp`      | `Pasted Image 1.jpg`, supplied August 6, 2026   | Milestone planning card and page hero             |
-| `public/videos/actual/actual-ivone-event-details-v1.mp4` and poster WebP | `WhatsApp Video 2026-08-01 at 4.27.45 PM.mp4`   | Mobile hero, cards, and About; subject is Ivone   |
-| `public/videos/actual/actual-dessert-finishing-v1.mp4` and poster WebP   | `WhatsApp Video 2026-08-01 at 4.38.31 PM.mp4`   | Desktop hero and shower-detail motion cards       |
+| Local derivative                                                         | Owner-provided source                               | Intended use                                      |
+| ------------------------------------------------------------------------ | --------------------------------------------------- | ------------------------------------------------- |
+| `src/assets/images/actual/dessert-favor-collection.webp`                 | `WhatsApp Image 2026-08-01 at 4.50.42 PM.jpeg`      | Wedding planning card and page hero               |
+| `src/assets/images/actual/duck-cake-pops.webp`                           | `WhatsApp Image 2026-08-01 at 7.23.58 PM.jpeg`      | Shower planning card, page hero, and video poster |
+| `src/assets/images/actual/first-birthday-balloon-backdrop.webp`          | `WhatsApp Image 2026-08-03 at 11.20.07 AM.jpeg`     | Kids’ party planning card and page hero           |
+| `src/assets/images/actual/fiftieth-milestone-balloon-backdrop.webp`      | `Pasted Image 1.jpg`, supplied August 6, 2026       | Milestone planning card and page hero             |
+| `src/assets/images/actual/buffet-service-table.webp`                     | `WhatsApp Image 2026-08-07 at 12.55.34 PM.jpeg`     | Homepage real event detail gallery                |
+| `src/assets/images/actual/restroom-trailer.webp`                         | `WhatsApp Image 2026-08-07 at 12.55.34 PM (1).jpeg` | Homepage gallery; phone interface cropped out     |
+| `src/assets/images/actual/guest-table-setup.webp`                        | `WhatsApp Image 2026-08-07 at 12.55.33 PM (2).jpeg` | Homepage real event detail gallery                |
+| `src/assets/images/actual/birthday-gift-table.webp`                      | `WhatsApp Image 2026-08-07 at 12.55.33 PM (3).jpeg` | Homepage real event detail gallery                |
+| `src/assets/images/actual/cupcake-display.webp`                          | `WhatsApp Image 2026-08-07 at 12.55.33 PM (1).jpeg` | Homepage real event detail gallery                |
+| `src/assets/images/actual/refreshment-table.webp`                        | `WhatsApp Image 2026-08-07 at 12.55.33 PM.jpeg`     | Homepage real event detail gallery                |
+| `public/videos/actual/actual-ivone-event-details-v1.mp4` and poster WebP | `WhatsApp Video 2026-08-01 at 4.27.45 PM.mp4`       | Mobile hero, cards, and About; subject is Ivone   |
+| `public/videos/actual/actual-dessert-finishing-v1.mp4` and poster WebP   | `WhatsApp Video 2026-08-01 at 4.38.31 PM.mp4`       | Desktop hero and shower-detail motion cards       |
 
 `public/social/og-default.jpg` is a retired crop of the licensed hero source; site metadata now uses
 the owner-supplied dessert-video poster. The temporary favicon files are project-generated
 placeholders, not the supplied business logo. No image is
 presented as proof of a client relationship, venue partnership, or complete portfolio project.
+Visible product branding and small family photographs in the August 7 gallery appear at the project
+owner’s direct request and are not described as client, vendor, partner, or endorsement proof.

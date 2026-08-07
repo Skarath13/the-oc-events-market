@@ -1,0 +1,73 @@
+---
+import { Image } from 'astro:assets';
+import { media } from '@/data/media';
+
+const galleryItems = [
+  {
+    image: media.actualBuffetServiceTable,
+    alt: 'Buffet table set with In N Out meal bags, salad, drinks, and vintage car centerpieces',
+    caption: 'A food moment with its own point of view.',
+  },
+  {
+    image: media.actualRestroomTrailer,
+    alt: 'Black luxury restroom trailer with two lit guest entrances at dusk',
+    caption: 'Guest comfort, considered.',
+  },
+  {
+    image: media.actualGuestTableSetup,
+    alt: 'Red and black guest tables arranged with chairs and place settings',
+    caption: 'The room, ready to welcome.',
+  },
+  {
+    image: media.actualBirthdayGiftTable,
+    alt: 'Birthday gift table with colorful bags, framed family photos, and red mirrored linen',
+    caption: 'A gift table made personal.',
+  },
+  {
+    image: media.actualCupcakeDisplay,
+    alt: 'Pink and chocolate cupcakes with cherries displayed on floral tiered stands',
+    caption: 'Dessert, down to the last detail.',
+  },
+  {
+    image: media.actualRefreshmentTable,
+    alt: 'Refreshment table with popcorn, red licorice, soda, and pink drinks',
+    caption: 'Refreshments, ready.',
+  },
+] as const;
+
+const galleryWidths = [320, 480, 640, 800, 1040, 1280, 1600];
+---
+
+<section class="actual-work section-shell" aria-labelledby="actual-work-title">
+  <div class="section-heading section-heading--split actual-work__heading">
+    <div>
+      <p class="eyebrow">Real events, real details</p>
+      <h2 id="actual-work-title">Every detail tells the same story.</h2>
+    </div>
+    <p>
+      Guest comfort, food, gifting, seating, sweets, and every last setup detail belong to one
+      thoughtful experience.
+    </p>
+  </div>
+  <div class="actual-work__grid">
+    {
+      galleryItems.map((item, index) => (
+        <figure class:list={['actual-work__item', `actual-work__item--${index + 1}`]}>
+          <Image
+            src={item.image}
+            alt={item.alt}
+            widths={galleryWidths.filter((width) => width <= item.image.width)}
+            sizes={
+              index === 0 || index === 3
+                ? '(max-width: 767px) calc(100vw - 2.5rem), 60vw'
+                : '(max-width: 767px) calc((100vw - 3.15rem) / 2), 38vw'
+            }
+            loading="lazy"
+            quality={78}
+          />
+          <figcaption>{item.caption}</figcaption>
+        </figure>
+      ))
+    }
+  </div>
+</section>

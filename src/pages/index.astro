@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import ActualWorkGallery from '@/components/global/ActualWorkGallery.astro';
 import CapabilityIndex from '@/components/global/CapabilityIndex.astro';
 import EventGateway from '@/components/global/EventGateway.astro';
 import FaqList from '@/components/global/FaqList.astro';
@@ -145,6 +146,8 @@ const origin = Astro.site ?? new URL('https://the-oc-events-market.example');
       </div>
     </div>
   </section>
+
+  <ActualWorkGallery />
 
   <section class="section-shell home-guidance">
     <article class="network-brief">

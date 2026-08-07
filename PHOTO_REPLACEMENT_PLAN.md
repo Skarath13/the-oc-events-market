@@ -9,11 +9,13 @@ work.
 The homepage gateway places the packaged favors with Weddings, dessert finishing with Showers, the
 50th backdrop with Milestones, the first-birthday backdrop with Kids’ Parties, and Ivone’s setup clip
 on the Corporate and Brand Events card. These are presentation placements, not verified source-event
-classifications. The same stills lead the corresponding event pages. Ivone’s confirmed portrait
-appears on About. The Pexels homepage hero, Unsplash About hero, corporate event still, network
-imagery, venue imagery, and service/planning imagery remain licensed editorial stock until matching
-rights-cleared event media is available. Portrait balloon images use portrait frames so the work is
-visible without an aggressive landscape crop.
+classifications. A separate homepage gallery now presents six additional owner-supplied setup and
+detail photographs without assigning them to an event category or client relationship. The same
+stills lead the corresponding event pages. Ivone’s confirmed portrait appears on About. Retired
+Pexels hero assets, the Unsplash About hero, corporate event still, network imagery, venue imagery,
+and service/planning imagery remain licensed editorial stock until matching rights-cleared event
+media is available. Portrait balloon images use portrait frames so the work is visible without an
+aggressive landscape crop.
 
 ## Replacement order
 

@@ -264,7 +264,7 @@ test.describe('navigation interactions', () => {
 
     const mobile = Boolean(viewport && viewport.width <= 767);
     const routes = [
-      { path: '/', maxHeight: mobile ? 6_900 : 5_200 },
+      { path: '/', maxHeight: mobile ? 7_600 : 6_200 },
       { path: '/services/', maxHeight: mobile ? 5_600 : 4_200 },
       {
         path: '/services/full-service-planning-design/',

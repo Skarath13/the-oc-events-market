@@ -1,14 +1,15 @@
 import { expect, test } from '@playwright/test';
 
-test('footer displays Romans 10:9', async ({ page }) => {
+test('pre-footer banner displays only the Romans 10:9 reference', async ({ page }) => {
   await page.goto('/');
 
-  const verse = page.locator('footer blockquote[cite="https://ebible.org/eng-web/ROM10.htm"]');
-  await expect(verse).toContainText(
-    'that if you will confess with your mouth that Jesus is Lord and believe in your heart that God raised him from the dead, you will be saved.',
-  );
-  await expect(verse.locator('cite')).toHaveText('Romans 10:9');
-  await expect(verse.locator('.site-footer__verse-icon[aria-hidden="true"] svg')).toHaveCount(1);
+  const banner = page.locator('.verse-banner');
+  await expect(banner).toHaveText('Romans 10:9');
+  await expect(banner.locator('blockquote, cite, svg')).toHaveCount(0);
+  await expect(page.locator('footer')).not.toContainText('you will be saved');
+  expect(
+    await banner.evaluate((element) => element.nextElementSibling?.matches('footer.site-footer')),
+  ).toBe(true);
 });
 
 test('planner responsibilities use decorative icons on every capability index', async ({

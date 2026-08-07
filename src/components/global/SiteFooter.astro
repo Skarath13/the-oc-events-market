@@ -1,7 +1,6 @@
 ---
 import {
   IconAccessible,
-  IconBible,
   IconBriefcase,
   IconCalendarEvent,
   IconChecklist,
@@ -32,6 +31,10 @@ const footerNavigationIcons = {
   '/accessibility/': IconAccessible,
 } as const;
 ---
+
+<aside class="verse-banner" aria-label="Bible verse reference">
+  <p>Romans 10:9</p>
+</aside>
 
 <footer class="site-footer">
   <div class="site-footer__top">
@@ -124,16 +127,6 @@ const footerNavigationIcons = {
       }
     </div>
   </div>
-  <blockquote class="site-footer__verse" cite="https://ebible.org/eng-web/ROM10.htm">
-    <span class="site-footer__verse-icon" aria-hidden="true">
-      <IconBible size={24} stroke={1.4} />
-    </span>
-    <p>
-      “that if you will confess with your mouth that Jesus is Lord and believe in your heart that
-      God raised him from the dead, you will be saved.”
-    </p>
-    <cite>Romans 10:9</cite>
-  </blockquote>
   <div class="site-footer__bottom">
     <p>© {new Date().getFullYear()} {siteConfig.businessName}</p>
     <p>Event Planning and Design in Orange County, California</p>
