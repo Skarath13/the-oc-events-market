@@ -32,7 +32,10 @@ test('required viewport screenshots and hero safety', async ({ page, browserName
       caret: 'hide',
     });
     const h1 = await page.locator('.home-hero h1').boundingBox();
-    const cta = await page.getByRole('link', { name: 'Begin Planning' }).first().boundingBox();
+    const cta = await page
+      .locator('.home-hero')
+      .getByRole('link', { name: 'Plan My Event' })
+      .boundingBox();
     expect(h1).not.toBeNull();
     expect(cta).not.toBeNull();
     expect((h1?.y ?? viewport.height) + (h1?.height ?? 0)).toBeLessThan(viewport.height);

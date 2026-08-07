@@ -2,9 +2,9 @@ import { expect, test } from '@playwright/test';
 
 const heroVideos = {
   desktop: {
-    path: '/videos/actual/actual-dessert-finishing-v1.mp4',
-    width: 576,
-    height: 480,
+    path: '/videos/hero/oc-events-hero-desktop-v1.mp4',
+    width: 1440,
+    height: 810,
   },
   mobile: {
     path: '/videos/hero/oc-events-hero-mobile-v1.mp4',
@@ -15,6 +15,35 @@ const heroVideos = {
 
 test.describe('home hero video playback', () => {
   test.use({ contextOptions: { reducedMotion: 'no-preference' } });
+
+  test('uses the video as a full screen hero backdrop', async ({ page, viewport }) => {
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
+
+    const layout = await page.locator('.home-hero').evaluate((hero) => {
+      const media = hero.querySelector<HTMLElement>('[data-home-hero-media]');
+      const copy = hero.querySelector<HTMLElement>('.home-hero__copy');
+      if (!media || !copy) throw new Error('Hero media or copy is missing');
+
+      const heroRect = hero.getBoundingClientRect();
+      const mediaRect = media.getBoundingClientRect();
+      const copyRect = copy.getBoundingClientRect();
+      return {
+        copy: copyRect.toJSON(),
+        hero: heroRect.toJSON(),
+        media: mediaRect.toJSON(),
+      };
+    });
+
+    expect(layout.hero.height).toBeGreaterThanOrEqual((viewport?.height ?? 900) - 90);
+    expect(layout.media.x).toBeCloseTo(layout.hero.x, 0);
+    expect(layout.media.y).toBeCloseTo(layout.hero.y, 0);
+    expect(layout.media.width).toBeCloseTo(layout.hero.width, 0);
+    expect(layout.media.height).toBeCloseTo(layout.hero.height, 0);
+    expect(layout.copy.x).toBeCloseTo(layout.hero.x, 0);
+    expect(layout.copy.y).toBeCloseTo(layout.hero.y, 0);
+    expect(layout.copy.width).toBeCloseTo(layout.hero.width, 0);
+    expect(layout.copy.height).toBeCloseTo(layout.hero.height, 0);
+  });
 
   test('uses a silent inline responsive source and presents a decoded frame', async ({
     page,

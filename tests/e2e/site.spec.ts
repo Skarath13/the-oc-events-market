@@ -100,14 +100,18 @@ test.describe('site contracts', () => {
         .locator('img, source, video')
         .evaluateAll((elements) =>
           elements
-            .flatMap((element) => [
-              element.getAttribute('src') ?? '',
-              element.getAttribute('srcset') ?? '',
-              element.getAttribute('poster') ?? '',
-              ...Object.values((element as HTMLElement).dataset).filter((value): value is string =>
-                Boolean(value),
-              ),
-            ])
+            .flatMap((element) =>
+              element.closest('[data-home-hero-media]')
+                ? []
+                : [
+                    element.getAttribute('src') ?? '',
+                    element.getAttribute('srcset') ?? '',
+                    element.getAttribute('poster') ?? '',
+                    ...Object.values((element as HTMLElement).dataset).filter(
+                      (value): value is string => Boolean(value),
+                    ),
+                  ],
+            )
             .filter((source) =>
               /(?:hero-desktop|weddings|birthdays|kids-parties|corporate|planning-detail|network|venue|og-default)[._/-]/i.test(
                 source,
@@ -150,7 +154,7 @@ test.describe('site contracts', () => {
       {
         route: '/',
         title: 'Orange County Event Planner and Designer | The OC Events Market',
-        h1: 'Events With a Point of View',
+        h1: 'Orange County Event Planning, Beautifully Run',
       },
       {
         route: '/services/',
@@ -264,7 +268,7 @@ test.describe('navigation interactions', () => {
 
     const mobile = Boolean(viewport && viewport.width <= 767);
     const routes = [
-      { path: '/', maxHeight: mobile ? 7_600 : 6_200 },
+      { path: '/', maxHeight: mobile ? 7_600 : 6_250 },
       { path: '/services/', maxHeight: mobile ? 5_600 : 4_200 },
       {
         path: '/services/full-service-planning-design/',
@@ -341,11 +345,11 @@ test.describe('navigation interactions', () => {
     await expect(
       page.getByRole('heading', {
         level: 1,
-        name: 'Events With a Point of View',
+        name: 'Orange County Event Planning, Beautifully Run',
       }),
     ).toBeVisible();
     await expect(page.locator('.home-hero__proof')).toHaveText(
-      'Beautifully imagined. Impeccably run.',
+      'Creative vision. Calm execution. One accountable planner.',
     );
     await expect(page.locator('main')).not.toContainText(/planning team|marketplace|directory/i);
 

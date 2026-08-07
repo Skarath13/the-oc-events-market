@@ -12,9 +12,9 @@ import { organizationSchema, websiteSchema } from '@/lib/seo';
 
 const heroMedia = {
   desktop: {
-    mp4: '/videos/actual/actual-dessert-finishing-v1.mp4',
-    webm: undefined,
-    poster: '/videos/actual/actual-dessert-finishing-v1-poster.webp',
+    mp4: '/videos/hero/oc-events-hero-desktop-v1.mp4',
+    webm: '/videos/hero/oc-events-hero-desktop-v1.webm',
+    poster: '/videos/hero/oc-events-hero-desktop-v1-poster.webp',
   },
   mobile: {
     mp4: '/videos/hero/oc-events-hero-mobile-v1.mp4',
@@ -53,28 +53,27 @@ const origin = Astro.site ?? new URL('https://the-oc-events-market.example');
   <section class="home-hero">
     <div class="home-hero__copy">
       <div class="home-hero__copy-inner">
-        <p class="eyebrow">Orange County Event Planning and Design</p>
-        <h1>Events With a Point of View</h1>
+        <h1>Orange County Event Planning, Beautifully Run</h1>
         <p class="home-hero__body">
-          We create distinctive celebrations and direct every moving part behind them, so the
-          experience feels personal, polished, and entirely your own.
+          We turn weddings, milestones, and brand moments into beautifully paced experiences. A
+          clear creative point of view, the right people, and every detail stay in sync.
         </p>
         <div class="home-hero__actions">
           <a
             class="button button--dark"
             href="/contact/"
             data-analytics-event="primary_cta_click"
-            data-analytics-context="home_hero">Begin Planning</a
+            data-analytics-context="home_hero">Plan My Event</a
           >
           <a
             class="button button--outline"
             href={contactLinks.inquiryText}
             data-analytics-event="text_cta_click"
-            data-analytics-context="home_hero">Text the Studio</a
+            data-analytics-context="home_hero">Text Event Details</a
           >
-          <a class="text-link" href="/celebrations/">Explore Our Events</a>
+          <a class="text-link" href="/celebrations/">Explore Celebrations</a>
         </div>
-        <p class="home-hero__proof">Beautifully imagined. Impeccably run.</p>
+        <p class="home-hero__proof">Creative vision. Calm execution. One accountable planner.</p>
       </div>
     </div>
     <div class="home-hero__media" data-home-hero-media data-video-state="poster">
@@ -89,14 +88,14 @@ const origin = Astro.site ?? new URL('https://the-oc-events-market.example');
           media="(min-width: 768px)"
           type="image/webp"
           srcset={heroMedia.desktop.poster}
-          sizes="50vw"
+          sizes="100vw"
         />
         <img
           src={heroMedia.desktop.poster}
-          sizes="50vw"
-          alt="Event tables styled with floral, dining, and dessert details"
-          width={576}
-          height={480}
+          sizes="100vw"
+          alt="Sunlit outdoor event table arranged with greenery, flowers, glassware, and woven place settings"
+          width={1440}
+          height={810}
           loading="eager"
           fetchpriority="high"
           decoding="sync"
