@@ -193,6 +193,7 @@ test.describe('site contracts', () => {
       'That support meets you wherever you are: whether you need a coordinator',
     );
     await expect(page.locator('.about-transition[aria-hidden="true"]')).toHaveCount(2);
+    await expect(page.locator('.about-transition__squiggle')).toHaveCount(0);
     await expect(
       page.getByRole('heading', { level: 2, name: 'Beautiful Moments Begin Here' }),
     ).toBeVisible();
@@ -216,6 +217,75 @@ test.describe('site contracts', () => {
     await expect(
       page.locator('[data-about-reveal]:not([data-about-reveal="visible"])'),
     ).toHaveCount(0);
+  });
+
+  test('About keeps panel copy evenly inset across responsive widths', async ({
+    page,
+  }, testInfo) => {
+    test.skip(testInfo.project.name !== 'chromium-desktop', 'One canonical responsive sweep');
+    await page.goto('/about/');
+
+    for (const width of [320, 360, 390, 430, 767, 768, 820, 1024, 1280, 1440, 1920]) {
+      await page.setViewportSize({ width, height: width <= 430 ? 844 : 900 });
+
+      const overflow = await page.evaluate(
+        () => document.documentElement.scrollWidth - window.innerWidth,
+      );
+      expect(overflow, `${width}px horizontal overflow`).toBeLessThanOrEqual(1);
+
+      const transitions = await page.locator('.about-transition').evaluateAll((elements) =>
+        elements.map((element) => {
+          const rect = element.getBoundingClientRect();
+          return { left: rect.left, right: rect.right };
+        }),
+      );
+      for (const transition of transitions) {
+        expect(Math.abs(transition.left), `${width}px transition left edge`).toBeLessThanOrEqual(1);
+        expect(
+          Math.abs(transition.right - width),
+          `${width}px transition right edge`,
+        ).toBeLessThanOrEqual(1);
+      }
+
+      const transitionShapes = await page
+        .locator('.about-transition')
+        .evaluateAll((elements) =>
+          elements.map((element) => getComputedStyle(element, '::before').clipPath),
+        );
+      expect(transitionShapes, `${width}px distinct transition shapes`).toHaveLength(2);
+      expect(transitionShapes.every((shape) => shape !== 'none')).toBe(true);
+      expect(new Set(transitionShapes).size, `${width}px transition shape variety`).toBe(2);
+
+      const panelSpacing = await page
+        .locator('.about-values__statement, .about-values__trusted-place')
+        .evaluateAll((panels) =>
+          panels.map((panel) => {
+            const style = getComputedStyle(panel);
+            return {
+              left: Number.parseFloat(style.paddingLeft),
+              right: Number.parseFloat(style.paddingRight),
+              top: Number.parseFloat(style.paddingTop),
+              bottom: Number.parseFloat(style.paddingBottom),
+            };
+          }),
+        );
+
+      for (const spacing of panelSpacing) {
+        expect(spacing.left, `${width}px panel left inset`).toBeGreaterThanOrEqual(20);
+        expect(spacing.right, `${width}px panel right inset`).toBeGreaterThanOrEqual(20);
+        expect(Math.abs(spacing.left - spacing.right), `${width}px horizontal inset balance`).toBe(
+          0,
+        );
+        expect(Math.abs(spacing.top - spacing.bottom), `${width}px vertical inset balance`).toBe(0);
+      }
+
+      const valuesHeadingLines = await page.locator('.about-values__title').evaluate((heading) => {
+        const range = document.createRange();
+        range.selectNodeContents(heading);
+        return range.getClientRects().length;
+      });
+      expect(valuesHeadingLines, `${width}px values heading wrap`).toBeLessThanOrEqual(3);
+    }
   });
 
   test('maps Search Console opportunity clusters to distinct landing pages', async ({ page }) => {
