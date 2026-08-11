@@ -1,0 +1,24 @@
+---
+type Tone = 'porcelain' | 'white' | 'olive' | 'salmon';
+type Shape = 'crest' | 'rise' | 'drift-left' | 'drift-right';
+
+type Props = {
+  from?: Tone;
+  to?: Tone;
+  shape?: Shape;
+};
+
+const { from = 'porcelain', to = 'white', shape = 'crest' } = Astro.props;
+---
+
+<div
+  class:list={[
+    'section-transition',
+    `section-transition--from-${from}`,
+    `section-transition--to-${to}`,
+    `section-transition--${shape}`,
+  ]}
+  data-section-transition={shape}
+  aria-hidden="true"
+>
+</div>

@@ -2,6 +2,7 @@
 import PageHero from './PageHero.astro';
 import FaqList from './FaqList.astro';
 import FinalCta from './FinalCta.astro';
+import SectionTransition from './SectionTransition.astro';
 import { eventTypes } from '@/data/eventTypes';
 import type { ServicePage } from '@/data/services';
 import type { EventTypePage } from '@/data/eventTypes';
@@ -27,7 +28,7 @@ const relatedEvents = eventTypes.filter((eventType) => eventType.slug !== page.s
 />
 
 <section class="section-shell detail-overview">
-  <div class="detail-overview__fit">
+  <div class="detail-overview__fit" data-site-reveal>
     <p class="eyebrow">Designed for</p>
     <h2>A smart fit if…</h2>
     <div class="detail-overview__fit-copy">
@@ -35,7 +36,7 @@ const relatedEvents = eventTypes.filter((eventType) => eventType.slug !== page.s
     </div>
   </div>
   <div class="detail-overview__scope">
-    <div class="detail-overview__scope-heading">
+    <div class="detail-overview__scope-heading" data-site-reveal>
       <div>
         <p class="eyebrow">Inside the plan</p>
         <h2>What we can bring together</h2>
@@ -53,10 +54,13 @@ const relatedEvents = eventTypes.filter((eventType) => eventType.slug !== page.s
       }
     </div>
   </div>
+  <p class="narrative-bridge detail-overview__bridge" data-site-reveal>
+    Once the scope is clear, every partner can move through one current plan.
+  </p>
 </section>
 
 <section class="section-shell detail-vendor">
-  <aside class="vendor-brief">
+  <aside class="vendor-brief" data-site-reveal>
     <p class="eyebrow">Your team, beautifully coordinated</p>
     <h3>Bring your favorites. We’ll bring the plan.</h3>
     <p>
@@ -70,9 +74,10 @@ const relatedEvents = eventTypes.filter((eventType) => eventType.slug !== page.s
   </aside>
 </section>
 
+<SectionTransition from="porcelain" to="white" shape="rise" />
 <section class="detail-answers surface-white">
   <div class="section-shell">
-    <div class="section-heading section-heading--split">
+    <div class="section-heading section-heading--split" data-site-reveal>
       <h2>The details that make it work</h2>
       <p>
         The polish comes from decisions guests never see. We surface them early, assign them
@@ -99,10 +104,11 @@ const relatedEvents = eventTypes.filter((eventType) => eventType.slug !== page.s
   </div>
 </section>
 
+<SectionTransition from="white" to="porcelain" shape="drift-left" />
 <section class="section-shell related-strip">
-  <div class="related-strip__heading">
+  <div class="related-strip__heading" data-site-reveal>
     <div>
-      <p class="eyebrow">Find your celebration</p>
+      <p class="eyebrow">Back to the occasion</p>
       <h2>See what else we plan</h2>
     </div>
     <div>

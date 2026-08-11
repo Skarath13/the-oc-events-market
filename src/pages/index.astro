@@ -52,7 +52,7 @@ const origin = Astro.site ?? new URL('https://the-oc-events-market.example');
 
   <section class="home-hero">
     <div class="home-hero__copy">
-      <div class="home-hero__copy-inner">
+      <div class="home-hero__copy-inner" data-site-hero>
         <h1>Orange County Event Planning, Beautifully Run</h1>
         <p class="home-hero__body">
           We turn weddings, milestones, and brand moments into beautifully paced experiences. A
@@ -121,6 +121,7 @@ const origin = Astro.site ?? new URL('https://the-oc-events-market.example');
         aria-hidden="true"
         tabindex="-1"></video>
     </div>
+    <div class="home-hero__transition" aria-hidden="true"></div>
   </section>
 
   <EventGateway
@@ -131,7 +132,7 @@ const origin = Astro.site ?? new URL('https://the-oc-events-market.example');
 
   <section class="planning-system">
     <div class="section-shell">
-      <div class="section-heading section-heading--split">
+      <div class="section-heading section-heading--split" data-site-reveal>
         <h2>The Beauty Is in the Details. The Ease Is in the Plan.</h2>
         <p>
           We align the creative, logistical, and budget decisions early, then direct every moving
@@ -144,13 +145,19 @@ const origin = Astro.site ?? new URL('https://the-oc-events-market.example');
           <CapabilityIndex headingLevel={4} />
         </div>
       </div>
+      <p class="narrative-bridge planning-system__bridge" data-site-reveal>
+        When the plan is clear, the smallest details your guests see have room to feel effortless.
+      </p>
     </div>
   </section>
 
   <ActualWorkGallery />
 
   <section class="section-shell home-guidance">
-    <article class="network-brief">
+    <p class="narrative-bridge home-guidance__bridge" data-site-reveal>
+      The finished room comes from the right team, aligned early, with the right questions answered.
+    </p>
+    <article class="network-brief" data-site-reveal>
       <div class="network-brief__media">
         <Image
           src={media.actualDuckCakePops}
@@ -174,7 +181,7 @@ const origin = Astro.site ?? new URL('https://the-oc-events-market.example');
       </div>
     </article>
     <div class="home-guidance__faqs">
-      <div class="section-heading">
+      <div class="section-heading" data-site-reveal>
         <p class="eyebrow">Before We Begin</p>
         <h2>The Questions Worth Asking.</h2>
         <p>Straight answers before a single detail is decided.</p>

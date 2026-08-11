@@ -8,6 +8,7 @@ type Props = {
   heading?: string;
   intro?: string;
   note?: string;
+  bridge?: string;
   enableMotion?: boolean;
 };
 
@@ -33,6 +34,7 @@ const {
   heading = 'One studio. Every kind of celebration.',
   intro = 'The guest list changes. The standard does not. Expect considered design, sharp logistics, and a celebration that never shows the work behind it.',
   note,
+  bridge,
   enableMotion = false,
 } = Astro.props;
 
@@ -140,7 +142,14 @@ const items = await Promise.all(
 ---
 
 <section class="section-shell gateway-section">
-  <div class="section-heading section-heading--split gateway-section__heading">
+  {
+    bridge && (
+      <p class="narrative-bridge gateway-section__bridge" data-site-reveal>
+        {bridge}
+      </p>
+    )
+  }
+  <div class="section-heading section-heading--split gateway-section__heading" data-site-reveal>
     <h2>{heading}</h2>
     <div>
       <p>{intro}</p>

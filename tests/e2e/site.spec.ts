@@ -192,8 +192,8 @@ test.describe('site contracts', () => {
     await expect(values).toContainText(
       'That support meets you wherever you are: whether you need a coordinator',
     );
-    await expect(page.locator('.about-transition[aria-hidden="true"]')).toHaveCount(2);
-    await expect(page.locator('.about-transition__squiggle')).toHaveCount(0);
+    await expect(page.locator('.section-transition[aria-hidden="true"]')).toHaveCount(2);
+    await expect(page.locator('.about-transition, .about-transition__squiggle')).toHaveCount(0);
     await expect(
       page.getByRole('heading', { level: 2, name: 'Beautiful Moments Begin Here' }),
     ).toBeVisible();
@@ -202,21 +202,148 @@ test.describe('site contracts', () => {
     await expect(page.locator('main')).not.toContainText('drusted vendor');
   });
 
-  test('About motion reveals once and yields to reduced motion', async ({ page }, testInfo) => {
+  test('shared motion reveals once and yields to reduced motion', async ({ page }, testInfo) => {
     test.skip(testInfo.project.name !== 'chromium-desktop', 'One canonical motion check');
     await page.emulateMedia({ reducedMotion: 'no-preference' });
-    await page.goto('/about/');
+    await page.goto('/services/');
 
-    await expect(page.locator('body')).toHaveAttribute('data-about-motion', 'ready');
-    const valuesHeader = page.locator('.about-values__header');
-    await valuesHeader.scrollIntoViewIfNeeded();
-    await expect(valuesHeader).toHaveAttribute('data-about-reveal', 'visible');
+    await expect(page.locator('body')).toHaveAttribute('data-site-motion', 'ready');
+    const finalCta = page.locator('.final-cta__inner');
+    await expect(finalCta).not.toHaveAttribute('data-site-reveal', 'visible');
+    await finalCta
+      .getByRole('link', { name: 'Begin Planning' })
+      .evaluate((link) => (link as HTMLElement).focus({ preventScroll: true }));
+    await expect(finalCta).toHaveAttribute('data-site-reveal', 'visible');
+
+    const gatewayBridge = page.locator('.gateway-section__bridge');
+    await gatewayBridge.scrollIntoViewIfNeeded();
+    await expect(gatewayBridge).toHaveAttribute('data-site-reveal', 'visible');
 
     await page.emulateMedia({ reducedMotion: 'reduce' });
-    await expect(page.locator('body')).not.toHaveAttribute('data-about-motion', 'ready');
-    await expect(
-      page.locator('[data-about-reveal]:not([data-about-reveal="visible"])'),
-    ).toHaveCount(0);
+    await expect(page.locator('body')).not.toHaveAttribute('data-site-motion', 'ready');
+    await expect(page.locator('[data-site-reveal]:not([data-site-reveal="visible"])')).toHaveCount(
+      0,
+    );
+
+    await page.reload();
+    await expect(page.locator('body')).not.toHaveAttribute('data-site-motion', 'ready');
+    await expect(page.locator('[data-site-reveal]:not([data-site-reveal="visible"])')).toHaveCount(
+      0,
+    );
+
+    await page.addInitScript(() => {
+      Object.defineProperty(window, 'IntersectionObserver', {
+        configurable: true,
+        value: undefined,
+      });
+    });
+    await page.emulateMedia({ reducedMotion: 'no-preference' });
+    await page.goto('/services/');
+    await expect(page.locator('body')).not.toHaveAttribute('data-site-motion', 'ready');
+    await expect(page.locator('[data-site-reveal]:not([data-site-reveal="visible"])')).toHaveCount(
+      0,
+    );
+  });
+
+  test('shared narrative hierarchy and curve system carries across marketing pages', async ({
+    page,
+  }) => {
+    const targets = [
+      {
+        route: '/',
+        transitions: 1,
+        bridges: 2,
+        heroCurve: '.home-hero__transition',
+        proof: 'Creative vision. Calm execution. One accountable planner.',
+      },
+      {
+        route: '/services/',
+        transitions: 1,
+        bridges: 1,
+        heroCurve: '.page-hero__transition',
+        proof: 'The right support. A clear proposal. One accountable planner.',
+      },
+      {
+        route: '/events/weddings/',
+        transitions: 3,
+        bridges: 1,
+        heroCurve: '.page-hero__transition',
+        proof: 'One creative direction. One current plan. One accountable planner.',
+      },
+      {
+        route: '/celebrations/',
+        transitions: 1,
+        bridges: 0,
+        heroCurve: '.page-hero__transition',
+        proof: 'The people come first. The plan follows.',
+      },
+      {
+        route: '/about/',
+        transitions: 2,
+        bridges: 2,
+        heroCurve: '.page-hero__transition',
+        proof: 'Thoughtful design. Clear communication. Calm coordination.',
+      },
+      {
+        route: '/trusted-creative-network/',
+        transitions: 1,
+        bridges: 0,
+        heroCurve: '.page-hero__transition',
+        proof: 'Your vendors. Our coordination. One current plan.',
+      },
+    ] as const;
+
+    for (const target of targets) {
+      await page.goto(target.route);
+      await expect(page.locator('.section-transition')).toHaveCount(target.transitions);
+      await expect(page.locator('.narrative-bridge')).toHaveCount(target.bridges);
+      await expect(page.locator(target.heroCurve)).toHaveCount(1);
+      await expect(page.locator('.home-hero__proof, .page-hero__proof')).toHaveText(target.proof);
+
+      const fullBleed = await page.locator('.section-transition').evaluateAll((elements) =>
+        elements.map((element) => {
+          const rect = element.getBoundingClientRect();
+          return {
+            left: rect.left,
+            right: rect.right,
+            viewportWidth: document.documentElement.clientWidth,
+            clipPath: getComputedStyle(element, '::before').clipPath,
+          };
+        }),
+      );
+      for (const transition of fullBleed) {
+        expect(Math.abs(transition.left), `${target.route} curve left edge`).toBeLessThanOrEqual(1);
+        expect(
+          Math.abs(transition.right - transition.viewportWidth),
+          `${target.route} curve right edge`,
+        ).toBeLessThanOrEqual(1);
+        expect(transition.clipPath, `${target.route} curve shape`).not.toBe('none');
+      }
+
+      const heroClipPath = await page
+        .locator(target.heroCurve)
+        .evaluate((element) => getComputedStyle(element).clipPath);
+      expect(heroClipPath, `${target.route} hero curve shape`).not.toBe('none');
+    }
+
+    await page.goto('/events/weddings/');
+    const detailTransitions = await page.locator('.section-transition').evaluateAll((elements) =>
+      elements.map((element) => ({
+        hidden: element.getAttribute('aria-hidden'),
+        shape: element.getAttribute('data-section-transition'),
+      })),
+    );
+    expect(detailTransitions).toEqual([
+      { hidden: 'true', shape: 'rise' },
+      { hidden: 'true', shape: 'drift-left' },
+      { hidden: 'true', shape: 'drift-right' },
+    ]);
+    const detailClipPaths = await page
+      .locator('.section-transition')
+      .evaluateAll((elements) =>
+        elements.map((element) => getComputedStyle(element, '::before').clipPath),
+      );
+    expect(new Set(detailClipPaths).size).toBe(3);
   });
 
   test('About keeps panel copy evenly inset across responsive widths', async ({
@@ -229,26 +356,27 @@ test.describe('site contracts', () => {
       await page.setViewportSize({ width, height: width <= 430 ? 844 : 900 });
 
       const overflow = await page.evaluate(
-        () => document.documentElement.scrollWidth - window.innerWidth,
+        () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
       );
       expect(overflow, `${width}px horizontal overflow`).toBeLessThanOrEqual(1);
 
-      const transitions = await page.locator('.about-transition').evaluateAll((elements) =>
+      const transitions = await page.locator('.section-transition').evaluateAll((elements) =>
         elements.map((element) => {
           const rect = element.getBoundingClientRect();
           return { left: rect.left, right: rect.right };
         }),
       );
+      const viewportWidth = await page.evaluate(() => document.documentElement.clientWidth);
       for (const transition of transitions) {
         expect(Math.abs(transition.left), `${width}px transition left edge`).toBeLessThanOrEqual(1);
         expect(
-          Math.abs(transition.right - width),
+          Math.abs(transition.right - viewportWidth),
           `${width}px transition right edge`,
         ).toBeLessThanOrEqual(1);
       }
 
       const transitionShapes = await page
-        .locator('.about-transition')
+        .locator('.section-transition')
         .evaluateAll((elements) =>
           elements.map((element) => getComputedStyle(element, '::before').clipPath),
         );
@@ -407,7 +535,7 @@ test.describe('navigation interactions', () => {
 
     const mobile = Boolean(viewport && viewport.width <= 767);
     const routes = [
-      { path: '/', maxHeight: mobile ? 7_600 : 6_250 },
+      { path: '/', maxHeight: mobile ? 8_000 : 6_750 },
       { path: '/services/', maxHeight: mobile ? 5_600 : 4_200 },
       {
         path: '/services/full-service-planning-design/',

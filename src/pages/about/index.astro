@@ -2,6 +2,7 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PageHero from '@/components/global/PageHero.astro';
 import FinalCta from '@/components/global/FinalCta.astro';
+import SectionTransition from '@/components/global/SectionTransition.astro';
 import { media } from '@/data/media';
 import { breadcrumbSchema } from '@/lib/seo';
 
@@ -24,6 +25,7 @@ const breadcrumbs = [
     image={media.actualDessertFavorCollection}
     imageAlt="Packaged mini cakes and decorated cake pops presented in blush pink favor boxes"
     imageFit="contain"
+    proof="Thoughtful design. Clear communication. Calm coordination."
   />
 
   <section class="section-shell profile-panel">
@@ -52,7 +54,7 @@ const breadcrumbs = [
         aria-hidden="true"
         tabindex="-1"></video>
     </div>
-    <div class="profile-panel__copy" data-about-reveal>
+    <div class="profile-panel__copy" data-site-reveal>
       <p class="eyebrow">An attentive point of view</p>
       <h2>Good taste is only the beginning.</h2>
       <p>
@@ -76,17 +78,17 @@ const breadcrumbs = [
         <p>Events designed to let you enjoy every moment, while we handle every detail.</p>
       </aside>
     </div>
-    <p class="profile-panel__bridge" data-about-reveal>
+    <p class="narrative-bridge profile-panel__bridge" data-site-reveal>
       That same care for the room, the rhythm, and every handoff shapes the three pillars behind
       OCEM.
     </p>
   </section>
 
-  <div class="about-transition about-transition--values" aria-hidden="true"></div>
+  <SectionTransition from="porcelain" to="olive" shape="crest" />
 
   <section class="about-values" data-about-values>
     <div class="section-shell about-values__inner">
-      <header class="about-values__header" data-about-reveal>
+      <header class="about-values__header" data-site-reveal>
         <p class="eyebrow">Brand Statement</p>
         <h2 class="about-values__title">Coordinate. Connect. Celebrate.</h2>
         <p class="about-values__brand-statement">
@@ -97,7 +99,7 @@ const breadcrumbs = [
       </header>
 
       <div class="about-values__statements">
-        <article class="about-values__statement" data-about-reveal>
+        <article class="about-values__statement" data-site-reveal>
           <p class="eyebrow">Our vision</p>
           <p>
             That belief shapes our vision: to become a trusted destination for SoCal event
@@ -105,7 +107,7 @@ const breadcrumbs = [
             to move from the first idea to the celebration with clarity and confidence.
           </p>
         </article>
-        <article class="about-values__statement" data-about-reveal>
+        <article class="about-values__statement" data-site-reveal>
           <p class="eyebrow">Our mission</p>
           <p>
             To move that vision forward, our mission is to connect people with vetted event
@@ -115,12 +117,12 @@ const breadcrumbs = [
         </article>
       </div>
 
-      <p class="about-values__access" data-about-reveal>
+      <p class="about-values__access" data-site-reveal>
         Together, those pillars make exceptional events more accessible through trusted
         coordination, curated vendors, and practical education.
       </p>
 
-      <div class="about-values__trusted-place" data-about-reveal>
+      <div class="about-values__trusted-place" data-site-reveal>
         <div>
           <p class="eyebrow">What this means for you</p>
           <h3>OCEM, your trusted place for:</h3>
@@ -133,7 +135,7 @@ const breadcrumbs = [
         </ul>
       </div>
 
-      <article class="about-values__promise" data-about-reveal>
+      <article class="about-values__promise" data-site-reveal>
         <p class="eyebrow">Brand Promise</p>
         <p>
           That support meets you wherever you are: whether you need a coordinator, a trusted vendor,
@@ -141,21 +143,22 @@ const breadcrumbs = [
         </p>
       </article>
 
-      <p class="about-values__bridge" data-about-reveal>
+      <p class="narrative-bridge narrative-bridge--light about-values__bridge" data-site-reveal>
         When the plan, people, and details move together, you’re free to stay present for the
         moments that matter.
       </p>
     </div>
   </section>
 
-  <div class="about-transition about-transition--cta" aria-hidden="true"></div>
-  <FinalCta heading="Beautiful Moments Begin Here" />
+  <FinalCta
+    heading="Beautiful Moments Begin Here"
+    transitionFrom="olive"
+    transitionShape="drift-left"
+  />
 </BaseLayout>
 
 <script>
-  import { initAboutMotion } from '@/lib/about-motion';
   import { initActualMediaVideos } from '@/lib/actual-media-video';
 
-  initAboutMotion();
   initActualMediaVideos();
 </script>

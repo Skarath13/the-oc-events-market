@@ -89,5 +89,10 @@ const socialImage = new URL(ogImage, origin).href;
       <slot />
     </main>
     <SiteFooter />
+    <script>
+      import { initSiteMotion } from '@/lib/site-motion';
+
+      initSiteMotion();
+    </script>
   </body>
 </html>

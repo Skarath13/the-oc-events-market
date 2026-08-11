@@ -35,7 +35,7 @@ const mobileSrcset = mobileImages
     image && `page-hero--${imageOrientation}`,
   ]}
 >
-  <div class="page-hero__copy">
+  <div class="page-hero__copy" data-site-hero>
     <h1>{title}</h1>
     <p class="page-hero__summary">{summary}</p>
     {proof && <p class="page-hero__proof">{proof}</p>}
@@ -74,4 +74,5 @@ const mobileSrcset = mobileImages
       </div>
     )
   }
+  <div class="page-hero__transition" aria-hidden="true"></div>
 </section>

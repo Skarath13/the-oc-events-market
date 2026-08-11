@@ -1,11 +1,17 @@
 ---
 import { contactLinks } from '@/data/site';
+import SectionTransition from './SectionTransition.astro';
+
+type TransitionTone = 'porcelain' | 'white' | 'olive' | 'salmon';
+type TransitionShape = 'crest' | 'rise' | 'drift-left' | 'drift-right';
 
 type Props = {
   heading?: string;
   body?: string;
   label?: string;
   href?: string;
+  transitionFrom?: TransitionTone;
+  transitionShape?: TransitionShape;
 };
 
 const {
@@ -13,11 +19,14 @@ const {
   body = 'Share the date, the occasion, and what you want it to feel like. We will turn the first idea into a clear way forward.',
   label = 'Begin Planning',
   href = '/contact/',
+  transitionFrom = 'porcelain',
+  transitionShape = 'drift-right',
 } = Astro.props;
 ---
 
+<SectionTransition from={transitionFrom} to="salmon" shape={transitionShape} />
 <section class="final-cta">
-  <div class="final-cta__inner">
+  <div class="final-cta__inner" data-site-reveal>
     <div>
       <h2>{heading}</h2>
       <p>{body}</p>
