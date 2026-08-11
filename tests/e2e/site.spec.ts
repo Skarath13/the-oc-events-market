@@ -149,6 +149,75 @@ test.describe('site contracts', () => {
     expect(journal.status()).toBe(404);
   });
 
+  test('About presents the approved host promise and business pillars', async ({ page }) => {
+    await page.goto('/about/');
+
+    await expect(page.locator('.page-hero__summary')).toContainText(
+      'That lets your event feel beautifully effortless, so you can be a guest at your own celebration.',
+    );
+    await expect(
+      page.getByRole('heading', {
+        level: 3,
+        name: 'Planning Made Simple. Celebrations Made Beautiful.',
+      }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole('heading', { level: 3, name: 'Every Detail. Every Time' }),
+    ).toBeVisible();
+
+    const values = page.locator('[data-about-values]');
+    await expect(
+      values.getByRole('heading', { level: 2, name: 'Coordinate. Connect. Celebrate.' }),
+    ).toBeVisible();
+    await expect(values).toContainText('At OCEM, we create spaces where celebrations begin.');
+    await expect(values).toContainText('OCEM, your trusted place for:');
+    await expect(
+      values.getByRole('list', { name: 'What hosts can find at OCEM' }).getByRole('listitem'),
+    ).toHaveText([
+      'Hiring a coordinator',
+      'Finding vetted vendors',
+      'Learning how to plan an event',
+      'Discovering inspiration, trends, and a look behind the scenes',
+    ]);
+    await expect(values).toContainText(
+      'That belief shapes our vision: to become a trusted destination',
+    );
+    await expect(values).toContainText(
+      'To move that vision forward, our mission is to connect people with vetted event professionals',
+    );
+    await expect(values).toContainText(
+      'Together, those pillars make exceptional events more accessible',
+    );
+    await expect(values).toContainText('Brand Promise');
+    await expect(values).toContainText(
+      'That support meets you wherever you are: whether you need a coordinator',
+    );
+    await expect(page.locator('.about-transition[aria-hidden="true"]')).toHaveCount(2);
+    await expect(
+      page.getByRole('heading', { level: 2, name: 'Beautiful Moments Begin Here' }),
+    ).toBeVisible();
+    await expect(page.locator('main')).not.toContainText('Make the Occasion Unmistakably Yours.');
+    await expect(page.locator('main')).not.toContainText('One direction, from idea to event day.');
+    await expect(page.locator('main')).not.toContainText('drusted vendor');
+  });
+
+  test('About motion reveals once and yields to reduced motion', async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name !== 'chromium-desktop', 'One canonical motion check');
+    await page.emulateMedia({ reducedMotion: 'no-preference' });
+    await page.goto('/about/');
+
+    await expect(page.locator('body')).toHaveAttribute('data-about-motion', 'ready');
+    const valuesHeader = page.locator('.about-values__header');
+    await valuesHeader.scrollIntoViewIfNeeded();
+    await expect(valuesHeader).toHaveAttribute('data-about-reveal', 'visible');
+
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await expect(page.locator('body')).not.toHaveAttribute('data-about-motion', 'ready');
+    await expect(
+      page.locator('[data-about-reveal]:not([data-about-reveal="visible"])'),
+    ).toHaveCount(0);
+  });
+
   test('maps Search Console opportunity clusters to distinct landing pages', async ({ page }) => {
     const targets = [
       {

@@ -16,10 +16,11 @@ const breadcrumbs = [
   title="About Ivone and The OC Events Market"
   description="Meet Ivone and discover the thoughtful, attentive approach behind The OC Events Market."
   jsonLd={[breadcrumbSchema(origin, breadcrumbs)]}
+  bodyClass="about-page"
 >
   <PageHero
     title="Meet Ivone. Close to Every Detail."
-    summary="At The OC Events Market, creative choices, vendor handoffs, and event day logistics belong to one connected plan. That lets the celebration feel beautifully effortless."
+    summary="At The OC Events Market, creative choices, vendor handoffs, and event day logistics belong to one connected plan. That lets your event feel beautifully effortless, so you can be a guest at your own celebration."
     image={media.actualDessertFavorCollection}
     imageAlt="Packaged mini cakes and decorated cake pops presented in blush pink favor boxes"
     imageFit="contain"
@@ -51,7 +52,7 @@ const breadcrumbs = [
         aria-hidden="true"
         tabindex="-1"></video>
     </div>
-    <div class="profile-panel__copy">
+    <div class="profile-panel__copy" data-about-reveal>
       <p class="eyebrow">An attentive point of view</p>
       <h2>Good taste is only the beginning.</h2>
       <p>
@@ -64,19 +65,101 @@ const breadcrumbs = [
         for recommendations that fit the plan.
       </p>
       <aside class="profile-panel__note">
-        <h3>One direction, from idea to event day.</h3>
+        <h3>Planning Made Simple. Celebrations Made Beautiful.</h3>
         <p>
-          Creative decisions, vendor communication, and the current timeline stay connected, so the
-          people bringing the event to life are working from the same direction.
+          Creative decisions, vendor communication, and the event timeline stay aligned, so everyone
+          bringing the event to life is working from one shared plan.
         </p>
       </aside>
+      <aside class="profile-panel__note">
+        <h3>Every Detail. Every Time</h3>
+        <p>Events designed to let you enjoy every moment, while we handle every detail.</p>
+      </aside>
+    </div>
+    <p class="profile-panel__bridge" data-about-reveal>
+      That same care for the room, the rhythm, and every handoff shapes the three pillars behind
+      OCEM.
+    </p>
+  </section>
+
+  <div class="about-transition about-transition--values" aria-hidden="true">
+    <span class="about-transition__squiggle"></span>
+  </div>
+
+  <section class="about-values" data-about-values>
+    <div class="section-shell about-values__inner">
+      <header class="about-values__header" data-about-reveal>
+        <p class="eyebrow">Brand Statement</p>
+        <h2 class="about-values__title">Coordinate. Connect. Celebrate.</h2>
+        <p class="about-values__brand-statement">
+          At OCEM, we create spaces where celebrations begin. Through vetted vendors, expert
+          coordination, and practical education, we help every host plan with confidence and
+          celebrate with ease.
+        </p>
+      </header>
+
+      <div class="about-values__statements">
+        <article class="about-values__statement" data-about-reveal>
+          <p class="eyebrow">Our vision</p>
+          <p>
+            That belief shapes our vision: to become a trusted destination for SoCal event
+            coordination, vendor discovery, and event education. Our goal is to empower every host
+            to move from the first idea to the celebration with clarity and confidence.
+          </p>
+        </article>
+        <article class="about-values__statement" data-about-reveal>
+          <p class="eyebrow">Our mission</p>
+          <p>
+            To move that vision forward, our mission is to connect people with vetted event
+            professionals, provide expert guidance, and deliver seamless coordination from the first
+            plan through the celebration itself.
+          </p>
+        </article>
+      </div>
+
+      <p class="about-values__access" data-about-reveal>
+        Together, those pillars make exceptional events more accessible through trusted
+        coordination, curated vendors, and practical education.
+      </p>
+
+      <div class="about-values__trusted-place" data-about-reveal>
+        <div>
+          <p class="eyebrow">What this means for you</p>
+          <h3>OCEM, your trusted place for:</h3>
+        </div>
+        <ul aria-label="What hosts can find at OCEM">
+          <li>Hiring a coordinator</li>
+          <li>Finding vetted vendors</li>
+          <li>Learning how to plan an event</li>
+          <li>Discovering inspiration, trends, and a look behind the scenes</li>
+        </ul>
+      </div>
+
+      <article class="about-values__promise" data-about-reveal>
+        <p class="eyebrow">Brand Promise</p>
+        <p>
+          That support meets you wherever you are: whether you need a coordinator, a trusted vendor,
+          or simply the right guidance, we’re here to help you celebrate with confidence.
+        </p>
+      </article>
+
+      <p class="about-values__bridge" data-about-reveal>
+        When the plan, people, and details move together, you’re free to stay present for the
+        moments that matter.
+      </p>
     </div>
   </section>
-  <FinalCta />
+
+  <div class="about-transition about-transition--cta" aria-hidden="true">
+    <span class="about-transition__squiggle"></span>
+  </div>
+  <FinalCta heading="Beautiful Moments Begin Here" />
 </BaseLayout>
 
 <script>
+  import { initAboutMotion } from '@/lib/about-motion';
   import { initActualMediaVideos } from '@/lib/actual-media-video';
 
+  initAboutMotion();
   initActualMediaVideos();
 </script>

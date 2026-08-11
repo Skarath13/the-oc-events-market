@@ -5,6 +5,7 @@ const routes = [
   '/',
   '/services/',
   '/events/weddings/',
+  '/about/',
   '/contact/',
   '/for-vendors/',
   '/accessibility/',
