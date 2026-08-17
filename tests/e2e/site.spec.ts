@@ -152,13 +152,22 @@ test.describe('site contracts', () => {
   test('About presents the approved host promise and business pillars', async ({ page }) => {
     await page.goto('/about/');
 
+    await expect(
+      page.getByRole('heading', {
+        level: 1,
+        name: 'Meet Ivone. Passionate about Every Detail.',
+      }),
+    ).toBeVisible();
     await expect(page.locator('.page-hero__summary')).toContainText(
       'That lets your event feel beautifully effortless, so you can be a guest at your own celebration.',
     );
+    await expect(page.locator('.page-hero__proof')).toHaveText(
+      'Thoughtful design. Clear communication. Composed coordination.',
+    );
     await expect(
       page.getByRole('heading', {
-        level: 3,
-        name: 'Planning Made Simple. Celebrations Made Beautiful.',
+        level: 2,
+        name: 'Exquisite Taste from the Beginning',
       }),
     ).toBeVisible();
     await expect(
@@ -180,17 +189,26 @@ test.describe('site contracts', () => {
       'Discovering inspiration, trends, and a look behind the scenes',
     ]);
     await expect(values).toContainText(
-      'That belief shapes our vision: to become a trusted destination',
+      'To become a trusted destination for SoCal event coordination, vendor discovery, and event education.',
     );
     await expect(values).toContainText(
-      'To move that vision forward, our mission is to connect people with vetted event professionals',
+      'To connect people with vetted event professionals, provide expert guidance, and deliver seamless coordination from the first plan through the celebration itself.',
     );
     await expect(values).toContainText(
-      'Together, those pillars make exceptional events more accessible',
+      'Together, these pillars make exceptional events more accessible',
     );
     await expect(values).toContainText('Brand Promise');
     await expect(values).toContainText(
-      'That support meets you wherever you are: whether you need a coordinator',
+      'That support meets you wherever you are. Whether you need a coordinator',
+    );
+    await expect(page.locator('.profile-panel__bridge')).toContainText(
+      'Every detail, from the ambiance of the room to the rhythm of the night and every careful handoff, shapes the heart of everything OCEM does.',
+    );
+    await expect(page.locator('main')).not.toContainText(
+      'Creative decisions, vendor communication, and the event timeline stay aligned',
+    );
+    await expect(page.locator('main')).not.toContainText(
+      'Planning Made Simple. Celebrations Made Beautiful.',
     );
     await expect(page.locator('.section-transition[aria-hidden="true"]')).toHaveCount(2);
     await expect(page.locator('.about-transition, .about-transition__squiggle')).toHaveCount(0);
@@ -282,7 +300,7 @@ test.describe('site contracts', () => {
         transitions: 2,
         bridges: 2,
         heroCurve: '.page-hero__transition',
-        proof: 'Thoughtful design. Clear communication. Calm coordination.',
+        proof: 'Thoughtful design. Clear communication. Composed coordination.',
       },
       {
         route: '/trusted-creative-network/',
@@ -618,6 +636,12 @@ test.describe('navigation interactions', () => {
     await expect(page.locator('.home-hero__proof')).toHaveText(
       'Creative vision. Calm execution. One accountable planner.',
     );
+    await expect(
+      page.getByRole('heading', {
+        level: 2,
+        name: 'Planning Made Simple. Celebrations Made Beautiful.',
+      }),
+    ).toBeVisible();
     await expect(page.locator('main')).not.toContainText(/planning team|marketplace|directory/i);
 
     await page.goto('/trusted-creative-network/');
