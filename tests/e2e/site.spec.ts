@@ -233,9 +233,9 @@ test.describe('site contracts', () => {
       .evaluate((link) => (link as HTMLElement).focus({ preventScroll: true }));
     await expect(finalCta).toHaveAttribute('data-site-reveal', 'visible');
 
-    const gatewayBridge = page.locator('.gateway-section__bridge');
-    await gatewayBridge.scrollIntoViewIfNeeded();
-    await expect(gatewayBridge).toHaveAttribute('data-site-reveal', 'visible');
+    const gatewayHeading = page.locator('.gateway-section__heading');
+    await gatewayHeading.scrollIntoViewIfNeeded();
+    await expect(gatewayHeading).toHaveAttribute('data-site-reveal', 'visible');
 
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await expect(page.locator('body')).not.toHaveAttribute('data-site-motion', 'ready');
@@ -272,12 +272,12 @@ test.describe('site contracts', () => {
         transitions: 1,
         bridges: 2,
         heroCurve: '.home-hero__transition',
-        proof: 'Creative vision. Calm execution. One accountable planner.',
+        proof: 'Planning Made Simple. Celebrations Made Beautiful.',
       },
       {
         route: '/services/',
         transitions: 1,
-        bridges: 1,
+        bridges: 0,
         heroCurve: '.page-hero__transition',
         proof: 'The right support. A clear proposal. One accountable planner.',
       },
@@ -580,7 +580,7 @@ test.describe('navigation interactions', () => {
     );
 
     const actualImage = page.getByAltText(
-      'Four dessert favor presentations with mini cakes and decorated cake pops in blush packaging',
+      'A bride seen from behind in a white gown overlooking the ocean',
     );
     await expect(actualImage).toHaveAttribute('srcset', / 480w(?:,|$)/);
     await expect(actualImage).toHaveAttribute('srcset', / 960w(?:,|$)/);
@@ -634,7 +634,7 @@ test.describe('navigation interactions', () => {
       }),
     ).toBeVisible();
     await expect(page.locator('.home-hero__proof')).toHaveText(
-      'Creative vision. Calm execution. One accountable planner.',
+      'Planning Made Simple. Celebrations Made Beautiful.',
     );
     await expect(
       page.getByRole('heading', {

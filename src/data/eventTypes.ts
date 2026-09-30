@@ -91,8 +91,8 @@ export const eventTypes: EventTypePage[] = [
           'Event day management is available when included in your proposal. Team size, coverage, hours, and handoffs are confirmed before you book.',
       },
     ],
-    image: 'actualDessertFavorCollection',
-    imageAlt: 'Packaged mini cakes and decorated cake pops presented in blush pink favor boxes',
+    image: 'actualCoastalWedding',
+    imageAlt: 'A bride seen from behind in a white gown overlooking the ocean',
     imageFit: 'contain',
   },
   {
@@ -159,9 +159,9 @@ export const eventTypes: EventTypePage[] = [
           'Tell us the setting in your inquiry. We will review access, parking, power, rentals, cleanup, and weather needs before recommending the right planning approach.',
       },
     ],
-    image: 'actualDuckCakePops',
+    image: 'actualPinkShowerBackdrop',
     imageAlt:
-      'Mint green cake pops topped with yellow ducks and pearl sprinkles sit in a clear stand',
+      'A couple at a baby shower framed by pink and copper balloons, florals, and a gold arch',
     imageFit: 'contain',
   },
   {

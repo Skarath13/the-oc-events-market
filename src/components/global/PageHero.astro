@@ -4,7 +4,7 @@ import type { ImageMetadata } from 'astro';
 
 type Props = {
   title: string;
-  summary: string;
+  summary?: string;
   image?: ImageMetadata;
   imageAlt?: string;
   imageFit?: 'cover' | 'contain';
@@ -14,13 +14,25 @@ type Props = {
 const { title, summary, image, imageAlt = '', imageFit = 'cover', proof } = Astro.props;
 const imageOrientation = image && image.width >= image.height ? 'landscape' : 'portrait';
 const mobileWidths = image
-  ? [...new Set([...[480, 720, 960].filter((width) => width <= image.width), image.width])]
-      .sort((a, b) => a - b)
-      .slice(0, 3)
+  ? [
+      ...new Set([
+        ...[480, 720, 736, 960].filter((width) => width <= image.width),
+        ...(image.width < 960 ? [image.width] : []),
+      ]),
+    ].sort((a, b) => a - b)
   : [];
 const mobileImages = image
   ? await Promise.all(
-      mobileWidths.map((width) => getImage({ src: image, width, format: 'avif', quality: 72 })),
+      mobileWidths.map((width) =>
+        getImage({
+          src: image,
+          width,
+          height: imageFit === 'cover' ? Math.round((width * 9) / 16) : undefined,
+          fit: imageFit,
+          format: 'avif',
+          quality: 72,
+        }),
+      ),
     )
   : [];
 const mobileSrcset = mobileImages
@@ -37,7 +49,7 @@ const mobileSrcset = mobileImages
 >
   <div class="page-hero__copy" data-site-hero>
     <h1>{title}</h1>
-    <p class="page-hero__summary">{summary}</p>
+    {summary && <p class="page-hero__summary">{summary}</p>}
     {proof && <p class="page-hero__proof">{proof}</p>}
   </div>
   {

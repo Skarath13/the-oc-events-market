@@ -3,6 +3,7 @@ import { Image, getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import { eventTypes } from '@/data/eventTypes';
 import { media } from '@/data/media';
+import ivonePoster from '../../../public/videos/actual/actual-ivone-event-details-v1-poster.webp';
 
 type Props = {
   heading?: string;
@@ -40,8 +41,8 @@ const {
 
 const presentations: Record<string, GatewayPresentation> = {
   weddings: {
-    image: media.actualDessertFavorCollection,
-    alt: 'Four dessert favor presentations with mini cakes and decorated cake pops in blush packaging',
+    image: media.actualCoastalWedding,
+    alt: 'A bride seen from behind in a white gown overlooking the ocean',
     caption: 'The final impression matters.',
     label: 'Wedding planning and design',
     ratio: 'landscape',
@@ -101,7 +102,7 @@ const items = await Promise.all(
       ratio: 'landscape' as const,
     };
     const compactMobileCard = itemIndex === 2 || itemIndex === 3;
-    const mobileWidthTargets = compactMobileCard ? [240, 360, 480, 720] : [480, 720, 960];
+    const mobileWidthTargets = compactMobileCard ? [240, 320, 360, 480, 720] : [480, 660, 720, 960];
     const mobileWidths = mobileWidthTargets.filter((width) => width <= presentation.image.width);
     if (!mobileWidths.includes(presentation.image.width) && presentation.image.width < 960) {
       mobileWidths.push(presentation.image.width);
@@ -111,6 +112,8 @@ const items = await Promise.all(
         getImage({
           src: presentation.image,
           width,
+          height: compactMobileCard ? Math.round(width * 1.25) : undefined,
+          fit: 'cover',
           format: 'avif',
           quality: 72,
         }),
@@ -127,6 +130,32 @@ const items = await Promise.all(
       : '(max-width: 767px) calc(100vw - 2.5rem), (max-width: 1199px) 48vw, 38vw';
     const posterImage =
       mobileImages[mobileWidths.indexOf(720)] ?? mobileImages.at(-1) ?? mobileImages[0];
+    const motionPosterImage =
+      presentation.motion?.id === 'ivone' ? ivonePoster : presentation.image;
+    const motionPosterWidths = [320, 480, 660, 720].filter(
+      (width) => width <= motionPosterImage.width,
+    );
+    if (motionPosterImage.width < 720 && !motionPosterWidths.includes(motionPosterImage.width)) {
+      motionPosterWidths.push(motionPosterImage.width);
+    }
+    const motionPosters =
+      enableMotion && presentation.motion
+        ? await Promise.all(
+            motionPosterWidths.map((width) =>
+              getImage({
+                src: motionPosterImage,
+                width,
+                height: Math.round(width * 0.75),
+                fit: 'cover',
+                format: 'avif',
+                quality: 72,
+              }),
+            ),
+          )
+        : [];
+    const motionPosterSrcset = motionPosters
+      .map((poster, index) => `${poster.src} ${motionPosterWidths[index]}w`)
+      .join(', ');
 
     return {
       eventType,
@@ -136,6 +165,7 @@ const items = await Promise.all(
       responsiveSizes,
       videoPoster:
         presentation.motion?.id === 'dessert' ? posterImage?.src : presentation.motion?.poster,
+      motionPosterSrcset,
     };
   }),
 );
@@ -160,7 +190,15 @@ const items = await Promise.all(
     {
       items.map(
         (
-          { eventType, presentation, mobileSrcset, mobileSizes, responsiveSizes, videoPoster },
+          {
+            eventType,
+            presentation,
+            mobileSrcset,
+            mobileSizes,
+            responsiveSizes,
+            videoPoster,
+            motionPosterSrcset,
+          },
           index,
         ) => {
           const motion = enableMotion ? presentation.motion : undefined;
@@ -183,22 +221,41 @@ const items = await Promise.all(
                 aria-label={motion ? `Play motion: ${motion.description}` : undefined}
               >
                 {motion ? (
-                  <video
-                    data-actual-video-element
-                    data-src-mp4={motion.mp4}
-                    poster={videoPoster}
-                    width={motion.width}
-                    height={motion.height}
-                    autoplay
-                    muted
-                    loop
-                    playsinline
-                    preload="none"
-                    disablepictureinpicture
-                    disableRemotePlayback
-                    aria-hidden="true"
-                    tabindex="-1"
-                  />
+                  <>
+                    <picture>
+                      <source
+                        media="(max-width: 767px)"
+                        type="image/avif"
+                        srcset={motionPosterSrcset}
+                        sizes="calc(100vw - 2.5rem)"
+                      />
+                      <img
+                        class="event-gateway__poster"
+                        src={videoPoster}
+                        alt=""
+                        width={motion.width}
+                        height={motion.height}
+                        loading="lazy"
+                        fetchpriority="low"
+                        decoding="async"
+                      />
+                    </picture>
+                    <video
+                      data-actual-video-element
+                      data-src-mp4={motion.mp4}
+                      width={motion.width}
+                      height={motion.height}
+                      autoplay
+                      muted
+                      loop
+                      playsinline
+                      preload="none"
+                      disablepictureinpicture
+                      disableRemotePlayback
+                      aria-hidden="true"
+                      tabindex="-1"
+                    />
+                  </>
                 ) : (
                   <picture>
                     <source

@@ -7,6 +7,8 @@ import { eventTypes } from '@/data/eventTypes';
 import type { ServicePage } from '@/data/services';
 import type { EventTypePage } from '@/data/eventTypes';
 import { media } from '@/data/media';
+import EventPhotoGallery from './EventPhotoGallery.astro';
+import { eventPhotos } from '@/data/eventPhotos';
 
 type Props = {
   page: ServicePage | EventTypePage;
@@ -16,6 +18,7 @@ type Props = {
 const { page, kind } = Astro.props;
 const forItems = 'forWhom' in page ? page.forWhom : [page.whoFor];
 const relatedEvents = eventTypes.filter((eventType) => eventType.slug !== page.slug).slice(0, 3);
+const photos = kind === 'event' ? eventPhotos[page.slug] : undefined;
 ---
 
 <PageHero
@@ -58,6 +61,8 @@ const relatedEvents = eventTypes.filter((eventType) => eventType.slug !== page.s
     Once the scope is clear, every partner can move through one current plan.
   </p>
 </section>
+
+{photos && <EventPhotoGallery title="A closer look at the celebration." items={photos} />}
 
 <section class="section-shell detail-vendor">
   <aside class="vendor-brief" data-site-reveal>

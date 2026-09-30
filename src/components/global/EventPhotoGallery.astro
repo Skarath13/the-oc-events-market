@@ -1,0 +1,66 @@
+---
+import { Image } from 'astro:assets';
+import { media } from '@/data/media';
+import type { EventPhoto } from '@/data/eventPhotos';
+
+type Props = {
+  title: string;
+  items: EventPhoto[];
+  compact?: boolean;
+};
+
+const { title, items, compact = false } = Astro.props;
+const dense = !compact && items.length > 6;
+const sizes = compact
+  ? '(max-width: 767px) calc((100vw - 3.35rem) / 2), (max-width: 1599px) 22vw, 320px'
+  : dense
+    ? '(max-width: 767px) calc((100vw - 3.35rem) / 2), (max-width: 1599px) 30vw, 400px'
+    : items.length === 3
+      ? '(max-width: 767px) calc(100vw - 2.5rem), (max-width: 1599px) 30vw, 400px'
+      : '(max-width: 767px) calc(100vw - 2.5rem), (max-width: 1599px) 46vw, 650px';
+---
+
+<section
+  class:list={[
+    'section-shell',
+    'event-photos',
+    compact && 'event-photos--compact',
+    dense && 'event-photos--dense',
+  ]}
+  aria-label={title}
+>
+  <div class="section-heading" data-site-reveal>
+    <h2>{title}</h2>
+  </div>
+  <div class="event-photos__grid">
+    {
+      items.map((item) => {
+        const image = media[item.image];
+        return (
+          <figure class="event-photos__item" data-photo-index={item.sourceIndex}>
+            <Image
+              src={image}
+              alt={item.alt}
+              widths={[320, 480, 640, 660, 800, 1040, 1280, 1600].filter(
+                (width) => width <= image.width,
+              )}
+              sizes={sizes}
+              loading="lazy"
+              fetchpriority="low"
+              quality={82}
+            />
+            <figcaption>{item.caption}</figcaption>
+          </figure>
+        );
+      })
+    }
+  </div>
+  {
+    items.some((item) => item.privacyStickers) && (
+      <p class="event-photos__credit">
+        Privacy stickers by <a href="https://github.com/jdecked/twemoji">Twemoji</a>, adapted under{' '}
+        <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
+      </p>
+    )
+  }
+</section>

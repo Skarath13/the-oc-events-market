@@ -3,6 +3,8 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import PageHero from '@/components/global/PageHero.astro';
 import EventGateway from '@/components/global/EventGateway.astro';
 import FinalCta from '@/components/global/FinalCta.astro';
+import EventPhotoGallery from '@/components/global/EventPhotoGallery.astro';
+import { photoBoothPhotos } from '@/data/eventPhotos';
 import { media } from '@/data/media';
 import { breadcrumbSchema } from '@/lib/seo';
 
@@ -32,5 +34,6 @@ const breadcrumbs = [
     intro="From there, we build the room, rhythm, vendors, and guest experience around what makes this occasion unmistakably yours."
     enableMotion={true}
   />
+  <EventPhotoGallery title="Details that bring people together." items={photoBoothPhotos} compact />
   <FinalCta />
 </BaseLayout>

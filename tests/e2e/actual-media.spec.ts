@@ -18,24 +18,24 @@ const actualVideos = {
 } as const;
 
 const actualGalleryAlts = [
-  'Buffet with individual meal bags, fresh salad, bottled soda, and vintage car accents',
-  'Black restroom trailer with two illuminated guest entrances at dusk',
+  'Wedding tables with ivory linens, floral centerpieces, gold chargers, and blue goblets',
+  'A photo booth and prop table beside a pink draped backdrop and floral arrangements',
   'Guest tables with red linens, black chairs, and custom place settings',
-  'Birthday gift display with colorful bags, framed family photos, and metallic red linen',
+  'A fiftieth birthday dessert table beneath black, gold, and silver balloons',
   'Cupcakes topped with cherries and arranged on vintage floral tiered stands',
-  'Popcorn, candy, soda, and pink drinks arranged for guests to serve themselves',
+  'An outdoor photo booth beside a white table of colorful photo props',
 ] as const;
 
 const actualGalleryCaptions = [
-  'Guest Hospitality',
-  'Guest Comfort',
+  'Wedding Tablescapes',
+  'Photo Moments',
   'Tablescape and Flow',
-  'Personal Details',
+  'Milestone Celebrations',
   'Dessert Styling',
-  'Refreshment Service',
+  'Guest Experiences',
 ] as const;
 
-test('homepage flows through all six new owner supplied event photos', async ({
+test('homepage flows through six selected owner supplied event photos', async ({
   page,
 }, testInfo) => {
   test.skip(testInfo.project.name !== 'chromium-desktop', 'One canonical gallery contract');
@@ -84,6 +84,7 @@ test.describe('actual event media playback', () => {
       const video = root.locator('[data-actual-video-element]');
       await root.scrollIntoViewIfNeeded();
       await expect(root).toHaveAttribute('data-video-state', 'playing', { timeout: 15_000 });
+      await expect(video).toHaveCSS('opacity', '1');
 
       await expect(video).toHaveAttribute('autoplay', '');
       await expect(video).toHaveAttribute('muted', '');
@@ -116,6 +117,7 @@ test.describe('actual event media playback', () => {
 
       await root.click({ position: { x: 20, y: 20 } });
       await expect(root).toHaveAttribute('data-video-state', 'paused');
+      await expect(video).toHaveCSS('opacity', '1');
       await expect(root).toHaveAttribute('aria-label', /^Play motion:/);
       await expect
         .poll(() => video.evaluate((element: HTMLVideoElement) => element.paused))
@@ -272,6 +274,8 @@ test('reduced motion keeps the actual-work poster and makes no video request', a
     const root = page.locator(`[data-actual-video="${id}"]`);
     await root.scrollIntoViewIfNeeded();
     await expect(root).toHaveAttribute('data-video-state', 'reduced-motion');
+    await expect(root.locator('.event-gateway__poster')).toBeVisible();
+    await expect(root.locator('[data-actual-video-element]')).toHaveCSS('opacity', '0');
     await expect(root.locator('[data-actual-video-element]')).not.toHaveAttribute('src', /.+/);
     await expect(root).not.toHaveAttribute('role', 'button');
     await expect(root).not.toHaveAttribute('tabindex', /.+/);
@@ -306,6 +310,7 @@ test.describe('actual event media Save-Data fallback', () => {
       const root = page.locator(`[data-actual-video="${id}"]`);
       await root.scrollIntoViewIfNeeded();
       await expect(root).toHaveAttribute('data-video-state', 'save-data');
+      await expect(root.locator('.event-gateway__poster')).toBeVisible();
       await expect(root.locator('[data-actual-video-element]')).not.toHaveAttribute('src', /.+/);
       await expect(root).not.toHaveAttribute('role', 'button');
       await expect(root).not.toHaveAttribute('tabindex', /.+/);
